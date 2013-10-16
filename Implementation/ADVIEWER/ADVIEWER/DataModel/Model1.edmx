@@ -1,0 +1,902 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model1.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="Model1StoreContainer">
+    <EntitySet Name="Advetisements" EntityType="Model1.Store.Advetisements" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Users" EntityType="Model1.Store.Users" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Tickets1" EntityType="Model1.Store.Tickets1" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="States" EntityType="Model1.Store.States" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Payments1" EntityType="Model1.Store.Payments1" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Groups" EntityType="Model1.Store.Groups" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Cities" EntityType="Model1.Store.Cities" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ContactMessages" EntityType="Model1.Store.ContactMessages" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="AdvertisementMessages" EntityType="Model1.Store.AdvertisementMessages" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Mail_User1" EntityType="Model1.Store.Mail_User1" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserGroup" EntityType="Model1.Store.UserGroup" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="GroupGroup" Association="Model1.Store.GroupGroup">
+      <End Role="parent" EntitySet="Groups" />
+      <End Role="child" EntitySet="Groups" />
+    </AssociationSet>
+    <AssociationSet Name="StateCity" Association="Model1.Store.StateCity">
+      <End Role="State" EntitySet="States" />
+      <End Role="City" EntitySet="Cities" />
+    </AssociationSet>
+    <AssociationSet Name="UserDataAdvetisement" Association="Model1.Store.UserDataAdvetisement">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Advetisement" EntitySet="Advetisements" />
+    </AssociationSet>
+    <AssociationSet Name="UserTicket" Association="Model1.Store.UserTicket">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Ticket" EntitySet="Tickets1" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserGroup_User" Association="Model1.Store.FK_UserGroup_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="UserGroup" EntitySet="UserGroup" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserGroup_Group" Association="Model1.Store.FK_UserGroup_Group">
+      <End Role="Group" EntitySet="Groups" />
+      <End Role="UserGroup" EntitySet="UserGroup" />
+    </AssociationSet>
+    <AssociationSet Name="StateAdvetisement" Association="Model1.Store.StateAdvetisement">
+      <End Role="State" EntitySet="States" />
+      <End Role="Advetisement" EntitySet="Advetisements" />
+    </AssociationSet>
+    <AssociationSet Name="CityAdvetisement" Association="Model1.Store.CityAdvetisement">
+      <End Role="City" EntitySet="Cities" />
+      <End Role="Advetisement" EntitySet="Advetisements" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Advetisements">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="GroupID" Type="int" Nullable="false" />
+    <Property Name="SateID" Type="int" Nullable="false" />
+    <Property Name="StarCount" Type="int" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="Description" Type="nvarchar" Nullable="true" MaxLength="300" />
+    <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="KeyWords" Type="nvarchar" Nullable="true" MaxLength="300" />
+    <Property Name="Pic" Type="nvarchar" Nullable="false" MaxLength="200" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="IsConfirmed" Type="bit" Nullable="true" />
+    <Property Name="IsPaid" Type="bit" Nullable="true" />
+    <Property Name="IsRead" Type="bit" Nullable="true" />
+    <Property Name="ConfirmMsg" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="FullName" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="Tell" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="Mobile" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="Address" Type="nvarchar" Nullable="true" MaxLength="1000" />
+    <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="YahooID" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="Price" Type="nvarchar" Nullable="true" MaxLength="200" />
+    <Property Name="StartDate" Type="datetime" Nullable="true" />
+    <Property Name="ExpirationDate" Type="datetime" Nullable="false" />
+    <Property Name="RegistrationDate" Type="datetime" Nullable="false" />
+    <Property Name="LastRenewal" Type="datetime" Nullable="true" />
+    <Property Name="CreditTime" Type="int" Nullable="false" />
+    <Property Name="ReviewCount" Type="int" Nullable="false" />
+    <Property Name="TellTime" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="Link" Type="nvarchar" Nullable="true" MaxLength="1000" />
+    <Property Name="PaidID" Type="bigint" Nullable="true" />
+    <Property Name="ShowContactForm" Type="bit" Nullable="true" />
+    <Property Name="ActiveMsg" Type="nvarchar" Nullable="true" MaxLength="3000" />
+    <Property Name="IsHaraji" Type="bit" Nullable="true" />
+    <Property Name="EndTime" Type="nvarchar" Nullable="true" MaxLength="200" />
+    <Property Name="LastPrice" Type="bit" Nullable="true" />
+    <Property Name="ClickCount" Type="int" Nullable="false" />
+    <Property Name="CityID" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FullName" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="IsActive" Type="bit" Nullable="true" DefaultValue="true" />
+    <Property Name="IsManager" Type="bit" Nullable="true" DefaultValue="false" />
+    <Property Name="RegisterDate" Type="datetime" Nullable="false" />
+    <Property Name="Mobile" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="Tell" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="Address" Type="nvarchar" Nullable="true" MaxLength="1000" />
+    <Property Name="IP" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="LastLogin" Type="datetime" Nullable="false" />
+    <Property Name="StateID" Type="int" Nullable="true" />
+    <Property Name="CityID" Type="int" Nullable="true" />
+    <Property Name="Fax" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="YahooID" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="About" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="PicAddress" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="BannedMsg" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="AffiliateMoney" Type="int" Nullable="true" />
+    <Property Name="UserID" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Tickets1">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="Text" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="RegDate" Type="datetime" Nullable="true" />
+    <Property Name="Status" Type="smallint" Nullable="true" />
+    <Property Name="Priority" Type="nvarchar" Nullable="true" MaxLength="10" />
+    <Property Name="IsRead" Type="bit" Nullable="true" />
+    <Property Name="IsManageRead" Type="bit" Nullable="true" />
+    <Property Name="Part" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="IsDeleted" Type="bit" Nullable="true" />
+    <Property Name="LastUpdate" Type="datetime" Nullable="true" />
+    <Property Name="User_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="States">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="StateName" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Payments1">
+    <Key>
+      <PropertyRef Name="RequestID" />
+    </Key>
+    <Property Name="RequestID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="bigint" Nullable="true" />
+    <Property Name="AgahiID" Type="nvarchar" Nullable="true" MaxLength="1000" />
+    <Property Name="Title" Type="nvarchar" Nullable="true" MaxLength="1000" />
+    <Property Name="RegisterDate" Type="datetime" Nullable="true" />
+    <Property Name="Mablagh" Type="int" Nullable="true" />
+    <Property Name="IsRead" Type="bit" Nullable="true" />
+    <Property Name="SanadNum" Type="nvarchar" Nullable="true" MaxLength="250" />
+    <Property Name="ResidNum" Type="nvarchar" Nullable="true" MaxLength="250" />
+    <Property Name="Status" Type="int" Nullable="true" />
+    <Property Name="Name" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="Tel" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="Description" Type="nvarchar" Nullable="true" MaxLength="3000" />
+    <Property Name="Bank" Type="nvarchar" Nullable="true" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Groups">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Pic" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="GroupName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ParentID" Type="int" Nullable="true" />
+    <Property Name="childGroup_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Cities">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CityName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="StateID" Type="int" Nullable="false" />
+    <Property Name="State_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ContactMessages">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FulName" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="Email" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="Tell" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="Title" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="Text" Type="nvarchar" Nullable="true" MaxLength="2000" />
+    <Property Name="Reply" Type="nvarchar" Nullable="true" MaxLength="3000" />
+    <Property Name="IsRead" Type="bit" Nullable="true" />
+    <Property Name="RegDate" Type="datetime" Nullable="true" />
+    <Property Name="UserID" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="AdvertisementMessages">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AgahiID" Type="bigint" Nullable="true" />
+    <Property Name="UserID" Type="bigint" Nullable="true" />
+    <Property Name="FullName" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="Email" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="Text" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Date" Type="datetime" Nullable="true" />
+    <Property Name="IsRead" Type="bit" Nullable="true" />
+    <Property Name="Tell" Type="nvarchar" Nullable="true" MaxLength="200" />
+    <Property Name="Inbox" Type="bit" Nullable="true" />
+    <Property Name="reply" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Mail_User1">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SenderID" Type="bigint" Nullable="true" />
+    <Property Name="ReciverID" Type="bigint" Nullable="true" />
+    <Property Name="QuotationID" Type="bigint" Nullable="true" />
+    <Property Name="Title" Type="nvarchar" Nullable="true" MaxLength="200" />
+    <Property Name="Text" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="IsRead" Type="bigint" Nullable="true" />
+    <Property Name="SenderDelete" Type="bit" Nullable="true" />
+    <Property Name="ReciverDelete" Type="bit" Nullable="true" />
+    <Property Name="IsAnswerd" Type="bit" Nullable="true" />
+    <Property Name="Date" Type="datetime" Nullable="true" />
+  </EntityType>
+  <EntityType Name="UserGroup">
+    <Key>
+      <PropertyRef Name="Users_ID" />
+      <PropertyRef Name="Groups_ID" />
+    </Key>
+    <Property Name="Users_ID" Type="int" Nullable="false" />
+    <Property Name="Groups_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="GroupGroup">
+    <End Role="parent" Type="Model1.Store.Groups" Multiplicity="1" />
+    <End Role="child" Type="Model1.Store.Groups" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="parent">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="child">
+        <PropertyRef Name="childGroup_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="StateCity">
+    <End Role="State" Type="Model1.Store.States" Multiplicity="1" />
+    <End Role="City" Type="Model1.Store.Cities" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="State">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="City">
+        <PropertyRef Name="State_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserDataAdvetisement">
+    <End Role="User" Type="Model1.Store.Users" Multiplicity="1" />
+    <End Role="Advetisement" Type="Model1.Store.Advetisements" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Advetisement">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserTicket">
+    <End Role="User" Type="Model1.Store.Users" Multiplicity="1" />
+    <End Role="Ticket" Type="Model1.Store.Tickets1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Ticket">
+        <PropertyRef Name="User_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="StateAdvetisement">
+    <End Role="State" Type="Model1.Store.States" Multiplicity="1" />
+    <End Role="Advetisement" Type="Model1.Store.Advetisements" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="State">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Advetisement">
+        <PropertyRef Name="SateID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CityAdvetisement">
+    <End Role="City" Type="Model1.Store.Cities" Multiplicity="0..1" />
+    <End Role="Advetisement" Type="Model1.Store.Advetisements" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Advetisement">
+        <PropertyRef Name="CityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserGroup_User">
+    <End Role="User" Type="Model1.Store.Users" Multiplicity="1" />
+    <End Role="UserGroup" Type="Model1.Store.UserGroup" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="UserGroup">
+        <PropertyRef Name="Users_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserGroup_Group">
+    <End Role="UserGroup" Type="Model1.Store.UserGroup" Multiplicity="*" />
+    <End Role="Group" Type="Model1.Store.Groups" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Group">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="UserGroup">
+        <PropertyRef Name="Groups_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Model1" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+        <EntityContainer Name="ModelContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Advetisements" EntityType="Model1.Advetisement" />
+          <EntitySet Name="Users" EntityType="Model1.User" />
+          <EntitySet Name="Tickets1" EntityType="Model1.Ticket" />
+          <EntitySet Name="States" EntityType="Model1.State" />
+          <EntitySet Name="Payments1" EntityType="Model1.Payment" />
+          <EntitySet Name="Groups" EntityType="Model1.Group" />
+          <EntitySet Name="Cities" EntityType="Model1.City" />
+          <EntitySet Name="ContactMessages" EntityType="Model1.ContactMessage" />
+          <EntitySet Name="AdvertisementMessages" EntityType="Model1.AdvertisementMessage" />
+          <EntitySet Name="Mail_User1" EntityType="Model1.Mail_User" />
+          <AssociationSet Name="GroupGroup" Association="Model1.GroupGroup">
+            <End Role="parent" EntitySet="Groups" />
+            <End Role="child" EntitySet="Groups" />
+          </AssociationSet>
+          <AssociationSet Name="StateCity" Association="Model1.StateCity">
+            <End Role="State" EntitySet="States" />
+            <End Role="City" EntitySet="Cities" />
+          </AssociationSet>
+          <AssociationSet Name="UserDataAdvetisement" Association="Model1.UserDataAdvetisement">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Advetisement" EntitySet="Advetisements" />
+          </AssociationSet>
+          <AssociationSet Name="UserTicket" Association="Model1.UserTicket">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Ticket" EntitySet="Tickets1" />
+          </AssociationSet>
+          <AssociationSet Name="UserGroup" Association="Model1.UserGroup">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Group" EntitySet="Groups" />
+          </AssociationSet>
+          <AssociationSet Name="StateAdvetisement" Association="Model1.StateAdvetisement">
+            <End Role="State" EntitySet="States" />
+            <End Role="Advetisement" EntitySet="Advetisements" />
+          </AssociationSet>
+          <AssociationSet Name="CityAdvetisement" Association="Model1.CityAdvetisement">
+            <End Role="City" EntitySet="Cities" />
+            <End Role="Advetisement" EntitySet="Advetisements" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Advetisement">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <Property Type="Int32" Name="GroupID" Nullable="false" />
+          <Property Type="Int32" Name="SateID" Nullable="false" />
+          <Property Type="Int32" Name="StarCount" Nullable="false" />
+          <Property Type="String" Name="Title" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Description" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Text" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="KeyWords" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Pic" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <Property Type="Boolean" Name="IsConfirmed" />
+          <Property Type="Boolean" Name="IsPaid" />
+          <Property Type="Boolean" Name="IsRead" />
+          <Property Type="String" Name="ConfirmMsg" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="FullName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Tell" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Mobile" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Address" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="YahooID" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Price" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="StartDate" />
+          <Property Type="DateTime" Name="ExpirationDate" Nullable="false" />
+          <Property Type="DateTime" Name="RegistrationDate" Nullable="false" />
+          <Property Type="DateTime" Name="LastRenewal" />
+          <Property Type="Int32" Name="CreditTime" Nullable="false" />
+          <Property Type="Int32" Name="ReviewCount" Nullable="false" />
+          <Property Type="String" Name="TellTime" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Link" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Type="Int64" Name="PaidID" />
+          <Property Type="Boolean" Name="ShowContactForm" />
+          <Property Type="String" Name="ActiveMsg" MaxLength="3000" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="EndTime" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="LastPrice" />
+          <Property Type="Int32" Name="ClickCount" Nullable="false" />
+          <Property Type="Int32" Name="CityID" Nullable="true" />
+          <NavigationProperty Name="UserData" Relationship="Model1.UserDataAdvetisement" FromRole="Advetisement" ToRole="User" />
+          <NavigationProperty Name="State" Relationship="Model1.StateAdvetisement" FromRole="Advetisement" ToRole="State" />
+          <NavigationProperty Name="City" Relationship="Model1.CityAdvetisement" FromRole="Advetisement" ToRole="City" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="FullName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="IsActive" DefaultValue="true" />
+          <Property Type="Boolean" Name="IsManager" DefaultValue="false" />
+          <Property Type="DateTime" Name="RegisterDate" Nullable="false" />
+          <Property Type="String" Name="Mobile" MaxLength="50" FixedLength="false" Unicode="true" Nullable="true" />
+          <Property Type="String" Name="Tell" MaxLength="50" FixedLength="false" Unicode="true" Nullable="true" />
+          <Property Type="String" Name="Address" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="true" />
+          <Property Type="String" Name="IP" MaxLength="50" FixedLength="false" Unicode="true" Nullable="true" />
+          <Property Type="DateTime" Name="LastLogin" Nullable="false" />
+          <Property Type="Int32" Name="StateID" Nullable="true" />
+          <Property Type="Int32" Name="CityID" Nullable="true" />
+          <Property Type="String" Name="Fax" MaxLength="50" FixedLength="false" Unicode="true" Nullable="true" />
+          <Property Type="String" Name="YahooID" MaxLength="100" FixedLength="false" Unicode="true" Nullable="true" />
+          <Property Type="String" Name="About" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="true" />
+          <Property Type="String" Name="PicAddress" MaxLength="100" FixedLength="false" Unicode="true" Nullable="true" />
+          <Property Type="String" Name="BannedMsg" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="true" />
+          <Property Type="Int32" Name="AffiliateMoney" />
+          <Property Type="Guid" Name="UserID" Nullable="false" />
+          <NavigationProperty Name="Advetisements" Relationship="Model1.UserDataAdvetisement" FromRole="User" ToRole="Advetisement" />
+          <NavigationProperty Name="Tickets" Relationship="Model1.UserTicket" FromRole="User" ToRole="Ticket" />
+          <NavigationProperty Name="Groups" Relationship="Model1.UserGroup" FromRole="User" ToRole="Group" />
+        </EntityType>
+        <EntityType Name="Ticket">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <Property Type="String" Name="Title" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Text" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="RegDate" />
+          <Property Type="Int16" Name="Status" />
+          <Property Type="String" Name="Priority" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="IsRead" />
+          <Property Type="Boolean" Name="IsManageRead" />
+          <Property Type="String" Name="Part" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="IsDeleted" />
+          <Property Type="DateTime" Name="LastUpdate" />
+          <NavigationProperty Name="User" Relationship="Model1.UserTicket" FromRole="Ticket" ToRole="User" />
+        </EntityType>
+        <EntityType Name="State">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="StateName" Nullable="false" />
+          <NavigationProperty Name="Cities" Relationship="Model1.StateCity" FromRole="State" ToRole="City" />
+          <NavigationProperty Name="Advetisements" Relationship="Model1.StateAdvetisement" FromRole="State" ToRole="Advetisement" />
+        </EntityType>
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="RequestID" />
+          </Key>
+          <Property Type="Int64" Name="RequestID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int64" Name="UserID" />
+          <Property Type="String" Name="AgahiID" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Title" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="RegisterDate" />
+          <Property Type="Int32" Name="Mablagh" />
+          <Property Type="Boolean" Name="IsRead" />
+          <Property Type="String" Name="SanadNum" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ResidNum" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="Status" />
+          <Property Type="String" Name="Name" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Tel" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Description" MaxLength="3000" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Bank" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Pic" Nullable="true" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="GroupName" Nullable="false" />
+          <Property Type="Int32" Name="ParentID" Nullable="true" />
+          <NavigationProperty Name="parentGroup" Relationship="Model1.GroupGroup" FromRole="parent" ToRole="child" />
+          <NavigationProperty Name="childGroup" Relationship="Model1.GroupGroup" FromRole="child" ToRole="parent" />
+          <NavigationProperty Name="Users" Relationship="Model1.UserGroup" FromRole="Group" ToRole="User" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="CityName" Nullable="false" />
+          <Property Type="Int32" Name="StateID" Nullable="false" />
+          <NavigationProperty Name="State" Relationship="Model1.StateCity" FromRole="City" ToRole="State" />
+          <NavigationProperty Name="Advetisements" Relationship="Model1.CityAdvetisement" FromRole="City" ToRole="Advetisement" />
+        </EntityType>
+        <EntityType Name="ContactMessage">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="FulName" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Email" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Tell" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Title" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Text" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Reply" MaxLength="3000" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="IsRead" />
+          <Property Type="DateTime" Name="RegDate" />
+          <Property Type="Int32" Name="UserID" />
+        </EntityType>
+        <EntityType Name="AdvertisementMessage">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int64" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int64" Name="AgahiID" />
+          <Property Type="Int64" Name="UserID" />
+          <Property Type="String" Name="FullName" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Email" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Text" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="Date" />
+          <Property Type="Boolean" Name="IsRead" />
+          <Property Type="String" Name="Tell" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="Inbox" />
+          <Property Type="String" Name="reply" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Mail_User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int64" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int64" Name="SenderID" />
+          <Property Type="Int64" Name="ReciverID" />
+          <Property Type="Int64" Name="QuotationID" />
+          <Property Type="String" Name="Title" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Text" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Int64" Name="IsRead" />
+          <Property Type="Boolean" Name="SenderDelete" />
+          <Property Type="Boolean" Name="ReciverDelete" />
+          <Property Type="Boolean" Name="IsAnswerd" />
+          <Property Type="DateTime" Name="Date" />
+        </EntityType>
+        <Association Name="GroupGroup">
+          <End Type="Model1.Group" Role="parent" Multiplicity="1" />
+          <End Type="Model1.Group" Role="child" Multiplicity="*" />
+        </Association>
+        <Association Name="StateCity">
+          <End Type="Model1.State" Role="State" Multiplicity="1" />
+          <End Type="Model1.City" Role="City" Multiplicity="*" />
+        </Association>
+        <Association Name="UserDataAdvetisement">
+          <End Type="Model1.User" Role="User" Multiplicity="1" />
+          <End Type="Model1.Advetisement" Role="Advetisement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Advetisement">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserTicket">
+          <End Type="Model1.User" Role="User" Multiplicity="1" />
+          <End Type="Model1.Ticket" Role="Ticket" Multiplicity="*" />
+        </Association>
+        <Association Name="UserGroup">
+          <End Type="Model1.User" Role="User" Multiplicity="*" />
+          <End Type="Model1.Group" Role="Group" Multiplicity="*" />
+        </Association>
+        <Association Name="StateAdvetisement">
+          <End Type="Model1.State" Role="State" Multiplicity="1" />
+          <End Type="Model1.Advetisement" Role="Advetisement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Advetisement">
+              <PropertyRef Name="SateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CityAdvetisement">
+          <End Type="Model1.City" Role="City" Multiplicity="0..1" />
+          <End Type="Model1.Advetisement" Role="Advetisement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Advetisement">
+              <PropertyRef Name="CityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Model1StoreContainer" CdmEntityContainer="ModelContainer">
+    <EntitySetMapping Name="Advetisements">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Advetisement)">
+        <MappingFragment StoreEntitySet="Advetisements">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+          <ScalarProperty Name="SateID" ColumnName="SateID" />
+          <ScalarProperty Name="StarCount" ColumnName="StarCount" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Text" ColumnName="Text" />
+          <ScalarProperty Name="KeyWords" ColumnName="KeyWords" />
+          <ScalarProperty Name="Pic" ColumnName="Pic" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="IsConfirmed" ColumnName="IsConfirmed" />
+          <ScalarProperty Name="IsPaid" ColumnName="IsPaid" />
+          <ScalarProperty Name="IsRead" ColumnName="IsRead" />
+          <ScalarProperty Name="ConfirmMsg" ColumnName="ConfirmMsg" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="Tell" ColumnName="Tell" />
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="YahooID" ColumnName="YahooID" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="ExpirationDate" ColumnName="ExpirationDate" />
+          <ScalarProperty Name="RegistrationDate" ColumnName="RegistrationDate" />
+          <ScalarProperty Name="LastRenewal" ColumnName="LastRenewal" />
+          <ScalarProperty Name="CreditTime" ColumnName="CreditTime" />
+          <ScalarProperty Name="ReviewCount" ColumnName="ReviewCount" />
+          <ScalarProperty Name="TellTime" ColumnName="TellTime" />
+          <ScalarProperty Name="Link" ColumnName="Link" />
+          <ScalarProperty Name="PaidID" ColumnName="PaidID" />
+          <ScalarProperty Name="ShowContactForm" ColumnName="ShowContactForm" />
+          <ScalarProperty Name="ActiveMsg" ColumnName="ActiveMsg" />
+          <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+          <ScalarProperty Name="LastPrice" ColumnName="LastPrice" />
+          <ScalarProperty Name="ClickCount" ColumnName="ClickCount" />
+          <ScalarProperty Name="CityID" ColumnName="CityID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.User)">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="IsManager" ColumnName="IsManager" />
+          <ScalarProperty Name="RegisterDate" ColumnName="RegisterDate" />
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+          <ScalarProperty Name="Tell" ColumnName="Tell" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="IP" ColumnName="IP" />
+          <ScalarProperty Name="LastLogin" ColumnName="LastLogin" />
+          <ScalarProperty Name="StateID" ColumnName="StateID" />
+          <ScalarProperty Name="CityID" ColumnName="CityID" />
+          <ScalarProperty Name="Fax" ColumnName="Fax" />
+          <ScalarProperty Name="YahooID" ColumnName="YahooID" />
+          <ScalarProperty Name="About" ColumnName="About" />
+          <ScalarProperty Name="PicAddress" ColumnName="PicAddress" />
+          <ScalarProperty Name="BannedMsg" ColumnName="BannedMsg" />
+          <ScalarProperty Name="AffiliateMoney" ColumnName="AffiliateMoney" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tickets1">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Ticket)">
+        <MappingFragment StoreEntitySet="Tickets1">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Text" ColumnName="Text" />
+          <ScalarProperty Name="RegDate" ColumnName="RegDate" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Priority" ColumnName="Priority" />
+          <ScalarProperty Name="IsRead" ColumnName="IsRead" />
+          <ScalarProperty Name="IsManageRead" ColumnName="IsManageRead" />
+          <ScalarProperty Name="Part" ColumnName="Part" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="States">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.State)">
+        <MappingFragment StoreEntitySet="States">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="StateName" ColumnName="StateName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Payments1">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Payment)">
+        <MappingFragment StoreEntitySet="Payments1">
+          <ScalarProperty Name="RequestID" ColumnName="RequestID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="AgahiID" ColumnName="AgahiID" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="RegisterDate" ColumnName="RegisterDate" />
+          <ScalarProperty Name="Mablagh" ColumnName="Mablagh" />
+          <ScalarProperty Name="IsRead" ColumnName="IsRead" />
+          <ScalarProperty Name="SanadNum" ColumnName="SanadNum" />
+          <ScalarProperty Name="ResidNum" ColumnName="ResidNum" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Tel" ColumnName="Tel" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Bank" ColumnName="Bank" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Groups">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Group)">
+        <MappingFragment StoreEntitySet="Groups">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Pic" ColumnName="Pic" />
+          <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+          <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cities">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.City)">
+        <MappingFragment StoreEntitySet="Cities">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="CityName" ColumnName="CityName" />
+          <ScalarProperty Name="StateID" ColumnName="StateID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ContactMessages">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.ContactMessage)">
+        <MappingFragment StoreEntitySet="ContactMessages">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="FulName" ColumnName="FulName" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Tell" ColumnName="Tell" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Text" ColumnName="Text" />
+          <ScalarProperty Name="Reply" ColumnName="Reply" />
+          <ScalarProperty Name="IsRead" ColumnName="IsRead" />
+          <ScalarProperty Name="RegDate" ColumnName="RegDate" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AdvertisementMessages">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.AdvertisementMessage)">
+        <MappingFragment StoreEntitySet="AdvertisementMessages">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="AgahiID" ColumnName="AgahiID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Text" ColumnName="Text" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="IsRead" ColumnName="IsRead" />
+          <ScalarProperty Name="Tell" ColumnName="Tell" />
+          <ScalarProperty Name="Inbox" ColumnName="Inbox" />
+          <ScalarProperty Name="reply" ColumnName="reply" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Mail_User1">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Mail_User)">
+        <MappingFragment StoreEntitySet="Mail_User1">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="SenderID" ColumnName="SenderID" />
+          <ScalarProperty Name="ReciverID" ColumnName="ReciverID" />
+          <ScalarProperty Name="QuotationID" ColumnName="QuotationID" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Text" ColumnName="Text" />
+          <ScalarProperty Name="IsRead" ColumnName="IsRead" />
+          <ScalarProperty Name="SenderDelete" ColumnName="SenderDelete" />
+          <ScalarProperty Name="ReciverDelete" ColumnName="ReciverDelete" />
+          <ScalarProperty Name="IsAnswerd" ColumnName="IsAnswerd" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="GroupGroup" TypeName="Model1.GroupGroup" StoreEntitySet="Groups">
+      <EndProperty Name="parent">
+        <ScalarProperty Name="ID" ColumnName="childGroup_ID" />
+      </EndProperty>
+      <EndProperty Name="child">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="StateCity" TypeName="Model1.StateCity" StoreEntitySet="Cities">
+      <EndProperty Name="State">
+        <ScalarProperty Name="ID" ColumnName="State_ID" />
+      </EndProperty>
+      <EndProperty Name="City">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="UserTicket" TypeName="Model1.UserTicket" StoreEntitySet="Tickets1">
+      <EndProperty Name="User">
+        <ScalarProperty Name="ID" ColumnName="User_ID" />
+      </EndProperty>
+      <EndProperty Name="Ticket">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="UserGroup" TypeName="Model1.UserGroup" StoreEntitySet="UserGroup">
+      <EndProperty Name="User">
+        <ScalarProperty Name="ID" ColumnName="Users_ID" />
+      </EndProperty>
+      <EndProperty Name="Group">
+        <ScalarProperty Name="ID" ColumnName="Groups_ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram Name="Model1" ZoomLevel="71" >
+        <EntityTypeShape EntityType="Model1.Advetisement" Width="1.5" PointX="3" PointY="1.625" Height="8.7108365885416656" />
+        <EntityTypeShape EntityType="Model1.User" Width="1.5" PointX="0.75" PointY="6.875" Height="5.2494108072916656" />
+        <EntityTypeShape EntityType="Model1.Ticket" Width="1.5" PointX="3" PointY="10.875" Height="3.5186979174613953" />
+        <EntityTypeShape EntityType="Model1.State" Width="1.5" PointX="5.75" PointY="1" Height="1.5956835933029652" />
+        <EntityTypeShape EntityType="Model1.Payment" Width="1.5" PointX="3.4290385001474242" PointY="23.861620005155736" />
+        <EntityTypeShape EntityType="Model1.Group" Width="1.5" PointX="3" PointY="15.125" Height="2.3648893237113953" />
+        <EntityTypeShape EntityType="Model1.City" Width="1.5" PointX="8" PointY="0.875" Height="1.7879850268363953" />
+        <EntityTypeShape EntityType="Model1.ContactMessage" Width="1.5" PointX="6.3320766959023089" PointY="11.04664527394187" />
+        <EntityTypeShape EntityType="Model1.AdvertisementMessage" Width="1.5" PointX="7.75" PointY="7.75" Height="3.1340950520833317" />
+        <EntityTypeShape EntityType="Model1.Mail_User" Width="1.5" PointX="2.852776593925793" PointY="27.424576071754366" />
+        <AssociationConnector Association="Model1.GroupGroup" >
+          <ConnectorPoint PointX="3.5319230769230767" PointY="17.489889323711395" />
+          <ConnectorPoint PointX="3.5319230769230767" PointY="17.739889323711395" />
+          <ConnectorPoint PointX="3.9784615384615383" PointY="17.739889323711395" />
+          <ConnectorPoint PointX="3.9784615384615383" PointY="17.489889323711395" />
+        </AssociationConnector>
+        <AssociationConnector Association="Model1.StateCity" >
+          <ConnectorPoint PointX="7.25" PointY="1.7978417966514826" />
+          <ConnectorPoint PointX="8" PointY="1.7978417966514826" />
+        </AssociationConnector>
+        <AssociationConnector Association="Model1.UserDataAdvetisement" >
+          <ConnectorPoint PointX="2.25" PointY="8.6054182942708337" />
+          <ConnectorPoint PointX="3" PointY="8.6054182942708337" />
+        </AssociationConnector>
+        <AssociationConnector Association="Model1.UserTicket" >
+          <ConnectorPoint PointX="2.25" PointY="11.499705403645834" />
+          <ConnectorPoint PointX="3" PointY="11.499705403645834" />
+        </AssociationConnector>
+        <AssociationConnector Association="Model1.UserGroup" >
+          <ConnectorPoint PointX="1.5" PointY="12.124410807291666" />
+          <ConnectorPoint PointX="1.5" PointY="16.307444661855698" />
+          <ConnectorPoint PointX="3" PointY="16.307444661855698" />
+        </AssociationConnector>
+        <AssociationConnector Association="Model1.StateAdvetisement">
+          <ConnectorPoint PointX="5.75" PointY="2.2064925130208328" />
+          <ConnectorPoint PointX="4.5" PointY="2.2064925130208328" />
+        </AssociationConnector>
+        <AssociationConnector Association="Model1.CityAdvetisement">
+          <ConnectorPoint PointX="9.40625" PointY="2.8552864583333331" />
+          <ConnectorPoint PointX="9.40625" PointY="3.2713937291666664" />
+          <ConnectorPoint PointX="4.5" PointY="3.2713937291666664" />
+        </AssociationConnector>
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

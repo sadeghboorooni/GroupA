@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Security;
-
+using ADVIEWER.DataModel;
 
 namespace ADVIEWER.Codes
 {
@@ -11,7 +11,13 @@ namespace ADVIEWER.Codes
     {
         public static void newUser(Guid UserId) 
         {
-            throw new NotImplementedException();
+            MembershipUser mu = Membership.GetUser(UserId);
+            ModelContainer ml = new ModelContainer();
+            User newUser = new User();
+            newUser.LastLogin = DateTime.Now;
+            newUser.RegisterDate = DateTime.Now;
+            ml.Users.AddObject(newUser);
+            ml.SaveChanges();
         }
 
         public static void loginUser(Guid UserId) 

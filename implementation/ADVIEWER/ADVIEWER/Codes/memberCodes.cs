@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using ADVIEWER.DataModel;
 
 namespace ADVIEWER.Codes
 {
@@ -9,7 +10,17 @@ namespace ADVIEWER.Codes
     {
         public static bool MakeNewAdvertisment(Advetisement newadv)
         {
-            throw new NotImplementedException();
+            ModelContainer ml = new ModelContainer();
+            ml.Advetisements.AddObject(newadv);
+            try
+            {
+                ml.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }
