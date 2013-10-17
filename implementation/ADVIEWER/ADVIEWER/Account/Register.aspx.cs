@@ -21,7 +21,8 @@ namespace ADVIEWER.Account
         {
             FormsAuthentication.SetAuthCookie(RegisterUser.UserName, false /* createPersistentCookie */);
             Guid userID = (Guid)Membership.GetUser(RegisterUser.UserName).ProviderUserKey;
-            AccountCodes.newUser(userID);
+            string userFullName = (string)Membership.GetUser(RegisterUser.UserName).UserName;
+            AccountCodes.newUser(userID,userFullName);
             string continueUrl = RegisterUser.ContinueDestinationPageUrl;
             if (String.IsNullOrEmpty(continueUrl))
             {
