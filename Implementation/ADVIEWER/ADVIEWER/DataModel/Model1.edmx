@@ -6,7 +6,7 @@
     <edmx:StorageModels>
     <Schema Namespace="Model1.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
   <EntityContainer Name="Model1StoreContainer">
-    <EntitySet Name="Advetisements" EntityType="Model1.Store.Advetisements" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Advertisments" EntityType="Model1.Store.Advertisments" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Users" EntityType="Model1.Store.Users" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Tickets1" EntityType="Model1.Store.Tickets1" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="States" EntityType="Model1.Store.States" store:Type="Tables" Schema="dbo" />
@@ -18,7 +18,7 @@
     <EntitySet Name="Mail_User1" EntityType="Model1.Store.Mail_User1" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="KeyWords" EntityType="Model1.Store.KeyWords" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="UserGroup" EntityType="Model1.Store.UserGroup" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="AdvetisementKeyWord" EntityType="Model1.Store.AdvetisementKeyWord" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="AdvertismentKeyWord" EntityType="Model1.Store.AdvertismentKeyWord" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="GroupGroup" Association="Model1.Store.GroupGroup">
       <End Role="parent" EntitySet="Groups" />
       <End Role="child" EntitySet="Groups" />
@@ -39,20 +39,20 @@
       <End Role="Group" EntitySet="Groups" />
       <End Role="UserGroup" EntitySet="UserGroup" />
     </AssociationSet>
-    <AssociationSet Name="FK_AdvetisementKeyWord_Advetisement" Association="Model1.Store.FK_AdvetisementKeyWord_Advetisement">
-      <End Role="Advetisement" EntitySet="Advetisements" />
-      <End Role="AdvetisementKeyWord" EntitySet="AdvetisementKeyWord" />
+    <AssociationSet Name="FK_AdvertismentKeyWord_Advertisment" Association="Model1.Store.FK_AdvertismentKeyWord_Advertisment">
+      <End Role="Advertisment" EntitySet="Advertisments" />
+      <End Role="AdvertismentKeyWord" EntitySet="AdvertismentKeyWord" />
     </AssociationSet>
-    <AssociationSet Name="FK_AdvetisementKeyWord_KeyWord" Association="Model1.Store.FK_AdvetisementKeyWord_KeyWord">
+    <AssociationSet Name="FK_AdvertismentKeyWord_KeyWord" Association="Model1.Store.FK_AdvertismentKeyWord_KeyWord">
       <End Role="KeyWord" EntitySet="KeyWords" />
-      <End Role="AdvetisementKeyWord" EntitySet="AdvetisementKeyWord" />
+      <End Role="AdvertismentKeyWord" EntitySet="AdvertismentKeyWord" />
     </AssociationSet>
-    <AssociationSet Name="UserAdvetisement" Association="Model1.Store.UserAdvetisement">
+    <AssociationSet Name="UserAdvertisment" Association="Model1.Store.UserAdvertisment">
       <End Role="User" EntitySet="Users" />
-      <End Role="Advetisement" EntitySet="Advetisements" />
+      <End Role="Advertisment" EntitySet="Advertisments" />
     </AssociationSet>
   </EntityContainer>
-  <EntityType Name="Advetisements">
+  <EntityType Name="Advertisments">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -238,12 +238,12 @@
     <Property Name="Users_ID" Type="int" Nullable="false" />
     <Property Name="Groups_ID" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="AdvetisementKeyWord">
+  <EntityType Name="AdvertismentKeyWord">
     <Key>
-      <PropertyRef Name="Advetisement_ID" />
+      <PropertyRef Name="Advertisment_ID" />
       <PropertyRef Name="KeyWords_Id" />
     </Key>
-    <Property Name="Advetisement_ID" Type="int" Nullable="false" />
+    <Property Name="Advertisment_ID" Type="int" Nullable="false" />
     <Property Name="KeyWords_Id" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="GroupGroup">
@@ -282,14 +282,14 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="UserAdvetisement">
+  <Association Name="UserAdvertisment">
     <End Role="User" Type="Model1.Store.Users" Multiplicity="1" />
-    <End Role="Advetisement" Type="Model1.Store.Advetisements" Multiplicity="*" />
+    <End Role="Advertisment" Type="Model1.Store.Advertisments" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="User">
         <PropertyRef Name="ID" />
       </Principal>
-      <Dependent Role="Advetisement">
+      <Dependent Role="Advertisment">
         <PropertyRef Name="UserId" />
       </Dependent>
     </ReferentialConstraint>
@@ -318,26 +318,26 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_AdvetisementKeyWord_Advetisement">
-    <End Role="Advetisement" Type="Model1.Store.Advetisements" Multiplicity="1" />
-    <End Role="AdvetisementKeyWord" Type="Model1.Store.AdvetisementKeyWord" Multiplicity="*" />
+  <Association Name="FK_AdvertismentKeyWord_Advertisment">
+    <End Role="Advertisment" Type="Model1.Store.Advertisments" Multiplicity="1" />
+    <End Role="AdvertismentKeyWord" Type="Model1.Store.AdvertismentKeyWord" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Advetisement">
+      <Principal Role="Advertisment">
         <PropertyRef Name="ID" />
       </Principal>
-      <Dependent Role="AdvetisementKeyWord">
-        <PropertyRef Name="Advetisement_ID" />
+      <Dependent Role="AdvertismentKeyWord">
+        <PropertyRef Name="Advertisment_ID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_AdvetisementKeyWord_KeyWord">
-    <End Role="AdvetisementKeyWord" Type="Model1.Store.AdvetisementKeyWord" Multiplicity="*" />
+  <Association Name="FK_AdvertismentKeyWord_KeyWord">
+    <End Role="AdvertismentKeyWord" Type="Model1.Store.AdvertismentKeyWord" Multiplicity="*" />
     <End Role="KeyWord" Type="Model1.Store.KeyWords" Multiplicity="1" />
     <ReferentialConstraint>
       <Principal Role="KeyWord">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="AdvetisementKeyWord">
+      <Dependent Role="AdvertismentKeyWord">
         <PropertyRef Name="KeyWords_Id" />
       </Dependent>
     </ReferentialConstraint>
@@ -347,7 +347,7 @@
     <edmx:ConceptualModels>
       <Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Model1" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
         <EntityContainer Name="ModelContainer" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Advetisements" EntityType="Model1.Advetisement" />
+          <EntitySet Name="Advertisments" EntityType="Model1.Advertisment" />
           <EntitySet Name="Users" EntityType="Model1.User" />
           <EntitySet Name="Tickets1" EntityType="Model1.Ticket" />
           <EntitySet Name="States" EntityType="Model1.State" />
@@ -374,16 +374,16 @@
             <End Role="Group" EntitySet="Groups" />
           </AssociationSet>
           <EntitySet Name="KeyWords" EntityType="Model1.KeyWord" />
-          <AssociationSet Name="AdvetisementKeyWord" Association="Model1.AdvetisementKeyWord">
-            <End Role="Advetisement" EntitySet="Advetisements" />
+          <AssociationSet Name="AdvertismentKeyWord" Association="Model1.AdvertismentKeyWord">
+            <End Role="Advertisment" EntitySet="Advertisments" />
             <End Role="KeyWord" EntitySet="KeyWords" />
           </AssociationSet>
-          <AssociationSet Name="UserAdvetisement" Association="Model1.UserAdvetisement">
+          <AssociationSet Name="UserAdvertisment" Association="Model1.UserAdvertisment">
             <End Role="User" EntitySet="Users" />
-            <End Role="Advetisement" EntitySet="Advetisements" />
+            <End Role="Advertisment" EntitySet="Advertisments" />
           </AssociationSet>
         </EntityContainer>
-        <EntityType Name="Advetisement">
+        <EntityType Name="Advertisment">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
@@ -417,9 +417,9 @@
           <Property Name="PaidID" Type="Int64" Nullable="true" />
           <Property Name="EndTime" MaxLength="200" FixedLength="false" Unicode="true" Type="String" />
           <Property Type="Int32" Name="CityID" Nullable="true" />
-          <NavigationProperty Name="KeyWords" Relationship="Model1.AdvetisementKeyWord" FromRole="Advetisement" ToRole="KeyWord" />
+          <NavigationProperty Name="KeyWords" Relationship="Model1.AdvertismentKeyWord" FromRole="Advertisment" ToRole="KeyWord" />
           <Property Type="Int32" Name="AdvDuration" Nullable="false" />
-          <NavigationProperty Name="User" Relationship="Model1.UserAdvetisement" FromRole="Advetisement" ToRole="User" />
+          <NavigationProperty Name="User" Relationship="Model1.UserAdvertisment" FromRole="Advertisment" ToRole="User" />
           <Property Type="Int32" Name="UserId" Nullable="false" />
         </EntityType>
         <EntityType Name="User">
@@ -447,7 +447,7 @@
           <Property Type="Guid" Name="UserProviderKey" Nullable="false" />
           <NavigationProperty Name="Tickets" Relationship="Model1.UserTicket" FromRole="User" ToRole="Ticket" />
           <NavigationProperty Name="Groups" Relationship="Model1.UserGroup" FromRole="User" ToRole="Group" />
-          <NavigationProperty Name="Advetisements" Relationship="Model1.UserAdvetisement" FromRole="User" ToRole="Advetisement" />
+          <NavigationProperty Name="Advertisments" Relationship="Model1.UserAdvertisment" FromRole="User" ToRole="Advertisment" />
         </EntityType>
         <EntityType Name="Ticket">
           <Key>
@@ -584,20 +584,20 @@
           </Key>
           <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="Text" Nullable="false" />
-          <NavigationProperty Name="Advetisement" Relationship="Model1.AdvetisementKeyWord" FromRole="KeyWord" ToRole="Advetisement" />
+          <NavigationProperty Name="Advertisment" Relationship="Model1.AdvertismentKeyWord" FromRole="KeyWord" ToRole="Advertisment" />
         </EntityType>
-        <Association Name="AdvetisementKeyWord">
-          <End Type="Model1.Advetisement" Role="Advetisement" Multiplicity="*" />
+        <Association Name="AdvertismentKeyWord">
+          <End Type="Model1.Advertisment" Role="Advertisment" Multiplicity="*" />
           <End Type="Model1.KeyWord" Role="KeyWord" Multiplicity="*" />
         </Association>
-        <Association Name="UserAdvetisement">
+        <Association Name="UserAdvertisment">
           <End Type="Model1.User" Role="User" Multiplicity="1" />
-          <End Type="Model1.Advetisement" Role="Advetisement" Multiplicity="*" />
+          <End Type="Model1.Advertisment" Role="Advertisment" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="Advetisement">
+            <Dependent Role="Advertisment">
               <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
@@ -608,9 +608,9 @@
     <edmx:Mappings>
     <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="Model1StoreContainer" CdmEntityContainer="ModelContainer">
-    <EntitySetMapping Name="Advetisements">
-      <EntityTypeMapping TypeName="IsTypeOf(Model1.Advetisement)">
-        <MappingFragment StoreEntitySet="Advetisements">
+    <EntitySetMapping Name="Advertisments">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Advertisment)">
+        <MappingFragment StoreEntitySet="Advertisments">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="GroupID" ColumnName="GroupID" />
           <ScalarProperty Name="SateID" ColumnName="SateID" />
@@ -826,9 +826,9 @@
         <ScalarProperty Name="ID" ColumnName="Groups_ID" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="AdvetisementKeyWord" TypeName="Model1.AdvetisementKeyWord" StoreEntitySet="AdvetisementKeyWord">
-      <EndProperty Name="Advetisement">
-        <ScalarProperty Name="ID" ColumnName="Advetisement_ID" />
+    <AssociationSetMapping Name="AdvertismentKeyWord" TypeName="Model1.AdvertismentKeyWord" StoreEntitySet="AdvertismentKeyWord">
+      <EndProperty Name="Advertisment">
+        <ScalarProperty Name="ID" ColumnName="Advertisment_ID" />
       </EndProperty>
       <EndProperty Name="KeyWord">
         <ScalarProperty Name="Id" ColumnName="KeyWords_Id" />
@@ -853,7 +853,7 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram Name="Model1" ZoomLevel="85" >
-        <EntityTypeShape EntityType="Model1.Advetisement" Width="1.5" PointX="3" PointY="1.375" Height="7.5570279947916656" />
+        <EntityTypeShape EntityType="Model1.Advertisment" Width="1.5" PointX="3" PointY="1.375" Height="7.5570279947916656" />
         <EntityTypeShape EntityType="Model1.User" Width="1.5" PointX="0.75" PointY="6.875" Height="5.2494108072916656" />
         <EntityTypeShape EntityType="Model1.Ticket" Width="1.5" PointX="3" PointY="10.875" Height="3.5186979174613953" />
         <EntityTypeShape EntityType="Model1.State" Width="1.5" PointX="5.75" PointY="1" Height="1.5956835933029652" />
@@ -883,11 +883,11 @@
           <ConnectorPoint PointX="3" PointY="16.403595377604169" />
         </AssociationConnector>
         <EntityTypeShape EntityType="Model1.KeyWord" Width="1.5" PointX="6.625" PointY="5.375" Height="1.4033821614583326" />
-        <AssociationConnector Association="Model1.AdvetisementKeyWord">
+        <AssociationConnector Association="Model1.AdvertismentKeyWord">
           <ConnectorPoint PointX="4.5" PointY="6.172841796875" />
           <ConnectorPoint PointX="6.625" PointY="6.172841796875" />
         </AssociationConnector>
-        <AssociationConnector Association="Model1.UserAdvetisement">
+        <AssociationConnector Association="Model1.UserAdvertisment">
           <ConnectorPoint PointX="2.25" PointY="7.9035139973958328" />
           <ConnectorPoint PointX="3" PointY="7.9035139973958328" />
         </AssociationConnector>

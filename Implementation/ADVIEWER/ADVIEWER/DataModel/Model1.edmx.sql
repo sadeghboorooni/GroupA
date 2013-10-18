@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 10/18/2013 23:38:47
+-- Date Created: 10/19/2013 00:16:58
 -- Generated from EDMX file: C:\Users\M-R\Desktop\SE2\GroupA\Implementation\ADVIEWER\ADVIEWER\DataModel\Model1.edmx
 -- --------------------------------------------------
 
@@ -32,19 +32,22 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_UserGroup_Group]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[UserGroup] DROP CONSTRAINT [FK_UserGroup_Group];
 GO
-IF OBJECT_ID(N'[dbo].[FK_AdvetisementKeyWord_Advetisement]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[AdvetisementKeyWord] DROP CONSTRAINT [FK_AdvetisementKeyWord_Advetisement];
+IF OBJECT_ID(N'[dbo].[FK_AdvertismentKeyWord_Advertisment]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[AdvertismentKeyWord] DROP CONSTRAINT [FK_AdvertismentKeyWord_Advertisment];
 GO
-IF OBJECT_ID(N'[dbo].[FK_AdvetisementKeyWord_KeyWord]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[AdvetisementKeyWord] DROP CONSTRAINT [FK_AdvetisementKeyWord_KeyWord];
+IF OBJECT_ID(N'[dbo].[FK_AdvertismentKeyWord_KeyWord]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[AdvertismentKeyWord] DROP CONSTRAINT [FK_AdvertismentKeyWord_KeyWord];
+GO
+IF OBJECT_ID(N'[dbo].[FK_UserAdvertisment]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Advertisments] DROP CONSTRAINT [FK_UserAdvertisment];
 GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[Advetisements]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Advetisements];
+IF OBJECT_ID(N'[dbo].[Advertisments]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Advertisments];
 GO
 IF OBJECT_ID(N'[dbo].[Users]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Users];
@@ -79,16 +82,16 @@ GO
 IF OBJECT_ID(N'[dbo].[UserGroup]', 'U') IS NOT NULL
     DROP TABLE [dbo].[UserGroup];
 GO
-IF OBJECT_ID(N'[dbo].[AdvetisementKeyWord]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[AdvetisementKeyWord];
+IF OBJECT_ID(N'[dbo].[AdvertismentKeyWord]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[AdvertismentKeyWord];
 GO
 
 -- --------------------------------------------------
 -- Creating all tables
 -- --------------------------------------------------
 
--- Creating table 'Advetisements'
-CREATE TABLE [dbo].[Advetisements] (
+-- Creating table 'Advertisments'
+CREATE TABLE [dbo].[Advertisments] (
     [ID] int IDENTITY(1,1) NOT NULL,
     [GroupID] int  NULL,
     [SateID] int  NULL,
@@ -272,9 +275,9 @@ CREATE TABLE [dbo].[UserGroup] (
 );
 GO
 
--- Creating table 'AdvetisementKeyWord'
-CREATE TABLE [dbo].[AdvetisementKeyWord] (
-    [Advetisement_ID] int  NOT NULL,
+-- Creating table 'AdvertismentKeyWord'
+CREATE TABLE [dbo].[AdvertismentKeyWord] (
+    [Advertisment_ID] int  NOT NULL,
     [KeyWords_Id] int  NOT NULL
 );
 GO
@@ -283,9 +286,9 @@ GO
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
 
--- Creating primary key on [ID] in table 'Advetisements'
-ALTER TABLE [dbo].[Advetisements]
-ADD CONSTRAINT [PK_Advetisements]
+-- Creating primary key on [ID] in table 'Advertisments'
+ALTER TABLE [dbo].[Advertisments]
+ADD CONSTRAINT [PK_Advertisments]
     PRIMARY KEY CLUSTERED ([ID] ASC);
 GO
 
@@ -355,10 +358,10 @@ ADD CONSTRAINT [PK_UserGroup]
     PRIMARY KEY NONCLUSTERED ([Users_ID], [Groups_ID] ASC);
 GO
 
--- Creating primary key on [Advetisement_ID], [KeyWords_Id] in table 'AdvetisementKeyWord'
-ALTER TABLE [dbo].[AdvetisementKeyWord]
-ADD CONSTRAINT [PK_AdvetisementKeyWord]
-    PRIMARY KEY NONCLUSTERED ([Advetisement_ID], [KeyWords_Id] ASC);
+-- Creating primary key on [Advertisment_ID], [KeyWords_Id] in table 'AdvertismentKeyWord'
+ALTER TABLE [dbo].[AdvertismentKeyWord]
+ADD CONSTRAINT [PK_AdvertismentKeyWord]
+    PRIMARY KEY NONCLUSTERED ([Advertisment_ID], [KeyWords_Id] ASC);
 GO
 
 -- --------------------------------------------------
@@ -430,40 +433,40 @@ ON [dbo].[UserGroup]
     ([Groups_ID]);
 GO
 
--- Creating foreign key on [Advetisement_ID] in table 'AdvetisementKeyWord'
-ALTER TABLE [dbo].[AdvetisementKeyWord]
-ADD CONSTRAINT [FK_AdvetisementKeyWord_Advetisement]
-    FOREIGN KEY ([Advetisement_ID])
-    REFERENCES [dbo].[Advetisements]
+-- Creating foreign key on [Advertisment_ID] in table 'AdvertismentKeyWord'
+ALTER TABLE [dbo].[AdvertismentKeyWord]
+ADD CONSTRAINT [FK_AdvertismentKeyWord_Advertisment]
+    FOREIGN KEY ([Advertisment_ID])
+    REFERENCES [dbo].[Advertisments]
         ([ID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating foreign key on [KeyWords_Id] in table 'AdvetisementKeyWord'
-ALTER TABLE [dbo].[AdvetisementKeyWord]
-ADD CONSTRAINT [FK_AdvetisementKeyWord_KeyWord]
+-- Creating foreign key on [KeyWords_Id] in table 'AdvertismentKeyWord'
+ALTER TABLE [dbo].[AdvertismentKeyWord]
+ADD CONSTRAINT [FK_AdvertismentKeyWord_KeyWord]
     FOREIGN KEY ([KeyWords_Id])
     REFERENCES [dbo].[KeyWords]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 
--- Creating non-clustered index for FOREIGN KEY 'FK_AdvetisementKeyWord_KeyWord'
-CREATE INDEX [IX_FK_AdvetisementKeyWord_KeyWord]
-ON [dbo].[AdvetisementKeyWord]
+-- Creating non-clustered index for FOREIGN KEY 'FK_AdvertismentKeyWord_KeyWord'
+CREATE INDEX [IX_FK_AdvertismentKeyWord_KeyWord]
+ON [dbo].[AdvertismentKeyWord]
     ([KeyWords_Id]);
 GO
 
--- Creating foreign key on [UserId] in table 'Advetisements'
-ALTER TABLE [dbo].[Advetisements]
-ADD CONSTRAINT [FK_UserAdvetisement]
+-- Creating foreign key on [UserId] in table 'Advertisments'
+ALTER TABLE [dbo].[Advertisments]
+ADD CONSTRAINT [FK_UserAdvertisment]
     FOREIGN KEY ([UserId])
     REFERENCES [dbo].[Users]
         ([ID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 
--- Creating non-clustered index for FOREIGN KEY 'FK_UserAdvetisement'
-CREATE INDEX [IX_FK_UserAdvetisement]
-ON [dbo].[Advetisements]
+-- Creating non-clustered index for FOREIGN KEY 'FK_UserAdvertisment'
+CREATE INDEX [IX_FK_UserAdvertisment]
+ON [dbo].[Advertisments]
     ([UserId]);
 GO
 

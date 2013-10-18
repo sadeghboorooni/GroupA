@@ -27,7 +27,7 @@ namespace ADVIEWER.Member
                 return;
             }
 
-            Advetisement newadv = new Advetisement();
+            Advertisment newadv = new Advertisment();
 
             
             newadv.Title = AdvTitleTxt.Text;

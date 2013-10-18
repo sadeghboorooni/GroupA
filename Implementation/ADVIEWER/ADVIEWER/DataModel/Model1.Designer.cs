@@ -22,8 +22,8 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("Model1", "StateCity", "State", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ADVIEWER.DataModel.State), "City", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DataModel.City))]
 [assembly: EdmRelationshipAttribute("Model1", "UserTicket", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ADVIEWER.DataModel.User), "Ticket", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DataModel.Ticket))]
 [assembly: EdmRelationshipAttribute("Model1", "UserGroup", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DataModel.User), "Group", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DataModel.Group))]
-[assembly: EdmRelationshipAttribute("Model1", "AdvetisementKeyWord", "Advetisement", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DataModel.Advetisement), "KeyWord", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DataModel.KeyWord))]
-[assembly: EdmRelationshipAttribute("Model1", "UserAdvetisement", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ADVIEWER.DataModel.User), "Advetisement", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DataModel.Advetisement), true)]
+[assembly: EdmRelationshipAttribute("Model1", "AdvetisementKeyWord", "Advetisement", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DataModel.Advertisment), "KeyWord", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DataModel.KeyWord))]
+[assembly: EdmRelationshipAttribute("Model1", "UserAdvetisement", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ADVIEWER.DataModel.User), "Advetisement", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DataModel.Advertisment), true)]
 
 #endregion
 
@@ -78,18 +78,18 @@ namespace ADVIEWER.DataModel
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<Advetisement> Advetisements
+        public ObjectSet<Advertisment> Advertisments
         {
             get
             {
-                if ((_Advetisements == null))
+                if ((_Advertisments == null))
                 {
-                    _Advetisements = base.CreateObjectSet<Advetisement>("Advetisements");
+                    _Advertisments = base.CreateObjectSet<Advertisment>("Advertisments");
                 }
-                return _Advetisements;
+                return _Advertisments;
             }
         }
-        private ObjectSet<Advetisement> _Advetisements;
+        private ObjectSet<Advertisment> _Advertisments;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -255,11 +255,11 @@ namespace ADVIEWER.DataModel
         #region AddTo Methods
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the Advetisements EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// Deprecated Method for adding a new object to the Advertisments EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToAdvetisements(Advetisement advetisement)
+        public void AddToAdvertisments(Advertisment advertisment)
         {
-            base.AddObject("Advetisements", advetisement);
+            base.AddObject("Advertisments", advertisment);
         }
     
         /// <summary>
@@ -648,15 +648,15 @@ namespace ADVIEWER.DataModel
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="Model1", Name="Advetisement")]
+    [EdmEntityTypeAttribute(NamespaceName="Model1", Name="Advertisment")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class Advetisement : EntityObject
+    public partial class Advertisment : EntityObject
     {
         #region Factory Method
     
         /// <summary>
-        /// Create a new Advetisement object.
+        /// Create a new Advertisment object.
         /// </summary>
         /// <param name="id">Initial value of the ID property.</param>
         /// <param name="starCount">Initial value of the StarCount property.</param>
@@ -671,23 +671,23 @@ namespace ADVIEWER.DataModel
         /// <param name="reviewCount">Initial value of the ReviewCount property.</param>
         /// <param name="advDuration">Initial value of the AdvDuration property.</param>
         /// <param name="userId">Initial value of the UserId property.</param>
-        public static Advetisement CreateAdvetisement(global::System.Int32 id, global::System.Int32 starCount, global::System.String title, global::System.String text, global::System.String pic, global::System.Boolean isActive, global::System.String fullName, global::System.String email, global::System.DateTime expirationDate, global::System.DateTime registrationDate, global::System.Int32 reviewCount, global::System.Int32 advDuration, global::System.Int32 userId)
+        public static Advertisment CreateAdvertisment(global::System.Int32 id, global::System.Int32 starCount, global::System.String title, global::System.String text, global::System.String pic, global::System.Boolean isActive, global::System.String fullName, global::System.String email, global::System.DateTime expirationDate, global::System.DateTime registrationDate, global::System.Int32 reviewCount, global::System.Int32 advDuration, global::System.Int32 userId)
         {
-            Advetisement advetisement = new Advetisement();
-            advetisement.ID = id;
-            advetisement.StarCount = starCount;
-            advetisement.Title = title;
-            advetisement.Text = text;
-            advetisement.Pic = pic;
-            advetisement.IsActive = isActive;
-            advetisement.FullName = fullName;
-            advetisement.Email = email;
-            advetisement.ExpirationDate = expirationDate;
-            advetisement.RegistrationDate = registrationDate;
-            advetisement.ReviewCount = reviewCount;
-            advetisement.AdvDuration = advDuration;
-            advetisement.UserId = userId;
-            return advetisement;
+            Advertisment advertisment = new Advertisment();
+            advertisment.ID = id;
+            advertisment.StarCount = starCount;
+            advertisment.Title = title;
+            advertisment.Text = text;
+            advertisment.Pic = pic;
+            advertisment.IsActive = isActive;
+            advertisment.FullName = fullName;
+            advertisment.Email = email;
+            advertisment.ExpirationDate = expirationDate;
+            advertisment.RegistrationDate = registrationDate;
+            advertisment.ReviewCount = reviewCount;
+            advertisment.AdvDuration = advDuration;
+            advertisment.UserId = userId;
+            return advertisment;
         }
 
         #endregion
@@ -2252,17 +2252,17 @@ namespace ADVIEWER.DataModel
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("Model1", "AdvetisementKeyWord", "Advetisement")]
-        public EntityCollection<Advetisement> Advetisement
+        public EntityCollection<Advertisment> Advetisement
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Advetisement>("Model1.AdvetisementKeyWord", "Advetisement");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Advertisment>("Model1.AdvetisementKeyWord", "Advetisement");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Advetisement>("Model1.AdvetisementKeyWord", "Advetisement", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Advertisment>("Model1.AdvetisementKeyWord", "Advetisement", value);
                 }
             }
         }
@@ -3946,17 +3946,17 @@ namespace ADVIEWER.DataModel
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("Model1", "UserAdvetisement", "Advetisement")]
-        public EntityCollection<Advetisement> Advetisements
+        public EntityCollection<Advertisment> Advetisements
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Advetisement>("Model1.UserAdvetisement", "Advetisement");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Advertisment>("Model1.UserAdvetisement", "Advetisement");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Advetisement>("Model1.UserAdvetisement", "Advetisement", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Advertisment>("Model1.UserAdvetisement", "Advetisement", value);
                 }
             }
         }
