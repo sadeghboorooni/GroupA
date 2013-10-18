@@ -1,6 +1,10 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AddNewAdv.aspx.cs" Inherits="ADVIEWER.Member.AddNewAdv" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
- 
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="../src/jquery.tokeninput.js"></script>
+
+    <link rel="stylesheet" href="../styles/token-input.css" type="text/css" />
+    <link rel="stylesheet" href="../styles/token-input-facebook.css" type="text/css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div dir="rtl" style="height: 101px">
@@ -59,17 +63,26 @@
     <p align="right" dir="rtl">
         کلمات کلیدی آگهی</p>
     <p align="right" dir="rtl">
-        <asp:TextBox ID="KeyWordtxt" runat="server" Height="24px" Width="420px"></asp:TextBox>
+        <asp:TextBox ID="KeyWordtxt" ClientIDMode="Static" runat="server" Height="24px" Width="420px"></asp:TextBox>
+        
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#KeyWordtxt").tokenInput("~/Codes/JsonMaker.aspx?entity=keyword", {
+
+                    theme: "facebook", preventDuplicates: true, allowFreeTagging: true
+            });
+            });
+        </script>
+    
     </p>
     <p align="right" dir="rtl">
         راهنما: کلمات کلیدی، کلمات یا عباراتی است که کاربران برای یافتن کالا و یا خدمات 
         شما آن ها را در موتور های جستجو و یا سایت نیازجو به کار میبرند. انتخاب کلمات 
         کلیدی مناسب تاثیر بسیاری در افزایش بازدید آگهی شما دارد.
         <br />
-        از تکرار کلمات کلیدی خودداری کنید.<br />
-        کلمات کلیدی مرتبط و کوتاه استفاده کنید.<br />
-        کلمات کلیدی را می توانید با , ، - | + ; جدا کنید و یا هر کلمه کلیدی را در یک خط 
-        بنویسید.</p>
+        کلمات کلیدی 
+        موجود در سایت به شما پیشنهاد داده می شوند. در صورت تمایل برای اضافه کردن کلمه 
+        جدید بعد از تایپ آن علامت = را اضافه کنید یا Tab را بفشارید. </p>
     <p align="right" dir="rtl">
         قیمت</p>
     <p align="right" dir="rtl">

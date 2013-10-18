@@ -18,8 +18,7 @@ namespace ADVIEWER.Member
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            ModelContainer ModelData = new ModelContainer();
-
+            
             if (string.IsNullOrEmpty(AdvTitleTxt.Text) || string.IsNullOrEmpty(AdvTexttxt.Text) || string.IsNullOrEmpty(Nametxt.Text) || string.IsNullOrEmpty(KeyWordtxt.Text))
             {
                 ltr_error.Text = "فیلدهای الزامی را کامل کنید";
@@ -28,26 +27,32 @@ namespace ADVIEWER.Member
                 return;
             }
 
-            string Title, ShortAdv, AdvText, KeyWord, Link, Address, Name, Price, Mobile, Tell, TellTime,Email,YahooID;
-            int AdvKind,AdvMonth;
-            Title = AdvTitleTxt.Text;
-            ShortAdv = AdvShorttxt.Text;
-            AdvText = System.Text.RegularExpressions.Regex.Replace(AdvTexttxt.Text, "<[^>]*>", string.Empty);
-            KeyWord = System.Text.RegularExpressions.Regex.Replace(KeyWordtxt.Text, "<[^>]*>", string.Empty);
-            Link = Linktxt.Text;
-            Address = Addresstxt.Text;
-            Name = Nametxt.Text;
-            Tell = TellTimetxt.Text;
-            Mobile = Mobiletxt.Text;
-            Price = Pricetxt.Text;
-            TellTime = TellTimetxt.Text;
-            Email = Emailtxt.Text;
-            YahooID = YahooIDtxt.Text;
-            if (Link.ToLower().Trim() == "http://") Link = "";
-            AdvKind = int.Parse(AdvKindDrop.SelectedValue);
-            AdvMonth = int.Parse(MonthDrop.SelectedValue);
+            Advetisement newadv = new Advetisement();
 
-            Advetisement newadv = Advetisement.CreateAdvetisement(1, 2, 3, 4, AdvKind, Title, AdvText, " ",false, Name, Email,DateTime.Now.AddDays(0),DateTime.Now.AddDays(0),0,0,0);
+            newadv.User = AccountCodes.currentUser();
+
+            newadv.Title = AdvTitleTxt.Text;
+            newadv.Description= AdvShorttxt.Text;
+            newadv.Text = System.Text.RegularExpressions.Regex.Replace(AdvTexttxt.Text, "<[^>]*>", string.Empty);
+            foreach (KeyWord kw in memberCodes.ParseKeyWords(KeyWordtxt.Text)) 
+            {
+                newadv.KeyWords.Add(kw);
+            }
+            newadv.Link = Linktxt.Text;
+            newadv.Address = Addresstxt.Text;
+            newadv.FullName = Nametxt.Text;
+            newadv.Tell = TellTimetxt.Text;
+            newadv.Mobile = Mobiletxt.Text;
+            newadv.Price = Pricetxt.Text;
+            newadv.TellTime = TellTimetxt.Text;
+            newadv.Email = Emailtxt.Text;
+            newadv.YahooID = YahooIDtxt.Text;
+            if (newadv.Link.ToLower().Trim() == "http://") newadv.Link = "";
+            newadv.StarCount = int.Parse(AdvKindDrop.SelectedValue);
+            newadv.AdvDuration = int.Parse(MonthDrop.SelectedValue);
+            
+            
+
 
             memberCodes.MakeNewAdvertisment(newadv);
         }
