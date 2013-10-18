@@ -67,8 +67,7 @@
         
         <script type="text/javascript">
             $(document).ready(function () {
-                $("#KeyWordtxt").tokenInput("~/Codes/JsonMaker.aspx?entity=keyword", {
-
+                $("#KeyWordtxt").tokenInput("../Codes/JsonMaker.aspx?entity=keyword", {
                     theme: "facebook", preventDuplicates: true, allowFreeTagging: true
             });
             });
@@ -77,7 +76,7 @@
     </p>
     <p align="right" dir="rtl">
         راهنما: کلمات کلیدی، کلمات یا عباراتی است که کاربران برای یافتن کالا و یا خدمات 
-        شما آن ها را در موتور های جستجو و یا سایت نیازجو به کار میبرند. انتخاب کلمات 
+        شما آن ها را در موتور های جستجو و یا سایت به کار میبرند. انتخاب کلمات 
         کلیدی مناسب تاثیر بسیاری در افزایش بازدید آگهی شما دارد.
         <br />
         کلمات کلیدی 

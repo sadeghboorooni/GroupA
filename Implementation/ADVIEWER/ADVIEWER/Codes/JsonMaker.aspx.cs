@@ -10,20 +10,22 @@ namespace ADVIEWER.Codes
 {
     public partial class JsonMaker : System.Web.UI.Page
     {
-        protected void Page_Load(object sender, EventArgs e)
+        protected void Page_PreRender(object sender, EventArgs e)
         {
-            
+
+            if (Request.QueryString["entity"] != null)
             {
-                
+
+                if (Request.QueryString["entity"] == "keyword")
                 {
                     ModelContainer ml = new ModelContainer();
                     string resp = "[";
-
-                    foreach (KeyWord kw in ml.KeyWords) 
+                    string q = Request.QueryString["q"];
+                    foreach (KeyWord kw in ml.KeyWords.Where(t=>t.Text.Contains(q)))
                     {
-                        resp+="{\"name\":\""+kw.Text+"\",\"id\":\""+kw.Id+"\"},";
+                        resp += "{\"name\":\"" + kw.Text + "\",\"id\":\"" + kw.Id + "\"},";
                     }
-                    resp = resp.Remove(resp.Count() - 1);
+                    if(resp.LastIndexOf(',')!=-1) resp = resp.Remove(resp.LastIndexOf(','));
                     resp += "]";
                     Response.Write(resp);
                 }
