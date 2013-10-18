@@ -100,11 +100,11 @@
         </div>
         <div class="groups rounded">
             <div class="right">
-                <a href="logout.aspx">
+                <asp:LinkButton runat="server" OnClick = "ExitFuction">
                     <img src="Images/Exit.png" alt="" />
                     <h6>
                         خروج</h6>
-                </a>
+                </asp:LinkButton>
             </div>
             </div>
         
