@@ -1,8 +1,6 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AddNewAdv.aspx.cs" Inherits="ADVIEWER.Member.AddNewAdv" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
- 
-</asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/member/MemberMaster.Master" AutoEventWireup="true" CodeBehind="AddNewAdv.aspx.cs" Inherits="ADVIEWER.Member.AddNewAdv" %>
+
+<asp:Content ID="Content2" ContentPlaceHolderID="mainContent" runat="server">
     <div dir="rtl" style="height: 101px">
     <h2 align="right" dir="rtl">
         درج آگهی جدید</h2>

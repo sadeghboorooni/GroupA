@@ -18,7 +18,6 @@ namespace ADVIEWER.Member
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            ModelContainer ModelData = new ModelContainer();
 
             if (string.IsNullOrEmpty(AdvTitleTxt.Text) || string.IsNullOrEmpty(AdvTexttxt.Text) || string.IsNullOrEmpty(Nametxt.Text) || string.IsNullOrEmpty(KeyWordtxt.Text))
             {
