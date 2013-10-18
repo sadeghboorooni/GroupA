@@ -27,10 +27,6 @@
       <End Role="State" EntitySet="States" />
       <End Role="City" EntitySet="Cities" />
     </AssociationSet>
-    <AssociationSet Name="UserDataAdvetisement" Association="Model1.Store.UserDataAdvetisement">
-      <End Role="User" EntitySet="Users" />
-      <End Role="Advetisement" EntitySet="Advetisements" />
-    </AssociationSet>
     <AssociationSet Name="UserTicket" Association="Model1.Store.UserTicket">
       <End Role="User" EntitySet="Users" />
       <End Role="Ticket" EntitySet="Tickets1" />
@@ -51,13 +47,16 @@
       <End Role="KeyWord" EntitySet="KeyWords" />
       <End Role="AdvetisementKeyWord" EntitySet="AdvetisementKeyWord" />
     </AssociationSet>
+    <AssociationSet Name="UserAdvetisement" Association="Model1.Store.UserAdvetisement">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Advetisement" EntitySet="Advetisements" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Advetisements">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="UserID" Type="int" Nullable="false" />
     <Property Name="GroupID" Type="int" Nullable="true" />
     <Property Name="SateID" Type="int" Nullable="true" />
     <Property Name="StarCount" Type="int" Nullable="false" />
@@ -87,6 +86,8 @@
     <Property Name="PaidID" Type="bigint" Nullable="true" />
     <Property Name="EndTime" Type="nvarchar" Nullable="true" MaxLength="200" />
     <Property Name="CityID" Type="int" Nullable="true" />
+    <Property Name="AdvDuration" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Users">
     <Key>
@@ -269,18 +270,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="UserDataAdvetisement">
-    <End Role="User" Type="Model1.Store.Users" Multiplicity="1" />
-    <End Role="Advetisement" Type="Model1.Store.Advetisements" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="User">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="Advetisement">
-        <PropertyRef Name="UserID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="UserTicket">
     <End Role="User" Type="Model1.Store.Users" Multiplicity="1" />
     <End Role="Ticket" Type="Model1.Store.Tickets1" Multiplicity="*" />
@@ -290,6 +279,18 @@
       </Principal>
       <Dependent Role="Ticket">
         <PropertyRef Name="User_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserAdvetisement">
+    <End Role="User" Type="Model1.Store.Users" Multiplicity="1" />
+    <End Role="Advetisement" Type="Model1.Store.Advetisements" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Advetisement">
+        <PropertyRef Name="UserId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -364,10 +365,6 @@
             <End Role="State" EntitySet="States" />
             <End Role="City" EntitySet="Cities" />
           </AssociationSet>
-          <AssociationSet Name="UserDataAdvetisement" Association="Model1.UserDataAdvetisement">
-            <End Role="User" EntitySet="Users" />
-            <End Role="Advetisement" EntitySet="Advetisements" />
-          </AssociationSet>
           <AssociationSet Name="UserTicket" Association="Model1.UserTicket">
             <End Role="User" EntitySet="Users" />
             <End Role="Ticket" EntitySet="Tickets1" />
@@ -381,13 +378,16 @@
             <End Role="Advetisement" EntitySet="Advetisements" />
             <End Role="KeyWord" EntitySet="KeyWords" />
           </AssociationSet>
+          <AssociationSet Name="UserAdvetisement" Association="Model1.UserAdvetisement">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Advetisement" EntitySet="Advetisements" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Advetisement">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Int32" Name="UserID" Nullable="false" />
           <Property Type="Int32" Name="GroupID" Nullable="true" />
           <Property Type="Int32" Name="SateID" Nullable="true" />
           <Property Type="Int32" Name="StarCount" Nullable="false" />
@@ -417,8 +417,10 @@
           <Property Name="PaidID" Type="Int64" Nullable="true" />
           <Property Name="EndTime" MaxLength="200" FixedLength="false" Unicode="true" Type="String" />
           <Property Type="Int32" Name="CityID" Nullable="true" />
-          <NavigationProperty Name="UserData" Relationship="Model1.UserDataAdvetisement" FromRole="Advetisement" ToRole="User" />
           <NavigationProperty Name="KeyWords" Relationship="Model1.AdvetisementKeyWord" FromRole="Advetisement" ToRole="KeyWord" />
+          <Property Type="Int32" Name="AdvDuration" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Model1.UserAdvetisement" FromRole="Advetisement" ToRole="User" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -443,9 +445,9 @@
           <Property Type="String" Name="BannedMsg" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="true" />
           <Property Type="Int32" Name="AffiliateMoney" />
           <Property Type="Guid" Name="UserProviderKey" Nullable="false" />
-          <NavigationProperty Name="Advetisements" Relationship="Model1.UserDataAdvetisement" FromRole="User" ToRole="Advetisement" />
           <NavigationProperty Name="Tickets" Relationship="Model1.UserTicket" FromRole="User" ToRole="Ticket" />
           <NavigationProperty Name="Groups" Relationship="Model1.UserGroup" FromRole="User" ToRole="Group" />
+          <NavigationProperty Name="Advetisements" Relationship="Model1.UserAdvetisement" FromRole="User" ToRole="Advetisement" />
         </EntityType>
         <EntityType Name="Ticket">
           <Key>
@@ -568,18 +570,6 @@
           <End Type="Model1.State" Role="State" Multiplicity="1" />
           <End Type="Model1.City" Role="City" Multiplicity="*" />
         </Association>
-        <Association Name="UserDataAdvetisement">
-          <End Type="Model1.User" Role="User" Multiplicity="1" />
-          <End Type="Model1.Advetisement" Role="Advetisement" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Advetisement">
-              <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="UserTicket">
           <End Type="Model1.User" Role="User" Multiplicity="1" />
           <End Type="Model1.Ticket" Role="Ticket" Multiplicity="*" />
@@ -600,6 +590,18 @@
           <End Type="Model1.Advetisement" Role="Advetisement" Multiplicity="*" />
           <End Type="Model1.KeyWord" Role="KeyWord" Multiplicity="*" />
         </Association>
+        <Association Name="UserAdvetisement">
+          <End Type="Model1.User" Role="User" Multiplicity="1" />
+          <End Type="Model1.Advetisement" Role="Advetisement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Advetisement">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -610,7 +612,6 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model1.Advetisement)">
         <MappingFragment StoreEntitySet="Advetisements">
           <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="UserID" ColumnName="UserID" />
           <ScalarProperty Name="GroupID" ColumnName="GroupID" />
           <ScalarProperty Name="SateID" ColumnName="SateID" />
           <ScalarProperty Name="StarCount" ColumnName="StarCount" />
@@ -640,6 +641,8 @@
           <ScalarProperty Name="PaidID" ColumnName="PaidID" />
           <ScalarProperty Name="EndTime" ColumnName="EndTime" />
           <ScalarProperty Name="CityID" ColumnName="CityID" />
+          <ScalarProperty Name="AdvDuration" ColumnName="AdvDuration" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -849,8 +852,8 @@
     </edmx:Options>
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram Name="Model1" ZoomLevel="68" >
-        <EntityTypeShape EntityType="Model1.Advetisement" Width="1.5" PointX="3" PointY="1.375" Height="7.3647265624999978" />
+      <Diagram Name="Model1" ZoomLevel="85" >
+        <EntityTypeShape EntityType="Model1.Advetisement" Width="1.5" PointX="3" PointY="1.375" Height="7.5570279947916656" />
         <EntityTypeShape EntityType="Model1.User" Width="1.5" PointX="0.75" PointY="6.875" Height="5.2494108072916656" />
         <EntityTypeShape EntityType="Model1.Ticket" Width="1.5" PointX="3" PointY="10.875" Height="3.5186979174613953" />
         <EntityTypeShape EntityType="Model1.State" Width="1.5" PointX="5.75" PointY="1" Height="1.5956835933029652" />
@@ -870,10 +873,6 @@
           <ConnectorPoint PointX="7.25" PointY="1.7978417966514826" />
           <ConnectorPoint PointX="8" PointY="1.7978417966514826" />
         </AssociationConnector>
-        <AssociationConnector Association="Model1.UserDataAdvetisement" >
-          <ConnectorPoint PointX="2.25" PointY="7.80736328125" />
-          <ConnectorPoint PointX="3" PointY="7.80736328125" />
-        </AssociationConnector>
         <AssociationConnector Association="Model1.UserTicket" >
           <ConnectorPoint PointX="2.25" PointY="11.499705403645834" />
           <ConnectorPoint PointX="3" PointY="11.499705403645834" />
@@ -887,6 +886,10 @@
         <AssociationConnector Association="Model1.AdvetisementKeyWord">
           <ConnectorPoint PointX="4.5" PointY="6.172841796875" />
           <ConnectorPoint PointX="6.625" PointY="6.172841796875" />
+        </AssociationConnector>
+        <AssociationConnector Association="Model1.UserAdvetisement">
+          <ConnectorPoint PointX="2.25" PointY="7.9035139973958328" />
+          <ConnectorPoint PointX="3" PointY="7.9035139973958328" />
         </AssociationConnector>
       </Diagram>
     </edmx:Diagrams>

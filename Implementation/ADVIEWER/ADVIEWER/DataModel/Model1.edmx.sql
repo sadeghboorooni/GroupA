@@ -2,13 +2,13 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 10/18/2013 17:49:18
+-- Date Created: 10/18/2013 23:38:47
 -- Generated from EDMX file: C:\Users\M-R\Desktop\SE2\GroupA\Implementation\ADVIEWER\ADVIEWER\DataModel\Model1.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
 GO
-USE [ADVIEWER];
+USE [ADVIEWERdb];
 GO
 IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
 GO
@@ -23,9 +23,6 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_StateCity]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Cities] DROP CONSTRAINT [FK_StateCity];
 GO
-IF OBJECT_ID(N'[dbo].[FK_UserDataAdvetisement]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Advetisements] DROP CONSTRAINT [FK_UserDataAdvetisement];
-GO
 IF OBJECT_ID(N'[dbo].[FK_UserTicket]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Tickets1] DROP CONSTRAINT [FK_UserTicket];
 GO
@@ -35,11 +32,11 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_UserGroup_Group]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[UserGroup] DROP CONSTRAINT [FK_UserGroup_Group];
 GO
-IF OBJECT_ID(N'[dbo].[FK_StateAdvetisement]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Advetisements] DROP CONSTRAINT [FK_StateAdvetisement];
+IF OBJECT_ID(N'[dbo].[FK_AdvetisementKeyWord_Advetisement]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[AdvetisementKeyWord] DROP CONSTRAINT [FK_AdvetisementKeyWord_Advetisement];
 GO
-IF OBJECT_ID(N'[dbo].[FK_CityAdvetisement]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Advetisements] DROP CONSTRAINT [FK_CityAdvetisement];
+IF OBJECT_ID(N'[dbo].[FK_AdvetisementKeyWord_KeyWord]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[AdvetisementKeyWord] DROP CONSTRAINT [FK_AdvetisementKeyWord_KeyWord];
 GO
 
 -- --------------------------------------------------
@@ -76,8 +73,14 @@ GO
 IF OBJECT_ID(N'[dbo].[Mail_User1]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Mail_User1];
 GO
+IF OBJECT_ID(N'[dbo].[KeyWords]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[KeyWords];
+GO
 IF OBJECT_ID(N'[dbo].[UserGroup]', 'U') IS NOT NULL
     DROP TABLE [dbo].[UserGroup];
+GO
+IF OBJECT_ID(N'[dbo].[AdvetisementKeyWord]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[AdvetisementKeyWord];
 GO
 
 -- --------------------------------------------------
@@ -87,7 +90,6 @@ GO
 -- Creating table 'Advetisements'
 CREATE TABLE [dbo].[Advetisements] (
     [ID] int IDENTITY(1,1) NOT NULL,
-    [UserID] int  NOT NULL,
     [GroupID] int  NULL,
     [SateID] int  NULL,
     [StarCount] int  NOT NULL,
@@ -116,7 +118,9 @@ CREATE TABLE [dbo].[Advetisements] (
     [Link] nvarchar(1000)  NULL,
     [PaidID] bigint  NULL,
     [EndTime] nvarchar(200)  NULL,
-    [CityID] int  NULL
+    [CityID] int  NULL,
+    [AdvDuration] int  NOT NULL,
+    [UserId] int  NOT NULL
 );
 GO
 
@@ -389,20 +393,6 @@ ON [dbo].[Cities]
     ([State_ID]);
 GO
 
--- Creating foreign key on [UserID] in table 'Advetisements'
-ALTER TABLE [dbo].[Advetisements]
-ADD CONSTRAINT [FK_UserDataAdvetisement]
-    FOREIGN KEY ([UserID])
-    REFERENCES [dbo].[Users]
-        ([ID])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-
--- Creating non-clustered index for FOREIGN KEY 'FK_UserDataAdvetisement'
-CREATE INDEX [IX_FK_UserDataAdvetisement]
-ON [dbo].[Advetisements]
-    ([UserID]);
-GO
-
 -- Creating foreign key on [User_ID] in table 'Tickets1'
 ALTER TABLE [dbo].[Tickets1]
 ADD CONSTRAINT [FK_UserTicket]
@@ -461,6 +451,20 @@ ADD CONSTRAINT [FK_AdvetisementKeyWord_KeyWord]
 CREATE INDEX [IX_FK_AdvetisementKeyWord_KeyWord]
 ON [dbo].[AdvetisementKeyWord]
     ([KeyWords_Id]);
+GO
+
+-- Creating foreign key on [UserId] in table 'Advetisements'
+ALTER TABLE [dbo].[Advetisements]
+ADD CONSTRAINT [FK_UserAdvetisement]
+    FOREIGN KEY ([UserId])
+    REFERENCES [dbo].[Users]
+        ([ID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_UserAdvetisement'
+CREATE INDEX [IX_FK_UserAdvetisement]
+ON [dbo].[Advetisements]
+    ([UserId]);
 GO
 
 -- --------------------------------------------------

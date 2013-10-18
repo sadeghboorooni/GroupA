@@ -20,10 +20,10 @@ using System.Runtime.Serialization;
 
 [assembly: EdmRelationshipAttribute("Model1", "GroupGroup", "parent", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ADVIEWER.DataModel.Group), "child", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DataModel.Group))]
 [assembly: EdmRelationshipAttribute("Model1", "StateCity", "State", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ADVIEWER.DataModel.State), "City", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DataModel.City))]
-[assembly: EdmRelationshipAttribute("Model1", "UserDataAdvetisement", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ADVIEWER.DataModel.User), "Advetisement", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DataModel.Advetisement), true)]
 [assembly: EdmRelationshipAttribute("Model1", "UserTicket", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ADVIEWER.DataModel.User), "Ticket", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DataModel.Ticket))]
 [assembly: EdmRelationshipAttribute("Model1", "UserGroup", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DataModel.User), "Group", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DataModel.Group))]
 [assembly: EdmRelationshipAttribute("Model1", "AdvetisementKeyWord", "Advetisement", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DataModel.Advetisement), "KeyWord", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DataModel.KeyWord))]
+[assembly: EdmRelationshipAttribute("Model1", "UserAdvetisement", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ADVIEWER.DataModel.User), "Advetisement", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DataModel.Advetisement), true)]
 
 #endregion
 
@@ -659,7 +659,6 @@ namespace ADVIEWER.DataModel
         /// Create a new Advetisement object.
         /// </summary>
         /// <param name="id">Initial value of the ID property.</param>
-        /// <param name="userID">Initial value of the UserID property.</param>
         /// <param name="starCount">Initial value of the StarCount property.</param>
         /// <param name="title">Initial value of the Title property.</param>
         /// <param name="text">Initial value of the Text property.</param>
@@ -670,11 +669,12 @@ namespace ADVIEWER.DataModel
         /// <param name="expirationDate">Initial value of the ExpirationDate property.</param>
         /// <param name="registrationDate">Initial value of the RegistrationDate property.</param>
         /// <param name="reviewCount">Initial value of the ReviewCount property.</param>
-        public static Advetisement CreateAdvetisement(global::System.Int32 id, global::System.Int32 userID, global::System.Int32 starCount, global::System.String title, global::System.String text, global::System.String pic, global::System.Boolean isActive, global::System.String fullName, global::System.String email, global::System.DateTime expirationDate, global::System.DateTime registrationDate, global::System.Int32 reviewCount)
+        /// <param name="advDuration">Initial value of the AdvDuration property.</param>
+        /// <param name="userId">Initial value of the UserId property.</param>
+        public static Advetisement CreateAdvetisement(global::System.Int32 id, global::System.Int32 starCount, global::System.String title, global::System.String text, global::System.String pic, global::System.Boolean isActive, global::System.String fullName, global::System.String email, global::System.DateTime expirationDate, global::System.DateTime registrationDate, global::System.Int32 reviewCount, global::System.Int32 advDuration, global::System.Int32 userId)
         {
             Advetisement advetisement = new Advetisement();
             advetisement.ID = id;
-            advetisement.UserID = userID;
             advetisement.StarCount = starCount;
             advetisement.Title = title;
             advetisement.Text = text;
@@ -685,6 +685,8 @@ namespace ADVIEWER.DataModel
             advetisement.ExpirationDate = expirationDate;
             advetisement.RegistrationDate = registrationDate;
             advetisement.ReviewCount = reviewCount;
+            advetisement.AdvDuration = advDuration;
+            advetisement.UserId = userId;
             return advetisement;
         }
 
@@ -717,30 +719,6 @@ namespace ADVIEWER.DataModel
         private global::System.Int32 _ID;
         partial void OnIDChanging(global::System.Int32 value);
         partial void OnIDChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 UserID
-        {
-            get
-            {
-                return _UserID;
-            }
-            set
-            {
-                OnUserIDChanging(value);
-                ReportPropertyChanging("UserID");
-                _UserID = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("UserID");
-                OnUserIDChanged();
-            }
-        }
-        private global::System.Int32 _UserID;
-        partial void OnUserIDChanging(global::System.Int32 value);
-        partial void OnUserIDChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -1437,48 +1415,58 @@ namespace ADVIEWER.DataModel
         private Nullable<global::System.Int32> _CityID;
         partial void OnCityIDChanging(Nullable<global::System.Int32> value);
         partial void OnCityIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 AdvDuration
+        {
+            get
+            {
+                return _AdvDuration;
+            }
+            set
+            {
+                OnAdvDurationChanging(value);
+                ReportPropertyChanging("AdvDuration");
+                _AdvDuration = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("AdvDuration");
+                OnAdvDurationChanged();
+            }
+        }
+        private global::System.Int32 _AdvDuration;
+        partial void OnAdvDurationChanging(global::System.Int32 value);
+        partial void OnAdvDurationChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 UserId
+        {
+            get
+            {
+                return _UserId;
+            }
+            set
+            {
+                OnUserIdChanging(value);
+                ReportPropertyChanging("UserId");
+                _UserId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("UserId");
+                OnUserIdChanged();
+            }
+        }
+        private global::System.Int32 _UserId;
+        partial void OnUserIdChanging(global::System.Int32 value);
+        partial void OnUserIdChanged();
 
         #endregion
     
         #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Model1", "UserDataAdvetisement", "User")]
-        public User UserData
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("Model1.UserDataAdvetisement", "User").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("Model1.UserDataAdvetisement", "User").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<User> UserDataReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("Model1.UserDataAdvetisement", "User");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("Model1.UserDataAdvetisement", "User", value);
-                }
-            }
-        }
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -1498,6 +1486,44 @@ namespace ADVIEWER.DataModel
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<KeyWord>("Model1.AdvetisementKeyWord", "KeyWord", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("Model1", "UserAdvetisement", "User")]
+        public User User
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("Model1.UserAdvetisement", "User").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("Model1.UserAdvetisement", "User").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<User> UserReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("Model1.UserAdvetisement", "User");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("Model1.UserAdvetisement", "User", value);
                 }
             }
         }
@@ -3875,28 +3901,6 @@ namespace ADVIEWER.DataModel
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Model1", "UserDataAdvetisement", "Advetisement")]
-        public EntityCollection<Advetisement> Advetisements
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Advetisement>("Model1.UserDataAdvetisement", "Advetisement");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Advetisement>("Model1.UserDataAdvetisement", "Advetisement", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("Model1", "UserTicket", "Ticket")]
         public EntityCollection<Ticket> Tickets
         {
@@ -3931,6 +3935,28 @@ namespace ADVIEWER.DataModel
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Group>("Model1.UserGroup", "Group", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("Model1", "UserAdvetisement", "Advetisement")]
+        public EntityCollection<Advetisement> Advetisements
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Advetisement>("Model1.UserAdvetisement", "Advetisement");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Advetisement>("Model1.UserAdvetisement", "Advetisement", value);
                 }
             }
         }

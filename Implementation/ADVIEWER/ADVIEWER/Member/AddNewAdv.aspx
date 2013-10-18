@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AddNewAdv.aspx.cs" Inherits="ADVIEWER.Member.AddNewAdv" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
@@ -8,11 +7,6 @@
     <link rel="stylesheet" href="../styles/token-input-facebook.css" type="text/css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-=======
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/member/MemberMaster.Master" AutoEventWireup="true" CodeBehind="AddNewAdv.aspx.cs" Inherits="ADVIEWER.Member.AddNewAdv" %>
-
-<asp:Content ID="Content2" ContentPlaceHolderID="mainContent" runat="server">
->>>>>>> 880d0349c902102dc505ae51ede2863ad2ad430e
     <div dir="rtl" style="height: 101px">
     <h2 align="right" dir="rtl">
         درج آگهی جدید</h2>

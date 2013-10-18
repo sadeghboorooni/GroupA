@@ -18,11 +18,7 @@ namespace ADVIEWER.Member
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-<<<<<<< HEAD
             
-=======
-
->>>>>>> 880d0349c902102dc505ae51ede2863ad2ad430e
             if (string.IsNullOrEmpty(AdvTitleTxt.Text) || string.IsNullOrEmpty(AdvTexttxt.Text) || string.IsNullOrEmpty(Nametxt.Text) || string.IsNullOrEmpty(KeyWordtxt.Text))
             {
                 ltr_error.Text = "فیلدهای الزامی را کامل کنید";
@@ -33,15 +29,11 @@ namespace ADVIEWER.Member
 
             Advetisement newadv = new Advetisement();
 
-            newadv.User = AccountCodes.currentUser();
-
+            
             newadv.Title = AdvTitleTxt.Text;
             newadv.Description= AdvShorttxt.Text;
             newadv.Text = System.Text.RegularExpressions.Regex.Replace(AdvTexttxt.Text, "<[^>]*>", string.Empty);
-            foreach (KeyWord kw in memberCodes.ParseKeyWords(KeyWordtxt.Text)) 
-            {
-                newadv.KeyWords.Add(kw);
-            }
+            
             newadv.Link = Linktxt.Text;
             newadv.Address = Addresstxt.Text;
             newadv.FullName = Nametxt.Text;
@@ -54,10 +46,24 @@ namespace ADVIEWER.Member
             if (newadv.Link.ToLower().Trim() == "http://") newadv.Link = "";
             newadv.StarCount = int.Parse(AdvKindDrop.SelectedValue);
             newadv.AdvDuration = int.Parse(MonthDrop.SelectedValue);
-            
-            
 
+            newadv.Pic = "";
+            newadv.ExpirationDate = DateTime.Now;
+            newadv.LastRenewal = DateTime.Now;
+            newadv.RegistrationDate = DateTime.Now;
+            newadv.StartDate = DateTime.Now;
+            
+            ModelContainer ml = new ModelContainer();
 
+            Guid uguid = (Guid)System.Web.Security.Membership.GetUser().ProviderUserKey;
+            newadv.User = ml.Users.Where(t => t.UserProviderKey == uguid).FirstOrDefault();
+
+            foreach (KeyWord kw in memberCodes.ParseKeyWords(KeyWordtxt.Text))
+            {
+                KeyWord tempkw = ml.KeyWords.Where(t => t.Id == kw.Id).First();
+                newadv.KeyWords.Add(tempkw);
+            }
+            ml.SaveChanges();
             memberCodes.MakeNewAdvertisment(newadv);
         }
       

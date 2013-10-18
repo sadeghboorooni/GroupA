@@ -17,6 +17,7 @@ namespace ADVIEWER.Codes
             newUser.LastLogin = DateTime.Now;
             newUser.RegisterDate = DateTime.Now;
             newUser.FullName = UserFullName;
+            newUser.UserProviderKey = UserId;
             ml.Users.AddObject(newUser);
             ml.SaveChanges();
         }
@@ -24,6 +25,13 @@ namespace ADVIEWER.Codes
         public static void loginUser(Guid UserId) 
         {
             throw new NotImplementedException();
+        }
+
+        public static User currentUser() 
+        {
+            ModelContainer ml = new ModelContainer();
+            Guid userGuid = (Guid)Membership.GetUser().ProviderUserKey;
+            return ml.Users.Where(t => t.UserProviderKey == userGuid).FirstOrDefault();
         }
     }
 }
