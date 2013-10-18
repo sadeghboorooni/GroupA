@@ -58,13 +58,22 @@
     <Content Include="Account\ChangePasswordSuccess.aspx" />
     <Content Include="Account\Login.aspx" />
     <Content Include="Account\Register.aspx" />
+    <Content Include="App_Data\ASPNETDB.MDF" />
+    <Content Include="App_Data\aspnetdb_log.ldf">
+      <DependentUpon>ASPNETDB.MDF</DependentUpon>
+    </Content>
+    <Content Include="Codes\JsonMaker.aspx" />
     <Content Include="DataModel\Model1.edmx.sql" />
     <Content Include="Member\AddNewAdv.aspx" />
+    <Content Include="src\jquery.tokeninput.js" />
     <Content Include="Styles\Site.css" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.4.1.js" />
     <Content Include="Scripts\jquery-1.4.1.min.js" />
+    <Content Include="Styles\token-input-facebook.css" />
+    <Content Include="Styles\token-input-mac.css" />
+    <Content Include="Styles\token-input.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -103,6 +112,13 @@
     <Compile Include="Account\Register.aspx.designer.cs">
       <DependentUpon>Register.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Codes\JsonMaker.aspx.cs">
+      <DependentUpon>JsonMaker.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Codes\JsonMaker.aspx.designer.cs">
+      <DependentUpon>JsonMaker.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Codes\memberCodes.cs" />
     <Compile Include="DataModel\Model1.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -128,9 +144,7 @@
       <DependentUpon>Site.Master</DependentUpon>
     </Compile>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Account\Web.config" />
     <Content Include="Site.Master" />

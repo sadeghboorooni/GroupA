@@ -8,13 +8,12 @@
 //------------------------------------------------------------------------------
 
 using System;
-using System.ComponentModel;
-using System.Data.EntityClient;
 using System.Data.Objects;
 using System.Data.Objects.DataClasses;
-using System.Linq;
-using System.Runtime.Serialization;
+using System.Data.EntityClient;
+using System.ComponentModel;
 using System.Xml.Serialization;
+using System.Runtime.Serialization;
 
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
@@ -24,8 +23,7 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("Model1", "UserDataAdvetisement", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ADVIEWER.DataModel.User), "Advetisement", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DataModel.Advetisement), true)]
 [assembly: EdmRelationshipAttribute("Model1", "UserTicket", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ADVIEWER.DataModel.User), "Ticket", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DataModel.Ticket))]
 [assembly: EdmRelationshipAttribute("Model1", "UserGroup", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DataModel.User), "Group", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DataModel.Group))]
-[assembly: EdmRelationshipAttribute("Model1", "StateAdvetisement", "State", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ADVIEWER.DataModel.State), "Advetisement", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DataModel.Advetisement), true)]
-[assembly: EdmRelationshipAttribute("Model1", "CityAdvetisement", "City", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(ADVIEWER.DataModel.City), "Advetisement", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DataModel.Advetisement), true)]
+[assembly: EdmRelationshipAttribute("Model1", "AdvetisementKeyWord", "Advetisement", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DataModel.Advetisement), "KeyWord", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DataModel.KeyWord))]
 
 #endregion
 
@@ -236,9 +234,24 @@ namespace ADVIEWER.DataModel
             }
         }
         private ObjectSet<Mail_User> _Mail_User1;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<KeyWord> KeyWords
+        {
+            get
+            {
+                if ((_KeyWords == null))
+                {
+                    _KeyWords = base.CreateObjectSet<KeyWord>("KeyWords");
+                }
+                return _KeyWords;
+            }
+        }
+        private ObjectSet<KeyWord> _KeyWords;
 
         #endregion
-
         #region AddTo Methods
     
         /// <summary>
@@ -320,13 +333,21 @@ namespace ADVIEWER.DataModel
         {
             base.AddObject("Mail_User1", mail_User);
         }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the KeyWords EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToKeyWords(KeyWord keyWord)
+        {
+            base.AddObject("KeyWords", keyWord);
+        }
 
         #endregion
-
     }
+    
 
     #endregion
-
+    
     #region Entities
     
     /// <summary>
@@ -351,7 +372,6 @@ namespace ADVIEWER.DataModel
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -622,7 +642,6 @@ namespace ADVIEWER.DataModel
         partial void OnreplyChanged();
 
         #endregion
-
     
     }
     
@@ -641,8 +660,6 @@ namespace ADVIEWER.DataModel
         /// </summary>
         /// <param name="id">Initial value of the ID property.</param>
         /// <param name="userID">Initial value of the UserID property.</param>
-        /// <param name="groupID">Initial value of the GroupID property.</param>
-        /// <param name="sateID">Initial value of the SateID property.</param>
         /// <param name="starCount">Initial value of the StarCount property.</param>
         /// <param name="title">Initial value of the Title property.</param>
         /// <param name="text">Initial value of the Text property.</param>
@@ -652,16 +669,12 @@ namespace ADVIEWER.DataModel
         /// <param name="email">Initial value of the Email property.</param>
         /// <param name="expirationDate">Initial value of the ExpirationDate property.</param>
         /// <param name="registrationDate">Initial value of the RegistrationDate property.</param>
-        /// <param name="creditTime">Initial value of the CreditTime property.</param>
         /// <param name="reviewCount">Initial value of the ReviewCount property.</param>
-        /// <param name="clickCount">Initial value of the ClickCount property.</param>
-        public static Advetisement CreateAdvetisement(global::System.Int32 id, global::System.Int32 userID, global::System.Int32 groupID, global::System.Int32 sateID, global::System.Int32 starCount, global::System.String title, global::System.String text, global::System.String pic, global::System.Boolean isActive, global::System.String fullName, global::System.String email, global::System.DateTime expirationDate, global::System.DateTime registrationDate, global::System.Int32 creditTime, global::System.Int32 reviewCount, global::System.Int32 clickCount)
+        public static Advetisement CreateAdvetisement(global::System.Int32 id, global::System.Int32 userID, global::System.Int32 starCount, global::System.String title, global::System.String text, global::System.String pic, global::System.Boolean isActive, global::System.String fullName, global::System.String email, global::System.DateTime expirationDate, global::System.DateTime registrationDate, global::System.Int32 reviewCount)
         {
             Advetisement advetisement = new Advetisement();
             advetisement.ID = id;
             advetisement.UserID = userID;
-            advetisement.GroupID = groupID;
-            advetisement.SateID = sateID;
             advetisement.StarCount = starCount;
             advetisement.Title = title;
             advetisement.Text = text;
@@ -671,14 +684,11 @@ namespace ADVIEWER.DataModel
             advetisement.Email = email;
             advetisement.ExpirationDate = expirationDate;
             advetisement.RegistrationDate = registrationDate;
-            advetisement.CreditTime = creditTime;
             advetisement.ReviewCount = reviewCount;
-            advetisement.ClickCount = clickCount;
             return advetisement;
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -735,9 +745,9 @@ namespace ADVIEWER.DataModel
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.Int32 GroupID
+        public Nullable<global::System.Int32> GroupID
         {
             get
             {
@@ -752,16 +762,16 @@ namespace ADVIEWER.DataModel
                 OnGroupIDChanged();
             }
         }
-        private global::System.Int32 _GroupID;
-        partial void OnGroupIDChanging(global::System.Int32 value);
+        private Nullable<global::System.Int32> _GroupID;
+        partial void OnGroupIDChanging(Nullable<global::System.Int32> value);
         partial void OnGroupIDChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.Int32 SateID
+        public Nullable<global::System.Int32> SateID
         {
             get
             {
@@ -776,8 +786,8 @@ namespace ADVIEWER.DataModel
                 OnSateIDChanged();
             }
         }
-        private global::System.Int32 _SateID;
-        partial void OnSateIDChanging(global::System.Int32 value);
+        private Nullable<global::System.Int32> _SateID;
+        partial void OnSateIDChanging(Nullable<global::System.Int32> value);
         partial void OnSateIDChanged();
     
         /// <summary>
@@ -875,30 +885,6 @@ namespace ADVIEWER.DataModel
         private global::System.String _Text;
         partial void OnTextChanging(global::System.String value);
         partial void OnTextChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String KeyWords
-        {
-            get
-            {
-                return _KeyWords;
-            }
-            set
-            {
-                OnKeyWordsChanging(value);
-                ReportPropertyChanging("KeyWords");
-                _KeyWords = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("KeyWords");
-                OnKeyWordsChanged();
-            }
-        }
-        private global::System.String _KeyWords;
-        partial void OnKeyWordsChanging(global::System.String value);
-        partial void OnKeyWordsChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -1025,24 +1011,24 @@ namespace ADVIEWER.DataModel
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String ConfirmMsg
+        public global::System.String DenyReason
         {
             get
             {
-                return _ConfirmMsg;
+                return _DenyReason;
             }
             set
             {
-                OnConfirmMsgChanging(value);
-                ReportPropertyChanging("ConfirmMsg");
-                _ConfirmMsg = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("ConfirmMsg");
-                OnConfirmMsgChanged();
+                OnDenyReasonChanging(value);
+                ReportPropertyChanging("DenyReason");
+                _DenyReason = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("DenyReason");
+                OnDenyReasonChanged();
             }
         }
-        private global::System.String _ConfirmMsg;
-        partial void OnConfirmMsgChanging(global::System.String value);
-        partial void OnConfirmMsgChanged();
+        private global::System.String _DenyReason;
+        partial void OnDenyReasonChanging(global::System.String value);
+        partial void OnDenyReasonChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -1313,30 +1299,6 @@ namespace ADVIEWER.DataModel
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int32 CreditTime
-        {
-            get
-            {
-                return _CreditTime;
-            }
-            set
-            {
-                OnCreditTimeChanging(value);
-                ReportPropertyChanging("CreditTime");
-                _CreditTime = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("CreditTime");
-                OnCreditTimeChanged();
-            }
-        }
-        private global::System.Int32 _CreditTime;
-        partial void OnCreditTimeChanging(global::System.Int32 value);
-        partial void OnCreditTimeChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
         public global::System.Int32 ReviewCount
         {
             get
@@ -1433,54 +1395,6 @@ namespace ADVIEWER.DataModel
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Boolean> ShowContactForm
-        {
-            get
-            {
-                return _ShowContactForm;
-            }
-            set
-            {
-                OnShowContactFormChanging(value);
-                ReportPropertyChanging("ShowContactForm");
-                _ShowContactForm = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("ShowContactForm");
-                OnShowContactFormChanged();
-            }
-        }
-        private Nullable<global::System.Boolean> _ShowContactForm;
-        partial void OnShowContactFormChanging(Nullable<global::System.Boolean> value);
-        partial void OnShowContactFormChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String ActiveMsg
-        {
-            get
-            {
-                return _ActiveMsg;
-            }
-            set
-            {
-                OnActiveMsgChanging(value);
-                ReportPropertyChanging("ActiveMsg");
-                _ActiveMsg = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("ActiveMsg");
-                OnActiveMsgChanged();
-            }
-        }
-        private global::System.String _ActiveMsg;
-        partial void OnActiveMsgChanging(global::System.String value);
-        partial void OnActiveMsgChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
         public global::System.String EndTime
         {
             get
@@ -1499,54 +1413,6 @@ namespace ADVIEWER.DataModel
         private global::System.String _EndTime;
         partial void OnEndTimeChanging(global::System.String value);
         partial void OnEndTimeChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Boolean> LastPrice
-        {
-            get
-            {
-                return _LastPrice;
-            }
-            set
-            {
-                OnLastPriceChanging(value);
-                ReportPropertyChanging("LastPrice");
-                _LastPrice = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("LastPrice");
-                OnLastPriceChanged();
-            }
-        }
-        private Nullable<global::System.Boolean> _LastPrice;
-        partial void OnLastPriceChanging(Nullable<global::System.Boolean> value);
-        partial void OnLastPriceChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 ClickCount
-        {
-            get
-            {
-                return _ClickCount;
-            }
-            set
-            {
-                OnClickCountChanging(value);
-                ReportPropertyChanging("ClickCount");
-                _ClickCount = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("ClickCount");
-                OnClickCountChanged();
-            }
-        }
-        private global::System.Int32 _ClickCount;
-        partial void OnClickCountChanging(global::System.Int32 value);
-        partial void OnClickCountChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -1573,7 +1439,6 @@ namespace ADVIEWER.DataModel
         partial void OnCityIDChanged();
 
         #endregion
-
     
         #region Navigation Properties
     
@@ -1621,78 +1486,23 @@ namespace ADVIEWER.DataModel
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Model1", "StateAdvetisement", "State")]
-        public State State
+        [EdmRelationshipNavigationPropertyAttribute("Model1", "AdvetisementKeyWord", "KeyWord")]
+        public EntityCollection<KeyWord> KeyWords
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<State>("Model1.StateAdvetisement", "State").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<State>("Model1.StateAdvetisement", "State").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<State> StateReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<State>("Model1.StateAdvetisement", "State");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<KeyWord>("Model1.AdvetisementKeyWord", "KeyWord");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<State>("Model1.StateAdvetisement", "State", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Model1", "CityAdvetisement", "City")]
-        public City City
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<City>("Model1.CityAdvetisement", "City").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<City>("Model1.CityAdvetisement", "City").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<City> CityReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<City>("Model1.CityAdvetisement", "City");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<City>("Model1.CityAdvetisement", "City", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<KeyWord>("Model1.AdvetisementKeyWord", "KeyWord", value);
                 }
             }
         }
 
         #endregion
-
     }
     
     /// <summary>
@@ -1721,7 +1531,6 @@ namespace ADVIEWER.DataModel
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -1800,7 +1609,6 @@ namespace ADVIEWER.DataModel
         partial void OnStateIDChanged();
 
         #endregion
-
     
         #region Navigation Properties
     
@@ -1841,31 +1649,8 @@ namespace ADVIEWER.DataModel
                 }
             }
         }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Model1", "CityAdvetisement", "Advetisement")]
-        public EntityCollection<Advetisement> Advetisements
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Advetisement>("Model1.CityAdvetisement", "Advetisement");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Advetisement>("Model1.CityAdvetisement", "Advetisement", value);
-                }
-            }
-        }
 
         #endregion
-
     }
     
     /// <summary>
@@ -1890,7 +1675,6 @@ namespace ADVIEWER.DataModel
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -2137,7 +1921,6 @@ namespace ADVIEWER.DataModel
         partial void OnUserIDChanged();
 
         #endregion
-
     
     }
     
@@ -2165,7 +1948,6 @@ namespace ADVIEWER.DataModel
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -2268,7 +2050,6 @@ namespace ADVIEWER.DataModel
         partial void OnParentIDChanged();
 
         #endregion
-
     
         #region Navigation Properties
     
@@ -2355,7 +2136,112 @@ namespace ADVIEWER.DataModel
         }
 
         #endregion
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="Model1", Name="KeyWord")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class KeyWord : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new KeyWord object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="text">Initial value of the Text property.</param>
+        public static KeyWord CreateKeyWord(global::System.Int32 id, global::System.String text)
+        {
+            KeyWord keyWord = new KeyWord();
+            keyWord.Id = id;
+            keyWord.Text = text;
+            return keyWord;
+        }
 
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _Id;
+        partial void OnIdChanging(global::System.Int32 value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Text
+        {
+            get
+            {
+                return _Text;
+            }
+            set
+            {
+                OnTextChanging(value);
+                ReportPropertyChanging("Text");
+                _Text = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Text");
+                OnTextChanged();
+            }
+        }
+        private global::System.String _Text;
+        partial void OnTextChanging(global::System.String value);
+        partial void OnTextChanged();
+
+        #endregion
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("Model1", "AdvetisementKeyWord", "Advetisement")]
+        public EntityCollection<Advetisement> Advetisement
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Advetisement>("Model1.AdvetisementKeyWord", "Advetisement");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Advetisement>("Model1.AdvetisementKeyWord", "Advetisement", value);
+                }
+            }
+        }
+
+        #endregion
     }
     
     /// <summary>
@@ -2380,7 +2266,6 @@ namespace ADVIEWER.DataModel
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -2651,7 +2536,6 @@ namespace ADVIEWER.DataModel
         partial void OnDateChanged();
 
         #endregion
-
     
     }
     
@@ -2677,7 +2561,6 @@ namespace ADVIEWER.DataModel
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -3020,7 +2903,6 @@ namespace ADVIEWER.DataModel
         partial void OnBankChanged();
 
         #endregion
-
     
     }
     
@@ -3048,7 +2930,6 @@ namespace ADVIEWER.DataModel
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -3103,7 +2984,6 @@ namespace ADVIEWER.DataModel
         partial void OnStateNameChanged();
 
         #endregion
-
     
         #region Navigation Properties
     
@@ -3128,31 +3008,8 @@ namespace ADVIEWER.DataModel
                 }
             }
         }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Model1", "StateAdvetisement", "Advetisement")]
-        public EntityCollection<Advetisement> Advetisements
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Advetisement>("Model1.StateAdvetisement", "Advetisement");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Advetisement>("Model1.StateAdvetisement", "Advetisement", value);
-                }
-            }
-        }
 
         #endregion
-
     }
     
     /// <summary>
@@ -3179,7 +3036,6 @@ namespace ADVIEWER.DataModel
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -3474,7 +3330,6 @@ namespace ADVIEWER.DataModel
         partial void OnLastUpdateChanged();
 
         #endregion
-
     
         #region Navigation Properties
     
@@ -3517,7 +3372,6 @@ namespace ADVIEWER.DataModel
         }
 
         #endregion
-
     }
     
     /// <summary>
@@ -3537,20 +3391,19 @@ namespace ADVIEWER.DataModel
         /// <param name="fullName">Initial value of the FullName property.</param>
         /// <param name="registerDate">Initial value of the RegisterDate property.</param>
         /// <param name="lastLogin">Initial value of the LastLogin property.</param>
-        /// <param name="userID">Initial value of the UserID property.</param>
-        public static User CreateUser(global::System.Int32 id, global::System.String fullName, global::System.DateTime registerDate, global::System.DateTime lastLogin, global::System.Guid userID)
+        /// <param name="userProviderKey">Initial value of the UserProviderKey property.</param>
+        public static User CreateUser(global::System.Int32 id, global::System.String fullName, global::System.DateTime registerDate, global::System.DateTime lastLogin, global::System.Guid userProviderKey)
         {
             User user = new User();
             user.ID = id;
             user.FullName = fullName;
             user.RegisterDate = registerDate;
             user.LastLogin = lastLogin;
-            user.UserID = userID;
+            user.UserProviderKey = userProviderKey;
             return user;
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -3993,27 +3846,26 @@ namespace ADVIEWER.DataModel
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Guid UserID
+        public global::System.Guid UserProviderKey
         {
             get
             {
-                return _UserID;
+                return _UserProviderKey;
             }
             set
             {
-                OnUserIDChanging(value);
-                ReportPropertyChanging("UserID");
-                _UserID = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("UserID");
-                OnUserIDChanged();
+                OnUserProviderKeyChanging(value);
+                ReportPropertyChanging("UserProviderKey");
+                _UserProviderKey = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("UserProviderKey");
+                OnUserProviderKeyChanged();
             }
         }
-        private global::System.Guid _UserID;
-        partial void OnUserIDChanging(global::System.Guid value);
-        partial void OnUserIDChanged();
+        private global::System.Guid _UserProviderKey;
+        partial void OnUserProviderKeyChanging(global::System.Guid value);
+        partial void OnUserProviderKeyChanged();
 
         #endregion
-
     
         #region Navigation Properties
     
@@ -4084,10 +3936,8 @@ namespace ADVIEWER.DataModel
         }
 
         #endregion
-
     }
 
     #endregion
-
     
 }

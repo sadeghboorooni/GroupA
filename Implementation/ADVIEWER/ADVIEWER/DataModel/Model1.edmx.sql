@@ -2,13 +2,13 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 10/16/2013 22:31:17
--- Generated from EDMX file: E:\se2\ADVIEWER\ADVIEWER\DataModel\Model1.edmx
+-- Date Created: 10/18/2013 17:49:18
+-- Generated from EDMX file: C:\Users\M-R\Desktop\SE2\GroupA\Implementation\ADVIEWER\ADVIEWER\DataModel\Model1.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
 GO
-USE [ADVIEWERdb];
+USE [ADVIEWER];
 GO
 IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
 GO
@@ -88,19 +88,18 @@ GO
 CREATE TABLE [dbo].[Advetisements] (
     [ID] int IDENTITY(1,1) NOT NULL,
     [UserID] int  NOT NULL,
-    [GroupID] int  NOT NULL,
-    [SateID] int  NOT NULL,
+    [GroupID] int  NULL,
+    [SateID] int  NULL,
     [StarCount] int  NOT NULL,
     [Title] nvarchar(100)  NOT NULL,
     [Description] nvarchar(300)  NULL,
     [Text] nvarchar(max)  NOT NULL,
-    [KeyWords] nvarchar(300)  NULL,
     [Pic] nvarchar(200)  NOT NULL,
     [IsActive] bit  NOT NULL,
     [IsConfirmed] bit  NULL,
     [IsPaid] bit  NULL,
     [IsRead] bit  NULL,
-    [ConfirmMsg] nvarchar(max)  NULL,
+    [DenyReason] nvarchar(max)  NULL,
     [FullName] nvarchar(100)  NOT NULL,
     [Tell] nvarchar(50)  NULL,
     [Mobile] nvarchar(50)  NULL,
@@ -112,17 +111,11 @@ CREATE TABLE [dbo].[Advetisements] (
     [ExpirationDate] datetime  NOT NULL,
     [RegistrationDate] datetime  NOT NULL,
     [LastRenewal] datetime  NULL,
-    [CreditTime] int  NOT NULL,
     [ReviewCount] int  NOT NULL,
     [TellTime] nvarchar(100)  NULL,
     [Link] nvarchar(1000)  NULL,
     [PaidID] bigint  NULL,
-    [ShowContactForm] bit  NULL,
-    [ActiveMsg] nvarchar(3000)  NULL,
-    [IsHaraji] bit  NULL,
     [EndTime] nvarchar(200)  NULL,
-    [LastPrice] bit  NULL,
-    [ClickCount] int  NOT NULL,
     [CityID] int  NULL
 );
 GO
@@ -147,7 +140,7 @@ CREATE TABLE [dbo].[Users] (
     [PicAddress] nvarchar(100)  NULL,
     [BannedMsg] nvarchar(max)  NULL,
     [AffiliateMoney] int  NULL,
-    [UserID] uniqueidentifier  NOT NULL
+    [UserProviderKey] uniqueidentifier  NOT NULL
 );
 GO
 
@@ -261,10 +254,24 @@ CREATE TABLE [dbo].[Mail_User1] (
 );
 GO
 
+-- Creating table 'KeyWords'
+CREATE TABLE [dbo].[KeyWords] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [Text] nvarchar(max)  NOT NULL
+);
+GO
+
 -- Creating table 'UserGroup'
 CREATE TABLE [dbo].[UserGroup] (
     [Users_ID] int  NOT NULL,
     [Groups_ID] int  NOT NULL
+);
+GO
+
+-- Creating table 'AdvetisementKeyWord'
+CREATE TABLE [dbo].[AdvetisementKeyWord] (
+    [Advetisement_ID] int  NOT NULL,
+    [KeyWords_Id] int  NOT NULL
 );
 GO
 
@@ -332,10 +339,22 @@ ADD CONSTRAINT [PK_Mail_User1]
     PRIMARY KEY CLUSTERED ([ID] ASC);
 GO
 
+-- Creating primary key on [Id] in table 'KeyWords'
+ALTER TABLE [dbo].[KeyWords]
+ADD CONSTRAINT [PK_KeyWords]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
 -- Creating primary key on [Users_ID], [Groups_ID] in table 'UserGroup'
 ALTER TABLE [dbo].[UserGroup]
 ADD CONSTRAINT [PK_UserGroup]
     PRIMARY KEY NONCLUSTERED ([Users_ID], [Groups_ID] ASC);
+GO
+
+-- Creating primary key on [Advetisement_ID], [KeyWords_Id] in table 'AdvetisementKeyWord'
+ALTER TABLE [dbo].[AdvetisementKeyWord]
+ADD CONSTRAINT [PK_AdvetisementKeyWord]
+    PRIMARY KEY NONCLUSTERED ([Advetisement_ID], [KeyWords_Id] ASC);
 GO
 
 -- --------------------------------------------------
@@ -421,32 +440,27 @@ ON [dbo].[UserGroup]
     ([Groups_ID]);
 GO
 
--- Creating foreign key on [SateID] in table 'Advetisements'
-ALTER TABLE [dbo].[Advetisements]
-ADD CONSTRAINT [FK_StateAdvetisement]
-    FOREIGN KEY ([SateID])
-    REFERENCES [dbo].[States]
+-- Creating foreign key on [Advetisement_ID] in table 'AdvetisementKeyWord'
+ALTER TABLE [dbo].[AdvetisementKeyWord]
+ADD CONSTRAINT [FK_AdvetisementKeyWord_Advetisement]
+    FOREIGN KEY ([Advetisement_ID])
+    REFERENCES [dbo].[Advetisements]
         ([ID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
-
--- Creating non-clustered index for FOREIGN KEY 'FK_StateAdvetisement'
-CREATE INDEX [IX_FK_StateAdvetisement]
-ON [dbo].[Advetisements]
-    ([SateID]);
 GO
 
--- Creating foreign key on [CityID] in table 'Advetisements'
-ALTER TABLE [dbo].[Advetisements]
-ADD CONSTRAINT [FK_CityAdvetisement]
-    FOREIGN KEY ([CityID])
-    REFERENCES [dbo].[Cities]
-        ([ID])
+-- Creating foreign key on [KeyWords_Id] in table 'AdvetisementKeyWord'
+ALTER TABLE [dbo].[AdvetisementKeyWord]
+ADD CONSTRAINT [FK_AdvetisementKeyWord_KeyWord]
+    FOREIGN KEY ([KeyWords_Id])
+    REFERENCES [dbo].[KeyWords]
+        ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 
--- Creating non-clustered index for FOREIGN KEY 'FK_CityAdvetisement'
-CREATE INDEX [IX_FK_CityAdvetisement]
-ON [dbo].[Advetisements]
-    ([CityID]);
+-- Creating non-clustered index for FOREIGN KEY 'FK_AdvetisementKeyWord_KeyWord'
+CREATE INDEX [IX_FK_AdvetisementKeyWord_KeyWord]
+ON [dbo].[AdvetisementKeyWord]
+    ([KeyWords_Id]);
 GO
 
 -- --------------------------------------------------
