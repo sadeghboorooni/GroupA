@@ -45,16 +45,15 @@
             <div class="col-md-3 col-sm-6" style="float:left;text-align:left">
                     
 					<div style="font-size:17px;" class="createAccountButton">
-                        <div runat="server" style="margin-top:1%;margin-bottom:30px;" id="loginform">
-                        
-                         
-                        </div>
-                        <div runat="server" id="userlinks">
-                            خوش آمدید <asp:Literal ID="ltr_username" runat="server"></asp:Literal> |
-                            <li class="icon-user"></li> <a style="font-size:17px;" href="/member/">حساب کاربری</a> | 
-						     <li class="icon-star-empty"> </li><a style="font-size:17px;" href="adlist.aspx">آگهی های من</a></li>
-                            [<asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" LogoutText="خروج" LogoutPageUrl="~/"/>]
-                        </div>
+                        <asp:LoginView ID="HeadLoginView" runat="server" EnableViewState="false">
+                    <AnonymousTemplate>
+                        [ <a href="~/Account/Login.aspx" ID="HeadLoginStatus" runat="server">ورود</a> ]
+                    </AnonymousTemplate>
+                    <LoggedInTemplate>
+                        خوش آمدید <span class="bold"><asp:LoginName ID="HeadLoginName" runat="server" /></span>!
+                        [ <asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" LogoutText="خروج" LogoutPageUrl="~/Default.aspx"/> ]
+                    </LoggedInTemplate>
+                </asp:LoginView>
                     </div>	
                     
             </div>
@@ -76,9 +75,9 @@
                               
 									<li class=""><a class="" style="font-size:120%" href="/default.aspx">صفحه اصلی</a></li>
 
-               <li class="ltrClass"> <a class="ltrClass" style="font-size:120%" href="/help.aspx">راهنما</a></li>
-               <li class="ltrClass"> <a class="ltrClass" style="font-size:120%" href="/page-about.aspx">درباره ما</a></li>
-               <li class="ltrClass"> <a class="ltrClass" style="font-size:120%" href="/contactus.aspx">تماس با ما</a></li>
+               <li class="ltrClass"> <a class="ltrClass" style="font-size:120%" href="/Help.aspx">راهنما</a></li>
+               <li class="ltrClass"> <a class="ltrClass" style="font-size:120%" href="/About.aspx">درباره ما</a></li>
+               <li class="ltrClass"> <a class="ltrClass" style="font-size:120%" href="/ContactUs.aspx">تماس با ما</a></li>
 									
 								</ul> <!-- /.nav -->
 							</div> <!-- /.nav-collapse -->

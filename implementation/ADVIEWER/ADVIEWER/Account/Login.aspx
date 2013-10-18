@@ -1,8 +1,6 @@
-﻿<%@ Page Title="Log In" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true"
+﻿<%@ Page Title="Log In" Language="C#" MasterPageFile="~/MainMaster.master" AutoEventWireup="true"
     CodeBehind="Login.aspx.cs" Inherits="ADVIEWER.Account.Login" %>
 
-<asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
-</asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
     <h2>
          ورود با خساب کاربری
@@ -11,7 +9,7 @@
         لطفا نام کاربری و رمز عبور خود را وارد کنید.
         اگر عضو نیستید<asp:HyperLink ID="RegisterHyperLink" runat="server" EnableViewState="false">عضو شوید</asp:HyperLink>.
     </p>
-    <asp:Login ID="LoginUser" runat="server" EnableViewState="false" OnLoggedIn="LoginUser_LoggedIn" RenderOuterTable="false">
+    <asp:Login ID="LoginUser" runat="server" EnableViewState="false" OnLoggedIn="LoginUser_LoggedIn" DestinationPageUrl = "~/member/MemberDefault.aspx" RenderOuterTable="false">
         <LayoutTemplate>
             <span class="failureNotification">
                 <asp:Literal ID="FailureText" runat="server"></asp:Literal>

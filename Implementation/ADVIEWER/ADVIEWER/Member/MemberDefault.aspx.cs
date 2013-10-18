@@ -5,13 +5,13 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace ADVIEWER
+namespace ADVIEWER.member
 {
-    public partial class MainMaster : System.Web.UI.MasterPage
+    public partial class MemberDefault : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-        }
 
+        }
     }
 }

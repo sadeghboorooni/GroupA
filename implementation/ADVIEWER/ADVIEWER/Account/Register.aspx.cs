@@ -26,7 +26,7 @@ namespace ADVIEWER.Account
             string continueUrl = RegisterUser.ContinueDestinationPageUrl;
             if (String.IsNullOrEmpty(continueUrl))
             {
-                continueUrl = "~/member/";
+                continueUrl = "~/member/MemberDefault.aspx";
             }
             Response.Redirect(continueUrl);
         }

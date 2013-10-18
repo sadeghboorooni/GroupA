@@ -14,14 +14,14 @@
 		<meta name="description" content="">
 		<meta name="author" content="">
 
-        <link href="Styles/member.css" rel="stylesheet" type="text/css" />
-        <link href="Styles/bootstrap.css" rel="stylesheet">
-		<link href="Styles/theme.css" rel="stylesheet">
-        <link href="Styles/newTheme.css" rel="stylesheet">
-        <link href="Styles/font-awesome.css" rel="stylesheet" type="text/css" />
+        <link href="../Styles/member.css" rel="stylesheet" type="text/css" />
+        <link href="../Styles/bootstrap.css" rel="stylesheet">
+		<link href="../Styles/theme.css" rel="stylesheet">
+        <link href="../Styles/newTheme.css" rel="stylesheet">
+        <link href="../Styles/font-awesome.css" rel="stylesheet" type="text/css" />
 
-        <script src="Scripts/jquery-1.8.2.min.js" type="text/javascript"></script>
-        <script src="Scripts/bootstrap.min.js" type="text/javascript"></script>
+        <script src="../Scripts/jquery-1.8.2.min.js" type="text/javascript"></script>
+        <script src="../Scripts/bootstrap.min.js" type="text/javascript"></script>
     <title></title>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
@@ -45,16 +45,15 @@
             <div class="col-md-3 col-sm-6" style="float:left;text-align:left">
                     
 					<div style="font-size:17px;" class="createAccountButton">
-                        <div runat="server" style="margin-top:1%;margin-bottom:30px;" id="loginform">
-                        
-                         
-                        </div>
-                        <div runat="server" id="userlinks">
-                            خوش آمدید <asp:Literal ID="ltr_username" runat="server"></asp:Literal> |
-                            <li class="icon-user"></li> <a style="font-size:17px;" href="/member/">حساب کاربری</a> | 
-						     <li class="icon-star-empty"> </li><a style="font-size:17px;" href="adlist.aspx">آگهی های من</a></li>
-                            [<asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" LogoutText="خروج" LogoutPageUrl="~/"/>]
-                        </div>
+                        <asp:LoginView ID="HeadLoginView" runat="server" EnableViewState="false">
+                    <AnonymousTemplate>
+                        [ <a href="~/Account/Login.aspx" ID="HeadLoginStatus" runat="server">ورود</a> ]
+                    </AnonymousTemplate>
+                    <LoggedInTemplate>
+                        خوش آمدید <span class="bold"><asp:LoginName ID="HeadLoginName" runat="server" /></span>!
+                        [ <asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" LogoutText="خروج" LogoutPageUrl="~/Default.aspx"/> ]
+                    </LoggedInTemplate>
+                </asp:LoginView>
                     </div>	
                     
             </div>
@@ -76,9 +75,9 @@
                               
 									<li class=""><a class="" style="font-size:120%" href="/default.aspx">صفحه اصلی</a></li>
 
-               <li class="ltrClass"> <a class="ltrClass" style="font-size:120%" href="/help.aspx">راهنما</a></li>
-               <li class="ltrClass"> <a class="ltrClass" style="font-size:120%" href="/page-about.aspx">درباره ما</a></li>
-               <li class="ltrClass"> <a class="ltrClass" style="font-size:120%" href="/contactus.aspx">تماس با ما</a></li>
+               <li class="ltrClass"> <a class="ltrClass" style="font-size:120%" href="/Help.aspx">راهنما</a></li>
+               <li class="ltrClass"> <a class="ltrClass" style="font-size:120%" href="/About.aspx">درباره ما</a></li>
+               <li class="ltrClass"> <a class="ltrClass" style="font-size:120%" href="/ContactUs.aspx">تماس با ما</a></li>
 								
 									
 								</ul> <!-- /.nav -->
@@ -108,8 +107,6 @@
         </div>
         <div class="six columns sidebarhome" style="margin:0 5px !important;">
             <div class="sidinside">
-                <asp:ContentPlaceHolder ID="sideBarTop" runat="server">
-                </asp:ContentPlaceHolder>
                 <div class="widget">
                     <div class="white usermenu">
                         <div class="right avatarcon">
@@ -120,9 +117,9 @@
                         </div>
                         <asp:Literal ID="ltr_username2" runat="server"></asp:Literal>
                         <br>
-                        <a href="editprofile.aspx">ویرایش مشخصات</a>
+                        <a href="#">ویرایش مشخصات</a>
                         <br />
-                        <a href="avatar.aspx">تغییر تصویر</a>
+                        <a href="#">تغییر تصویر</a>
                         <br />
                         <%--<a href='<%= string.Format("/profile.aspx?id={0}",UserID) %>' target="_blank">مشاهده صفحه شخصی</a>--%>
 
@@ -132,37 +129,29 @@
                         </div> 
                         <a href="/member/"><i class="icon-home"></i>پنل کاربری</a>
                         <hr />
-                        <a href="/member/newad.aspx"><i class="icon-plus"></i>درج آگهی جدید</a> &nbsp;&nbsp;
-                        -&nbsp; &nbsp;<a href="fastad.aspx" title="فقط اطلاعات اصلی آگهی را وارد می کنید">درج
+                        <a href="AddNewAdv.aspx"><i class="icon-plus"></i>درج آگهی جدید</a> &nbsp;&nbsp;
+                        -&nbsp; &nbsp;<a href="#" title="فقط اطلاعات اصلی آگهی را وارد می کنید">درج
                             سریع آگهی</a>
                         <hr />
-                        <a href="adlist.aspx"><i class="icon-th-list"></i>لیست آگهی های درج شده</a>
+                        <a href="#"><i class="icon-th-list"></i>لیست آگهی های درج شده</a>
                         <hr />
-                        <a href="ordermail.aspx"><i class="icon-edit"></i>سفارش ایمیل تبلیغاتی</a>
+                        <a href="#"><i class="icon-lock"></i>تغییر رمز ورود</a>
                         <hr />
-                         
-                        <a href="changepass.aspx"><i class="icon-lock"></i>تغییر رمز ورود</a>
+                        <a href="#"><i class="icon-envelope"></i>پیام های دریافتی</a>
                         <hr />
-                        <a href="inbox.aspx"><i class="icon-envelope"></i>پیام های دریافتی</a>
-                        <hr />
-                        <a href="ticketlist.aspx"><i class="icon-file"></i>تیکت پشتیبانی</a>
+                        <a href="#"><i class="icon-file"></i>تیکت پشتیبانی</a>
                          &nbsp;&nbsp;
-                        -&nbsp; &nbsp;<a href="addticket.aspx" title="اگر سوال، پیشنهاد یا مشکلی دارید، با ما در میان بگذارید">تیکت جدید</a>
+                        -&nbsp; &nbsp;<a href="#" title="اگر سوال، پیشنهاد یا مشکلی دارید، با ما در میان بگذارید">تیکت جدید</a>
                         <hr />
-                        <a href="paylist.aspx"><i class="icon-th-list"></i>لیست پرداخت ها</a>
-                        
+                        <a href="#"><i class="icon-th-list"></i>لیست پرداخت ها</a>
                         <hr />
-                        <a href="affiliates.aspx"><i class="icon-magnet"></i>کسب درآمد</a>
+                        <a href="#" target="_blank"><i class="icon-question-sign"></i>راهنمای درج آگهی</a>
                         <hr />
-                        <a href="/helpadv.aspx" target="_blank"><i class="icon-question-sign"></i>راهنمای درج آگهی</a>
-                        <hr />
-                        <a href="/member/logout.aspx" style="color:#f01"><i class="icon-share-alt"></i>خروج</a>
+                        <a href="#" style="color:#f01"><i class="icon-share-alt"></i>خروج</a>
                         </div>
                     </div>
                 </div>
 
-                <asp:ContentPlaceHolder ID="sideBarBottom" runat="server">
-                </asp:ContentPlaceHolder>
             </div>
         </div>
         <div class="clear"></div>
