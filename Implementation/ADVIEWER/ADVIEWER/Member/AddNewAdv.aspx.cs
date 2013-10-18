@@ -53,18 +53,14 @@ namespace ADVIEWER.Member
             newadv.RegistrationDate = DateTime.Now;
             newadv.StartDate = DateTime.Now;
             
-            ModelContainer ml = new ModelContainer();
+            //ModelContainer ml = new ModelContainer();
 
-            Guid uguid = (Guid)System.Web.Security.Membership.GetUser().ProviderUserKey;
-            newadv.User = ml.Users.Where(t => t.UserProviderKey == uguid).FirstOrDefault();
+            //Guid uguid = (Guid)System.Web.Security.Membership.GetUser().ProviderUserKey;
+            //newadv.User = ml.Users.Where(t => t.UserProviderKey == uguid).FirstOrDefault();
 
-            foreach (KeyWord kw in memberCodes.ParseKeyWords(KeyWordtxt.Text))
-            {
-                KeyWord tempkw = ml.KeyWords.Where(t => t.Id == kw.Id).First();
-                newadv.KeyWords.Add(tempkw);
-            }
-            ml.SaveChanges();
-            memberCodes.MakeNewAdvertisment(newadv);
+            memberCodes.MakeNewAdvertisment(newadv.StarCount, newadv.Title, newadv.Text, newadv.Pic, newadv.IsActive, newadv.FullName, 
+                newadv.Email, newadv.ExpirationDate, newadv.RegistrationDate, newadv.ReviewCount, newadv.AdvDuration, 
+                AccountCodes.currentUserId(),KeyWordtxt.Text);
         }
       
     }
