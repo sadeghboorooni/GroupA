@@ -125,9 +125,9 @@
 					<h4><i class="icon-link"></i>
                     دسترسی سریع</h4>
 					<ul class="links">
-                        <li><a href="tariff.aspx">تعرفه ها</a></li> 
-                        <li><a href="helpadv.aspx">راهنمای درج آگهی</a></li>
-                        <li><a href="contactus.aspx">تماس با ما</a></li>
+                        <li><a href="About.aspx">درباره ما</a></li> 
+                        <li><a href="Help.aspx">راهنمای سایت</a></li>
+                        <li><a href="ContactUs.aspx">تماس با ما</a></li>
                     </ul>
 				</div><!-- /.span3 -->
 
