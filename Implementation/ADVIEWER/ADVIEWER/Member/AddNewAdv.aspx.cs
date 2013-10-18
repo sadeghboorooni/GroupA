@@ -53,10 +53,7 @@ namespace ADVIEWER.Member
             newadv.RegistrationDate = DateTime.Now;
             newadv.StartDate = DateTime.Now;
             
-            //ModelContainer ml = new ModelContainer();
-
-            //Guid uguid = (Guid)System.Web.Security.Membership.GetUser().ProviderUserKey;
-            //newadv.User = ml.Users.Where(t => t.UserProviderKey == uguid).FirstOrDefault();
+            
 
             memberCodes.MakeNewAdvertisment(newadv.StarCount, newadv.Title, newadv.Text, newadv.Pic, newadv.IsActive, newadv.FullName, 
                 newadv.Email, newadv.ExpirationDate, newadv.RegistrationDate, newadv.ReviewCount, newadv.AdvDuration, 

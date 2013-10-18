@@ -18,12 +18,12 @@ using System.Runtime.Serialization;
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
 
-[assembly: EdmRelationshipAttribute("Model1", "GroupGroup", "parent", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ADVIEWER.DataModel.Group), "child", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DataModel.Group))]
+[assembly: EdmRelationshipAttribute("Model1", "GroupGroup", "Group", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ADVIEWER.DataModel.Group), "Group1", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DataModel.Group))]
 [assembly: EdmRelationshipAttribute("Model1", "StateCity", "State", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ADVIEWER.DataModel.State), "City", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DataModel.City))]
 [assembly: EdmRelationshipAttribute("Model1", "UserTicket", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ADVIEWER.DataModel.User), "Ticket", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DataModel.Ticket))]
 [assembly: EdmRelationshipAttribute("Model1", "UserGroup", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DataModel.User), "Group", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DataModel.Group))]
-[assembly: EdmRelationshipAttribute("Model1", "AdvetisementKeyWord", "Advetisement", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DataModel.Advertisment), "KeyWord", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DataModel.KeyWord))]
-[assembly: EdmRelationshipAttribute("Model1", "UserAdvetisement", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ADVIEWER.DataModel.User), "Advetisement", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DataModel.Advertisment), true)]
+[assembly: EdmRelationshipAttribute("Model1", "AdvertismentKeyWord", "Advertisment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DataModel.Advertisment), "KeyWord", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DataModel.KeyWord))]
+[assembly: EdmRelationshipAttribute("Model1", "UserAdvertisment", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ADVIEWER.DataModel.User), "Advertisment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DataModel.Advertisment), true)]
 
 #endregion
 
@@ -1474,18 +1474,18 @@ namespace ADVIEWER.DataModel
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Model1", "AdvetisementKeyWord", "KeyWord")]
+        [EdmRelationshipNavigationPropertyAttribute("Model1", "AdvertismentKeyWord", "KeyWord")]
         public EntityCollection<KeyWord> KeyWords
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<KeyWord>("Model1.AdvetisementKeyWord", "KeyWord");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<KeyWord>("Model1.AdvertismentKeyWord", "KeyWord");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<KeyWord>("Model1.AdvetisementKeyWord", "KeyWord", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<KeyWord>("Model1.AdvertismentKeyWord", "KeyWord", value);
                 }
             }
         }
@@ -1496,16 +1496,16 @@ namespace ADVIEWER.DataModel
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Model1", "UserAdvetisement", "User")]
+        [EdmRelationshipNavigationPropertyAttribute("Model1", "UserAdvertisment", "User")]
         public User User
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("Model1.UserAdvetisement", "User").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("Model1.UserAdvertisment", "User").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("Model1.UserAdvetisement", "User").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("Model1.UserAdvertisment", "User").Value = value;
             }
         }
         /// <summary>
@@ -1517,13 +1517,13 @@ namespace ADVIEWER.DataModel
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("Model1.UserAdvetisement", "User");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("Model1.UserAdvertisment", "User");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("Model1.UserAdvetisement", "User", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("Model1.UserAdvertisment", "User", value);
                 }
             }
         }
@@ -2085,18 +2085,18 @@ namespace ADVIEWER.DataModel
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Model1", "GroupGroup", "child")]
+        [EdmRelationshipNavigationPropertyAttribute("Model1", "GroupGroup", "Group1")]
         public EntityCollection<Group> parentGroup
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Group>("Model1.GroupGroup", "child");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Group>("Model1.GroupGroup", "Group1");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Group>("Model1.GroupGroup", "child", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Group>("Model1.GroupGroup", "Group1", value);
                 }
             }
         }
@@ -2107,16 +2107,16 @@ namespace ADVIEWER.DataModel
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Model1", "GroupGroup", "parent")]
+        [EdmRelationshipNavigationPropertyAttribute("Model1", "GroupGroup", "Group")]
         public Group childGroup
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Group>("Model1.GroupGroup", "parent").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Group>("Model1.GroupGroup", "Group").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Group>("Model1.GroupGroup", "parent").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Group>("Model1.GroupGroup", "Group").Value = value;
             }
         }
         /// <summary>
@@ -2128,13 +2128,13 @@ namespace ADVIEWER.DataModel
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Group>("Model1.GroupGroup", "parent");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Group>("Model1.GroupGroup", "Group");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Group>("Model1.GroupGroup", "parent", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Group>("Model1.GroupGroup", "Group", value);
                 }
             }
         }
@@ -2251,18 +2251,18 @@ namespace ADVIEWER.DataModel
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Model1", "AdvetisementKeyWord", "Advetisement")]
-        public EntityCollection<Advertisment> Advetisement
+        [EdmRelationshipNavigationPropertyAttribute("Model1", "AdvertismentKeyWord", "Advertisment")]
+        public EntityCollection<Advertisment> Advertisment
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Advertisment>("Model1.AdvetisementKeyWord", "Advetisement");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Advertisment>("Model1.AdvertismentKeyWord", "Advertisment");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Advertisment>("Model1.AdvetisementKeyWord", "Advetisement", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Advertisment>("Model1.AdvertismentKeyWord", "Advertisment", value);
                 }
             }
         }
@@ -3945,18 +3945,18 @@ namespace ADVIEWER.DataModel
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Model1", "UserAdvetisement", "Advetisement")]
-        public EntityCollection<Advertisment> Advetisements
+        [EdmRelationshipNavigationPropertyAttribute("Model1", "UserAdvertisment", "Advertisment")]
+        public EntityCollection<Advertisment> Advertisments
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Advertisment>("Model1.UserAdvetisement", "Advetisement");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Advertisment>("Model1.UserAdvertisment", "Advertisment");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Advertisment>("Model1.UserAdvetisement", "Advetisement", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Advertisment>("Model1.UserAdvertisment", "Advertisment", value);
                 }
             }
         }

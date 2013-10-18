@@ -20,8 +20,8 @@
     <EntitySet Name="UserGroup" EntityType="Model1.Store.UserGroup" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="AdvertismentKeyWord" EntityType="Model1.Store.AdvertismentKeyWord" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="GroupGroup" Association="Model1.Store.GroupGroup">
-      <End Role="parent" EntitySet="Groups" />
-      <End Role="child" EntitySet="Groups" />
+      <End Role="Group" EntitySet="Groups" />
+      <End Role="Group1" EntitySet="Groups" />
     </AssociationSet>
     <AssociationSet Name="StateCity" Association="Model1.Store.StateCity">
       <End Role="State" EntitySet="States" />
@@ -247,13 +247,13 @@
     <Property Name="KeyWords_Id" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="GroupGroup">
-    <End Role="parent" Type="Model1.Store.Groups" Multiplicity="1" />
-    <End Role="child" Type="Model1.Store.Groups" Multiplicity="*" />
+    <End Role="Group" Type="Model1.Store.Groups" Multiplicity="1" />
+    <End Role="Group1" Type="Model1.Store.Groups" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="parent">
+      <Principal Role="Group">
         <PropertyRef Name="ID" />
       </Principal>
-      <Dependent Role="child">
+      <Dependent Role="Group1">
         <PropertyRef Name="childGroup_ID" />
       </Dependent>
     </ReferentialConstraint>
@@ -357,9 +357,10 @@
           <EntitySet Name="ContactMessages" EntityType="Model1.ContactMessage" />
           <EntitySet Name="AdvertisementMessages" EntityType="Model1.AdvertisementMessage" />
           <EntitySet Name="Mail_User1" EntityType="Model1.Mail_User" />
+          <EntitySet Name="KeyWords" EntityType="Model1.KeyWord" />
           <AssociationSet Name="GroupGroup" Association="Model1.GroupGroup">
-            <End Role="parent" EntitySet="Groups" />
-            <End Role="child" EntitySet="Groups" />
+            <End Role="Group" EntitySet="Groups" />
+            <End Role="Group1" EntitySet="Groups" />
           </AssociationSet>
           <AssociationSet Name="StateCity" Association="Model1.StateCity">
             <End Role="State" EntitySet="States" />
@@ -373,7 +374,6 @@
             <End Role="User" EntitySet="Users" />
             <End Role="Group" EntitySet="Groups" />
           </AssociationSet>
-          <EntitySet Name="KeyWords" EntityType="Model1.KeyWord" />
           <AssociationSet Name="AdvertismentKeyWord" Association="Model1.AdvertismentKeyWord">
             <End Role="Advertisment" EntitySet="Advertisments" />
             <End Role="KeyWord" EntitySet="KeyWords" />
@@ -405,7 +405,7 @@
           <Property Type="String" Name="Mobile" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="Address" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="Email" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="YahooID" MaxLength="100" FixedLength="false" Unicode="true" Type="String" />
+          <Property Type="String" Name="YahooID" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="Price" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Type="DateTime" Name="StartDate" />
           <Property Type="DateTime" Name="ExpirationDate" Nullable="false" />
@@ -414,13 +414,13 @@
           <Property Type="Int32" Name="ReviewCount" Nullable="false" />
           <Property Type="String" Name="TellTime" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="Link" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="PaidID" Type="Int64" Nullable="true" />
-          <Property Name="EndTime" MaxLength="200" FixedLength="false" Unicode="true" Type="String" />
+          <Property Type="Int64" Name="PaidID" Nullable="true" />
+          <Property Type="String" Name="EndTime" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Type="Int32" Name="CityID" Nullable="true" />
-          <NavigationProperty Name="KeyWords" Relationship="Model1.AdvertismentKeyWord" FromRole="Advertisment" ToRole="KeyWord" />
           <Property Type="Int32" Name="AdvDuration" Nullable="false" />
-          <NavigationProperty Name="User" Relationship="Model1.UserAdvertisment" FromRole="Advertisment" ToRole="User" />
           <Property Type="Int32" Name="UserId" Nullable="false" />
+          <NavigationProperty Name="KeyWords" Relationship="Model1.AdvertismentKeyWord" FromRole="Advertisment" ToRole="KeyWord" />
+          <NavigationProperty Name="User" Relationship="Model1.UserAdvertisment" FromRole="Advertisment" ToRole="User" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -431,18 +431,18 @@
           <Property Type="Boolean" Name="IsActive" DefaultValue="true" />
           <Property Type="Boolean" Name="IsManager" DefaultValue="false" />
           <Property Type="DateTime" Name="RegisterDate" Nullable="false" />
-          <Property Type="String" Name="Mobile" MaxLength="50" FixedLength="false" Unicode="true" Nullable="true" />
-          <Property Type="String" Name="Tell" MaxLength="50" FixedLength="false" Unicode="true" Nullable="true" />
-          <Property Type="String" Name="Address" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="true" />
-          <Property Type="String" Name="IP" MaxLength="50" FixedLength="false" Unicode="true" Nullable="true" />
+          <Property Type="String" Name="Mobile" Nullable="true" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Tell" Nullable="true" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Address" Nullable="true" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="IP" Nullable="true" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="DateTime" Name="LastLogin" Nullable="false" />
           <Property Type="Int32" Name="StateID" Nullable="true" />
           <Property Type="Int32" Name="CityID" Nullable="true" />
-          <Property Type="String" Name="Fax" MaxLength="50" FixedLength="false" Unicode="true" Nullable="true" />
-          <Property Type="String" Name="YahooID" MaxLength="100" FixedLength="false" Unicode="true" Nullable="true" />
-          <Property Type="String" Name="About" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="true" />
-          <Property Type="String" Name="PicAddress" MaxLength="100" FixedLength="false" Unicode="true" Nullable="true" />
-          <Property Type="String" Name="BannedMsg" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="true" />
+          <Property Type="String" Name="Fax" Nullable="true" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="YahooID" Nullable="true" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="About" Nullable="true" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="PicAddress" Nullable="true" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="BannedMsg" Nullable="true" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="Int32" Name="AffiliateMoney" />
           <Property Type="Guid" Name="UserProviderKey" Nullable="false" />
           <NavigationProperty Name="Tickets" Relationship="Model1.UserTicket" FromRole="User" ToRole="Ticket" />
@@ -502,8 +502,8 @@
           <Property Type="String" Name="Pic" Nullable="true" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="GroupName" Nullable="false" />
           <Property Type="Int32" Name="ParentID" Nullable="true" />
-          <NavigationProperty Name="parentGroup" Relationship="Model1.GroupGroup" FromRole="parent" ToRole="child" />
-          <NavigationProperty Name="childGroup" Relationship="Model1.GroupGroup" FromRole="child" ToRole="parent" />
+          <NavigationProperty Name="parentGroup" Relationship="Model1.GroupGroup" FromRole="Group" ToRole="Group1" />
+          <NavigationProperty Name="childGroup" Relationship="Model1.GroupGroup" FromRole="Group1" ToRole="Group" />
           <NavigationProperty Name="Users" Relationship="Model1.UserGroup" FromRole="Group" ToRole="User" />
         </EntityType>
         <EntityType Name="City">
@@ -562,9 +562,17 @@
           <Property Type="Boolean" Name="IsAnswerd" />
           <Property Type="DateTime" Name="Date" />
         </EntityType>
+        <EntityType Name="KeyWord">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Text" Nullable="false" />
+          <NavigationProperty Name="Advertisment" Relationship="Model1.AdvertismentKeyWord" FromRole="KeyWord" ToRole="Advertisment" />
+        </EntityType>
         <Association Name="GroupGroup">
-          <End Type="Model1.Group" Role="parent" Multiplicity="1" />
-          <End Type="Model1.Group" Role="child" Multiplicity="*" />
+          <End Type="Model1.Group" Role="Group" Multiplicity="1" />
+          <End Type="Model1.Group" Role="Group1" Multiplicity="*" />
         </Association>
         <Association Name="StateCity">
           <End Type="Model1.State" Role="State" Multiplicity="1" />
@@ -578,14 +586,6 @@
           <End Type="Model1.User" Role="User" Multiplicity="*" />
           <End Type="Model1.Group" Role="Group" Multiplicity="*" />
         </Association>
-        <EntityType Name="KeyWord">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="Text" Nullable="false" />
-          <NavigationProperty Name="Advertisment" Relationship="Model1.AdvertismentKeyWord" FromRole="KeyWord" ToRole="Advertisment" />
-        </EntityType>
         <Association Name="AdvertismentKeyWord">
           <End Type="Model1.Advertisment" Role="Advertisment" Multiplicity="*" />
           <End Type="Model1.KeyWord" Role="KeyWord" Multiplicity="*" />
@@ -795,10 +795,10 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <AssociationSetMapping Name="GroupGroup" TypeName="Model1.GroupGroup" StoreEntitySet="Groups">
-      <EndProperty Name="parent">
+      <EndProperty Name="Group">
         <ScalarProperty Name="ID" ColumnName="childGroup_ID" />
       </EndProperty>
-      <EndProperty Name="child">
+      <EndProperty Name="Group1">
         <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
     </AssociationSetMapping>
@@ -852,45 +852,24 @@
     </edmx:Options>
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram Name="Model1" ZoomLevel="85" >
-        <EntityTypeShape EntityType="Model1.Advertisment" Width="1.5" PointX="3" PointY="1.375" Height="7.5570279947916656" />
-        <EntityTypeShape EntityType="Model1.User" Width="1.5" PointX="0.75" PointY="6.875" Height="5.2494108072916656" />
-        <EntityTypeShape EntityType="Model1.Ticket" Width="1.5" PointX="3" PointY="10.875" Height="3.5186979174613953" />
-        <EntityTypeShape EntityType="Model1.State" Width="1.5" PointX="5.75" PointY="1" Height="1.5956835933029652" />
-        <EntityTypeShape EntityType="Model1.Payment" Width="1.5" PointX="3.4290385001474242" PointY="23.861620005155736" />
-        <EntityTypeShape EntityType="Model1.Group" Width="1.5" PointX="3" PointY="15.125" Height="2.3648893237113953" />
-        <EntityTypeShape EntityType="Model1.City" Width="1.5" PointX="8" PointY="0.875" Height="1.7879850268363953" />
-        <EntityTypeShape EntityType="Model1.ContactMessage" Width="1.5" PointX="5.5" PointY="11" Height="2.9417936197916656" />
-        <EntityTypeShape EntityType="Model1.AdvertisementMessage" Width="1.5" PointX="7.75" PointY="7.75" Height="3.1340950520833317" />
-        <EntityTypeShape EntityType="Model1.Mail_User" Width="1.5" PointX="2.852776593925793" PointY="27.424576071754366" />
-        <AssociationConnector Association="Model1.GroupGroup" >
-          <ConnectorPoint PointX="3.5319230769230767" PointY="17.682190755208335" />
-          <ConnectorPoint PointX="3.5319230769230767" PointY="17.932190755208339" />
-          <ConnectorPoint PointX="3.9784615384615383" PointY="17.932190755208339" />
-          <ConnectorPoint PointX="3.9784615384615383" PointY="17.682190755208335" />
-        </AssociationConnector>
-        <AssociationConnector Association="Model1.StateCity" >
-          <ConnectorPoint PointX="7.25" PointY="1.7978417966514826" />
-          <ConnectorPoint PointX="8" PointY="1.7978417966514826" />
-        </AssociationConnector>
-        <AssociationConnector Association="Model1.UserTicket" >
-          <ConnectorPoint PointX="2.25" PointY="11.499705403645834" />
-          <ConnectorPoint PointX="3" PointY="11.499705403645834" />
-        </AssociationConnector>
-        <AssociationConnector Association="Model1.UserGroup" >
-          <ConnectorPoint PointX="1.5" PointY="12.124410807291666" />
-          <ConnectorPoint PointX="1.5" PointY="16.403595377604169" />
-          <ConnectorPoint PointX="3" PointY="16.403595377604169" />
-        </AssociationConnector>
-        <EntityTypeShape EntityType="Model1.KeyWord" Width="1.5" PointX="6.625" PointY="5.375" Height="1.4033821614583326" />
-        <AssociationConnector Association="Model1.AdvertismentKeyWord">
-          <ConnectorPoint PointX="4.5" PointY="6.172841796875" />
-          <ConnectorPoint PointX="6.625" PointY="6.172841796875" />
-        </AssociationConnector>
-        <AssociationConnector Association="Model1.UserAdvertisment">
-          <ConnectorPoint PointX="2.25" PointY="7.9035139973958328" />
-          <ConnectorPoint PointX="3" PointY="7.9035139973958328" />
-        </AssociationConnector>
+      <Diagram Name="Model1" ZoomLevel="23" >
+        <EntityTypeShape EntityType="Model1.Advertisment" Width="1.5" PointX="2.6151791376132421" PointY="28.880030868984772" />
+        <EntityTypeShape EntityType="Model1.User" Width="1.5" PointX="0.4381703028633121" PointY="8.1430104561816012" />
+        <EntityTypeShape EntityType="Model1.Ticket" Width="1.5" PointX="4.6248136649955125" PointY="27.774290813028017" />
+        <EntityTypeShape EntityType="Model1.State" Width="1.5" PointX="6.8742681103173027" PointY="29.683984874600537" />
+        <EntityTypeShape EntityType="Model1.Payment" Width="1.5" PointX="2.0813320028043036" PointY="5.4162478621193433" />
+        <EntityTypeShape EntityType="Model1.Group" Width="1.5" PointX="10.185361704875419" PointY="17.956046217100717" />
+        <EntityTypeShape EntityType="Model1.City" Width="1.5" PointX="7.7031932453174115" PointY="9.0495631736934019" />
+        <EntityTypeShape EntityType="Model1.ContactMessage" Width="1.5" PointX="2.9197426973468357" PointY="18.565611624422303" />
+        <EntityTypeShape EntityType="Model1.AdvertisementMessage" Width="1.5" PointX="10.005599782804772" PointY="29.127043529007139" />
+        <EntityTypeShape EntityType="Model1.Mail_User" Width="1.5" PointX="5.3964427920973126" PointY="7.2720632437952153" />
+        <EntityTypeShape EntityType="Model1.KeyWord" Width="1.5" PointX="2.7685992302226827" PointY="31.072681381866651" />
+        <AssociationConnector Association="Model1.GroupGroup" />
+        <AssociationConnector Association="Model1.StateCity" />
+        <AssociationConnector Association="Model1.UserTicket" />
+        <AssociationConnector Association="Model1.UserGroup" />
+        <AssociationConnector Association="Model1.AdvertismentKeyWord" />
+        <AssociationConnector Association="Model1.UserAdvertisment" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

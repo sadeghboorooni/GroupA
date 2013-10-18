@@ -5,42 +5,36 @@ using System.Web;
 using ADVIEWER.DataModel;
 
 
-namespace ADVIEWER.DataModel
-{
-    public partial class Advertisment 
-    {
-        public static Advertisment InsertAvertisment(global::System.Int32 id, global::System.Int32 starCount, global::System.String title, global::System.String text, global::System.String pic, global::System.Boolean isActive, global::System.String fullName, global::System.String email, global::System.DateTime expirationDate, global::System.DateTime registrationDate, global::System.Int32 reviewCount, global::System.Int32 advDuration, global::System.Int32 userId)
-        {
-            Advertisment advertisment = new Advertisment();
-            advertisment.ID = id;
-            advertisment.StarCount = starCount;
-            advertisment.Title = title;
-            advertisment.Text = text;
-            advertisment.Pic = pic;
-            advertisment.IsActive = isActive;
-            advertisment.FullName = fullName;
-            advertisment.Email = email;
-            advertisment.ExpirationDate = expirationDate;
-            advertisment.RegistrationDate = registrationDate;
-            advertisment.ReviewCount = reviewCount;
-            advertisment.AdvDuration = advDuration;
-            advertisment.UserId = userId;
-            return advertisment;
-        }
-    }
-}
-
-
 namespace ADVIEWER.Codes
 {
     
     public class memberCodes
     {
-        public static bool MakeNewAdvertisment(Advertisment newadv)
+        public static bool MakeNewAdvertisment( int starCount, String title, String text, String pic, Boolean isActive, String fullName, 
+            String email, DateTime expirationDate, DateTime registrationDate, int reviewCount, int advDuration, int userId,string keywordStr)
         {
-            
             ModelContainer ml = new ModelContainer();
-            ml.Advertisments.AddObject(newadv);
+
+            Advertisment newAdv = new Advertisment();
+            newAdv.StarCount = starCount;
+            newAdv.Title = title;
+            newAdv.Text = text;
+            newAdv.Pic = pic;
+            newAdv.IsActive = isActive;
+            newAdv.FullName = fullName;
+            newAdv.Email = email;
+            newAdv.ExpirationDate = expirationDate;
+            newAdv.RegistrationDate = registrationDate;
+            newAdv.ReviewCount = reviewCount;
+            newAdv.AdvDuration = advDuration;
+            newAdv.UserId = userId;
+            foreach (int kwId in memberCodes.ParseKeyWords(keywordStr))
+            {
+                KeyWord tempkw = ml.KeyWords.Where(t => t.Id == kwId).First();
+                newAdv.KeyWords.Add(tempkw);
+            }
+
+            ml.Advertisments.AddObject(newAdv);
             try
             {
                 ml.SaveChanges();
@@ -52,9 +46,9 @@ namespace ADVIEWER.Codes
             }
         }
 
-        public static KeyWord[] ParseKeyWords(string keywordStr) 
+        public static int[] ParseKeyWords(string keywordStr) 
         {
-            List<KeyWord> kwList = new List<KeyWord>();
+            List<int> kwList = new List<int>();
             ModelContainer ml = new ModelContainer();
 
             foreach (string kwStr in keywordStr.Split(',')) 
@@ -64,7 +58,7 @@ namespace ADVIEWER.Codes
                     int id = int.Parse(kwStr);
                     if (ml.KeyWords.Where(t => t.Id == id).Count() > 0) 
                     {
-                        kwList.Add(ml.KeyWords.Where(t => t.Id == id).First());
+                        kwList.Add(ml.KeyWords.Where(t => t.Id == id).Select(t => t.Id).First());
                     }
                 }
                 catch 
@@ -73,7 +67,7 @@ namespace ADVIEWER.Codes
                     newkw.Text = kwStr;
                     ml.KeyWords.AddObject(newkw);
                     ml.SaveChanges();
-                    kwList.Add(newkw);
+                    kwList.Add(newkw.Id);
                 }
                 
             }

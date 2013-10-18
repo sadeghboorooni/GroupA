@@ -12,9 +12,9 @@ namespace ADVIEWER.Codes
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Request.QueryString["entity"] != null) 
+            
             {
-                if (Request.QueryString["entity"] == "keyword")
+                
                 {
                     ModelContainer ml = new ModelContainer();
                     string resp = "[";
@@ -23,6 +23,7 @@ namespace ADVIEWER.Codes
                     {
                         resp+="{\"name\":\""+kw.Text+"\",\"id\":\""+kw.Id+"\"},";
                     }
+                    resp = resp.Remove(resp.Count() - 1);
                     resp += "]";
                     Response.Write(resp);
                 }

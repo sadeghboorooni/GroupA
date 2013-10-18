@@ -27,11 +27,11 @@ namespace ADVIEWER.Codes
             throw new NotImplementedException();
         }
 
-        public static User currentUser() 
+        public static int currentUserId() 
         {
             ModelContainer ml = new ModelContainer();
             Guid userGuid = (Guid)Membership.GetUser().ProviderUserKey;
-            return ml.Users.Where(t => t.UserProviderKey == userGuid).FirstOrDefault();
+            return ml.Users.Where(t => t.UserProviderKey == userGuid).Select(t => t.ID).FirstOrDefault();
         }
     }
 }
