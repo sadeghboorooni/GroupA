@@ -1,0 +1,145 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MainMaster.master.cs" Inherits="ADVIEWER.MainMaster" %>
+
+<!DOCTYPE html >
+
+<html lang="en">
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<head id="Head1" runat="server">
+<!--<![endif]-->
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="">
+
+        <link href="Styles/member.css" rel="stylesheet" type="text/css" />
+        <link href="Styles/bootstrap.css" rel="stylesheet">
+		<link href="Styles/theme.css" rel="stylesheet">
+        <link href="Styles/newTheme.css" rel="stylesheet">
+        <link href="Styles/font-awesome.css" rel="stylesheet" type="text/css" />
+
+        <script src="Scripts/jquery-1.8.2.min.js" type="text/javascript"></script>
+        <script src="Scripts/bootstrap.min.js" type="text/javascript"></script>
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+    
+    <div class="container wrapper">
+        
+        <header>
+
+            <div class="row">
+          
+            <div class="col-md-3 col-sm-6">
+                
+                <div class="input-append" style="padding-top:1%">
+				    <input class="span2" id="txtSearch" type="text" placeholder="به دنبال چه می گردید؟" onfocus="this.placeholder = ''" onblur="this.placeholder = 'به دنبال چه می گردید؟'" tabindex="1" style="height:28px;border-radius: 0px 4px 4px 0px;width:235px ">
+					<input class="btn btn-primary" type="button" style="height:32px;border-radius: 4px 0px 0px 4px;" id="Button1" value="جستجو" tabindex="2" onclick="javascript:search();" />
+				</div>
+            </div>           
+            <div class="col-md-3 col-sm-6" style="float:left;text-align:left">
+                    
+					<div style="font-size:17px;" class="createAccountButton">
+                        <div runat="server" style="margin-top:1%;margin-bottom:30px;" id="loginform">
+                        
+                         
+                        </div>
+                        <div runat="server" id="userlinks">
+                            خوش آمدید <asp:Literal ID="ltr_username" runat="server"></asp:Literal> |
+                            <li class="icon-user"></li> <a style="font-size:17px;" href="/member/">حساب کاربری</a> | 
+						     <li class="icon-star-empty"> </li><a style="font-size:17px;" href="adlist.aspx">آگهی های من</a></li>
+                            [<asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" LogoutText="خروج" LogoutPageUrl="~/"/>]
+                        </div>
+                    </div>	
+                    
+            </div>
+              
+            </div>
+
+           
+		</header>
+        
+      
+        <div class="row ltrClass">
+			<div class="span12 ltrClass">
+					<div class="navbar ltrClass yamm" style="padding:10px 0 0 0;margin:0px" >
+					<div class="navbar-inner ltrClass" style="border-radius: 4px 4px 0px 0px">
+						<div class="container ltrClass" >
+					 <a data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar ltrClass">منوی اصلی</a>
+							<div class="nav-collapse collapse ltrClass">
+								<ul class="nav ltrClass" style="float:right;text-align:right">
+                              
+									<li class=""><a class="" style="font-size:120%" href="/default.aspx">صفحه اصلی</a></li>
+
+               <li class="ltrClass"> <a class="ltrClass" style="font-size:120%" href="/help.aspx">راهنما</a></li>
+               <li class="ltrClass"> <a class="ltrClass" style="font-size:120%" href="/page-about.aspx">درباره ما</a></li>
+               <li class="ltrClass"> <a class="ltrClass" style="font-size:120%" href="/contactus.aspx">تماس با ما</a></li>
+									
+								</ul> <!-- /.nav -->
+							</div> <!-- /.nav-collapse -->
+						</div><!-- /container -->
+					</div><!-- /navbar-inner -->
+				</div><!-- /navbar -->
+			</div><!-- /row -->
+		</div>
+
+    </div>
+    <!-- end of header -->
+
+    <div class="clear">
+    </div> 
+
+    <div class="container">
+                <asp:ContentPlaceHolder ID="mainContent" runat="server">
+            </asp:ContentPlaceHolder>
+            </div>
+
+     <footer>
+		<div class="container" style="z-index:999999">
+			<!-- row of widgets -->
+			<div class="row" style="height:auto">
+
+				<div style="padding:0px 3% 0px 3%">
+                	<div class="col-md-31 col-sm-6" style="margin-bottom:20px">
+					<h4><i class="icon-phone"></i>
+                    تماس با ما
+                     </h4>
+					
+						                    می توانید نظرات و پیشنهادات خود را از طریق <a href="/contactus.aspx">فرم تماس با ما </a>
+                    برای ما ارسال کنید.
+                    <br />
+                    تلفن: <span style="letter-spacing: 2px;">99999999-021</span>
+                    <br />
+                    فکس: <span style="letter-spacing: 2px;">88888888-021</span>
+<br />
+                   این سایت دارای مجوز رسمی می باشد.
+                   
+				
+				</div> <!-- /.span3 -->
+			
+				<div class="col-md-31 col-sm-6">
+					<h4><i class="icon-link"></i>
+                    دسترسی سریع</h4>
+					<ul class="links">
+                        <li><a href="tariff.aspx">تعرفه ها</a></li> 
+                        <li><a href="helpadv.aspx">راهنمای درج آگهی</a></li>
+                        <li><a href="contactus.aspx">تماس با ما</a></li>
+                    </ul>
+				</div><!-- /.span3 -->
+
+
+					</div>
+			</div> <!-- /.row -->
+		</div><!-- /.container -->
+
+		
+	</footer>
+    
+    </form>
+</body>
+</html>
