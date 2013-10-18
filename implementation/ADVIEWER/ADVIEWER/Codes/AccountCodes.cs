@@ -24,7 +24,9 @@ namespace ADVIEWER.Codes
 
         public static void loginUser(Guid UserId) 
         {
-            throw new NotImplementedException();
+            ModelContainer ml = new ModelContainer();
+            ml.Users.Where(t => t.UserProviderKey == UserId).FirstOrDefault().LastLogin = DateTime.Now;
+            ml.SaveChanges();
         }
 
         public static int currentUserId() 
