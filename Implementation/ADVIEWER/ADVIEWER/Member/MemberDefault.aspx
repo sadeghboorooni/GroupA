@@ -15,50 +15,7 @@
             <div class="clear">
             </div>
         </div>
-        <div class="groups rounded">
-            <div class="right">
-                <a href="#">
-                    <img src="Images/List.png" alt="" />
-                    <h6>
-                        لیست آگهی ها</h6>
-                </a>
-            </div>
-            <p>
-                مشاهده و مدیریت آگهی های درج شده توسط شما.</p>
-            <div class="clear">
-            </div>
-        </div>
-        <div class="groups rounded">
-            <div class="right">
-                <a href="#">
-                    <asp:Literal ID="ltrMsg" runat="server"></asp:Literal>
-                    <img src="Images/Email.png" alt="" />
-                    <h6>
-                        صندوق پیام</h6>
-                </a>
-            </div>
-            <p>
-                پیام های دریافتی خود را مشاهده کنید.</p>
-            <div class="clear">
-            </div>
-        </div>
         
-        <div class="groups rounded">
-            <div class="right">
-                <a href="#">
-                    <asp:Literal ID="ltrticket" runat="server"></asp:Literal>
-                    <img src="Images/Ticket.png" alt="" />
-                    <h6>
-                        تیکت پشتیبانی</h6>
-                </a>
-            </div>
-            <p>هر مشکل، سوال و نظری دارید از ما بپرسید و پیگیری کنید.</p>
-            <div class="clear">
-            </div>
-        </div>
-
-
-
         <div class="groups rounded">
             <div class="right">
                 <a href="#">

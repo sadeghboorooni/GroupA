@@ -21,6 +21,23 @@ outline:none !important;
 
     }
 
+h2
+{
+  background-color: #eeeeee;
+  font-weight:normal;
+  font-size:25px;
+   padding: 8px 35px 8px 14px;
+  margin-bottom: 10px;
+  margin-top:0px;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+  background-color: #fcf8e3;
+  border: 1px solid #fbeed5;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  color: #c09853;
+}
+
 .h1logo a
 {
     background: url("../images/logo.png") no-repeat scroll center center transparent;

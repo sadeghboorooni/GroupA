@@ -49,6 +49,15 @@ namespace ADVIEWER.Member {
         protected global::System.Web.UI.WebControls.TextBox AdvTitleTxt;
         
         /// <summary>
+        /// RequiredFieldValidator1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
+        
+        /// <summary>
         /// AdvShorttxt control.
         /// </summary>
         /// <remarks>
@@ -65,6 +74,15 @@ namespace ADVIEWER.Member {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox AdvTexttxt;
+        
+        /// <summary>
+        /// RequiredFieldValidator2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator2;
         
         /// <summary>
         /// KeyWordtxt control.
@@ -85,6 +103,15 @@ namespace ADVIEWER.Member {
         protected global::System.Web.UI.WebControls.TextBox Pricetxt;
         
         /// <summary>
+        /// RegularExpressionValidator3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator3;
+        
+        /// <summary>
         /// Linktxt control.
         /// </summary>
         /// <remarks>
@@ -94,13 +121,13 @@ namespace ADVIEWER.Member {
         protected global::System.Web.UI.WebControls.TextBox Linktxt;
         
         /// <summary>
-        /// AdvPicUpload control.
+        /// FileUpload1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload AdvPicUpload;
+        protected global::System.Web.UI.WebControls.FileUpload FileUpload1;
         
         /// <summary>
         /// Nametxt control.
@@ -112,6 +139,15 @@ namespace ADVIEWER.Member {
         protected global::System.Web.UI.WebControls.TextBox Nametxt;
         
         /// <summary>
+        /// RequiredFieldValidator4 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator4;
+        
+        /// <summary>
         /// Mobiletxt control.
         /// </summary>
         /// <remarks>
@@ -119,15 +155,6 @@ namespace ADVIEWER.Member {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox Mobiletxt;
-        
-        /// <summary>
-        /// Teletxt control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Teletxt;
         
         /// <summary>
         /// TellTimetxt control.
@@ -139,6 +166,15 @@ namespace ADVIEWER.Member {
         protected global::System.Web.UI.WebControls.TextBox TellTimetxt;
         
         /// <summary>
+        /// txtTellTime control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtTellTime;
+        
+        /// <summary>
         /// Emailtxt control.
         /// </summary>
         /// <remarks>
@@ -148,6 +184,15 @@ namespace ADVIEWER.Member {
         protected global::System.Web.UI.WebControls.TextBox Emailtxt;
         
         /// <summary>
+        /// RegularExpressionValidator1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator1;
+        
+        /// <summary>
         /// YahooIDtxt control.
         /// </summary>
         /// <remarks>
@@ -155,6 +200,15 @@ namespace ADVIEWER.Member {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox YahooIDtxt;
+        
+        /// <summary>
+        /// RegularExpressionValidator2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator2;
         
         /// <summary>
         /// Addresstxt control.
@@ -173,14 +227,5 @@ namespace ADVIEWER.Member {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button Button1;
-        
-        /// <summary>
-        /// Button2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button2;
     }
 }

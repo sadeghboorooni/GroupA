@@ -50,7 +50,8 @@
                         [ <a href="~/Account/Login.aspx" ID="HeadLoginStatus" runat="server">ورود</a> ]
                     </AnonymousTemplate>
                     <LoggedInTemplate>
-                        خوش آمدید <span class="bold"><asp:LoginName ID="HeadLoginName" runat="server" /></span>!
+                        خوش آمدید <span class="bold"><asp:LoginName ID="HeadLoginName" runat="server" /></span>!&nbsp |
+                        <span><i class="icon-user"></i><a href = "/member/MemberDefault.aspx">حساب کاربری من</a></span>
                         [ <asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" LogoutText="خروج" LogoutPageUrl="~/Default.aspx"/> ]
                     </LoggedInTemplate>
                 </asp:LoginView>
@@ -73,7 +74,7 @@
 							<div class="nav-collapse collapse ltrClass">
 								<ul class="nav ltrClass" style="float:right;text-align:right">
                               
-									<li class=""><a class="" style="font-size:120%" href="/default.aspx">صفحه اصلی</a></li>
+									<li class=""><a class="" style="font-size:120%" href="/Default.aspx">صفحه اصلی</a></li>
 
                <li class="ltrClass"> <a class="ltrClass" style="font-size:120%" href="/Help.aspx">راهنما</a></li>
                <li class="ltrClass"> <a class="ltrClass" style="font-size:120%" href="/About.aspx">درباره ما</a></li>
@@ -96,7 +97,7 @@
     <!-- main home content -->
     <div class="main container" style="width:960px;">
 
-                <div class="latestwork" style="padding:5px 0;margin-right:5px !important; ">
+                <div class="latestwork" style="padding:5px 0;margin-right:5px !important;display:inline-block;float:left ">
         <div class="ten columns maincontent" style="margin-right: 10px !important;width:650px !important;">
             
             <asp:Literal ID="ltr_unpaid" runat="server"></asp:Literal>
@@ -119,31 +120,16 @@
                         <br>
                         <a href="#">ویرایش مشخصات</a>
                         <br />
-                        <a href="#">تغییر تصویر</a>
-                        <br />
-                        <%--<a href='<%= string.Format("/profile.aspx?id={0}",UserID) %>' target="_blank">مشاهده صفحه شخصی</a>--%>
-
 
                         <div class="hrContainer">
                         <div class="clear">
                         </div> 
-                        <a href="/member/"><i class="icon-home"></i>پنل کاربری</a>
+                        <a href="/member/MemberDefault.aspx"><i class="icon-home"></i>پنل کاربری</a>
                         <hr />
-                        <a href="AddNewAdv.aspx"><i class="icon-plus"></i>درج آگهی جدید</a> &nbsp;&nbsp;
-                        -&nbsp; &nbsp;<a href="#" title="فقط اطلاعات اصلی آگهی را وارد می کنید">درج
-                            سریع آگهی</a>
+                        <a href="AddNewAdv.aspx"><i class="icon-plus"></i>درج آگهی جدید</a>
                         <hr />
-                        <a href="#"><i class="icon-th-list"></i>لیست آگهی های درج شده</a>
-                        <hr />
-                        <a href="#"><i class="icon-lock"></i>تغییر رمز ورود</a>
-                        <hr />
-                        <a href="#"><i class="icon-envelope"></i>پیام های دریافتی</a>
-                        <hr />
-                        <a href="#"><i class="icon-file"></i>تیکت پشتیبانی</a>
-                         &nbsp;&nbsp;
-                        -&nbsp; &nbsp;<a href="#" title="اگر سوال، پیشنهاد یا مشکلی دارید، با ما در میان بگذارید">تیکت جدید</a>
-                        <hr />
-                        <a href="#"><i class="icon-th-list"></i>لیست پرداخت ها</a>
+                        
+                        <a href="../Account/ChangePassword.aspx"><i class="icon-lock"></i>تغییر رمز ورود</a>
                         <hr />
                         <a href="#"><i class="icon-question-sign"></i>راهنمای درج آگهی</a>
                         <hr />
@@ -170,7 +156,7 @@
                     تماس با ما
                      </h4>
 					
-						                    می توانید نظرات و پیشنهادات خود را از طریق <a href="/contactus.aspx">فرم تماس با ما </a>
+						                    می توانید نظرات و پیشنهادات خود را از طریق <a href="/ContactUs.aspx">فرم تماس با ما </a>
                     برای ما ارسال کنید.
                     <br />
                     تلفن: <span>99999999-021</span>

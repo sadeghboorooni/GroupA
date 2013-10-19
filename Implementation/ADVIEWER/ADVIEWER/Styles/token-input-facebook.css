@@ -1,5 +1,6 @@
 /* Example tokeninput style #2: Facebook style */
 ul.token-input-list-facebook {
+    border-raDIUS:4PX;
     overflow: hidden; 
     height: auto !important; 
     height: 1%;
@@ -40,7 +41,7 @@ li.token-input-token-facebook {
     border-radius: 5px;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
-    float: left;
+    float: right;
     white-space: nowrap;
 }
 
@@ -64,7 +65,7 @@ li.token-input-selected-token-facebook {
 }
 
 li.token-input-input-token-facebook {
-    float: left;
+    float: right;
     margin: 0;
     padding: 0;
     list-style-type: none;

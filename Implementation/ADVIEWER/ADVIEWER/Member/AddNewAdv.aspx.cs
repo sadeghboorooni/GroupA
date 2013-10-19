@@ -19,7 +19,7 @@ namespace ADVIEWER.Member
         protected void Button1_Click(object sender, EventArgs e)
         {
             
-            if (string.IsNullOrEmpty(AdvTitleTxt.Text) || string.IsNullOrEmpty(AdvTexttxt.Text) || string.IsNullOrEmpty(Nametxt.Text) || string.IsNullOrEmpty(KeyWordtxt.Text))
+            if (string.IsNullOrEmpty(AdvTitleTxt.Text) || string.IsNullOrEmpty(AdvTexttxt.Text) || string.IsNullOrEmpty(Nametxt.Text))
             {
                 ltr_error.Text = "فیلدهای الزامی را کامل کنید";
                 ltr_error.Visible = true;
