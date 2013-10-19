@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using ADVIEWER.DataModel;
+using System.Reflection;
+using System.Data;
 
 
 namespace ADVIEWER.Codes
@@ -73,6 +75,69 @@ namespace ADVIEWER.Codes
             }
 
             return kwList.ToArray();
+        }
+
+        public static DataTable ToDataTable<T>(List<T> items)
+        {
+            DataTable dataTable = new DataTable(typeof(T).Name);
+            //Get all the properties
+            FieldInfo[] Props = typeof(T).GetFields(BindingFlags.Public | BindingFlags.Instance);
+            foreach (FieldInfo prop in Props)
+            {
+
+                //Setting column names as Property names
+                dataTable.Columns.Add(prop.Name, prop.FieldType);
+            }
+            foreach (T item in items)
+            {
+                var values = new object[Props.Length];
+                for (int i = 0; i < Props.Length; i++)
+                {
+                    //inserting property values to datatable rows
+                    values[i] = Props[i].GetValue(item);
+                }
+                dataTable.Rows.Add(values);
+            }
+            //put a breakpoint here and check datatable
+            return dataTable;
+        }
+        public static DataTable unconfirmedFreeAdvertismentsDataTable() 
+        {
+            ModelContainer ml = new ModelContainer();
+
+            List<ShowAdvertisment> unreadList = new List<ShowAdvertisment>();
+            foreach (Advertisment adv in ml.Advertisments.Where(t => t.IsConfirmed == false && t.IsRead == false && t.StarCount == -1))
+            {
+                unreadList.Add(new ShowAdvertisment(adv.ID, adv.Title, adv.Description, adv.FullName, adv.Pic, adv.RegistrationDate,adv.UserId));
+            }
+
+            return ToDataTable<ShowAdvertisment>(unreadList);
+        }
+    }
+    public class ShowAdvertisment 
+    {
+        public string Description,
+            FullName,
+            Title,
+            Pic;
+        public int ID,UserId;
+        public DateTime RegistrationDate;
+
+        public ShowAdvertisment(int ID,
+            string Title,
+            string Description,
+            string FullName,
+            string Pic,
+            DateTime RegistrationDate,
+            int UserId) 
+        {
+            this.ID = ID;
+            this.FullName = FullName;
+            this.Description = Description;
+            this.Pic = Pic;
+            this.RegistrationDate = RegistrationDate;
+            this.Title = Title;
+            this.UserId = UserId;
         }
     }
 }
