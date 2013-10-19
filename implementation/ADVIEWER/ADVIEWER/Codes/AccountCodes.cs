@@ -35,5 +35,18 @@ namespace ADVIEWER.Codes
             Guid userGuid = (Guid)Membership.GetUser().ProviderUserKey;
             return ml.Users.Where(t => t.UserProviderKey == userGuid).Select(t => t.ID).FirstOrDefault();
         }
+
+        public static User GetUserInformation(int UserID)
+        {
+            ModelContainer ml = new ModelContainer();
+            return ml.Users.Where(a => a.ID == UserID).FirstOrDefault();
+        }
+
+        public static Advertisment[] GetUserAdvs (int UserID)
+        {
+            ModelContainer ml = new ModelContainer();
+            return ml.Users.Where(a => a.ID == UserID).FirstOrDefault().Advertisments.ToArray();
+        }
+
     }
 }
