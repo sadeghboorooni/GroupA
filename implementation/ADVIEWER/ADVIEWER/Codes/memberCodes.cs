@@ -113,6 +113,30 @@ namespace ADVIEWER.Codes
 
             return ToDataTable<ShowAdvertisment>(unreadList);
         }
+        public static void ConfirmAdvertisment(int AdvID) 
+        {
+            ModelContainer ml = new ModelContainer();
+            Advertisment adv = ml.Advertisments.Where(t => t.ID == AdvID).FirstOrDefault();
+            if (adv.StarCount == -1) 
+            {
+                adv.IsRead = true;
+                adv.IsConfirmed = true;
+                ml.SaveChanges();
+            }
+        }
+        public static void DenyAdvertisment(int AdvID, string reason)
+        {
+            ModelContainer ml = new ModelContainer();
+            Advertisment adv = ml.Advertisments.Where(t => t.ID == AdvID).FirstOrDefault();
+            if (adv.StarCount == -1)
+            {
+                adv.IsRead = true;
+                adv.IsConfirmed = false;
+                adv.DenyReason = reason;
+                ml.SaveChanges();
+            }
+        }
+
     }
     public class ShowAdvertisment 
     {

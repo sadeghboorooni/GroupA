@@ -5,16 +5,23 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using ADVIEWER.Codes;
+using System.Data;
 
 namespace ADVIEWER.Manage
 {
     public partial class UnconfirmedAdvs : System.Web.UI.Page
     {
-        public string adiCount;
+        public int freeAdvsCount;
         protected void Page_Load(object sender, EventArgs e)
+        {
+            LoadGreedView();
+        }
+
+        private void LoadGreedView()
         {
             FreeAdvsGridView.DataSource = memberCodes.unconfirmedFreeAdvertismentsDataTable();
             FreeAdvsGridView.DataBind();
+            freeAdvsCount = ((DataTable)FreeAdvsGridView.DataSource).Rows.Count;
         }
         protected void FreeAdvsGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
@@ -25,46 +32,45 @@ namespace ADVIEWER.Manage
             Response.Redirect(string.Format("{0}?epage={1}", url, index));
         }
 
-        protected void LinkButton3_Click(object sender, EventArgs e)
+        protected void ConfirmFreeAdvsButton_Click(object sender, EventArgs e)
         {
-            //DataAccessDataContext _data = new DataAccessDataContext();
-            //CheckBox chkAdd;
-            //int rowCount;
-            //rowCount = GridView2.Rows.Count;
-            //int i;
-            //for (i = 0; i <= (rowCount - 1); i++)
-            //{
-            //    chkAdd = (CheckBox)GridView2.Rows[i].FindControl("chkSelectAdd");
-            //    long ID = long.Parse(GridView2.DataKeys[i].Value.ToString());
-            //    if (chkAdd.Checked == true)
-            //    {
-            //        _data.Confirm_Agahi(ID);
-            //    }
-            //}
+            CheckBox chkAdd;
+            int rowCount;
+            rowCount = FreeAdvsGridView.Rows.Count;
+            int i;
+            for (i = 0; i <= (rowCount - 1); i++)
+            {
+                chkAdd = (CheckBox)FreeAdvsGridView.Rows[i].FindControl("chkSelectAdd");
+                int ID = int.Parse(FreeAdvsGridView.DataKeys[i].Value.ToString());
+                if (chkAdd.Checked == true)
+                {
+                    memberCodes.ConfirmAdvertisment(ID);
+                }
+            }
 
-            //GridView2.DataBind();
-            //getCount();
+            LoadGreedView();
         }
-        protected void LinkButton4_Click(object sender, EventArgs e)
+
+        protected void DenyFreeAdvsButton_Click(object sender, EventArgs e)
         {
-            //DataAccessDataContext _data = new DataAccessDataContext();
-            //CheckBox chkAdd;
-            //int rowCount;
-            //rowCount = GridView2.Rows.Count;
-            //int i;
-            //string reason = TextBox2.Text;
-            //if (string.IsNullOrEmpty(reason)) reason = "به یکی از دلایل ذیل آگهی شما تایید نشد: 1- متن تکراری. 2- متن کوتاه. 3- متن، عنوان یا کلمات کلیدی نامناسب. 4- آگهی مخالف با قوانین";
-            //for (i = 0; i <= (rowCount - 1); i++)
-            //{
-            //    chkAdd = (CheckBox)GridView2.Rows[i].FindControl("chkSelectAdd");
-            //    long ID = long.Parse(GridView2.DataKeys[i].Value.ToString());
-            //    if (chkAdd.Checked == true)
-            //    {
-            //        _data.UnConfirm_Agahi(ID, reason);
-            //    }
-            //}
-            //GridView2.DataBind();
-            //getCount();
+            CheckBox chkAdd;
+            int rowCount;
+            rowCount = FreeAdvsGridView.Rows.Count;
+            int i;
+            string reason = TextBox2.Text;
+            if (string.IsNullOrEmpty(reason)) reason = "به یکی از دلایل ذیل آگهی شما تایید نشد: 1- متن تکراری. 2- متن کوتاه. 3- متن، عنوان یا کلمات کلیدی نامناسب. 4- آگهی مخالف با قوانین";
+            for (i = 0; i <= (rowCount - 1); i++)
+            {
+                chkAdd = (CheckBox)FreeAdvsGridView.Rows[i].FindControl("chkSelectAdd");
+                int ID = int.Parse(FreeAdvsGridView.DataKeys[i].Value.ToString());
+                if (chkAdd.Checked == true)
+                {
+                    memberCodes.DenyAdvertisment(ID, reason);
+                }
+            }
+            LoadGreedView();
         }
+
+        
     }
 }

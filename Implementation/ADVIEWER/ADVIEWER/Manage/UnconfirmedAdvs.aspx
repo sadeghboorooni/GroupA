@@ -1,12 +1,22 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Member/MemberMaster.Master" AutoEventWireup="true" CodeBehind="UnconfirmedAdvs.aspx.cs" Inherits="ADVIEWER.Manage.UnconfirmedAdvs" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <script>
+        function SelectAllCheckboxesFreeAdvsGridView(chk) {
+            $('#<%=FreeAdvsGridView.ClientID %>').find("input:checkbox").each(function () {
+                if (this != chk) {
+                    this.checked = chk.checked;
+                }
+            });
+        }
+
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="mainContent" runat="server">
 
     <div class="fullcontent">
         <h2 class="title green">
             لیست آگهی های عادی در انتظار تایید
-            <%= adiCount %>
+            <%= freeAdvsCount%>
             </h2>
         <div class="bordered">
             <asp:GridView ID="FreeAdvsGridView" runat="server" AutoGenerateColumns="False" PageSize="15"
@@ -71,13 +81,13 @@
                 </EmptyDataTemplate>
             </asp:GridView>
             <div class="gridbottom">
-               
-                <asp:LinkButton ID="LinkButton3" CssClass="gridbtn" runat="server" OnClick="LinkButton3_Click"><img src="images/add.png" alt="" /> تایید انتخاب شده ها</asp:LinkButton>
+                <asp:Button ID="ConfirmFreeAdvsButton" runat="server" 
+                    Text="تایید انتخاب شده ها" onclick="ConfirmFreeAdvsButton_Click" />
 
                 <div style="width: 400px; text-align: left; float: left">
-                    <asp:TextBox ID="TextBox2" runat="server" placeholder="علت عدم تایید" Style="padding: 7px;
-                        width: 220px;"></asp:TextBox>
-                    <asp:LinkButton ID="LinkButton4" CssClass="gridbtn" runat="server" OnClick="LinkButton4_Click"><img src="images/delete.png" alt="" /> رد انتخاب شده ها</asp:LinkButton>
+                    <asp:TextBox ID="TextBox2" runat="server" placeholder="علت عدم تایید" Style="width: 220px;"></asp:TextBox>
+                    <asp:Button ID="DenyFreeAdvsButton" runat="server" Text="رد انتخاب شده ها" 
+                        onclick="DenyFreeAdvsButton_Click" />
                 </div>
             </div>
         </div>
