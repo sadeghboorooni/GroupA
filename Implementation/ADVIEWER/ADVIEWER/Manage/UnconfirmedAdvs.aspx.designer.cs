@@ -22,13 +22,13 @@ namespace ADVIEWER.Manage {
         protected global::System.Web.UI.WebControls.GridView FreeAdvsGridView;
         
         /// <summary>
-        /// LinkButton3 control.
+        /// ConfirmFreeAdvsButton control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButton3;
+        protected global::System.Web.UI.WebControls.Button ConfirmFreeAdvsButton;
         
         /// <summary>
         /// TextBox2 control.
@@ -40,12 +40,12 @@ namespace ADVIEWER.Manage {
         protected global::System.Web.UI.WebControls.TextBox TextBox2;
         
         /// <summary>
-        /// LinkButton4 control.
+        /// DenyFreeAdvsButton control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButton4;
+        protected global::System.Web.UI.WebControls.Button DenyFreeAdvsButton;
     }
 }
