@@ -42,6 +42,20 @@ namespace ADVIEWER.Codes
             return ml.Users.Where(a => a.ID == UserID).FirstOrDefault();
         }
 
+        public static void UpdateUserInfo(Int32 id, String fullName,String about ,String address,String fax ,String mobile,String tell, String yahooId)
+        {
+            ModelContainer ml = new ModelContainer();
+            User user = ml.Users.Where(t => t.ID == id).FirstOrDefault();
+            user.FullName = fullName;
+            user.About = about;
+            user.Address = address;
+            user.Fax = fax;
+            user.Mobile = mobile;
+            user.Tell = tell;
+            user.YahooID = yahooId;
+            ml.SaveChanges();
+        }
+
         public static Advertisment[] GetUserAdvs (int UserID)
         {
             ModelContainer ml = new ModelContainer();
