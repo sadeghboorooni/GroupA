@@ -10,60 +10,60 @@
 namespace ADVIEWER {
     
     
-    public partial class MainMaster {
+    public partial class AdvContent {
         
         /// <summary>
-        /// Head1 control.
+        /// ltrvije control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlHead Head1;
+        protected global::System.Web.UI.WebControls.Literal ltrvije;
         
         /// <summary>
-        /// head control.
+        /// ltrstars control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder head;
+        protected global::System.Web.UI.WebControls.Literal ltrstars;
         
         /// <summary>
-        /// form1 control.
+        /// imglist control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl imglist;
         
         /// <summary>
-        /// HeadLoginView control.
+        /// ltrexmsg control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LoginView HeadLoginView;
+        protected global::System.Web.UI.WebControls.Literal ltrexmsg;
         
         /// <summary>
-        /// mainContent control.
+        /// subgroupadi control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder mainContent;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl subgroupadi;
         
         /// <summary>
-        /// MoreAdvs control.
+        /// UserAdvsRepeater control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder MoreAdvs;
+        protected global::System.Web.UI.WebControls.Repeater UserAdvsRepeater;
     }
 }

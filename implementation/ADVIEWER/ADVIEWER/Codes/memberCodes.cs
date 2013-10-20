@@ -137,6 +137,11 @@ namespace ADVIEWER.Codes
             }
         }
 
+        public static Advertisment GetAdvertismentInformation(int id)
+        {
+            ModelContainer ml = new ModelContainer();
+            return ml.Advertisments.Where(t => t.ID == id).FirstOrDefault();
+        }
     }
     public class ShowAdvertisment 
     {

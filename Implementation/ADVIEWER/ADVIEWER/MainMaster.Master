@@ -99,6 +99,11 @@
             </asp:ContentPlaceHolder>
             </div>
 
+            <div class="main container">
+               <asp:ContentPlaceHolder ID="MoreAdvs" runat="server">
+                </asp:ContentPlaceHolder>
+                </div>
+
      <footer>
 		<div class="container" style="z-index:999999">
 			<!-- row of widgets -->

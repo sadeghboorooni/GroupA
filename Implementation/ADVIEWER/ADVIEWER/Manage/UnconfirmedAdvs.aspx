@@ -44,11 +44,10 @@
                     <asp:TemplateField HeaderText="Title" SortExpression="Title">
                         <ItemTemplate>
                             <div class="groupname">
-                                <a href='<%# Eval("ID",  "displayadv-{0}.aspx") %>' target="_blank">
+                                <a href='<%# Eval("ID",  "displayadv.aspx?id={0}") %>' target="_blank">
                                     <%# Eval("pic").ToString() == "noimage.png" ? "" : string.Format("<img src='/HPicturer.ashx?img={0}&w=70&h=70&path=~/AdvertisePic/' class='advimg' alt='' />",Eval("pic").ToString())%>
-                                </a><a href='<%# Eval("ID",  "displayadv-{0}.aspx") %>' class="title" target="_blank">
+                                </a><a href='<%# Eval("ID",  "displayadv.aspx?id={0}") %>' class="title" target="_blank">
                                     <%# Eval("Title")%></a>
-                                <%--<%# Eval("ConfirmMsg").ToString() == string.Empty ? "" : "<img style='vertical-align:middle; margin-left:3px;' src='images/no.png' /> دلیل عدم تایید قبل: <span>" + "___ConfirmMsg___" + "</span><br>"%>--%>
                                 <p>
                                     تاریخ:
                                     <%# Eval("RegistrationDate")%>
