@@ -26,7 +26,7 @@
                          ValidationGroup="RegisterUserValidationGroup"/>
                     <div class="accountInfo">
                         <fieldset class="register">
-                            <legend>Account Information</legend>
+                            <legend>اطلاعات حساب کاربری</legend>
                             <p>
                                 <asp:Label ID="UserNameLabel" runat="server" AssociatedControlID="UserName">نام کاربری: </asp:Label>
                                 <asp:TextBox ID="UserName" runat="server" CssClass="textEntry"></asp:TextBox>
@@ -60,7 +60,7 @@
                             </p>
                         </fieldset>
                         <p class="submitButton">
-                            <asp:Button ID="CreateUserButton" runat="server" CommandName="MoveNext" Text="تایید" 
+                            <asp:Button ID="CreateUserButton" runat="server" CssClass="btn btn-primary" CommandName="MoveNext" Text="تایید" 
                                  ValidationGroup="RegisterUserValidationGroup"/>
                         </p>
                     </div>

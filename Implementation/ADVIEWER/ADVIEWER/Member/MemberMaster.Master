@@ -33,16 +33,15 @@
         
         <header>
 
-            <div class="row">
+            <div class="row" style="position:relative">
           
             <div class="col-md-3 col-sm-6">
                 
-                <div class="input-append" style="padding-top:1%">
-				    <input class="span2" id="txtSearch" type="text" placeholder="به دنبال چه می گردید؟" onfocus="this.placeholder = ''" onblur="this.placeholder = 'به دنبال چه می گردید؟'" tabindex="1" style="height:28px;border-radius: 0px 4px 4px 0px;width:235px ">
-					<input class="btn btn-primary" type="button" style="height:32px;border-radius: 4px 0px 0px 4px;" id="Button1" value="جستجو" tabindex="2" onclick="javascript:search();" />
+                <div class="input-append" style="margin-top:0">
+                 <a href="../Default.aspx"><img src="../Styles/Images/Logo.png" style="max-width:60%" alt="لوگوی سایت" title="لوگوی سایت" /></a>
 				</div>
             </div>           
-            <div class="col-md-3 col-sm-6" style="float:left;text-align:left">
+            <div class="col-md-3 col-sm-6" style="position:absolute;bottom:5px;left:0px;text-align:left">
                     
 					<div style="font-size:17px;" class="createAccountButton">
                         <asp:LoginView ID="HeadLoginView" runat="server" EnableViewState="false">
@@ -50,7 +49,7 @@
                         [ <a href="~/Account/Login.aspx" ID="HeadLoginStatus" runat="server">ورود</a> ]
                     </AnonymousTemplate>
                     <LoggedInTemplate>
-                        خوش آمدید <span class="bold"><asp:LoginName ID="HeadLoginName" runat="server" /></span>!&nbsp |
+                        خوش آمدید <span class="bold"><asp:LoginName ID="HeadLoginName" runat="server" /></span>&nbsp |
                         <span><i class="icon-user"></i><a href = "/member/MemberDefault.aspx">حساب کاربری من</a></span>
                         [ <asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" LogoutText="خروج" LogoutPageUrl="~/Default.aspx"/> ]
                     </LoggedInTemplate>
@@ -76,9 +75,7 @@
                               
 									<li class=""><a class="" style="font-size:120%" href="/Default.aspx">صفحه اصلی</a></li>
 
-               <li class="ltrClass"> <a class="ltrClass" style="font-size:120%" href="/Help.aspx">راهنما</a></li>
                <li class="ltrClass"> <a class="ltrClass" style="font-size:120%" href="/About.aspx">درباره ما</a></li>
-               <li class="ltrClass"> <a class="ltrClass" style="font-size:120%" href="/ContactUs.aspx">تماس با ما</a></li>
 								
 									
 								</ul> <!-- /.nav -->
@@ -97,8 +94,8 @@
     <!-- main home content -->
     <div class="main container" style="width:960px;">
 
-                <div class="latestwork" style="padding:5px 0;margin-right:5px !important;display:inline-block;float:left ">
-        <div class="ten columns maincontent" style="margin-right: 10px !important;width:650px !important;">
+                <div class="latestwork">
+                <div class="ten columns maincontent" style="margin-right: 10px !important;width:650px !important;">
             
             <asp:Literal ID="ltr_unpaid" runat="server"></asp:Literal>
             <asp:ContentPlaceHolder ID="mainContent" runat="server">
@@ -118,22 +115,24 @@
                         </div>
                         <asp:Literal ID="ltr_username2" runat="server"></asp:Literal>
                         <br>
-                        <a href="#">ویرایش مشخصات</a>
+                        <a href="EditProfile.aspx">ویرایش مشخصات</a>
                         <br />
 
                         <div class="hrContainer">
                         <div class="clear">
                         </div> 
-                        <a href="/member/MemberDefault.aspx"><i class="icon-home"></i>پنل کاربری</a>
+                        <a href="/member/MemberDefault.aspx"><i class="icon-home"></i>پنل کاربری</a> <asp:Literal ID="ManagerPanel" runat="server" Visible="false"></asp:Literal>
+                        <hr />
+                        <asp:Literal ID="ltrprofile" runat="server"></asp:Literal>
                         <hr />
                         <a href="AddNewAdv.aspx"><i class="icon-plus"></i>درج آگهی جدید</a>
                         <hr />
                         
                         <a href="../Account/ChangePassword.aspx"><i class="icon-lock"></i>تغییر رمز ورود</a>
                         <hr />
-                        <a href="#"><i class="icon-question-sign"></i>راهنمای درج آگهی</a>
-                        <hr />
-                        <asp:LinkButton runat="server" OnClick="ExitFunction"><i class="icon-share-alt"></i>خروج</asp:LinkButton>
+                      
+                        <asp:LinkButton runat="server" OnClick="ExitFunction"><i class="icon-share-alt" style="color:Red"
+                        ></i>خروج</asp:LinkButton>
                         </div>
                     </div>
                 </div>
@@ -156,7 +155,7 @@
                     تماس با ما
                      </h4>
 					
-						                    می توانید نظرات و پیشنهادات خود را از طریق <a href="/ContactUs.aspx">فرم تماس با ما </a>
+						                    می توانید نظرات و پیشنهادات خود را از طریق فرم تماس با ما
                     برای ما ارسال کنید.
                     <br />
                     تلفن: <span>99999999-021</span>
@@ -173,8 +172,6 @@
                     دسترسی سریع</h4>
 					<ul class="links">
                         <li><a href="../About.aspx">درباره ما</a></li> 
-                        <li><a href="../Help.aspx">راهنمای سایت</a></li>
-                        <li><a href="../ContactUs.aspx">تماس با ما</a></li>
                     </ul>
 
 				</div><!-- /.span3 -->

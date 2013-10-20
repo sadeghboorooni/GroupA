@@ -3,9 +3,9 @@
 
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
     <h2>
-        Change Password
+       تغییر رمز عبور
     </h2>
     <p>
-        Your password has been changed successfully.
-    </p>
+    رمز شما با موفقیت تغییر یافت.
+        </p>
 </asp:Content>

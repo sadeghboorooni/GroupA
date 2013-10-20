@@ -33,21 +33,21 @@
         
         <header>
 
-            <div class="row">
+            <div class="row" style="position:relative">
           
             <div class="col-md-3 col-sm-6">
                 
-                <div class="input-append" style="padding-top:1%">
-				    <input class="span2" id="txtSearch" type="text" placeholder="به دنبال چه می گردید؟" onfocus="this.placeholder = ''" onblur="this.placeholder = 'به دنبال چه می گردید؟'" tabindex="1" style="height:28px;border-radius: 0px 4px 4px 0px;width:235px ">
-					<input class="btn btn-primary" type="button" style="height:32px;border-radius: 4px 0px 0px 4px;" id="Button1" value="جستجو" tabindex="2" onclick="javascript:search();" />
+                <div class="input-append" style="margin-top:0;font-size:30px;">
+				    <a href="Default.aspx"><img src="../Styles/Images/Logo.png" style="max-width:60%" alt="لوگوی سایت" title="لوگوی سایت" /></a>
 				</div>
             </div>           
-            <div class="col-md-3 col-sm-6" style="float:left;text-align:left">
+            <div class="col-md-3 col-sm-6" style="position:absolute;bottom:5px;left:0px;text-align:left">
                     
 					<div style="font-size:17px;" class="createAccountButton">
                         <asp:LoginView ID="HeadLoginView" runat="server" EnableViewState="false">
                     <AnonymousTemplate>
-                        [ <a href="~/Account/Login.aspx" ID="HeadLoginStatus" runat="server">ورود</a> ]
+                          <a href="~/Account/Login.aspx" ID="HeadLoginStatus" runat="server">ورود</a> |
+                          <a href="~/Account/Register.aspx" ID = "HeadRegisterStatus" runat="server">عضویت</a>
                     </AnonymousTemplate>
                     <LoggedInTemplate>
                         خوش آمدید <span class="bold"><asp:LoginName ID="HeadLoginName" runat="server" /></span>!&nbsp |
@@ -76,9 +76,7 @@
                               
 									<li class=""><a class="" style="font-size:120%" href="/Default.aspx">صفحه اصلی</a></li>
 
-               <li class="ltrClass"> <a class="ltrClass" style="font-size:120%" href="/Help.aspx">راهنما</a></li>
                <li class="ltrClass"> <a class="ltrClass" style="font-size:120%" href="/About.aspx">درباره ما</a></li>
-               <li class="ltrClass"> <a class="ltrClass" style="font-size:120%" href="/ContactUs.aspx">تماس با ما</a></li>
 									
 								</ul> <!-- /.nav -->
 							</div> <!-- /.nav-collapse -->
@@ -94,7 +92,7 @@
     <div class="clear">
     </div> 
 
-    <div class="container">
+    <div class="MainMaster container">
                 <asp:ContentPlaceHolder ID="mainContent" runat="server">
             </asp:ContentPlaceHolder>
             </div>
@@ -115,7 +113,7 @@
                     تماس با ما
                      </h4>
 					
-						                    می توانید نظرات و پیشنهادات خود را از طریق <a href="/ContactUs.aspx">فرم تماس با ما </a>
+						                    می توانید نظرات و پیشنهادات خود را از طریق فرم تماس با ما 
                     برای ما ارسال کنید.
                     <br />
                     تلفن: <span style="letter-spacing: 2px;">99999999-021</span>
@@ -132,8 +130,6 @@
                     دسترسی سریع</h4>
 					<ul class="links">
                         <li><a href="About.aspx">درباره ما</a></li> 
-                        <li><a href="Help.aspx">راهنمای سایت</a></li>
-                        <li><a href="ContactUs.aspx">تماس با ما</a></li>
                     </ul>
 				</div><!-- /.span3 -->
 

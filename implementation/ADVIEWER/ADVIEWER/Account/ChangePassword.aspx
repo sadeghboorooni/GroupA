@@ -5,11 +5,14 @@
     <h2>
         تغییر رمز عبور
     </h2>
+    <div ID="ErrorMessage" runat="server" visible="false" class="alert hero-unit">
+        رمز شما با موفقیت تغییر یافت.    
+    </div>
     <p>
         رمز جدید باید دارای حداقل <%= Membership.MinRequiredPasswordLength %> کاراکتر باشد.
     </p>
-    <asp:ChangePassword ID="ChangeUserPassword" runat="server" CancelDestinationPageUrl="~/" EnableViewState="false" RenderOuterTable="false" 
-         SuccessPageUrl="ChangePasswordSuccess.aspx">
+    <asp:ChangePassword ID="ChangeUserPassword" runat="server" CancelDestinationPageUrl="../member/MemberDefault.aspx" EnableViewState="false" RenderOuterTable="false" 
+         SuccessPageUrl="ChangePassword.aspx">
         <ChangePasswordTemplate>
             <span class="failureNotification">
                 <asp:Literal ID="FailureText" runat="server"></asp:Literal>
@@ -18,7 +21,7 @@
                  ValidationGroup="ChangeUserPasswordValidationGroup"/>
             <div class="accountInfo">
                 <fieldset class="changePassword">
-                    <legend>اطلاعات حساب</legend>
+                    <legend>اطلاعات کاربری </legend>
                     <p>
                         <asp:Label ID="CurrentPasswordLabel" runat="server" AssociatedControlID="CurrentPassword">رمز عبور فعلی: </asp:Label>
                         <asp:TextBox ID="CurrentPassword" runat="server" CssClass="passwordEntry" TextMode="Password"></asp:TextBox>
@@ -45,9 +48,10 @@
                     </p>
                 </fieldset>
                 <p class="submitButton">
-                    <asp:Button ID="CancelPushButton" runat="server" CausesValidation="False" CommandName="Cancel" Text="انصراف"/>
-                    <asp:Button ID="ChangePasswordPushButton" runat="server" CommandName="ChangePassword" Text="تغییر رمز" 
+                   
+                    <asp:Button ID="ChangePasswordPushButton" runat="server" CssClass="btn btn-primary" CommandName="ChangePassword" Text="تغییر رمز" 
                          ValidationGroup="ChangeUserPasswordValidationGroup"/>
+                          <asp:Button ID="CancelPushButton" runat="server" CssClass="btn btn-primary" CausesValidation="False" CommandName="Cancel" Text="انصراف"/>
                 </p>
             </div>
         </ChangePasswordTemplate>

@@ -22,8 +22,11 @@
                 <asp:Literal ID="ltrmail" runat="server"></asp:Literal>
             </div>
             <br /> 
-            <label >نام کامل</label>
-            <asp:TextBox ID="txtName" Width="220" runat="server"></asp:TextBox><br />
+            <label ><span class="ess">×</span>نام کامل</label>
+            <asp:TextBox ID="txtName" Width="220" runat="server"></asp:TextBox>
+            <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator2" ValidationGroup="required"
+                    ControlToValidate="txtName" runat="server" ErrorMessage="<b>×</b>" Display="Dynamic"
+                    ToolTip="فیلد الزامی"></asp:RequiredFieldValidator><br />
             
             <label >موبایل </label>
             <asp:TextBox ID="txtMob" Width="220" runat="server"></asp:TextBox><br />
@@ -35,11 +38,11 @@
             <label >فکس </label>
             <asp:TextBox ID="txtfax" Width="220" runat="server"></asp:TextBox><br />
             
-            <label >یاهو آیدی</label>
+            <label >شناسه یاهو</label>
             <asp:TextBox ID="txtYahoo" Width="220" runat="server"></asp:TextBox>
                <asp:RegularExpressionValidator
-                    ID="RegularExpressionValidator1" style="padding-right:5px;vertical-align:3px" ValidationGroup="required" Display="Dynamic" 
-                    ValidationExpression="^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$" runat="server" ErrorMessage="ایمیل وارد شده صحیح نیست." ControlToValidate="txtYahoo"></asp:RegularExpressionValidator>
+                    ID="RegularExpressionValidator1" style="padding-right:5px;vertical-align:3px;color:Red" ValidationGroup="required" Display="Dynamic" 
+                    ValidationExpression="^[_a-z0-9-]+(\.[_a-z0-9-]+)*@yahoo.com" runat="server"  ErrorMessage="شناسه وارد شده صحیح نیست." ControlToValidate="txtYahoo"></asp:RegularExpressionValidator>
             <br />
             <label class="top">درباره </label>
             <asp:TextBox ID="txtAbout" TextMode="MultiLine" style="resize:none" Width="220" runat="server"></asp:TextBox><br />

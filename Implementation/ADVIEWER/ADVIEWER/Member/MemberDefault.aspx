@@ -18,7 +18,7 @@
         
         <div class="groups rounded">
             <div class="right">
-                <a href="#">
+                <a href="EditProfile.aspx">
                     <img src="Images/User-Info.png" alt="" />
                     <h6>
                         ویرایش مشخصات</h6>
@@ -42,19 +42,7 @@
             <div class="clear">
             </div>
         </div>
-        <div class="groups rounded">
-            <div class="right">
-                <a href='#'>
-                    <img src="Images/Help.png" alt="" />
-                    <h6>
-                        راهنمای درج آگهی</h6>
-                </a>
-            </div>
-            <p>
-                برای افزایش رتبه و آمار بازدید آگهی خود این راهنما را مطالعه کنید.</p>
-            <div class="clear">
-            </div>
-        </div>
+      
         <div class="groups rounded">
             <div class="right">
                 <asp:LinkButton runat="server" OnClick = "ExitFuction">
@@ -63,6 +51,9 @@
                         خروج</h6>
                 </asp:LinkButton>
             </div>
+            <p>
+            خروج امن از سایت و پاک کردن اطلاعات ورود شما.
+            </p>
             </div>
         
 </asp:Content>
