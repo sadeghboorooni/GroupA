@@ -41,7 +41,7 @@ namespace ADVIEWER.Member
             string Fax = txtfax.Text;
             string YahooID = txtYahoo.Text;
             AccountFunctions.UpdateUserInfo(UserID, FullName, About, Address, Fax, Mobile, Tell, YahooID);
-        
+            msg.Visible = true;
         } 
 
     }

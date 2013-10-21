@@ -4,10 +4,10 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="mainContent" runat="server">
  <div class="adv">
         <div class="contenttext" style="margin:15px;line-height:30px">
-           <div class="alert alert-success" style="font-size:18px;background:#e5ffd5 url('../images/Submit.png') no-repeat right center;padding-right:40px;display:inline-block" runat="server" id="msg" visible="false">
+            <h2 class="alert hero-unit" >ویرایش مشخصات کاربری</h2>
+            <div class="alert alert-success" style="font-size:15px;display:inline-block" runat="server" id="msg" visible="false">
                 مشخصات شما ذخیره شد.
             </div>
-            <h2 class="alert hero-unit" >ویرایش مشخصات کاربری</h2>
             <hr /> 
             <div class="left leftinfo" >
             این اطلاعات در هنگام درج آگهی، برای مشخصات آگهی دهنده استفاده می شوند.<br />

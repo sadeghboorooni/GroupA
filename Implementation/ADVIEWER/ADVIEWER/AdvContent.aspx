@@ -123,7 +123,7 @@
                 </div>
                
                     <div class="AdvDesc">                        
-                        <h3 style="font-family:'bbcbold';color:#777;">
+                        <h3 style="font-weight:bold;color:#777;">
                      
                        <%# Eval("Title")%> 
                         </h3>

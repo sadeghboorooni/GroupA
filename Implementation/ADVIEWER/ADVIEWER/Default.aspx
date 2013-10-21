@@ -113,7 +113,7 @@
                    </td>--%>
                  
                    <div class="DetailBtn">
-                    <a href='<%# Eval("ID", "adv.aspx?id={0}") %>'
+                    <a href='<%# Eval("ID", "advcontent.aspx?id={0}") %>'
                             title='<%# Eval("Title")%>'  class="btn btn-primary">مشاهده جزییات</a>
                    </div>
                   
