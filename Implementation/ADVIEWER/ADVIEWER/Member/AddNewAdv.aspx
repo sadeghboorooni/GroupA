@@ -1,4 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/member/MemberMaster.Master" AutoEventWireup="true" CodeBehind="AddNewAdv.aspx.cs" Inherits="ADVIEWER.Member.AddNewAdv" %>
+
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
     <script type="text/javascript" src="../src/jquery.tokeninput.js"></script>
@@ -7,10 +9,11 @@
     <link rel="stylesheet" href="../styles/token-input-facebook.css" type="text/css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-
+    <asp:ScriptManager ID="ScriptManager1" runat="server">
+    </asp:ScriptManager>
     <h2>
         درج آگهی جدید</h2>
-
+    <asp:Literal ID="SuccessMessage" Visible ="false" runat="server" ></asp:Literal>
     <asp:Literal ID="ltr_error" runat="server"></asp:Literal>
         
         <div class="contenttext">
@@ -108,7 +111,7 @@
                 </p>
                 <label class="title" for="ctl00_content_FileUpload1">
                     عکس آگهی</label>
-                <asp:FileUpload ID="FileUpload1" runat="server" Width="250" />
+            <asp:AsyncFileUpload ID="PictureAsyncFileUpload" OnUploadedComplete="PictureAsyncFileUpload_UploadedComplete" runat="server" />
                 
                 <p class="helper">
                     راهنما: عکسی که در تمام صفحات برای آگهی شما نمایش داده میشود.<br />
@@ -133,24 +136,31 @@
                 <br />
                 <label class="title" for="ctl00_content_txtTell">
                     تلفن تماس</label>
-                <asp:TextBox ID="TellTimetxt" runat="server" MaxLength="50" CssClass="ltr" Width="250"></asp:TextBox>
+                <asp:TextBox ID="Telltxt" runat="server" MaxLength="50" CssClass="ltr" Width="250"></asp:TextBox>
+                <br />
+                <label class="title" for="ctl00_content_txtTell">
+                    دورنگار</label>
+                <asp:TextBox ID="Faxtxt" runat="server" MaxLength="50" CssClass="ltr" Width="250"></asp:TextBox>
                 <br />
                 <label class="title" for="ctl00_content_txtTellTime">
                     تماس در ساعات</label>
-                <asp:TextBox ID="txtTellTime" runat="server" MaxLength="100" Text="8 صبح تا 2 بعدازظهر"
+                <asp:TextBox ID="TellTimetxt" runat="server" MaxLength="100" Text="8 صبح تا 2 بعدازظهر"
                     Width="250"></asp:TextBox>
                 <br />
                 <label class="title" for="ctl00_content_txtMail">
-                    ایمیل</label>
+                   <span class="ess">×</span>ایمیل</label>
                 <asp:TextBox ID="Emailtxt" runat="server" MaxLength="100" CssClass="ltr" Width="250"></asp:TextBox>
+                <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator3" ValidationGroup="required"
+                    ControlToValidate="Emailtxt" runat="server" ErrorMessage="<b>×</b>" Display="Dynamic"
+                    ToolTip="فیلد الزامی"></asp:RequiredFieldValidator>
                 <asp:RegularExpressionValidator
-                    ID="RegularExpressionValidator1" ValidationGroup="required" Display="Dynamic" ValidationExpression="^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$" runat="server" ErrorMessage="ایمیل وارد شده صحیح نیست." ControlToValidate="Emailtxt"></asp:RegularExpressionValidator>
+                    style="color:Red" ID="RegularExpressionValidator1" ValidationGroup="required" Display="Dynamic" ValidationExpression="^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$" runat="server" ErrorMessage="ایمیل وارد شده صحیح نیست." ControlToValidate="Emailtxt"></asp:RegularExpressionValidator>
                 <br />
                 <label class="title" for="ctl00_content_txtYahooID">
-                    یاهو آیدی</label>
-                <asp:TextBox ID="YahooIDtxt" runat="server" MaxLength="100" CssClass="ltr" Width="250"></asp:TextBox>
+                    شناسه یاهو</label>
+                <asp:TextBox ID="YahooIDtxt" runat="server" MaxLength="100" CssClass="ltr" Width="250" placeholder="مثال:JohsSmith@yahoo.com" onfocus="this.placeholder=''" onblur="this.placeholder='مثال:JohsSmith@yahoo.com'"></asp:TextBox>
                     <asp:RegularExpressionValidator
-                    ID="RegularExpressionValidator2" ValidationGroup="required" Display="Dynamic" ValidationExpression="^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$" runat="server" ErrorMessage="ایمیل وارد شده صحیح نیست." ControlToValidate="YahooIDtxt"></asp:RegularExpressionValidator>
+                    style="color:Red" ID="RegularExpressionValidator2" ValidationGroup="required" Display="Dynamic" ValidationExpression="^[_a-z0-9-]+(\.[_a-z0-9-]+)*@yahoo.com" runat="server" ErrorMessage="شناسه وارد شده صحیح نیست." ControlToValidate="YahooIDtxt"></asp:RegularExpressionValidator>
                 <p class="helper">
                     راهنما: در صورتی که آیدی یاهو دارید وارد نمایید. اگر کاربری آگهی شما را ببیند و
                     شما در آن لحظه آنلاین باشید، میتواند با شما چت کند و سریع تر به جواب برسد.

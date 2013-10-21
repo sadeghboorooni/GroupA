@@ -13,6 +13,24 @@ namespace ADVIEWER.Member {
     public partial class AddNewAdv {
         
         /// <summary>
+        /// ScriptManager1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.ScriptManager ScriptManager1;
+        
+        /// <summary>
+        /// SuccessMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal SuccessMessage;
+        
+        /// <summary>
         /// ltr_error control.
         /// </summary>
         /// <remarks>
@@ -121,13 +139,13 @@ namespace ADVIEWER.Member {
         protected global::System.Web.UI.WebControls.TextBox Linktxt;
         
         /// <summary>
-        /// FileUpload1 control.
+        /// PictureAsyncFileUpload control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload FileUpload1;
+        protected global::AjaxControlToolkit.AsyncFileUpload PictureAsyncFileUpload;
         
         /// <summary>
         /// Nametxt control.
@@ -157,6 +175,24 @@ namespace ADVIEWER.Member {
         protected global::System.Web.UI.WebControls.TextBox Mobiletxt;
         
         /// <summary>
+        /// Telltxt control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Telltxt;
+        
+        /// <summary>
+        /// Faxtxt control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Faxtxt;
+        
+        /// <summary>
         /// TellTimetxt control.
         /// </summary>
         /// <remarks>
@@ -166,15 +202,6 @@ namespace ADVIEWER.Member {
         protected global::System.Web.UI.WebControls.TextBox TellTimetxt;
         
         /// <summary>
-        /// txtTellTime control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTellTime;
-        
-        /// <summary>
         /// Emailtxt control.
         /// </summary>
         /// <remarks>
@@ -182,6 +209,15 @@ namespace ADVIEWER.Member {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox Emailtxt;
+        
+        /// <summary>
+        /// RequiredFieldValidator3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator3;
         
         /// <summary>
         /// RegularExpressionValidator1 control.

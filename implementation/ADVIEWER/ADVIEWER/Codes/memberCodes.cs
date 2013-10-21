@@ -12,24 +12,34 @@ namespace ADVIEWER.Codes
     
     public class memberCodes
     {
-        public static bool MakeNewAdvertisment( int starCount, String title, String text, String pic, Boolean isActive, String fullName, 
-            String email, DateTime expirationDate, DateTime registrationDate, int reviewCount, int advDuration, int userId,string keywordStr)
+        public static bool MakeNewAdvertisment( int starCount , int advDuration, string title, string shortdescription, string description,
+            string keywordStr , string price,string link , string fullName, string mobile, string tell, string telltime,
+            string email, string yahooid , string address, string pic, int userId)
         {
             ModelContainer ml = new ModelContainer();
 
             Advertisment newAdv = new Advertisment();
+
+            newAdv.UserId = userId;
             newAdv.StarCount = starCount;
             newAdv.Title = title;
-            newAdv.Text = text;
-            newAdv.Pic = pic;
-            newAdv.IsActive = isActive;
-            newAdv.FullName = fullName;
-            newAdv.Email = email;
-            newAdv.ExpirationDate = expirationDate;
-            newAdv.RegistrationDate = registrationDate;
-            newAdv.ReviewCount = reviewCount;
             newAdv.AdvDuration = advDuration;
-            newAdv.UserId = userId;
+            newAdv.Description = description;
+            newAdv.Pic = pic;
+            newAdv.ShortDescription = shortdescription;
+            newAdv.Price = price;
+            newAdv.Link = link;
+            newAdv.FullName = fullName;
+            newAdv.Mobile = mobile;
+            newAdv.Tell = tell;
+            newAdv.TellTime = telltime;
+            newAdv.Email = email;
+            newAdv.YahooID = yahooid;
+            newAdv.Address = address;
+            newAdv.ExpirationDate = DateTime.Now;
+            newAdv.RegistrationDate = DateTime.Now;
+            newAdv.LastRenewal = DateTime.Now;
+            
             foreach (int kwId in memberCodes.ParseKeyWords(keywordStr))
             {
                 KeyWord tempkw = ml.KeyWords.Where(t => t.Id == kwId).First();
@@ -65,11 +75,14 @@ namespace ADVIEWER.Codes
                 }
                 catch 
                 {
-                    KeyWord newkw = new KeyWord();
-                    newkw.Text = kwStr;
-                    ml.KeyWords.AddObject(newkw);
-                    ml.SaveChanges();
-                    kwList.Add(newkw.Id);
+                    if (ml.KeyWords.Where(t => t.Text == kwStr).Count() == 0)
+                    {
+                        KeyWord newkw = new KeyWord();
+                        newkw.Text = kwStr;
+                        ml.KeyWords.AddObject(newkw);
+                        ml.SaveChanges();
+                        kwList.Add(newkw.Id);
+                    }
                 }
                 
             }
@@ -108,7 +121,7 @@ namespace ADVIEWER.Codes
             List<ShowAdvertisment> unreadList = new List<ShowAdvertisment>();
             foreach (Advertisment adv in ml.Advertisments.Where(t => t.IsConfirmed == false && t.IsRead == false && t.StarCount == -1))
             {
-                unreadList.Add(new ShowAdvertisment(adv.ID, adv.Title, adv.Description, adv.FullName, adv.Pic, adv.RegistrationDate,adv.UserId));
+                unreadList.Add(new ShowAdvertisment(adv.ID, adv.Title, adv.ShortDescription, adv.FullName, adv.Pic, adv.RegistrationDate,adv.UserId));
             }
 
             return ToDataTable<ShowAdvertisment>(unreadList);

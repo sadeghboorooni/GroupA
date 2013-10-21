@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using ADVIEWER.DataModel;
 using ADVIEWER.Codes;
+using System.IO;
 
 namespace ADVIEWER.Member
 {
@@ -13,7 +14,20 @@ namespace ADVIEWER.Member
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-          
+            if (!IsPostBack)
+            {
+                int userid = AccountCodes.currentUserId();
+                User currusr = AccountCodes.GetUserInformation(userid);
+                Nametxt.Text = currusr.FullName;
+                Mobiletxt.Text = currusr.Mobile;
+                Telltxt.Text = currusr.Tell;
+                Faxtxt.Text = currusr.Fax;
+                Emailtxt.Text = currusr.Mail;
+                YahooIDtxt.Text = currusr.YahooID;
+                Addresstxt.Text = currusr.Address;
+
+
+            }
         }
 
         protected void Button1_Click(object sender, EventArgs e)
@@ -27,37 +41,60 @@ namespace ADVIEWER.Member
                 return;
             }
 
-            Advertisment newadv = new Advertisment();
+            int StarCount = int.Parse(AdvKindDrop.SelectedValue);
+            int AdvDuration = int.Parse(MonthDrop.SelectedValue);
+            string Title = AdvTitleTxt.Text;
+            string ShortDescription = AdvShorttxt.Text;
+            string Description = System.Text.RegularExpressions.Regex.Replace(AdvTexttxt.Text, "<[^>]*>", string.Empty);
+            string KeyWords = KeyWordtxt.Text;
+            string Price = Pricetxt.Text;
+            string Link = Linktxt.Text;
 
-            
-            newadv.Title = AdvTitleTxt.Text;
-            newadv.Description= AdvShorttxt.Text;
-            newadv.Text = System.Text.RegularExpressions.Regex.Replace(AdvTexttxt.Text, "<[^>]*>", string.Empty);
-            
-            newadv.Link = Linktxt.Text;
-            newadv.Address = Addresstxt.Text;
-            newadv.FullName = Nametxt.Text;
-            newadv.Tell = TellTimetxt.Text;
-            newadv.Mobile = Mobiletxt.Text;
-            newadv.Price = Pricetxt.Text;
-            newadv.TellTime = TellTimetxt.Text;
-            newadv.Email = Emailtxt.Text;
-            newadv.YahooID = YahooIDtxt.Text;
-            if (newadv.Link.ToLower().Trim() == "http://") newadv.Link = "";
-            newadv.StarCount = int.Parse(AdvKindDrop.SelectedValue);
-            newadv.AdvDuration = int.Parse(MonthDrop.SelectedValue);
+            string FullName = Nametxt.Text;
+            string Mobile = Mobiletxt.Text;
+            string Tell = TellTimetxt.Text;
+            string TellTime = TellTimetxt.Text;
+            string Email = Emailtxt.Text;
+            string YahooID = YahooIDtxt.Text;
+            string Address = Addresstxt.Text;
+            if (Link.ToLower().Trim() == "http://") Link = "";
+            int userId= AccountCodes.currentUserId();
+            //____________________________________fileUpload
+            if (PictureAsyncFileUpload.HasFile) 
+            {
+                string tempAdd = "~/Userfiles/AdvPictures/temp/" + userId + "/",
+                    mainAdd = "~/Userfiles/AdvPictures/main/" + userId + "/";
 
-            newadv.Pic = "";
-            newadv.ExpirationDate = DateTime.Now;
-            newadv.LastRenewal = DateTime.Now;
-            newadv.RegistrationDate = DateTime.Now;
-            newadv.StartDate = DateTime.Now;
-            
-            
+                if (!Directory.Exists(MapPath(mainAdd)))
+                {
+                    Directory.CreateDirectory(MapPath(mainAdd));
+                }
 
-            memberCodes.MakeNewAdvertisment(newadv.StarCount, newadv.Title, newadv.Text, newadv.Pic, newadv.IsActive, newadv.FullName, 
-                newadv.Email, newadv.ExpirationDate, newadv.RegistrationDate, newadv.ReviewCount, newadv.AdvDuration, 
-                AccountCodes.currentUserId(),KeyWordtxt.Text);
+                File.Copy(MapPath(tempAdd + PictureAsyncFileUpload.FileName), MapPath(mainAdd + PictureAsyncFileUpload.FileName));
+
+                File.Delete(MapPath(tempAdd + PictureAsyncFileUpload.FileName));
+            }
+            //____________________________________fileUpload
+            string Pic = MapPath("~/Userfiles/AdvPictures/main/" + userId + "/");
+            
+            memberCodes.MakeNewAdvertisment(StarCount , AdvDuration , Title , ShortDescription , Description , KeyWords , Price , Link , FullName , 
+                                            Mobile , Tell , TellTime , Email , YahooID , Address , Pic , userId);
+            SuccessMessage.Text = string.Format("<div class='alert alert-success' style='FontSize:17px'> آگهی شما با موفقیت ثبت شد. <br /> آگهی شما در لیست انتظار مدیر قرار گرفت. </div>");
+            SuccessMessage.Visible = true;
+        }
+
+
+        protected void PictureAsyncFileUpload_UploadedComplete(object sender, EventArgs e) 
+        {
+            //empty root - check file type
+            int userId = AccountCodes.currentUserId();
+            string dirPath = "~/Userfiles/AdvPictures/temp/" + userId;
+            if (!Directory.Exists(MapPath("~/Userfiles/AdvPictures/temp/" + userId)))
+            {
+                Directory.CreateDirectory(MapPath("~/Userfiles/AdvPictures/temp/" + userId));
+            }
+
+            PictureAsyncFileUpload.SaveAs(MapPath(dirPath+"/" + PictureAsyncFileUpload.FileName));
         }
       
     }

@@ -24,7 +24,7 @@ namespace ADVIEWER.Member
                 txtYahoo.Text = CurUser.YahooID;
                 txtAbout.Text = CurUser.About;
                 txtfax.Text = CurUser.Fax;
-                //ltrmail.Text = CurUser.Email;
+                ltrmail.Text = CurUser.Mail;
                 ltrprofile.Text = string.Format("<a href='/profile.aspx?id={0}' target='_blank'>صفحه پروفایل شما</a>", UserID);
             }
         }

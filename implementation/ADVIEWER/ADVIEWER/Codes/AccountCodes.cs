@@ -9,17 +9,26 @@ namespace ADVIEWER.Codes
 {
     public class AccountCodes
     {
-        public static void newUser(Guid UserId,string UserFullName) 
+        public static bool newUser(Guid UserId,string UserFullName, string mail) 
         {
-            MembershipUser mu = Membership.GetUser(UserId);
-            ModelContainer ml = new ModelContainer();
-            User newUser = new User();
-            newUser.LastLogin = DateTime.Now;
-            newUser.RegisterDate = DateTime.Now;
-            newUser.FullName = UserFullName;
-            newUser.UserProviderKey = UserId;
-            ml.Users.AddObject(newUser);
-            ml.SaveChanges();
+            try
+            {
+                ModelContainer ml = new ModelContainer();
+                User newUser = new User();
+                newUser.LastLogin = DateTime.Now;
+                newUser.RegisterDate = DateTime.Now;
+                newUser.FullName = UserFullName;
+                newUser.UserProviderKey = UserId;
+                newUser.Mail = mail;
+                ml.Users.AddObject(newUser);
+                ml.SaveChanges();
+                return true;
+            }
+            catch 
+            {
+                Membership.DeleteUser(Membership.GetUser(UserId).UserName);
+                return false;
+            }
         }
 
         public static void loginUser(Guid UserId) 

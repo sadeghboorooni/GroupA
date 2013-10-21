@@ -48,7 +48,7 @@
                 </div>
             </div>
            
-            <%= curAdv.Text %>
+            <%= curAdv.Description %>
            
                 </div>
             <div class="clear">

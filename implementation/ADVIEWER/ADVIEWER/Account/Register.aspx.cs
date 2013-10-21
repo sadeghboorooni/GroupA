@@ -19,10 +19,17 @@ namespace ADVIEWER.Account
 
         protected void RegisterUser_CreatedUser(object sender, EventArgs e)
         {
-            FormsAuthentication.SetAuthCookie(RegisterUser.UserName, false /* createPersistentCookie */);
             Guid userID = (Guid)Membership.GetUser(RegisterUser.UserName).ProviderUserKey;
             string userFullName = (string)Membership.GetUser(RegisterUser.UserName).UserName;
-            AccountCodes.newUser(userID,userFullName);
+            if (AccountCodes.newUser(userID, userFullName, RegisterUser.Email))
+            {
+                FormsAuthentication.SetAuthCookie(RegisterUser.UserName, false /* createPersistentCookie */);
+            }
+            else 
+            { 
+                //RegisterUser.UnknownErrorMessage = "مشکلی در ایجاد حساب کاربری ایجاد شده، لطفا دوباره تلاش کنید.";
+                Response.Redirect("~/account/register.aspx");
+            }
             string continueUrl = RegisterUser.ContinueDestinationPageUrl;
             if (String.IsNullOrEmpty(continueUrl))
             {
