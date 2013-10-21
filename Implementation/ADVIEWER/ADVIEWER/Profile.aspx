@@ -5,8 +5,6 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="mainContent" runat="server">
 
 <div class="adv" runat="server" id="abottext">
-
-    <div class="contenttext rounded" style="background: #fafafa;">
         
             <asp:Literal ID="ltrstars" runat="server"></asp:Literal>
       
@@ -15,7 +13,7 @@
             <h2>
             محصولات این کاربر
             </h2> 
-    </div>
+
 
     <div class="contactinfo rounded">
                 <div class="advcontact">
@@ -29,10 +27,9 @@
                         <i class="icon-user"></i>
                             <%=name.Trim()%>
                     </h3>
-                    <hr />
                     
-                             <%=  tell == null || tell =="" ? "" : string.Format("<hr><h3><i class='icon-cog'></i>{0}</h3>", tell)%>
-                             <%= mobile==null || mobile == "" ? "" : string.Format("<hr><h3><i class='icon-cog'></i>{0}</h3>", mobile)%>
+                             <%=  tell == null || tell =="" ? "" : string.Format("<hr><h3><i class='icon-phone'></i>{0}</h3>", tell)%>
+                             <%= mobile==null || mobile == "" ? "" : string.Format("<hr><h3><i class='icon-mobile-phone'></i>{0}</h3>", mobile)%>
                                    
                 </div>
      </div>
@@ -68,7 +65,7 @@
                     <%# DateTime.Parse(Eval("ExpirationDate").ToString()) > DateTime.Now &&  Eval("StarCount").ToString() != "-1" ? string.Format("<span class='right' title='تعداد ستاره محصول'><i class='icon-star'></i>{0}</span><br />", Eval("StarCount")):""%>
                          <%# string.Format("<span class='left' title='تاریخ درج محصول'><i class='icon-calendar'></i>{0} </span>", Eval("StartDate")==null?"":Eval("StartDate").ToString())%>
                     <div style="margin-bottom:10px;float:left;">
-                    <a href='<%# Eval("ID", "adv.aspx?id={0}")%>'
+                    <a href='<%# Eval("ID", "AdvContent.aspx?id={0}")%>'
                             title='<%# Eval("Title")%>'  class="btn btn-primary">مشاهده جزییات</a>
                     </div>
                     </div>
@@ -92,6 +89,5 @@
             </div>
             </div>
 
-</div>  
 
 </asp:Content>

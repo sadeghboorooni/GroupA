@@ -13,6 +13,15 @@ namespace ADVIEWER.manage {
     public partial class ManageMaster {
         
         /// <summary>
+        /// Head1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlHead Head1;
+        
+        /// <summary>
         /// head control.
         /// </summary>
         /// <remarks>
@@ -40,15 +49,6 @@ namespace ADVIEWER.manage {
         protected global::System.Web.UI.WebControls.LoginView HeadLoginView;
         
         /// <summary>
-        /// ltr_unpaid control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal ltr_unpaid;
-        
-        /// <summary>
         /// mainContent control.
         /// </summary>
         /// <remarks>
@@ -58,21 +58,12 @@ namespace ADVIEWER.manage {
         protected global::System.Web.UI.WebControls.ContentPlaceHolder mainContent;
         
         /// <summary>
-        /// Image1 control.
+        /// MoreAdvs control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image Image1;
-        
-        /// <summary>
-        /// ltr_username2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal ltr_username2;
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder MoreAdvs;
     }
 }

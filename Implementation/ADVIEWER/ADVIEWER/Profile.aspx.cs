@@ -45,8 +45,6 @@ namespace ADVIEWER
         {
             int ID = int.Parse(Request.QueryString["id"]);
             User userprofile = AccountCodes.GetUserInformation(ID);
-            if (userprofile.IsActive == false)
-                Response.Redirect("/");
             about = userprofile.About;
             name = userprofile.FullName;
             tell = userprofile.Tell;

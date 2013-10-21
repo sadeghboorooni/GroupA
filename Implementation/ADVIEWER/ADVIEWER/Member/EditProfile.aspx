@@ -35,11 +35,11 @@
             <label >تلفن </label>
             <asp:TextBox ID="txtTell" Width="220" runat="server"></asp:TextBox><br />
             
-            <label >فکس </label>
+            <label >دورنگار </label>
             <asp:TextBox ID="txtfax" Width="220" runat="server"></asp:TextBox><br />
             
             <label >شناسه یاهو</label>
-            <asp:TextBox ID="txtYahoo" Width="220" runat="server"></asp:TextBox>
+            <asp:TextBox ID="txtYahoo" Width="220" placeholder="مثال:JohnSmith@yahoo.com" onfocus="this.placeholder=''" onblur="this.placeholder='مثال:JohnSmith@yahoo.com'" runat="server"></asp:TextBox>
                <asp:RegularExpressionValidator
                     ID="RegularExpressionValidator1" style="padding-right:5px;vertical-align:3px;color:Red" ValidationGroup="required" Display="Dynamic" 
                     ValidationExpression="^[_a-z0-9-]+(\.[_a-z0-9-]+)*@yahoo.com" runat="server"  ErrorMessage="شناسه وارد شده صحیح نیست." ControlToValidate="txtYahoo"></asp:RegularExpressionValidator>
