@@ -121,7 +121,7 @@ namespace ADVIEWER.BAL
             {
                 unreadList.Add(new ShowAdvertisment(adv.ID, adv.Title, adv.ShortDescription, adv.FullName, adv.Pic, adv.RegistrationDate,adv.UserId));
             }
-
+            unreadList  = unreadList.OrderByDescending(t=> t.RegistrationDate).ToList();
             return PublicFunctions.ToDataTable<ShowAdvertisment>(unreadList);
         }
         public static void ConfirmAdvertisment(int AdvID) 
@@ -158,6 +158,12 @@ namespace ADVIEWER.BAL
             ModelContainer ml = new ModelContainer();
             return ml.Users.Where(a => a.ID == UserID).FirstOrDefault().Advertisments.ToArray();
         }
+        public static Advertisment[] GetUserConfirmedAdvs(int UserID)
+        {
+            ModelContainer ml = new ModelContainer();
+            return ml.Users.Where(a => a.ID == UserID).FirstOrDefault().Advertisments.Where(t => t.IsConfirmed).ToArray();
+        }
+
     }
     public class ShowAdvertisment 
     {

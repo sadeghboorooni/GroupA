@@ -31,14 +31,14 @@ namespace ADVIEWER
             else { Response.Redirect("404.aspx"); }
 
             curAdv = MemberFunctions.GetAdvertismentInformation(id);
-            if (curAdv == null) { Response.Redirect("404.aspx"); }
+            if (curAdv == null || !curAdv.IsConfirmed) { Response.Redirect("404.aspx"); }
             LoadUserAdvertisments();
         
         }
 
         protected void LoadUserAdvertisments()
         {
-            UserAdvsRepeater.DataSource = MemberFunctions.GetUserAdvs(curAdv.UserId);
+            UserAdvsRepeater.DataSource = MemberFunctions.GetUserConfirmedAdvs(curAdv.UserId);
             UserAdvsRepeater.DataBind();
         }
 

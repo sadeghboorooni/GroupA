@@ -57,7 +57,7 @@ namespace ADVIEWER
 
             CollectionPager1.DataSource = test;*/ //test view
 
-            CollectionPager1.DataSource = MemberFunctions.GetUserAdvs(ID);
+            CollectionPager1.DataSource = MemberFunctions.GetUserConfirmedAdvs(ID);
             
             CollectionPager1.BindToControl = Repeater1;
             Repeater1.DataSource = CollectionPager1.DataSourcePaged;
