@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using ADVIEWER.DataModel;
+using ADVIEWER.DAL;
 using System.Reflection;
 using System.Data;
 using System.IO;
 
 
-namespace ADVIEWER.Codes
+namespace ADVIEWER.BAL
 {
     
-    public class memberCodes
+    public class MemberFunctions
     {
         public static bool MakeNewAdvertisment( int starCount , int advDuration, string title, string shortdescription, string description,
             string keywordStr , string price,string link , string fullName, string mobile, string tell, string telltime,
@@ -41,7 +41,7 @@ namespace ADVIEWER.Codes
             newAdv.LastRenewal = DateTime.Now;
             newAdv.Pic = "";
             
-            foreach (int kwId in memberCodes.ParseKeyWords(keywordStr))
+            foreach (int kwId in MemberFunctions.ParseKeyWords(keywordStr))
             {
                 KeyWord tempkw = ml.KeyWords.Where(t => t.Id == kwId).First();
                 newAdv.KeyWords.Add(tempkw);
@@ -111,31 +111,8 @@ namespace ADVIEWER.Codes
             return kwList.ToArray();
         }
 
-        public static DataTable ToDataTable<T>(List<T> items)
-        {
-            DataTable dataTable = new DataTable(typeof(T).Name);
-            //Get all the properties
-            FieldInfo[] Props = typeof(T).GetFields(BindingFlags.Public | BindingFlags.Instance);
-            foreach (FieldInfo prop in Props)
-            {
-
-                //Setting column names as Property names
-                dataTable.Columns.Add(prop.Name, prop.FieldType);
-            }
-            foreach (T item in items)
-            {
-                var values = new object[Props.Length];
-                for (int i = 0; i < Props.Length; i++)
-                {
-                    //inserting property values to datatable rows
-                    values[i] = Props[i].GetValue(item);
-                }
-                dataTable.Rows.Add(values);
-            }
-            //put a breakpoint here and check datatable
-            return dataTable;
-        }
-        public static DataTable unconfirmedFreeAdvertismentsDataTable() 
+        
+        public static DataTable UnconfirmedFreeAdvertismentsDataTable() 
         {
             ModelContainer ml = new ModelContainer();
 
@@ -145,7 +122,7 @@ namespace ADVIEWER.Codes
                 unreadList.Add(new ShowAdvertisment(adv.ID, adv.Title, adv.ShortDescription, adv.FullName, adv.Pic, adv.RegistrationDate,adv.UserId));
             }
 
-            return ToDataTable<ShowAdvertisment>(unreadList);
+            return PublicFunctions.ToDataTable<ShowAdvertisment>(unreadList);
         }
         public static void ConfirmAdvertisment(int AdvID) 
         {
@@ -176,6 +153,11 @@ namespace ADVIEWER.Codes
             ModelContainer ml = new ModelContainer();
             return ml.Advertisments.Where(t => t.ID == id).FirstOrDefault();
         }
+        public static Advertisment[] GetUserAdvs(int UserID)
+        {
+            ModelContainer ml = new ModelContainer();
+            return ml.Users.Where(a => a.ID == UserID).FirstOrDefault().Advertisments.ToArray();
+        }
     }
     public class ShowAdvertisment 
     {
@@ -203,4 +185,10 @@ namespace ADVIEWER.Codes
             this.UserId = UserId;
         }
     }
+    public class L_User : User 
+    {
+        
+    }
+    public class L_Advertisment : Advertisment
+    { }
 }

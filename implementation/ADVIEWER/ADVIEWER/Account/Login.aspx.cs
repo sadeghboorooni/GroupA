@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.Security;
-using ADVIEWER.Codes;
+using ADVIEWER.BAL;
 
 namespace ADVIEWER.Account
 {
@@ -18,7 +18,7 @@ namespace ADVIEWER.Account
         protected void LoginUser_LoggedIn(object sender, EventArgs e) 
         {
             MembershipUser mu = Membership.GetUser(LoginUser.UserName);
-            AccountCodes.loginUser((Guid)mu.ProviderUserKey);
+            AccountFunctions.loginUser((Guid)mu.ProviderUserKey);
         }
     }
 }

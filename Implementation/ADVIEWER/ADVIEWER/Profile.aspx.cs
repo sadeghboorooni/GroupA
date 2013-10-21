@@ -5,8 +5,8 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
-using ADVIEWER.DataModel;
-using ADVIEWER.Codes;
+using ADVIEWER.DAL;
+using ADVIEWER.BAL;
 
 namespace ADVIEWER
 {
@@ -44,7 +44,7 @@ namespace ADVIEWER
         protected void Page_Load(object sender, EventArgs e)
         {
             int ID = int.Parse(Request.QueryString["id"]);
-            User userprofile = AccountCodes.GetUserInformation(ID);
+            User userprofile = AccountFunctions.GetUserInformation(ID);
             about = userprofile.About;
             name = userprofile.FullName;
             tell = userprofile.Tell;
@@ -57,7 +57,7 @@ namespace ADVIEWER
 
             CollectionPager1.DataSource = test;*/ //test view
 
-            CollectionPager1.DataSource = AccountCodes.GetUserAdvs(ID);
+            CollectionPager1.DataSource = MemberFunctions.GetUserAdvs(ID);
             
             CollectionPager1.BindToControl = Repeater1;
             Repeater1.DataSource = CollectionPager1.DataSourcePaged;

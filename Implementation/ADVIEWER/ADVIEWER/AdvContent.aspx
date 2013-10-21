@@ -33,9 +33,9 @@
                             <%= curAdv.FullName.Trim() %>
                     </h3>
                   
-                    <%= curAdv.Mobile == null ? "" : string.Format("<hr/><p><i class='icon-mobile-phone' style='padding-right:2px;padding-left:3px'></i> <b style='font:bold 14px tahoma'>{0}</b></p> <hr />", curAdv.Mobile)%>
+                    <%= curAdv.Mobile == null ? "" : string.Format("<hr/><p><i class='icon-mobile-phone' style='padding-right:2px;padding-left:3px'></i> <b>{0}</b></p> <hr />", curAdv.Mobile)%>
                      
-                    <%= curAdv.Tell == null ? "" : string.Format("<p><i class='icon-phone'></i> <b style='font:bold 14px tahoma'>{0}</b></p>", curAdv.Tell)%>
+                    <%= curAdv.Tell == null ? "" : string.Format("<p><i class='icon-phone'></i> <b>{0}</b></p>", curAdv.Tell)%>
                     
                     
                 </div>

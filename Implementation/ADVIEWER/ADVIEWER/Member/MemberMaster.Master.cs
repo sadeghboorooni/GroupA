@@ -5,8 +5,8 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.Security;
-using ADVIEWER.Codes;
-using ADVIEWER.DataModel;
+using ADVIEWER.BAL;
+using ADVIEWER.DAL;
 
 namespace ADVIEWER.member
 {
@@ -15,8 +15,8 @@ namespace ADVIEWER.member
         public User UserName;
         protected void Page_Load(object sender, EventArgs e)
         {
-            int UserID = AccountCodes.currentUserId();
-            UserName = AccountCodes.GetUserInformation(UserID);
+            int UserID = AccountFunctions.currentUserId();
+            UserName = AccountFunctions.GetUserInformation(UserID);
             if (!IsPostBack)
             {
                 ltrprofile.Text = string.Format("<a href='/profile.aspx?id={0}' target='_blank'><i class='icon-user'></i>مشاهده ی صفحه ی شخصی</a>", UserID);

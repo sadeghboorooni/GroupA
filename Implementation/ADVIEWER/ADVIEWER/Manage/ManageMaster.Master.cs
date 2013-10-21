@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.Security;
-using ADVIEWER.Codes;
+using ADVIEWER.BAL;
 
 namespace ADVIEWER.manage
 {
@@ -13,7 +13,7 @@ namespace ADVIEWER.manage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!AccountCodes.GetUserInformation(AccountCodes.currentUserId()).IsManager) 
+            if (!AccountFunctions.GetUserInformation(AccountFunctions.currentUserId()).IsManager) 
             {
                 Response.Redirect("~/");
             }

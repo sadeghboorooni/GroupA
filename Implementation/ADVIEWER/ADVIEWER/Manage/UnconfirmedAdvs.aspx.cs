@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using ADVIEWER.Codes;
+using ADVIEWER.BAL;
 using System.Data;
 
 namespace ADVIEWER.Manage
@@ -19,7 +19,7 @@ namespace ADVIEWER.Manage
 
         private void LoadGreedView()
         {
-            FreeAdvsGridView.DataSource = memberCodes.unconfirmedFreeAdvertismentsDataTable();
+            FreeAdvsGridView.DataSource = MemberFunctions.UnconfirmedFreeAdvertismentsDataTable();
             FreeAdvsGridView.DataBind();
             freeAdvsCount = ((DataTable)FreeAdvsGridView.DataSource).Rows.Count;
         }
@@ -44,7 +44,7 @@ namespace ADVIEWER.Manage
                 int ID = int.Parse(FreeAdvsGridView.DataKeys[i].Value.ToString());
                 if (chkAdd.Checked == true)
                 {
-                    memberCodes.ConfirmAdvertisment(ID);
+                    MemberFunctions.ConfirmAdvertisment(ID);
                 }
             }
 
@@ -65,7 +65,7 @@ namespace ADVIEWER.Manage
                 int ID = int.Parse(FreeAdvsGridView.DataKeys[i].Value.ToString());
                 if (chkAdd.Checked == true)
                 {
-                    memberCodes.DenyAdvertisment(ID, reason);
+                    MemberFunctions.DenyAdvertisment(ID, reason);
                 }
             }
             LoadGreedView();

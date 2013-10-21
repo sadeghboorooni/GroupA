@@ -4,9 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using ADVIEWER.DataModel;
+using ADVIEWER.DAL;
 
-namespace ADVIEWER.Codes
+namespace ADVIEWER.BAL
 {
     public partial class JsonMaker : System.Web.UI.Page
     {

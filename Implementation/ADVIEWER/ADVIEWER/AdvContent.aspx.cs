@@ -4,8 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using ADVIEWER.DataModel;
-using ADVIEWER.Codes;
+using ADVIEWER.DAL;
+using ADVIEWER.BAL;
 using ADVIEWER.Account;
 
 namespace ADVIEWER
@@ -30,7 +30,7 @@ namespace ADVIEWER
             }
             else { Response.Redirect("404.aspx"); }
 
-            curAdv = memberCodes.GetAdvertismentInformation(id);
+            curAdv = MemberFunctions.GetAdvertismentInformation(id);
             if (curAdv == null) { Response.Redirect("404.aspx"); }
             LoadUserAdvertisments();
         
@@ -38,7 +38,7 @@ namespace ADVIEWER
 
         protected void LoadUserAdvertisments()
         {
-            UserAdvsRepeater.DataSource = AccountCodes.GetUserAdvs(curAdv.UserId);
+            UserAdvsRepeater.DataSource = MemberFunctions.GetUserAdvs(curAdv.UserId);
             UserAdvsRepeater.DataBind();
         }
 

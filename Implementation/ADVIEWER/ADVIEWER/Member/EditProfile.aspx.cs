@@ -4,8 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using ADVIEWER.Codes;
-using ADVIEWER.DataModel;
+using ADVIEWER.BAL;
+using ADVIEWER.DAL;
 
 namespace ADVIEWER.Member
 {
@@ -15,8 +15,8 @@ namespace ADVIEWER.Member
         {
             if (!IsPostBack)
             {
-                int UserID = AccountCodes.currentUserId();
-                User CurUser = AccountCodes.GetUserInformation(UserID);
+                int UserID = AccountFunctions.currentUserId();
+                User CurUser = AccountFunctions.GetUserInformation(UserID);
                 txtAddress.Text = CurUser.Address;
                 txtMob.Text = CurUser.Mobile;
                 txtName.Text = CurUser.FullName;
@@ -32,7 +32,7 @@ namespace ADVIEWER.Member
         
         protected void Button1_Click(object sender, EventArgs e)
         {
-            int UserID = AccountCodes.currentUserId();
+            int UserID = AccountFunctions.currentUserId();
             string FullName = txtName.Text.Trim();
             string Address = txtAddress.Text.Trim();
             string Mobile = txtMob.Text.Trim();
@@ -40,7 +40,7 @@ namespace ADVIEWER.Member
             string Tell = txtTell.Text;
             string Fax = txtfax.Text;
             string YahooID = txtYahoo.Text;
-            AccountCodes.UpdateUserInfo(UserID, FullName, About, Address, Fax, Mobile, Tell, YahooID);
+            AccountFunctions.UpdateUserInfo(UserID, FullName, About, Address, Fax, Mobile, Tell, YahooID);
         
         } 
 

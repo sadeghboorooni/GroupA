@@ -18,16 +18,16 @@ using System.Runtime.Serialization;
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
 
-[assembly: EdmRelationshipAttribute("Model1", "GroupGroup", "Group", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ADVIEWER.DataModel.Group), "Group1", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DataModel.Group))]
-[assembly: EdmRelationshipAttribute("Model1", "StateCity", "State", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ADVIEWER.DataModel.State), "City", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DataModel.City))]
-[assembly: EdmRelationshipAttribute("Model1", "UserTicket", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ADVIEWER.DataModel.User), "Ticket", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DataModel.Ticket))]
-[assembly: EdmRelationshipAttribute("Model1", "UserGroup", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DataModel.User), "Group", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DataModel.Group))]
-[assembly: EdmRelationshipAttribute("Model1", "AdvertismentKeyWord", "Advertisment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DataModel.Advertisment), "KeyWord", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DataModel.KeyWord))]
-[assembly: EdmRelationshipAttribute("Model1", "UserAdvertisment", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ADVIEWER.DataModel.User), "Advertisment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DataModel.Advertisment), true)]
+[assembly: EdmRelationshipAttribute("Model1", "GroupGroup", "Group", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ADVIEWER.DAL.Group), "Group1", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DAL.Group))]
+[assembly: EdmRelationshipAttribute("Model1", "StateCity", "State", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ADVIEWER.DAL.State), "City", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DAL.City))]
+[assembly: EdmRelationshipAttribute("Model1", "UserTicket", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ADVIEWER.DAL.User), "Ticket", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DAL.Ticket))]
+[assembly: EdmRelationshipAttribute("Model1", "UserGroup", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DAL.User), "Group", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DAL.Group))]
+[assembly: EdmRelationshipAttribute("Model1", "AdvertismentKeyWord", "Advertisment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DAL.Advertisment), "KeyWord", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DAL.KeyWord))]
+[assembly: EdmRelationshipAttribute("Model1", "UserAdvertisment", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ADVIEWER.DAL.User), "Advertisment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DAL.Advertisment), true)]
 
 #endregion
 
-namespace ADVIEWER.DataModel
+namespace ADVIEWER.DAL
 {
     #region Contexts
     

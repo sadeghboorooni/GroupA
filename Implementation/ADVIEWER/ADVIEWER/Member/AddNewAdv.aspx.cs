@@ -4,8 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using ADVIEWER.DataModel;
-using ADVIEWER.Codes;
+using ADVIEWER.DAL;
+using ADVIEWER.BAL;
 using System.IO;
 
 namespace ADVIEWER.Member
@@ -16,8 +16,8 @@ namespace ADVIEWER.Member
         {
             if (!IsPostBack)
             {
-                int userid = AccountCodes.currentUserId();
-                User currusr = AccountCodes.GetUserInformation(userid);
+                int userid = AccountFunctions.currentUserId();
+                User currusr = AccountFunctions.GetUserInformation(userid);
                 Nametxt.Text = currusr.FullName;
                 Mobiletxt.Text = currusr.Mobile;
                 Telltxt.Text = currusr.Tell;
@@ -58,7 +58,7 @@ namespace ADVIEWER.Member
             string YahooID = YahooIDtxt.Text;
             string Address = Addresstxt.Text;
             if (Link.ToLower().Trim() == "http://") Link = "";
-            int userId= AccountCodes.currentUserId();
+            int userId= AccountFunctions.currentUserId();
             string tempAdd = "", mainAdd = "";
             if (PictureAsyncFileUpload.HasFile)
             {
@@ -66,7 +66,7 @@ namespace ADVIEWER.Member
                 mainAdd = "~/Userfiles/AdvPictures/main/" + userId + "/";
             }
             
-            memberCodes.MakeNewAdvertisment(StarCount , AdvDuration , Title , ShortDescription , Description , KeyWords , Price , Link , FullName , 
+            MemberFunctions.MakeNewAdvertisment(StarCount , AdvDuration , Title , ShortDescription , Description , KeyWords , Price , Link , FullName , 
                                             Mobile , Tell , TellTime , Email , YahooID , Address, userId,tempAdd,mainAdd,PictureAsyncFileUpload.FileName);
             SuccessMessage.Text = string.Format("<div class='alert alert-success' style='FontSize:17px'> آگهی شما با موفقیت ثبت شد. <br /> آگهی شما در لیست انتظار مدیر قرار گرفت. </div>");
             SuccessMessage.Visible = true;
@@ -76,7 +76,7 @@ namespace ADVIEWER.Member
         protected void PictureAsyncFileUpload_UploadedComplete(object sender, EventArgs e) 
         {
             //empty root - check file type
-            int userId = AccountCodes.currentUserId();
+            int userId = AccountFunctions.currentUserId();
             string dirPath = "~/Userfiles/AdvPictures/temp/" + userId;
             if (!Directory.Exists(MapPath("~/Userfiles/AdvPictures/temp/" + userId)))
             {

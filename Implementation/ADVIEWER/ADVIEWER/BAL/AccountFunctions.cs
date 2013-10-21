@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Security;
-using ADVIEWER.DataModel;
+using ADVIEWER.DAL;
 
-namespace ADVIEWER.Codes
+namespace ADVIEWER.BAL
 {
-    public class AccountCodes
+    public class AccountFunctions
     {
         public static bool newUser(Guid UserId,string UserFullName, string mail) 
         {
@@ -65,11 +65,7 @@ namespace ADVIEWER.Codes
             ml.SaveChanges();
         }
 
-        public static Advertisment[] GetUserAdvs (int UserID)
-        {
-            ModelContainer ml = new ModelContainer();
-            return ml.Users.Where(a => a.ID == UserID).FirstOrDefault().Advertisments.ToArray();
-        }
+        
 
     }
 }

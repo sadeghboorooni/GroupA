@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.Security;
-using ADVIEWER.Codes;
+using ADVIEWER.BAL;
 
 namespace ADVIEWER.member
 {
@@ -14,7 +14,7 @@ namespace ADVIEWER.member
         public string picAdd;
         protected void Page_Load(object sender, EventArgs e)
         {
-            picAdd = AccountCodes.GetUserInformation(AccountCodes.currentUserId()).PicAddress;
+            picAdd = AccountFunctions.GetUserInformation(AccountFunctions.currentUserId()).PicAddress;
         }
 
         protected void ExitFuction(object sender, EventArgs e)

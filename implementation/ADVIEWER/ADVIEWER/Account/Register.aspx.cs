@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using ADVIEWER.Codes;
+using ADVIEWER.BAL;
 
 namespace ADVIEWER.Account
 {
@@ -21,7 +21,7 @@ namespace ADVIEWER.Account
         {
             Guid userID = (Guid)Membership.GetUser(RegisterUser.UserName).ProviderUserKey;
             string userFullName = (string)Membership.GetUser(RegisterUser.UserName).UserName;
-            if (AccountCodes.newUser(userID, userFullName, RegisterUser.Email))
+            if (AccountFunctions.newUser(userID, userFullName, RegisterUser.Email))
             {
                 FormsAuthentication.SetAuthCookie(RegisterUser.UserName, false /* createPersistentCookie */);
             }

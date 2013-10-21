@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ADVIEWER.Codes {
+namespace ADVIEWER.BAL {
     
     
     public partial class JsonMaker {
