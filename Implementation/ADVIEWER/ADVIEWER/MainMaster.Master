@@ -15,9 +15,9 @@
 		<meta name="author" content=""/>
 
         <link href="Styles/member.css" rel="stylesheet" type="text/css" />
-        <link href="Styles/bootstrap.css" rel="stylesheet" />
-		<link href="Styles/theme.css" rel="stylesheet" />
-        <link href="Styles/newTheme.css" rel="stylesheet" />
+        <link href="Styles/bootstrap.css" rel="stylesheet" type="text/css"/>
+		<link href="Styles/theme.css" rel="stylesheet" type="text/css"/>
+        <link href="Styles/newTheme.css" rel="stylesheet" type="text/css" />
         <link href="Styles/font-awesome.css" rel="stylesheet" type="text/css" />
 
         <script src="Scripts/jquery-1.8.2.min.js" type="text/javascript"></script>

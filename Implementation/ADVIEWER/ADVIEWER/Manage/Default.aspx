@@ -2,7 +2,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="mainContent" runat="server">
-<div class="latestwork">
+<div >
 <ul id="homebtn">                
 
         <li><a href="UnconfirmedAdvs.aspx"><img src="images/icons/new.png" alt="" /><span>در انتظار تایید</span></a></li>

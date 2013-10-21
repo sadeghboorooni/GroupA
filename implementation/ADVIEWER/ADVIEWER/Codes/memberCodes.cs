@@ -5,6 +5,7 @@ using System.Web;
 using ADVIEWER.DataModel;
 using System.Reflection;
 using System.Data;
+using System.IO;
 
 
 namespace ADVIEWER.Codes
@@ -14,7 +15,7 @@ namespace ADVIEWER.Codes
     {
         public static bool MakeNewAdvertisment( int starCount , int advDuration, string title, string shortdescription, string description,
             string keywordStr , string price,string link , string fullName, string mobile, string tell, string telltime,
-            string email, string yahooid , string address, string pic, int userId)
+            string email, string yahooid , string address, int userId,string tempAdd,string mainAdd,string fileName)
         {
             ModelContainer ml = new ModelContainer();
 
@@ -25,7 +26,6 @@ namespace ADVIEWER.Codes
             newAdv.Title = title;
             newAdv.AdvDuration = advDuration;
             newAdv.Description = description;
-            newAdv.Pic = pic;
             newAdv.ShortDescription = shortdescription;
             newAdv.Price = price;
             newAdv.Link = link;
@@ -39,6 +39,7 @@ namespace ADVIEWER.Codes
             newAdv.ExpirationDate = DateTime.Now;
             newAdv.RegistrationDate = DateTime.Now;
             newAdv.LastRenewal = DateTime.Now;
+            newAdv.Pic = "";
             
             foreach (int kwId in memberCodes.ParseKeyWords(keywordStr))
             {
@@ -50,12 +51,32 @@ namespace ADVIEWER.Codes
             try
             {
                 ml.SaveChanges();
+                if (tempAdd != "")
+                {
+                    SaveImage(tempAdd, mainAdd + newAdv.ID+"/", fileName);
+                    newAdv.Pic = mainAdd + newAdv.ID + "/" + fileName;
+                    ml.SaveChanges();
+                }
                 return true;
             }
             catch
             {
                 return false;
             }
+        }
+
+        public static void SaveImage(string tempAdd, string mainAdd,string filename)
+        {
+
+            if (!Directory.Exists(HttpContext.Current.Server.MapPath(mainAdd)))
+            {
+                Directory.CreateDirectory(HttpContext.Current.Server.MapPath(mainAdd));
+            }
+
+            File.Copy(HttpContext.Current.Server.MapPath(tempAdd+filename), HttpContext.Current.Server.MapPath(mainAdd+filename));
+
+            File.Delete(HttpContext.Current.Server.MapPath(tempAdd+filename));
+
         }
 
         public static int[] ParseKeyWords(string keywordStr) 
