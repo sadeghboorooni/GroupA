@@ -4,11 +4,19 @@ using System.Linq;
 using System.Web;
 using System.Data;
 using System.Reflection;
+using ADVIEWER.DAL;
 
 namespace ADVIEWER.BAL
 {
     public class PublicFunctions
     {
+
+        public static Advertisment[] GetLast9Advs() 
+        {
+            ModelContainer ml = new ModelContainer();
+            return ml.Advertisments.Where(t=>t.IsConfirmed).OrderByDescending(t => t.RegistrationDate).Take(9).ToArray();
+        }
+
         public static DataTable ToDataTable<T>(List<T> items)
         {
             DataTable dataTable = new DataTable(typeof(T).Name);
