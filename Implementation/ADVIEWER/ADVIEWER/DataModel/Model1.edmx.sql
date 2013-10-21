@@ -2,13 +2,13 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 10/19/2013 01:09:40
+-- Date Created: 10/20/2013 23:32:25
 -- Generated from EDMX file: C:\Users\M-R\Desktop\SE2\GroupA\Implementation\ADVIEWER\ADVIEWER\DataModel\Model1.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
 GO
-USE [aspnetdb];
+USE [ADVIEWERdb];
 GO
 IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
 GO
@@ -97,13 +97,12 @@ CREATE TABLE [dbo].[Advertisments] (
     [SateID] int  NULL,
     [StarCount] int  NOT NULL,
     [Title] nvarchar(100)  NOT NULL,
-    [Description] nvarchar(300)  NULL,
-    [Text] nvarchar(max)  NOT NULL,
-    [Pic] nvarchar(200)  NOT NULL,
-    [IsActive] bit  NOT NULL,
-    [IsConfirmed] bit  NULL,
+    [ShortDescription] nvarchar(300)  NULL,
+    [Description] nvarchar(max)  NOT NULL,
+    [Pic] nvarchar(200)  NULL,
+    [IsConfirmed] bit  NOT NULL,
     [IsPaid] bit  NULL,
-    [IsRead] bit  NULL,
+    [IsRead] bit  NOT NULL,
     [DenyReason] nvarchar(max)  NULL,
     [FullName] nvarchar(100)  NOT NULL,
     [Tell] nvarchar(50)  NULL,
@@ -112,15 +111,13 @@ CREATE TABLE [dbo].[Advertisments] (
     [Email] nvarchar(100)  NOT NULL,
     [YahooID] nvarchar(100)  NULL,
     [Price] nvarchar(200)  NULL,
-    [StartDate] datetime  NULL,
     [ExpirationDate] datetime  NOT NULL,
     [RegistrationDate] datetime  NOT NULL,
-    [LastRenewal] datetime  NULL,
+    [LastRenewal] datetime  NOT NULL,
     [ReviewCount] int  NOT NULL,
-    [TellTime] nvarchar(100)  NULL,
+    [TellTime] nvarchar(100)  NOT NULL,
     [Link] nvarchar(1000)  NULL,
     [PaidID] bigint  NULL,
-    [EndTime] nvarchar(200)  NULL,
     [CityID] int  NULL,
     [AdvDuration] int  NOT NULL,
     [UserId] int  NOT NULL
@@ -131,13 +128,11 @@ GO
 CREATE TABLE [dbo].[Users] (
     [ID] int IDENTITY(1,1) NOT NULL,
     [FullName] nvarchar(100)  NOT NULL,
-    [IsActive] bit  NULL,
-    [IsManager] bit  NULL,
+    [IsManager] bit  NOT NULL,
     [RegisterDate] datetime  NOT NULL,
     [Mobile] nvarchar(50)  NULL,
     [Tell] nvarchar(50)  NULL,
     [Address] nvarchar(1000)  NULL,
-    [IP] nvarchar(50)  NULL,
     [LastLogin] datetime  NOT NULL,
     [StateID] int  NULL,
     [CityID] int  NULL,
@@ -146,8 +141,8 @@ CREATE TABLE [dbo].[Users] (
     [About] nvarchar(max)  NULL,
     [PicAddress] nvarchar(100)  NULL,
     [BannedMsg] nvarchar(max)  NULL,
-    [AffiliateMoney] int  NULL,
-    [UserProviderKey] uniqueidentifier  NOT NULL
+    [UserProviderKey] uniqueidentifier  NOT NULL,
+    [Mail] nvarchar(max)  NOT NULL
 );
 GO
 

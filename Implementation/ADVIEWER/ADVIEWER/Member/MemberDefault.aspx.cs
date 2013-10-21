@@ -5,14 +5,16 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.Security;
+using ADVIEWER.Codes;
 
 namespace ADVIEWER.member
 {
     public partial class MemberDefault : System.Web.UI.Page
     {
+        public string picAdd;
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            picAdd = AccountCodes.GetUserInformation(AccountCodes.currentUserId()).PicAddress;
         }
 
         protected void ExitFuction(object sender, EventArgs e)

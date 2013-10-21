@@ -661,30 +661,30 @@ namespace ADVIEWER.DataModel
         /// <param name="id">Initial value of the ID property.</param>
         /// <param name="starCount">Initial value of the StarCount property.</param>
         /// <param name="title">Initial value of the Title property.</param>
-        /// <param name="text">Initial value of the Text property.</param>
-        /// <param name="pic">Initial value of the Pic property.</param>
-        /// <param name="isActive">Initial value of the IsActive property.</param>
+        /// <param name="description">Initial value of the Description property.</param>
         /// <param name="fullName">Initial value of the FullName property.</param>
         /// <param name="email">Initial value of the Email property.</param>
         /// <param name="expirationDate">Initial value of the ExpirationDate property.</param>
         /// <param name="registrationDate">Initial value of the RegistrationDate property.</param>
+        /// <param name="lastRenewal">Initial value of the LastRenewal property.</param>
         /// <param name="reviewCount">Initial value of the ReviewCount property.</param>
+        /// <param name="tellTime">Initial value of the TellTime property.</param>
         /// <param name="advDuration">Initial value of the AdvDuration property.</param>
         /// <param name="userId">Initial value of the UserId property.</param>
-        public static Advertisment CreateAdvertisment(global::System.Int32 id, global::System.Int32 starCount, global::System.String title, global::System.String text, global::System.String pic, global::System.Boolean isActive, global::System.String fullName, global::System.String email, global::System.DateTime expirationDate, global::System.DateTime registrationDate, global::System.Int32 reviewCount, global::System.Int32 advDuration, global::System.Int32 userId)
+        public static Advertisment CreateAdvertisment(global::System.Int32 id, global::System.Int32 starCount, global::System.String title, global::System.String description, global::System.String fullName, global::System.String email, global::System.DateTime expirationDate, global::System.DateTime registrationDate, global::System.DateTime lastRenewal, global::System.Int32 reviewCount, global::System.String tellTime, global::System.Int32 advDuration, global::System.Int32 userId)
         {
             Advertisment advertisment = new Advertisment();
             advertisment.ID = id;
             advertisment.StarCount = starCount;
             advertisment.Title = title;
-            advertisment.Text = text;
-            advertisment.Pic = pic;
-            advertisment.IsActive = isActive;
+            advertisment.Description = description;
             advertisment.FullName = fullName;
             advertisment.Email = email;
             advertisment.ExpirationDate = expirationDate;
             advertisment.RegistrationDate = registrationDate;
+            advertisment.LastRenewal = lastRenewal;
             advertisment.ReviewCount = reviewCount;
+            advertisment.TellTime = tellTime;
             advertisment.AdvDuration = advDuration;
             advertisment.UserId = userId;
             return advertisment;
@@ -821,6 +821,30 @@ namespace ADVIEWER.DataModel
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
+        public global::System.String ShortDescription
+        {
+            get
+            {
+                return _ShortDescription;
+            }
+            set
+            {
+                OnShortDescriptionChanging(value);
+                ReportPropertyChanging("ShortDescription");
+                _ShortDescription = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("ShortDescription");
+                OnShortDescriptionChanged();
+            }
+        }
+        private global::System.String _ShortDescription;
+        partial void OnShortDescriptionChanging(global::System.String value);
+        partial void OnShortDescriptionChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
         public global::System.String Description
         {
             get
@@ -831,7 +855,7 @@ namespace ADVIEWER.DataModel
             {
                 OnDescriptionChanging(value);
                 ReportPropertyChanging("Description");
-                _Description = StructuralObject.SetValidValue(value, true);
+                _Description = StructuralObject.SetValidValue(value, false);
                 ReportPropertyChanged("Description");
                 OnDescriptionChanged();
             }
@@ -843,31 +867,7 @@ namespace ADVIEWER.DataModel
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String Text
-        {
-            get
-            {
-                return _Text;
-            }
-            set
-            {
-                OnTextChanging(value);
-                ReportPropertyChanging("Text");
-                _Text = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Text");
-                OnTextChanged();
-            }
-        }
-        private global::System.String _Text;
-        partial void OnTextChanging(global::System.String value);
-        partial void OnTextChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String Pic
         {
@@ -879,7 +879,7 @@ namespace ADVIEWER.DataModel
             {
                 OnPicChanging(value);
                 ReportPropertyChanging("Pic");
-                _Pic = StructuralObject.SetValidValue(value, false);
+                _Pic = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("Pic");
                 OnPicChanged();
             }
@@ -893,31 +893,7 @@ namespace ADVIEWER.DataModel
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Boolean IsActive
-        {
-            get
-            {
-                return _IsActive;
-            }
-            set
-            {
-                OnIsActiveChanging(value);
-                ReportPropertyChanging("IsActive");
-                _IsActive = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("IsActive");
-                OnIsActiveChanged();
-            }
-        }
-        private global::System.Boolean _IsActive;
-        partial void OnIsActiveChanging(global::System.Boolean value);
-        partial void OnIsActiveChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Boolean> IsConfirmed
+        public global::System.Boolean IsConfirmed
         {
             get
             {
@@ -932,8 +908,8 @@ namespace ADVIEWER.DataModel
                 OnIsConfirmedChanged();
             }
         }
-        private Nullable<global::System.Boolean> _IsConfirmed;
-        partial void OnIsConfirmedChanging(Nullable<global::System.Boolean> value);
+        private global::System.Boolean _IsConfirmed = false;
+        partial void OnIsConfirmedChanging(global::System.Boolean value);
         partial void OnIsConfirmedChanged();
     
         /// <summary>
@@ -963,9 +939,9 @@ namespace ADVIEWER.DataModel
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Boolean> IsRead
+        public global::System.Boolean IsRead
         {
             get
             {
@@ -980,8 +956,8 @@ namespace ADVIEWER.DataModel
                 OnIsReadChanged();
             }
         }
-        private Nullable<global::System.Boolean> _IsRead;
-        partial void OnIsReadChanging(Nullable<global::System.Boolean> value);
+        private global::System.Boolean _IsRead = false;
+        partial void OnIsReadChanging(global::System.Boolean value);
         partial void OnIsReadChanged();
     
         /// <summary>
@@ -1179,30 +1155,6 @@ namespace ADVIEWER.DataModel
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.DateTime> StartDate
-        {
-            get
-            {
-                return _StartDate;
-            }
-            set
-            {
-                OnStartDateChanging(value);
-                ReportPropertyChanging("StartDate");
-                _StartDate = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("StartDate");
-                OnStartDateChanged();
-            }
-        }
-        private Nullable<global::System.DateTime> _StartDate;
-        partial void OnStartDateChanging(Nullable<global::System.DateTime> value);
-        partial void OnStartDateChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.DateTime ExpirationDate
@@ -1251,9 +1203,9 @@ namespace ADVIEWER.DataModel
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public Nullable<global::System.DateTime> LastRenewal
+        public global::System.DateTime LastRenewal
         {
             get
             {
@@ -1268,8 +1220,8 @@ namespace ADVIEWER.DataModel
                 OnLastRenewalChanged();
             }
         }
-        private Nullable<global::System.DateTime> _LastRenewal;
-        partial void OnLastRenewalChanging(Nullable<global::System.DateTime> value);
+        private global::System.DateTime _LastRenewal;
+        partial void OnLastRenewalChanging(global::System.DateTime value);
         partial void OnLastRenewalChanged();
     
         /// <summary>
@@ -1299,7 +1251,7 @@ namespace ADVIEWER.DataModel
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.String TellTime
         {
@@ -1311,7 +1263,7 @@ namespace ADVIEWER.DataModel
             {
                 OnTellTimeChanging(value);
                 ReportPropertyChanging("TellTime");
-                _TellTime = StructuralObject.SetValidValue(value, true);
+                _TellTime = StructuralObject.SetValidValue(value, false);
                 ReportPropertyChanged("TellTime");
                 OnTellTimeChanged();
             }
@@ -1367,30 +1319,6 @@ namespace ADVIEWER.DataModel
         private Nullable<global::System.Int64> _PaidID;
         partial void OnPaidIDChanging(Nullable<global::System.Int64> value);
         partial void OnPaidIDChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String EndTime
-        {
-            get
-            {
-                return _EndTime;
-            }
-            set
-            {
-                OnEndTimeChanging(value);
-                ReportPropertyChanging("EndTime");
-                _EndTime = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("EndTime");
-                OnEndTimeChanged();
-            }
-        }
-        private global::System.String _EndTime;
-        partial void OnEndTimeChanging(global::System.String value);
-        partial void OnEndTimeChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -3418,7 +3346,8 @@ namespace ADVIEWER.DataModel
         /// <param name="registerDate">Initial value of the RegisterDate property.</param>
         /// <param name="lastLogin">Initial value of the LastLogin property.</param>
         /// <param name="userProviderKey">Initial value of the UserProviderKey property.</param>
-        public static User CreateUser(global::System.Int32 id, global::System.String fullName, global::System.DateTime registerDate, global::System.DateTime lastLogin, global::System.Guid userProviderKey)
+        /// <param name="mail">Initial value of the Mail property.</param>
+        public static User CreateUser(global::System.Int32 id, global::System.String fullName, global::System.DateTime registerDate, global::System.DateTime lastLogin, global::System.Guid userProviderKey, global::System.String mail)
         {
             User user = new User();
             user.ID = id;
@@ -3426,6 +3355,7 @@ namespace ADVIEWER.DataModel
             user.RegisterDate = registerDate;
             user.LastLogin = lastLogin;
             user.UserProviderKey = userProviderKey;
+            user.Mail = mail;
             return user;
         }
 
@@ -3486,33 +3416,9 @@ namespace ADVIEWER.DataModel
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Boolean> IsActive
-        {
-            get
-            {
-                return _IsActive;
-            }
-            set
-            {
-                OnIsActiveChanging(value);
-                ReportPropertyChanging("IsActive");
-                _IsActive = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("IsActive");
-                OnIsActiveChanged();
-            }
-        }
-        private Nullable<global::System.Boolean> _IsActive = true;
-        partial void OnIsActiveChanging(Nullable<global::System.Boolean> value);
-        partial void OnIsActiveChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Boolean> IsManager
+        public global::System.Boolean IsManager
         {
             get
             {
@@ -3527,8 +3433,8 @@ namespace ADVIEWER.DataModel
                 OnIsManagerChanged();
             }
         }
-        private Nullable<global::System.Boolean> _IsManager = false;
-        partial void OnIsManagerChanging(Nullable<global::System.Boolean> value);
+        private global::System.Boolean _IsManager = false;
+        partial void OnIsManagerChanging(global::System.Boolean value);
         partial void OnIsManagerChanged();
     
         /// <summary>
@@ -3626,30 +3532,6 @@ namespace ADVIEWER.DataModel
         private global::System.String _Address;
         partial void OnAddressChanging(global::System.String value);
         partial void OnAddressChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String IP
-        {
-            get
-            {
-                return _IP;
-            }
-            set
-            {
-                OnIPChanging(value);
-                ReportPropertyChanging("IP");
-                _IP = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("IP");
-                OnIPChanged();
-            }
-        }
-        private global::System.String _IP;
-        partial void OnIPChanging(global::System.String value);
-        partial void OnIPChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -3846,30 +3728,6 @@ namespace ADVIEWER.DataModel
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Int32> AffiliateMoney
-        {
-            get
-            {
-                return _AffiliateMoney;
-            }
-            set
-            {
-                OnAffiliateMoneyChanging(value);
-                ReportPropertyChanging("AffiliateMoney");
-                _AffiliateMoney = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("AffiliateMoney");
-                OnAffiliateMoneyChanged();
-            }
-        }
-        private Nullable<global::System.Int32> _AffiliateMoney;
-        partial void OnAffiliateMoneyChanging(Nullable<global::System.Int32> value);
-        partial void OnAffiliateMoneyChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.Guid UserProviderKey
@@ -3890,6 +3748,30 @@ namespace ADVIEWER.DataModel
         private global::System.Guid _UserProviderKey;
         partial void OnUserProviderKeyChanging(global::System.Guid value);
         partial void OnUserProviderKeyChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Mail
+        {
+            get
+            {
+                return _Mail;
+            }
+            set
+            {
+                OnMailChanging(value);
+                ReportPropertyChanging("Mail");
+                _Mail = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Mail");
+                OnMailChanged();
+            }
+        }
+        private global::System.String _Mail;
+        partial void OnMailChanging(global::System.String value);
+        partial void OnMailChanged();
 
         #endregion
     

@@ -21,7 +21,7 @@
         <link href="../Styles/newTheme.css" rel="stylesheet">
         <link href="../Styles/font-awesome.css" rel="stylesheet" type="text/css" />
         <link href="../Styles/Manage.css" rel="stylesheet" type="text/css" />
-
+        <script src="../Scripts/jquery-1.8.2.min.js" type="text/javascript"></script>
     <title></title>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
@@ -75,7 +75,7 @@
 								<ul class="nav ltrClass" style="float:right;text-align:right">
                               
 									<li class=""><a class="" style="font-size:120%" href="/Default.aspx">صفحه اصلی</a></li>
-
+                                    <li class=""><a class="" style="font-size:120%" href="Default.aspx">پنل مدیریت</a></li>
                <li class="ltrClass"> <a class="ltrClass" style="font-size:120%" href="/About.aspx">درباره ما</a></li>
 									
 								</ul> <!-- /.nav -->

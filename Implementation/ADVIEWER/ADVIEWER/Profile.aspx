@@ -47,23 +47,21 @@
                                         
                     <div class="info-column">
                     
-                    <div class="advContainer" style="height:130px;">
-                    <a class="pic" href='<%# Eval("ID", "adv.aspx?id={0}")%>'
-                        title='<%# Eval("Title")%>'>
-                        <img class="img-rounded" src='<%# Eval("Pic","/HPicturer.ashx?img={0}&w=300&h=200&path=~/AdvertisePic/") %>'
+                    <div class="advContainer">
+                                            <img class="img-rounded" height="130px" src='<%# Eval("Pic","/HPicturer.ashx?w=300&h=200&path={0}") %>'
                             alt='<%# Eval("Title")%>' />
-                    </a>
+                    
                     </div>
                    <div class="AdvDesc" style="height:75px;">                        
-                        <h3 style="font-family:'bbcbold';color:#777;">
-                     
+                        <h3 style="font-family:'bbc';color:#777;">
+                        <b>
                        <%# Eval("Title")%> 
-                        </h3>
+                        </b></h3>
                     
                     </div> 
                     <div class="details">
                     <%# DateTime.Parse(Eval("ExpirationDate").ToString()) > DateTime.Now &&  Eval("StarCount").ToString() != "-1" ? string.Format("<span class='right' title='تعداد ستاره محصول'><i class='icon-star'></i>{0}</span><br />", Eval("StarCount")):""%>
-                         <%# string.Format("<span class='left' title='تاریخ درج محصول'><i class='icon-calendar'></i>{0} </span>", Eval("StartDate")==null?"":Eval("StartDate").ToString())%>
+                         <%# string.Format("<span class='left' title='تاریخ درج محصول'><i class='icon-calendar'></i>{0} </span>", Eval("RegistrationDate")==null?"":((DateTime)Eval("RegistrationDate")).ToShortDateString())%>
                     <div style="margin-bottom:10px;float:left;">
                     <a href='<%# Eval("ID", "AdvContent.aspx?id={0}")%>'
                             title='<%# Eval("Title")%>'  class="btn btn-primary">مشاهده جزییات</a>

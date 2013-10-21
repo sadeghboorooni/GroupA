@@ -59,26 +59,15 @@ namespace ADVIEWER.Member
             string Address = Addresstxt.Text;
             if (Link.ToLower().Trim() == "http://") Link = "";
             int userId= AccountCodes.currentUserId();
-            //____________________________________fileUpload
-            if (PictureAsyncFileUpload.HasFile) 
+            string tempAdd = "", mainAdd = "";
+            if (PictureAsyncFileUpload.HasFile)
             {
-                string tempAdd = "~/Userfiles/AdvPictures/temp/" + userId + "/",
-                    mainAdd = "~/Userfiles/AdvPictures/main/" + userId + "/";
-
-                if (!Directory.Exists(MapPath(mainAdd)))
-                {
-                    Directory.CreateDirectory(MapPath(mainAdd));
-                }
-
-                File.Copy(MapPath(tempAdd + PictureAsyncFileUpload.FileName), MapPath(mainAdd + PictureAsyncFileUpload.FileName));
-
-                File.Delete(MapPath(tempAdd + PictureAsyncFileUpload.FileName));
+                tempAdd = "~/Userfiles/AdvPictures/temp/" + userId + "/";
+                mainAdd = "~/Userfiles/AdvPictures/main/" + userId + "/";
             }
-            //____________________________________fileUpload
-            string Pic = MapPath("~/Userfiles/AdvPictures/main/" + userId + "/");
             
             memberCodes.MakeNewAdvertisment(StarCount , AdvDuration , Title , ShortDescription , Description , KeyWords , Price , Link , FullName , 
-                                            Mobile , Tell , TellTime , Email , YahooID , Address , Pic , userId);
+                                            Mobile , Tell , TellTime , Email , YahooID , Address, userId,tempAdd,mainAdd,PictureAsyncFileUpload.FileName);
             SuccessMessage.Text = string.Format("<div class='alert alert-success' style='FontSize:17px'> آگهی شما با موفقیت ثبت شد. <br /> آگهی شما در لیست انتظار مدیر قرار گرفت. </div>");
             SuccessMessage.Visible = true;
         }

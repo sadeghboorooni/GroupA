@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.Security;
+using ADVIEWER.Codes;
 
 namespace ADVIEWER.manage
 {
@@ -12,7 +13,10 @@ namespace ADVIEWER.manage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!AccountCodes.GetUserInformation(AccountCodes.currentUserId()).IsManager) 
+            {
+                Response.Redirect("~/");
+            }
         }
 
         protected void ExitFunction(object sender, EventArgs e)
@@ -22,5 +26,7 @@ namespace ADVIEWER.manage
             FormsAuthentication.SignOut();
             Response.Redirect("/Default.aspx", true);
         }
+
+
     }
 }

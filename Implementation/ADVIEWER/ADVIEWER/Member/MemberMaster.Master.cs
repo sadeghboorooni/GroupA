@@ -12,10 +12,11 @@ namespace ADVIEWER.member
 {
     public partial class MemberMaster : System.Web.UI.MasterPage
     {
+        public User UserName;
         protected void Page_Load(object sender, EventArgs e)
         {
             int UserID = AccountCodes.currentUserId();
-            User UserName = AccountCodes.GetUserInformation(UserID);
+            UserName = AccountCodes.GetUserInformation(UserID);
             if (!IsPostBack)
             {
                 ltrprofile.Text = string.Format("<a href='/profile.aspx?id={0}' target='_blank'><i class='icon-user'></i>مشاهده ی صفحه ی شخصی</a>", UserID);

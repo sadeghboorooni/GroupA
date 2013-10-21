@@ -15,9 +15,9 @@
 		<meta name="author" content="">
 
         <link href="../Styles/member.css" rel="stylesheet" type="text/css" />
-        <link href="../Styles/bootstrap.css" rel="stylesheet">
-		<link href="../Styles/theme.css" rel="stylesheet">
-        <link href="../Styles/newTheme.css" rel="stylesheet">
+        <link href="../Styles/bootstrap.css" rel="stylesheet"/>
+		<link href="../Styles/theme.css" rel="stylesheet" />
+        <link href="../Styles/newTheme.css" rel="stylesheet" />
         <link href="../Styles/font-awesome.css" rel="stylesheet" type="text/css" />
 
     <title></title>
@@ -105,9 +105,9 @@
             <div class="sidinside">
                 <div class="widget">
                     <div class="white usermenu">
-                        <div class="right avatarcon">
-                        <asp:Image ID="Image1" BorderWidth="3" runat="server" style="margin:6px 0px 5px 0px;" CssClass="avatar" AlternateText="تصویر شما" />
-                        
+                        <div class="right avatarcon" style="padding:2px;">
+                        <%= UserName.PicAddress == "noimage.png" ? "<img src='noimage.png' class='advpic' />" : string.Format("<img src='/HPicturer.ashx?w=300&h=300&path={0}' class='advpic' />", UserName.PicAddress)%>
+
                         <div class="clear">
                         </div>
                         </div>

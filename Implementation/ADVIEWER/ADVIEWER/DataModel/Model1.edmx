@@ -61,13 +61,12 @@
     <Property Name="SateID" Type="int" Nullable="true" />
     <Property Name="StarCount" Type="int" Nullable="false" />
     <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="100" />
-    <Property Name="Description" Type="nvarchar" Nullable="true" MaxLength="300" />
-    <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Pic" Type="nvarchar" Nullable="false" MaxLength="200" />
-    <Property Name="IsActive" Type="bit" Nullable="false" />
-    <Property Name="IsConfirmed" Type="bit" Nullable="true" />
+    <Property Name="ShortDescription" Type="nvarchar" Nullable="true" MaxLength="300" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Pic" Type="nvarchar" Nullable="true" MaxLength="200" />
+    <Property Name="IsConfirmed" Type="bit" Nullable="false" DefaultValue="false" />
     <Property Name="IsPaid" Type="bit" Nullable="true" />
-    <Property Name="IsRead" Type="bit" Nullable="true" />
+    <Property Name="IsRead" Type="bit" Nullable="false" DefaultValue="false" />
     <Property Name="DenyReason" Type="nvarchar(max)" Nullable="true" />
     <Property Name="FullName" Type="nvarchar" Nullable="false" MaxLength="100" />
     <Property Name="Tell" Type="nvarchar" Nullable="true" MaxLength="50" />
@@ -76,15 +75,13 @@
     <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="100" />
     <Property Name="YahooID" Type="nvarchar" Nullable="true" MaxLength="100" />
     <Property Name="Price" Type="nvarchar" Nullable="true" MaxLength="200" />
-    <Property Name="StartDate" Type="datetime" Nullable="true" />
     <Property Name="ExpirationDate" Type="datetime" Nullable="false" />
     <Property Name="RegistrationDate" Type="datetime" Nullable="false" />
-    <Property Name="LastRenewal" Type="datetime" Nullable="true" />
+    <Property Name="LastRenewal" Type="datetime" Nullable="false" />
     <Property Name="ReviewCount" Type="int" Nullable="false" />
-    <Property Name="TellTime" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="TellTime" Type="nvarchar" Nullable="false" MaxLength="100" />
     <Property Name="Link" Type="nvarchar" Nullable="true" MaxLength="1000" />
     <Property Name="PaidID" Type="bigint" Nullable="true" />
-    <Property Name="EndTime" Type="nvarchar" Nullable="true" MaxLength="200" />
     <Property Name="CityID" Type="int" Nullable="true" />
     <Property Name="AdvDuration" Type="int" Nullable="false" />
     <Property Name="UserId" Type="int" Nullable="false" />
@@ -95,13 +92,11 @@
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="FullName" Type="nvarchar" Nullable="false" MaxLength="100" />
-    <Property Name="IsActive" Type="bit" Nullable="true" DefaultValue="true" />
-    <Property Name="IsManager" Type="bit" Nullable="true" DefaultValue="false" />
+    <Property Name="IsManager" Type="bit" Nullable="false" DefaultValue="false" />
     <Property Name="RegisterDate" Type="datetime" Nullable="false" />
     <Property Name="Mobile" Type="nvarchar" Nullable="true" MaxLength="50" />
     <Property Name="Tell" Type="nvarchar" Nullable="true" MaxLength="50" />
     <Property Name="Address" Type="nvarchar" Nullable="true" MaxLength="1000" />
-    <Property Name="IP" Type="nvarchar" Nullable="true" MaxLength="50" />
     <Property Name="LastLogin" Type="datetime" Nullable="false" />
     <Property Name="StateID" Type="int" Nullable="true" />
     <Property Name="CityID" Type="int" Nullable="true" />
@@ -110,8 +105,8 @@
     <Property Name="About" Type="nvarchar(max)" Nullable="true" />
     <Property Name="PicAddress" Type="nvarchar" Nullable="true" MaxLength="100" />
     <Property Name="BannedMsg" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="AffiliateMoney" Type="int" Nullable="true" />
     <Property Name="UserProviderKey" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Mail" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="Tickets1">
     <Key>
@@ -392,30 +387,27 @@
           <Property Type="Int32" Name="SateID" Nullable="true" />
           <Property Type="Int32" Name="StarCount" Nullable="false" />
           <Property Type="String" Name="Title" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Description" MaxLength="300" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Text" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Pic" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Type="Boolean" Name="IsActive" Nullable="false" />
-          <Property Type="Boolean" Name="IsConfirmed" />
+          <Property Type="String" Name="ShortDescription" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Description" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Pic" MaxLength="200" FixedLength="false" Unicode="true" Nullable="true" />
+          <Property Type="Boolean" Name="IsConfirmed" Nullable="false" DefaultValue="false" />
           <Property Type="Boolean" Name="IsPaid" Nullable="true" />
-          <Property Type="Boolean" Name="IsRead" />
-          <Property Type="String" Name="DenyReason" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="IsRead" Nullable="false" DefaultValue="false" />
+          <Property Type="String" Name="DenyReason" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="true" />
           <Property Type="String" Name="FullName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Tell" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Mobile" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Address" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Tell" MaxLength="50" FixedLength="false" Unicode="true" Nullable="true" />
+          <Property Type="String" Name="Mobile" MaxLength="50" FixedLength="false" Unicode="true" Nullable="true" />
+          <Property Type="String" Name="Address" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="true" />
           <Property Type="String" Name="Email" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="YahooID" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Price" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Type="DateTime" Name="StartDate" />
+          <Property Type="String" Name="YahooID" MaxLength="100" FixedLength="false" Unicode="true" Nullable="true" />
+          <Property Type="String" Name="Price" MaxLength="200" FixedLength="false" Unicode="true" Nullable="true" />
           <Property Type="DateTime" Name="ExpirationDate" Nullable="false" />
           <Property Type="DateTime" Name="RegistrationDate" Nullable="false" />
-          <Property Type="DateTime" Name="LastRenewal" />
+          <Property Type="DateTime" Name="LastRenewal" Nullable="false" />
           <Property Type="Int32" Name="ReviewCount" Nullable="false" />
-          <Property Type="String" Name="TellTime" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Link" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Type="Int64" Name="PaidID" Nullable="true" />
-          <Property Type="String" Name="EndTime" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="TellTime" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Type="String" Name="Link" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="true" />
+          <Property Name="PaidID" Nullable="true" Type="Int64" />
           <Property Type="Int32" Name="CityID" Nullable="true" />
           <Property Type="Int32" Name="AdvDuration" Nullable="false" />
           <Property Type="Int32" Name="UserId" Nullable="false" />
@@ -428,13 +420,11 @@
           </Key>
           <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="FullName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Type="Boolean" Name="IsActive" DefaultValue="true" />
-          <Property Type="Boolean" Name="IsManager" DefaultValue="false" />
+          <Property Type="Boolean" Name="IsManager" DefaultValue="false" Nullable="false" />
           <Property Type="DateTime" Name="RegisterDate" Nullable="false" />
           <Property Type="String" Name="Mobile" Nullable="true" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="Tell" Nullable="true" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="Address" Nullable="true" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="IP" Nullable="true" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="DateTime" Name="LastLogin" Nullable="false" />
           <Property Type="Int32" Name="StateID" Nullable="true" />
           <Property Type="Int32" Name="CityID" Nullable="true" />
@@ -443,11 +433,11 @@
           <Property Type="String" Name="About" Nullable="true" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="PicAddress" Nullable="true" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="BannedMsg" Nullable="true" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="Int32" Name="AffiliateMoney" />
           <Property Type="Guid" Name="UserProviderKey" Nullable="false" />
           <NavigationProperty Name="Tickets" Relationship="Model1.UserTicket" FromRole="User" ToRole="Ticket" />
           <NavigationProperty Name="Groups" Relationship="Model1.UserGroup" FromRole="User" ToRole="Group" />
           <NavigationProperty Name="Advertisments" Relationship="Model1.UserAdvertisment" FromRole="User" ToRole="Advertisment" />
+          <Property Type="String" Name="Mail" Nullable="false" />
         </EntityType>
         <EntityType Name="Ticket">
           <Key>
@@ -616,10 +606,9 @@
           <ScalarProperty Name="SateID" ColumnName="SateID" />
           <ScalarProperty Name="StarCount" ColumnName="StarCount" />
           <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="ShortDescription" ColumnName="ShortDescription" />
           <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="Text" ColumnName="Text" />
           <ScalarProperty Name="Pic" ColumnName="Pic" />
-          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
           <ScalarProperty Name="IsConfirmed" ColumnName="IsConfirmed" />
           <ScalarProperty Name="IsPaid" ColumnName="IsPaid" />
           <ScalarProperty Name="IsRead" ColumnName="IsRead" />
@@ -631,7 +620,6 @@
           <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="YahooID" ColumnName="YahooID" />
           <ScalarProperty Name="Price" ColumnName="Price" />
-          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
           <ScalarProperty Name="ExpirationDate" ColumnName="ExpirationDate" />
           <ScalarProperty Name="RegistrationDate" ColumnName="RegistrationDate" />
           <ScalarProperty Name="LastRenewal" ColumnName="LastRenewal" />
@@ -639,7 +627,6 @@
           <ScalarProperty Name="TellTime" ColumnName="TellTime" />
           <ScalarProperty Name="Link" ColumnName="Link" />
           <ScalarProperty Name="PaidID" ColumnName="PaidID" />
-          <ScalarProperty Name="EndTime" ColumnName="EndTime" />
           <ScalarProperty Name="CityID" ColumnName="CityID" />
           <ScalarProperty Name="AdvDuration" ColumnName="AdvDuration" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
@@ -651,13 +638,11 @@
         <MappingFragment StoreEntitySet="Users">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="FullName" ColumnName="FullName" />
-          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
           <ScalarProperty Name="IsManager" ColumnName="IsManager" />
           <ScalarProperty Name="RegisterDate" ColumnName="RegisterDate" />
           <ScalarProperty Name="Mobile" ColumnName="Mobile" />
           <ScalarProperty Name="Tell" ColumnName="Tell" />
           <ScalarProperty Name="Address" ColumnName="Address" />
-          <ScalarProperty Name="IP" ColumnName="IP" />
           <ScalarProperty Name="LastLogin" ColumnName="LastLogin" />
           <ScalarProperty Name="StateID" ColumnName="StateID" />
           <ScalarProperty Name="CityID" ColumnName="CityID" />
@@ -666,8 +651,8 @@
           <ScalarProperty Name="About" ColumnName="About" />
           <ScalarProperty Name="PicAddress" ColumnName="PicAddress" />
           <ScalarProperty Name="BannedMsg" ColumnName="BannedMsg" />
-          <ScalarProperty Name="AffiliateMoney" ColumnName="AffiliateMoney" />
           <ScalarProperty Name="UserProviderKey" ColumnName="UserProviderKey" />
+          <ScalarProperty Name="Mail" ColumnName="Mail" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -852,24 +837,49 @@
     </edmx:Options>
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram Name="Model1" ZoomLevel="23" >
-        <EntityTypeShape EntityType="Model1.Advertisment" Width="1.5" PointX="2.6151791376132421" PointY="28.880030868984772" />
-        <EntityTypeShape EntityType="Model1.User" Width="1.5" PointX="0.4381703028633121" PointY="8.1430104561816012" />
-        <EntityTypeShape EntityType="Model1.Ticket" Width="1.5" PointX="4.6248136649955125" PointY="27.774290813028017" />
-        <EntityTypeShape EntityType="Model1.State" Width="1.5" PointX="6.8742681103173027" PointY="29.683984874600537" />
-        <EntityTypeShape EntityType="Model1.Payment" Width="1.5" PointX="2.0813320028043036" PointY="5.4162478621193433" />
-        <EntityTypeShape EntityType="Model1.Group" Width="1.5" PointX="10.185361704875419" PointY="17.956046217100717" />
-        <EntityTypeShape EntityType="Model1.City" Width="1.5" PointX="7.7031932453174115" PointY="9.0495631736934019" />
-        <EntityTypeShape EntityType="Model1.ContactMessage" Width="1.5" PointX="2.9197426973468357" PointY="18.565611624422303" />
-        <EntityTypeShape EntityType="Model1.AdvertisementMessage" Width="1.5" PointX="10.005599782804772" PointY="29.127043529007139" />
-        <EntityTypeShape EntityType="Model1.Mail_User" Width="1.5" PointX="5.3964427920973126" PointY="7.2720632437952153" />
-        <EntityTypeShape EntityType="Model1.KeyWord" Width="1.5" PointX="2.7685992302226827" PointY="31.072681381866651" />
-        <AssociationConnector Association="Model1.GroupGroup" />
-        <AssociationConnector Association="Model1.StateCity" />
-        <AssociationConnector Association="Model1.UserTicket" />
-        <AssociationConnector Association="Model1.UserGroup" />
-        <AssociationConnector Association="Model1.AdvertismentKeyWord" />
-        <AssociationConnector Association="Model1.UserAdvertisment" />
+      <Diagram Name="Model1" ZoomLevel="81" >
+        <EntityTypeShape EntityType="Model1.Advertisment" Width="1.5" PointX="3" PointY="1.75" Height="6.9801236979166656" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model1.User" Width="1.5" PointX="1.125" PointY="1.125" Height="4.8648079427083326" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model1.Ticket" Width="1.5" PointX="10.25" PointY="11.875" Height="3.5186979166666674" />
+        <EntityTypeShape EntityType="Model1.State" Width="1.5" PointX="9.625" PointY="4.25" Height="1.5956835937500031" />
+        <EntityTypeShape EntityType="Model1.Payment" Width="1.5" PointX="10.25" PointY="5.875" Height="3.7109993489583335" />
+        <EntityTypeShape EntityType="Model1.Group" Width="1.5" PointX="11.75" PointY="12.125" Height="2.3648893229166674" />
+        <EntityTypeShape EntityType="Model1.City" Width="1.5" PointX="11.875" PointY="4.125" Height="1.7879850260416674" />
+        <EntityTypeShape EntityType="Model1.ContactMessage" Width="1.5" PointX="10.25" PointY="9" Height="2.9417936197916674" />
+        <EntityTypeShape EntityType="Model1.AdvertisementMessage" Width="1.5" PointX="11.75" PointY="9" Height="3.1340950520833317" />
+        <EntityTypeShape EntityType="Model1.Mail_User" Width="1.5" PointX="11.75" PointY="5.875" Height="3.1340950520833317" />
+        <EntityTypeShape EntityType="Model1.KeyWord" Width="1.5" PointX="5.5" PointY="3.25" Height="1.5956835937499996" IsExpanded="true" />
+        <AssociationConnector Association="Model1.GroupGroup" >
+          <ConnectorPoint PointX="12.5" PointY="14.489889322916667" />
+          <ConnectorPoint PointX="12.5" PointY="14.739889322916667" />
+          <ConnectorPoint PointX="12.832307692307692" PointY="14.739889322916667" />
+          <ConnectorPoint PointX="12.832307692307692" PointY="14.489889322916667" />
+        </AssociationConnector>
+        <AssociationConnector Association="Model1.StateCity" >
+          <ConnectorPoint PointX="11.125" PointY="5.0478417968750016" />
+          <ConnectorPoint PointX="11.875" PointY="5.0478417968750016" />
+        </AssociationConnector>
+        <AssociationConnector Association="Model1.UserTicket" >
+          <ConnectorPoint PointX="1.875" PointY="5.9898079427083326" />
+          <ConnectorPoint PointX="1.875" PointY="13.634348958333334" />
+          <ConnectorPoint PointX="2.1979186666666664" PointY="13.634348958333334" />
+          <ConnectorPoint PointX="2.3645853333333333" PointY="13.634348958333334" />
+          <ConnectorPoint PointX="10.25" PointY="13.634348958333334" />
+        </AssociationConnector>
+        <AssociationConnector Association="Model1.UserGroup" >
+          <ConnectorPoint PointX="2.281252" PointY="5.9898079427083326" />
+          <ConnectorPoint PointX="2.281252" PointY="15.643697916666667" />
+          <ConnectorPoint PointX="12.5" PointY="15.643697916666667" />
+          <ConnectorPoint PointX="12.5" PointY="14.489889322916667" />
+        </AssociationConnector>
+        <AssociationConnector Association="Model1.AdvertismentKeyWord" >
+          <ConnectorPoint PointX="4.5" PointY="4.047841796875" />
+          <ConnectorPoint PointX="5.5" PointY="4.047841796875" />
+        </AssociationConnector>
+        <AssociationConnector Association="Model1.UserAdvertisment" >
+          <ConnectorPoint PointX="2.625" PointY="3.8699039713541663" />
+          <ConnectorPoint PointX="3" PointY="3.8699039713541663" />
+        </AssociationConnector>
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

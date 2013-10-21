@@ -16,7 +16,7 @@
     <div class="fullcontent">
         <h2 class="title green">
             لیست آگهی های عادی در انتظار تایید
-            <%= freeAdvsCount%>
+            (<%= freeAdvsCount%>)
             </h2>
         <div class="bordered">
             <asp:GridView ID="FreeAdvsGridView" runat="server" AutoGenerateColumns="False" PageSize="15"
@@ -44,9 +44,9 @@
                     <asp:TemplateField HeaderText="Title" SortExpression="Title">
                         <ItemTemplate>
                             <div class="groupname">
-                                <a href='<%# Eval("ID",  "displayadv.aspx?id={0}") %>' target="_blank">
-                                    <%# Eval("pic").ToString() == "noimage.png" ? "" : string.Format("<img src='/HPicturer.ashx?img={0}&w=70&h=70&path=~/AdvertisePic/' class='advimg' alt='' />",Eval("pic").ToString())%>
-                                </a><a href='<%# Eval("ID",  "displayadv.aspx?id={0}") %>' class="title" target="_blank">
+                                <a href='<%# Eval("ID",  "/advcontent.aspx?id={0}") %>' target="_blank">
+                                    <%# Eval("pic").ToString() == "noimage.png" ? "" : string.Format("<img src='/HPicturer.ashx?w=70&h=70&path={0}' class='advimg' alt='' />",Eval("pic").ToString())%>
+                                </a><a href='<%# Eval("ID",  "/advcontent.aspx?id={0}") %>' class="title" target="_blank">
                                     <%# Eval("Title")%></a>
                                 <p>
                                     تاریخ:

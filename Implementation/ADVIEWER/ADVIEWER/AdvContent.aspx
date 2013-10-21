@@ -21,7 +21,7 @@
              
                 <div class="advContainer">
                   
-                        <%= curAdv.Pic == "noimage.png" ? "<img src='noimage.png' class='advpic' />" : string.Format("<a href='AdvertisePic/{0}' title='{1}' style='line-height:12px;' rel='slide'><img src='/HPicturer.ashx?img={0}&w=300&h=300&path=~/AdvertisePic/' class='advpic' alt='{1}' /></a>", curAdv.Pic, curAdv.Title)%>
+                        <%= curAdv.Pic == "noimage.png" ? "<img src='noimage.png' class='advpic' />" : string.Format("<a href='AdvertisePic/{0}' title='{1}' style='line-height:12px;' rel='slide'><img src='/HPicturer.ashx?w=300&h=300&path={0}' class='advpic' alt='{1}' /></a>", curAdv.Pic, curAdv.Title)%>
                         </div>
 
                  <h2 class="alert alert-success" style="text-align:center;padding-left:0;padding-right:0;">
@@ -118,7 +118,7 @@
                 <div class="info-column">
              
                 <div class="advContainer">
-                        <%# Eval("pic") == "noimage.png" ? "" : string.Format("<img src='/HPicturer.ashx?img={0}&w=300&h=220&path=~/AdvertisePic/' class='img-rounded' title='{1}' alt='{2}' />", Eval("pic"), Eval("Title"), Eval("Title"),Eval("id"))%>
+                        <%# Eval("pic") == "noimage.png" ? "" : string.Format("<img src='/HPicturer.ashx?w=300&h=220&path={0}' class='img-rounded' title='{1}' alt='{2}' />", Eval("pic"), Eval("Title"), Eval("Title"), Eval("id"))%>
                    </a>
                 </div>
                
