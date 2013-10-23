@@ -94,7 +94,7 @@
                     قیمت</label>
                 <asp:TextBox ID="Pricetxt" runat="server" MaxLength="190" Width="250"></asp:TextBox>
                 <asp:RegularExpressionValidator
-                    ID="RegularExpressionValidator3" ValidationGroup="required" Display="Dynamic" ValidationExpression="[0-9]*( ری.ل| تومان)*" runat="server" ErrorMessage="قیمت وارد شده صحیح نیست" ControlToValidate="Pricetxt"></asp:RegularExpressionValidator>
+                    ID="RegularExpressionValidator3" ValidationGroup="required" Display="Dynamic" style="color:Red" ValidationExpression="[0-9]*( ری.ل| تومان)*" runat="server" ErrorMessage="قیمت وارد شده صحیح نیست" ControlToValidate="Pricetxt"></asp:RegularExpressionValidator>
                 <p class="helper">
                     راهنما: در صورتی که کالای یا خدمات شما قیمت مشخصی دارد، آن را وارد کنید.
                     <br />
@@ -133,10 +133,17 @@
                 <label class="title" for="ctl00_content_txtMob">
                     موبایل</label>
                 <asp:TextBox ID="Mobiletxt" runat="server" MaxLength="50" CssClass="ltr" Width="250"></asp:TextBox>
+                <asp:RegularExpressionValidator
+                    ID="RegularExpressionValidator4" ValidationGroup="required" Display="Dynamic" style="color:Red" ValidationExpression="[0][9][0-9]+[0-9]+[0-9]+[0-9]+[0-9]+[0-9]+[0-9]+[0-9]+[0-9]+" runat="server" ErrorMessage="شماره ی وارد شده صحیح نیست" ControlToValidate="Mobiletxt"></asp:RegularExpressionValidator>
                 <br />
+                <p class="helper">
+                راهنما: برای وارد کردن شماره موبایل و تلفن تماس فقط از اعداد استفاده کنید. همچنین شماره ی موبایل با 09 شروع می شود.
+                </p>
                 <label class="title" for="ctl00_content_txtTell">
                     تلفن تماس</label>
                 <asp:TextBox ID="Telltxt" runat="server" MaxLength="50" CssClass="ltr" Width="250"></asp:TextBox>
+                <asp:RegularExpressionValidator
+                    ID="RegularExpressionValidator5" ValidationGroup="required" Display="Dynamic" style="color:Red" ValidationExpression="[0][0-9]+[0-9]+[0-9]+[0-9]+[0-9]+[0-9]+[0-9]+[0-9]+[0-9]+[0-9]+" runat="server" ErrorMessage="شماره ی وارد شده صحیح نیست" ControlToValidate="Telltxt"></asp:RegularExpressionValidator>
                 <br />
                 <label class="title" for="ctl00_content_txtTell">
                     دورنگار</label>
@@ -163,7 +170,7 @@
                     style="color:Red" ID="RegularExpressionValidator2" ValidationGroup="required" Display="Dynamic" ValidationExpression="^[_a-z0-9-]+(\.[_a-z0-9-]+)*@yahoo.com" runat="server" ErrorMessage="شناسه وارد شده صحیح نیست." ControlToValidate="YahooIDtxt"></asp:RegularExpressionValidator>
                 <p class="helper">
                     راهنما: در صورتی که آیدی یاهو دارید وارد نمایید. اگر کاربری آگهی شما را ببیند و
-                    شما در آن لحظه آنلاین باشید، میتواند با شما چت کند و سریع تر به جواب برسد.
+                    شما در آن لحظه آنلاین باشید، می تواند با شما چت کند و سریع تر به جواب برسد.
                 </p>
                 <label class="title top" for="ctl00_content_txtAddress" style="vertical-align:top">
                     آدرس</label>

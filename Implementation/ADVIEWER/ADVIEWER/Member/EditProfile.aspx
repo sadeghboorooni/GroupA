@@ -29,11 +29,16 @@
                     ToolTip="فیلد الزامی"></asp:RequiredFieldValidator><br />
             
             <label >موبایل </label>
-            <asp:TextBox ID="txtMob" Width="220" runat="server"></asp:TextBox><br />
+            <asp:TextBox ID="txtMob" Width="220" runat="server"></asp:TextBox>
+            <asp:RegularExpressionValidator
+                    ID="RegularExpressionValidator4" ValidationGroup="required" Display="Dynamic" style="color:Red" ValidationExpression="[0][9][0-9]+[0-9]+[0-9]+[0-9]+[0-9]+[0-9]+[0-9]+[0-9]+[0-9]+" runat="server" ErrorMessage="شماره ی وارد شده صحیح نیست" ControlToValidate="txtMob"></asp:RegularExpressionValidator>
+            <br />
 
-            
             <label >تلفن </label>
-            <asp:TextBox ID="txtTell" Width="220" runat="server"></asp:TextBox><br />
+            <asp:TextBox ID="txtTell" Width="220" runat="server"></asp:TextBox>
+            <asp:RegularExpressionValidator
+                    ID="RegularExpressionValidator5" ValidationGroup="required" Display="Dynamic" style="color:Red" ValidationExpression="[0][0-9]+[0-9]+[0-9]+[0-9]+[0-9]+[0-9]+[0-9]+[0-9]+[0-9]+[0-9]+" runat="server" ErrorMessage="شماره ی وارد شده صحیح نیست" ControlToValidate="txtTell"></asp:RegularExpressionValidator>
+            <br />
             
             <label >دورنگار </label>
             <asp:TextBox ID="txtfax" Width="220" runat="server"></asp:TextBox><br />

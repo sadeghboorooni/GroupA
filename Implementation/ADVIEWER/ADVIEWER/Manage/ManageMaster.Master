@@ -38,7 +38,7 @@
             <div class="col-md-3 col-sm-6">
                 
                 <div class="input-append" style="margin-top:0;font-size:30px;">
-				    <a href="Default.aspx"><img src="../Styles/Images/Logo.png" style="max-width:60%" alt="لوگوی سایت" title="لوگوی سایت" /></a>
+				    <a href="Default.aspx"><img src="../Styles/Images/Logo.png" style="max-width:30%" alt="لوگوی سایت" title="لوگوی سایت" /></a>
 				</div>
             </div>           
             <div class="col-md-3 col-sm-6" style="position:absolute;bottom:5px;left:0px;text-align:left">
