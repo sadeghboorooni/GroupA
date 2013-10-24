@@ -16,8 +16,8 @@ namespace ADVIEWER.Member
         {
             if (!IsPostBack)
             {
-                int userid = AccountFunctions.currentUserId();
-                User currusr = AccountFunctions.GetUserInformation(userid);
+                int userId = AccountFunctions.currentUserId();
+                User currusr = AccountFunctions.GetUserInformation(userId);
                 Nametxt.Text = currusr.FullName;
                 Mobiletxt.Text = currusr.Mobile;
                 Telltxt.Text = currusr.Tell;
@@ -25,8 +25,14 @@ namespace ADVIEWER.Member
                 Emailtxt.Text = currusr.Mail;
                 YahooIDtxt.Text = currusr.YahooID;
                 Addresstxt.Text = currusr.Address;
-
-
+                if (Directory.Exists(MapPath("~/Userfiles/AdvPictures/temp/" + userId + "/")))
+                {
+                    foreach (string file in Directory.GetFiles(MapPath("~/Userfiles/AdvPictures/temp/" + userId + "/")))
+                    {
+                        File.Delete(file);
+                    }
+                    Directory.Delete(MapPath("~/Userfiles/AdvPictures/temp/" + userId + "/"));
+                }
             }
         }
 
@@ -60,20 +66,20 @@ namespace ADVIEWER.Member
             if (Link.ToLower().Trim() == "http://") Link = "";
             int userId= AccountFunctions.currentUserId();
             string tempAdd = "", mainAdd = "";
-            if (PictureAsyncFileUpload.HasFile)
+            if (AsyncFileUpload1.HasFile)
             {
                 tempAdd = "~/Userfiles/AdvPictures/temp/" + userId + "/";
                 mainAdd = "~/Userfiles/AdvPictures/main/" + userId + "/";
             }
             
-            MemberFunctions.MakeNewAdvertisment(StarCount , AdvDuration , Title , ShortDescription , Description , KeyWords , Price , Link , FullName , 
-                                            Mobile , Tell , TellTime , Email , YahooID , Address, userId,tempAdd,mainAdd,PictureAsyncFileUpload.FileName);
+            MemberFunctions.MakeNewAdvertisment(StarCount , AdvDuration , Title , ShortDescription , Description , KeyWords , Price , Link , FullName ,
+                                            Mobile, Tell, TellTime, Email, YahooID, Address, userId, tempAdd, mainAdd, AsyncFileUpload1.FileName);
             SuccessMessage.Text = string.Format("<div class='alert alert-success' style='FontSize:17px'> آگهی شما با موفقیت ثبت شد. <br /> آگهی شما در لیست انتظار مدیر قرار گرفت. </div>");
             SuccessMessage.Visible = true;
         }
 
 
-        protected void PictureAsyncFileUpload_UploadedComplete(object sender, EventArgs e) 
+        protected void AsyncFileUpload1_UploadedComplete(object sender, EventArgs e) 
         {
             //empty root - check file type
             int userId = AccountFunctions.currentUserId();
@@ -82,8 +88,9 @@ namespace ADVIEWER.Member
             {
                 Directory.CreateDirectory(MapPath("~/Userfiles/AdvPictures/temp/" + userId));
             }
-
-            PictureAsyncFileUpload.SaveAs(MapPath(dirPath+"/" + PictureAsyncFileUpload.FileName));
+            string ext = Path.GetExtension(AsyncFileUpload1.FileName).ToLower();
+            if(ext == ".png" || ext==".jpg" || ext == ".jpeg" || ext == ".gif")
+                AsyncFileUpload1.SaveAs(MapPath(dirPath + "/" + AsyncFileUpload1.FileName));
         }
       
     }

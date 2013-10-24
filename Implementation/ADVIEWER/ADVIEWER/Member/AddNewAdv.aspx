@@ -1,16 +1,61 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/member/MemberMaster.Master" AutoEventWireup="true" CodeBehind="AddNewAdv.aspx.cs" Inherits="ADVIEWER.Member.AddNewAdv" %>
-
-<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
-    <script type="text/javascript" src="../src/jquery.tokeninput.js"></script>
+    <script type="text/javascript" src="../scripts/jquery.tokeninput.js"></script>
 
     <link rel="stylesheet" href="../styles/token-input.css" type="text/css" />
     <link rel="stylesheet" href="../styles/token-input-facebook.css" type="text/css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <asp:ScriptManager ID="ScriptManager1" runat="server">
-    </asp:ScriptManager>
+<script type="text/javascript">
+    var errorMessage;
+    window.onload = function () {
+        errorMessage = $get("<%=lblMesg.ClientID %>").innerHTML;
+        $get("<%=lblMesg.ClientID %>").innerHTML = "";
+        AjaxControlToolkit.AsyncFileUpload.prototype._onStart = function () {
+            var valid = this.raiseUploadStarted(new AjaxControlToolkit.AsyncFileUploadEventArgs(this._inputFile.value, null, null, null));
+            if (typeof valid == 'undefined') {
+                valid = true;
+            }
+            if (valid) {
+                valid = Validate(this._inputFile.value);
+                if (!valid) {
+                    //this._innerTB.value = "";
+                    //this._innerTB.style.BackColor = "White";
+                    $get("dvFileInfo").style.display = 'none';
+                    $get("dvFileErrorInfo").style.display = 'block';   
+                }
+            }
+            return valid;
+        }
+    }
+    var validFilesTypes = ["jpeg", "jpg" , "png" , "gif"];
+    function Validate(path) {
+        $get("dvFileErrorInfo").style.display = 'none';
+        $get("<%=lblMesg.ClientID%>").innerHTML = "";
+        var ext = path.substring(path.lastIndexOf(".") + 1, path.length).toLowerCase();
+        var isValidFile = false;
+        for (var i = 0; i < validFilesTypes.length; i++) {
+            if (ext == validFilesTypes[i]) {
+                isValidFile = true;
+                break;
+            }
+        }
+        if (!isValidFile) {
+            $get("<%=lblMesg.ClientID %>").innerHTML = errorMessage;
+        }
+        return isValidFile;
+    }
+    function ClientUploadComplete(sender, args) {
+        $get("dvFileErrorInfo").style.display = 'none';
+        $get("dvFileInfo").style.display = 'block';
+        $get("<%=lblSuccess.ClientID%>").innerHTML = "عکس شما با موفقيت آپلود شد.";
+        $get("<%=lblFileNameDisplay.ClientID%>").innerHTML = args.get_fileName();
+        $get("<%=lblFileSizeDisplay.ClientID%>").innerHTML = args.get_length();
+        $get("<%=lblContentTypeDisplay.ClientID%>").innerHTML = args.get_contentType();
+        }
+</script>
     <h2>
         درج آگهی جدید</h2>
     <asp:Literal ID="SuccessMessage" Visible ="false" runat="server" ></asp:Literal>
@@ -19,7 +64,7 @@
         <div class="contenttext">
 
         <p>
-            پرکردن قسمت هایی که با × مشخص شده اند الزامی است.</p>
+            پرکردن قسمت هایی که با <span class="ess">×</span> مشخص شده اند الزامی است.</p>
        <span class="title"><span class="ess">×</span>نوع و مدت آگهی</span>
                 <asp:DropDownList ID="AdvKindDrop" CssClass="MyCss" Width="180px" onchange="fill_capital(this.selectedIndex);"
                     runat="server">
@@ -76,7 +121,7 @@
         
         <script type="text/javascript">
             $(document).ready(function () {
-                $("#KeyWordtxt").tokenInput("../Codes/JsonMaker.aspx?entity=keyword", {
+                $("#KeyWordtxt").tokenInput("../BAL/JsonMaker.aspx?entity=keyword", {
                     theme: "facebook", preventDuplicates: true, allowFreeTagging: true
             });
             });
@@ -111,14 +156,36 @@
                 </p>
                 <label class="title" for="ctl00_content_FileUpload1">
                     عکس آگهی</label>
-            <asp:AsyncFileUpload ID="PictureAsyncFileUpload" OnUploadedComplete="PictureAsyncFileUpload_UploadedComplete" runat="server" />
+
                 
+                <cc1:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server">
+                </cc1:ToolkitScriptManager>
+                <cc1:AsyncFileUpload runat="server" ID="AsyncFileUpload1" Width="400px" 
+                CompleteBackColor="White" ThrobberID="imgLoader" 
+                OnUploadedComplete="AsyncFileUpload1_UploadedComplete" 
+                OnClientUploadComplete = "ClientUploadComplete" ClientIDMode="AutoID" 
+                Height="20px" UploaderStyle="Traditional"  /><br />
+                <asp:Image ID="imgLoader" runat="server" ImageUrl="./Images/loader.gif" />
+                <div style=" border: 1px solid #cccccc; display : none ; width: 350px" id="dvFileErrorInfo">
+                    <asp:Label ID="lblErrorStatus" Font-Bold="true" runat="server" Text="خطا:" />
+                    <asp:Label ID="lblMesg" runat="server" style = "color:red" Text = "فرمت فایل انتخاب شده اشتباه می باشد.یک عکس با فرمت های معرفی شده انتخاب کنید." />
+                </div>
+                <div style="border: 1px solid #cccccc; display: none; width: 350px" id="dvFileInfo">
+                    <asp:Label ID="lblSuccess" runat="server" style = "color:green; font-weight:bold;" /><br />
+                    <asp:Label ID="lblFileName" Font-Bold="true" runat="server" Text="نام فايل :" />
+                    <asp:Label ID="lblFileNameDisplay" runat="server" /><br />
+                    <asp:Label ID="lblFileSize" Font-Bold="true" runat="server" Text="اندازه فايل : " />
+                    <asp:Label ID="lblFileSizeDisplay" runat="server" /><br />
+                    <asp:Label ID="lblContentType" Font-Bold="true" runat="server" Text="توع فايل :" />
+                    <asp:Label ID="lblContentTypeDisplay" runat="server" /><br />
+                 </div>
+
                 <p class="helper">
                     راهنما: عکسی که در تمام صفحات برای آگهی شما نمایش داده میشود.<br />
-                    1) سایز عکس نباید بیشتر از 50Kb باشد<br />
-                    2) حداکثر طول و عرض عکس 400 پیکسل باشد.<br />
-                    3) عکس ارسالی با فرمتهای jpg, gif, png باشد<br />
-                    4) عکس باید با موضوع آگهی شما مطابقت داشته باشد
+                    1) عکس ارسالی 
+                    باید از میان فرمت های jpg, gif, png , jpeg باشد<br />
+                    2) عکس باید با موضوع آگهی شما مطابقت داشته باشد
+                باشد
                 </p>
                 <h3 style="font-size:25px;margin-bottom:5px">
                     اطلاعات آگهی دهنده</h3>

@@ -1,4 +1,4 @@
-/*
+﻿/*
 * jQuery Plugin: Tokenizing Autocomplete Text Entry
 * Version 1.6.1
 *
@@ -25,9 +25,9 @@
         processPrePopulate: false,
 
         // Display settings
-        hintText: "Type in a search term",
-        noResultsText: "No results",
-        searchingText: "Searching...",
+        hintText: "کلمه کلیدی مورد نظر را وارد کنید",
+        noResultsText: "این کلمه موجود نیست. با فشردن Tab یا = آن را اضافه کنید.",
+        searchingText: "در حال جستجو...",
         deleteText: "&times;",
         animateDropdown: true,
         placeholder: null,

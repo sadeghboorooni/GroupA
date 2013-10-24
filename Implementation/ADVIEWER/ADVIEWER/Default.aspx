@@ -81,7 +81,7 @@
   </div>
 
   <div class "container wrapper">
-  
+  <h1>
   <i class="icon-star"></i> آگهی های جدید </h1>
         <div class="row" style="clear: both;overflow:hidden;">
         <asp:Repeater ID="LastAdvsRepeater" runat="server">
