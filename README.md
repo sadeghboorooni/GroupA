@@ -9,7 +9,7 @@
 
 ## توضیحات
 
-توضیحات، جزییات و هدف گذاری های انجام شده در فایل [Proposal](https://github.com/sadeghboorooni/GroupA/blob/master/README_FINAL.pdf)قابل مشاهده است
+توضیحات، جزییات و هدف گذاری های انجام شده در فایل [Proposal](https://github.com/sadeghboorooni/GroupA/blob/master/Proposal.pdf)قابل مشاهده است
 
 ## مشکلات نرم افزار یا قابلیت های پیشنهادی
 
