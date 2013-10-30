@@ -120,9 +120,13 @@ footer hr{border-top:0;border-bottom:1px solid #454a4d}
 .info-box{text-align:center}
 input.flexible{width:50%}
 .ltrClass{direction:rtl !important;}
-                                              .sidinside{display:none}
+                                              .six.columns.sidebarhome{display:none}
+                                              .main.container{width:90% !important;}
+                                              .ten.columns.maincontent{width:100% !important;}
                                               .sixtysix{width:100% !important;}
 }
+@media(max-width:530px){input, textarea{width:50% !important}ul.token-input-list-facebook,li.token-input-list-facebook{width:50% !important}.groups.rounded{width:100% !important;}}
+@media(max-width:280px){.EmailViewer{font-size:13px}}
 @media(min-width:768px) and (max-width:979px){.footer-form input[type="text"]{width:90%}
 
 }

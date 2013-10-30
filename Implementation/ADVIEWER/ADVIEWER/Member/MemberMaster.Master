@@ -37,10 +37,10 @@
             <div class="col-md-3 col-sm-6">
                 
                 <div class="input-append" style="margin-top:0">
-                 <a href="../Default.aspx"><img src="../Styles/Images/Logo.png" style="max-width:30%" alt="لوگوی سایت" title="لوگوی سایت" /></a>
+                 <a href="../Default.aspx"><img src="../Styles/Images/Logo.png" style="max-width:30%;float:right" alt="لوگوی سایت" title="لوگوی سایت" /></a>
 				</div>
             </div>           
-            <div class="col-md-3 col-sm-6" style="position:absolute;bottom:5px;left:0px;text-align:left">
+            <div class="col-md-3 col-sm-6" style="width:100%;position:absolute;bottom:5px;left:0px;text-align:left">
                     
 					<div style="font-size:17px;" class="createAccountButton">
                         <asp:LoginView ID="HeadLoginView" runat="server" EnableViewState="false">
@@ -94,7 +94,7 @@
     <div class="main container" style="width:960px;">
 
                 <div class="latestwork">
-                <div class="ten columns maincontent" style="margin-right: 10px !important;width:650px !important;">
+                <div class="ten columns maincontent" style="margin-right: 10px !important;width:650px;">
             
             <asp:Literal ID="ltr_unpaid" runat="server"></asp:Literal>
             <asp:ContentPlaceHolder ID="mainContent" runat="server">

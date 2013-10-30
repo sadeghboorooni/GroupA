@@ -18,7 +18,7 @@
             <br />
 
             <label >ایمیل</label>
-            <div style="width:227px; background:#f9f9f9; padding:0px 6px; direction:ltr; float:right; margin-left:47px;">
+            <div class="EmailViewer" style="background:#f9f9f9; padding:0px 6px;display:inline-block">
                 <asp:Literal ID="ltrmail" runat="server"></asp:Literal>
             </div>
             <br /> 

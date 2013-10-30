@@ -156,22 +156,22 @@ h2
            text-align:center;
     
     }
-
-.createAccountButton
-{
-    float:none;
-}
+    
 .social-media 
 {
     margin-left:auto;
     margin-right:auto;
     width:auto;
     }
-
-
-
-
 }
+@media screen and (max-width: 400px)
+{
+.createAccountButton
+{
+    float:none;
+    font-size:10px !important;
+}
+}  
 
 .featuredAdv
 {
