@@ -56,7 +56,7 @@
        </div>
     <hr />
     <asp:Literal ID="ltrexmsg" Visible="false" runat="server"></asp:Literal>
-    <div class="main container" style="padding-right:300px">
+    <div class="main container AdvContent" style="padding-right:25%">
     <div class="info">
         <h3 class="alert alert-success" style="text-align:center;margin:0;">
             اطلاعات آگهي دهنده</h3>
@@ -67,8 +67,8 @@
             </p>
           
            
-            <%= curAdv.Mobile == null ? "<hr><p><i class='icon-cog'></i>موبايل: ----</p>" : string.Format("<hr><p><i class='icon-cog'></i>موبايل: {0}</p>", curAdv.Mobile)%>
-            <%= curAdv.Tell == null ? "<hr><p><i class='icon-cog'></i>تلفن: ----</p>" : string.Format("<hr><p><i class='icon-cog'></i>تلفن: {0}</p>", curAdv.Tell)%>
+            <%= curAdv.Mobile == null ? "<hr><p><i class='icon-mobile-phone'></i>موبايل: ----</p>" : string.Format("<hr><p><i class='icon-mobile-phone'></i>موبايل: {0}</p>", curAdv.Mobile)%>
+            <%= curAdv.Tell == null ? "<hr><p><i class='icon-phone'></i>تلفن: ----</p>" : string.Format("<hr><p><i class='icon-phone'></i>تلفن: {0}</p>", curAdv.Tell)%>
             <%= curAdv.TellTime == null ? "<hr><p><i class='icon-time'></i>زمان تماس: ----</p>" : string.Format("<hr><p><i class='icon-time'></i>زمان تماس: {0}</p>", curAdv.TellTime)%>
             <%= curAdv.Email == null ? "<hr><p><i class='icon-envelope'></i>ايميل: ----</p>" : string.Format("<hr><p><i class='icon-envelope'></i>ايميل: {0}</p>", curAdv.Email )%>
             <%= curAdv.User.Address == null ? "<hr><p><i class='icon-flag'></i>آدرس: ----</p>" : string.Format("<hr><p><i class='icon-flag'></i>آدرس: {0}</p>", curAdv.User.Address )%>

@@ -175,7 +175,7 @@ h2
 
 .featuredAdv
 {
-    width:28%;
+    width:25%;
     }
 
 .span3.hero-unit.featuredAdv:hover
@@ -189,7 +189,7 @@ h2
 .span3.hero-unit.featuredAdv
 {
     background-color:#f4f4f4;
-    margin:1% 4% 1% 1%;
+    margin:1% 6% 1% 1%;
     float:right;
     height:auto;
     background-clip: padding-box;

@@ -42,6 +42,19 @@
             <div class="clear">
             </div>
         </div>
+        <div class="groups rounded">
+            <div class="right">
+                <a href="TicketsList.aspx">
+                    <img src="Images/Ticket.png" alt="" />
+                    <h6>
+                        لیست تیکت‏ها</h6>
+                </a>
+            </div>
+            <p>
+                سوالات خود را از مدیر سایت بپرسید.</p>
+            <div class="clear">
+            </div>
+        </div>
       
         <div class="groups rounded">
             <div class="right">

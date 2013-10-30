@@ -91,7 +91,7 @@
     <div class="clear">
     </div> 
     <!-- main home content -->
-    <div class="main container" style="width:960px;">
+    <div class="main container" style="width:960px;padding-bottom:30px">
 
                 <div class="latestwork">
                 <div class="ten columns maincontent" style="margin-right: 10px !important;width:650px;">
@@ -126,7 +126,9 @@
                         <hr />
                         <a href="AddNewAdv.aspx"><i class="icon-plus"></i>درج آگهی جدید</a>
                         <hr />
-                        
+                        <a href="AddNewTicket.aspx"><i class="icon-file"></i>درج تیکت جدید</a>&nbsp&nbsp-&nbsp&nbsp
+                        <a href="TicketsList.aspx">لیست تیکت‏ها</a>
+                        <hr />
                         <a href="../Account/ChangePassword.aspx"><i class="icon-lock"></i>تغییر رمز ورود</a>
                         <hr />
                         <a href="SpecialAdvprivileges.aspx" onclick="return popitup('SpecialAdvprivileges.aspx')"><i class="icon-question-sign"></i>مزایای آگهی ویژه</a>

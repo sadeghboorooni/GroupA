@@ -1,4 +1,10 @@
-﻿ul#homebtn li {
+﻿
+#homebtn
+{
+    float:right
+}
+
+ul#homebtn li {
 padding: 0;
 text-align: center;
 width: 135px;
