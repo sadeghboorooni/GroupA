@@ -16,6 +16,7 @@ namespace ADVIEWER.Member
         {
             if (!IsPostBack)
             {
+                fillGroupsDropDownList();
                 int userId = AccountFunctions.currentUserId();
                 User currusr = AccountFunctions.GetUserInformation(userId);
                 Nametxt.Text = currusr.FullName;
@@ -36,9 +37,19 @@ namespace ADVIEWER.Member
             }
         }
 
+        private void fillGroupsDropDownList()
+        {
+            foreach (Group g in MemberFunctions.GetSubGroups())
+            {
+                ListItem li = new ListItem(g.GroupName, g.ID.ToString());
+                if (g.parentGroup == null) li.Enabled = false;
+                groupsDropDownList.Items.Add(li);
+            }
+        }
+
         protected void Button1_Click(object sender, EventArgs e)
         {
-            
+
             if (string.IsNullOrEmpty(AdvTitleTxt.Text) || string.IsNullOrEmpty(AdvTexttxt.Text) || string.IsNullOrEmpty(Nametxt.Text))
             {
                 ltr_error.Text = "فیلدهای الزامی را کامل کنید";
@@ -63,23 +74,24 @@ namespace ADVIEWER.Member
             string Email = Emailtxt.Text;
             string YahooID = YahooIDtxt.Text;
             string Address = Addresstxt.Text;
+            int groupId = int.Parse(groupsDropDownList.SelectedValue);
             if (Link.ToLower().Trim() == "http://") Link = "";
-            int userId= AccountFunctions.currentUserId();
+            int userId = AccountFunctions.currentUserId();
             string tempAdd = "", mainAdd = "";
             if (AsyncFileUpload1.HasFile)
             {
                 tempAdd = "~/Userfiles/AdvPictures/temp/" + userId + "/";
                 mainAdd = "~/Userfiles/AdvPictures/main/" + userId + "/";
             }
-            
-            MemberFunctions.MakeNewAdvertisment(StarCount , AdvDuration , Title , ShortDescription , Description , KeyWords , Price , Link , FullName ,
-                                            Mobile, Tell, TellTime, Email, YahooID, Address, userId, tempAdd, mainAdd, AsyncFileUpload1.FileName);
+
+            MemberFunctions.MakeNewAdvertisment(StarCount, AdvDuration, Title, ShortDescription, Description, KeyWords, Price, Link, FullName,
+                                            Mobile, Tell, TellTime, Email, YahooID, Address, userId, tempAdd, mainAdd, AsyncFileUpload1.FileName, groupId);
             SuccessMessage.Text = string.Format("<div class='alert alert-success' style='FontSize:17px'> آگهی شما با موفقیت ثبت شد. <br /> آگهی شما در لیست انتظار مدیر قرار گرفت. </div>");
             SuccessMessage.Visible = true;
         }
 
 
-        protected void AsyncFileUpload1_UploadedComplete(object sender, EventArgs e) 
+        protected void AsyncFileUpload1_UploadedComplete(object sender, EventArgs e)
         {
             //empty root - check file type
             int userId = AccountFunctions.currentUserId();
@@ -89,9 +101,9 @@ namespace ADVIEWER.Member
                 Directory.CreateDirectory(MapPath("~/Userfiles/AdvPictures/temp/" + userId));
             }
             string ext = Path.GetExtension(AsyncFileUpload1.FileName).ToLower();
-            if(ext == ".png" || ext==".jpg" || ext == ".jpeg" || ext == ".gif")
+            if (ext == ".png" || ext == ".jpg" || ext == ".jpeg" || ext == ".gif")
                 AsyncFileUpload1.SaveAs(MapPath(dirPath + "/" + AsyncFileUpload1.FileName));
         }
-      
+
     }
 }

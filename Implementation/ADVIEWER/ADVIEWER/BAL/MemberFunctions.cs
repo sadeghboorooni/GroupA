@@ -10,12 +10,12 @@ using System.IO;
 
 namespace ADVIEWER.BAL
 {
-    
+
     public class MemberFunctions
     {
-        public static bool MakeNewAdvertisment( int starCount , int advDuration, string title, string shortdescription, string description,
-            string keywordStr , string price,string link , string fullName, string mobile, string tell, string telltime,
-            string email, string yahooid , string address, int userId,string tempAdd,string mainAdd,string fileName)
+        public static bool MakeNewAdvertisment(int starCount, int advDuration, string title, string shortdescription, string description,
+            string keywordStr, string price, string link, string fullName, string mobile, string tell, string telltime,
+            string email, string yahooid, string address, int userId, string tempAdd, string mainAdd, string fileName, int groupId)
         {
             ModelContainer ml = new ModelContainer();
 
@@ -39,8 +39,9 @@ namespace ADVIEWER.BAL
             newAdv.ExpirationDate = DateTime.Now;
             newAdv.RegistrationDate = DateTime.Now;
             newAdv.LastRenewal = DateTime.Now;
+            newAdv.GroupID = groupId;
             newAdv.Pic = "";
-            
+
             foreach (int kwId in MemberFunctions.ParseKeyWords(keywordStr))
             {
                 KeyWord tempkw = ml.KeyWords.Where(t => t.Id == kwId).First();
@@ -53,7 +54,7 @@ namespace ADVIEWER.BAL
                 ml.SaveChanges();
                 if (tempAdd != "")
                 {
-                    SaveImage(tempAdd, mainAdd + newAdv.ID+"/", fileName);
+                    SaveImage(tempAdd, mainAdd + newAdv.ID + "/", fileName);
                     newAdv.Pic = mainAdd + newAdv.ID + "/" + fileName;
                     ml.SaveChanges();
                 }
@@ -65,7 +66,7 @@ namespace ADVIEWER.BAL
             }
         }
 
-        public static void SaveImage(string tempAdd, string mainAdd,string filename)
+        public static void SaveImage(string tempAdd, string mainAdd, string filename)
         {
 
             if (!Directory.Exists(HttpContext.Current.Server.MapPath(mainAdd)))
@@ -73,28 +74,28 @@ namespace ADVIEWER.BAL
                 Directory.CreateDirectory(HttpContext.Current.Server.MapPath(mainAdd));
             }
 
-            File.Copy(HttpContext.Current.Server.MapPath(tempAdd+filename), HttpContext.Current.Server.MapPath(mainAdd+filename));
+            File.Copy(HttpContext.Current.Server.MapPath(tempAdd + filename), HttpContext.Current.Server.MapPath(mainAdd + filename));
 
-            File.Delete(HttpContext.Current.Server.MapPath(tempAdd+filename));
+            File.Delete(HttpContext.Current.Server.MapPath(tempAdd + filename));
 
         }
 
-        public static int[] ParseKeyWords(string keywordStr) 
+        public static int[] ParseKeyWords(string keywordStr)
         {
             List<int> kwList = new List<int>();
             ModelContainer ml = new ModelContainer();
 
-            foreach (string kwStr in keywordStr.Split(',')) 
+            foreach (string kwStr in keywordStr.Split(','))
             {
                 try
                 {
                     int id = int.Parse(kwStr);
-                    if (ml.KeyWords.Where(t => t.Id == id).Count() > 0) 
+                    if (ml.KeyWords.Where(t => t.Id == id).Count() > 0)
                     {
                         kwList.Add(ml.KeyWords.Where(t => t.Id == id).Select(t => t.Id).First());
                     }
                 }
-                catch 
+                catch
                 {
                     if (ml.KeyWords.Where(t => t.Text == kwStr).Count() == 0)
                     {
@@ -105,30 +106,30 @@ namespace ADVIEWER.BAL
                         kwList.Add(newkw.Id);
                     }
                 }
-                
+
             }
 
             return kwList.ToArray();
         }
 
-        
-        public static DataTable UnconfirmedFreeAdvertismentsDataTable() 
+
+        public static DataTable UnconfirmedFreeAdvertismentsDataTable()
         {
             ModelContainer ml = new ModelContainer();
 
             List<ShowAdvertisment> unreadList = new List<ShowAdvertisment>();
             foreach (Advertisment adv in ml.Advertisments.Where(t => t.IsConfirmed == false && t.IsRead == false && t.StarCount == -1))
             {
-                unreadList.Add(new ShowAdvertisment(adv.ID, adv.Title, adv.ShortDescription, adv.FullName, adv.Pic, adv.RegistrationDate,adv.UserId));
+                unreadList.Add(new ShowAdvertisment(adv.ID, adv.Title, adv.ShortDescription, adv.FullName, adv.Pic, adv.RegistrationDate, adv.UserId));
             }
-            unreadList  = unreadList.OrderByDescending(t=> t.RegistrationDate).ToList();
+            unreadList = unreadList.OrderByDescending(t => t.RegistrationDate).ToList();
             return PublicFunctions.ToDataTable<ShowAdvertisment>(unreadList);
         }
-        public static void ConfirmAdvertisment(int AdvID) 
+        public static void ConfirmAdvertisment(int AdvID)
         {
             ModelContainer ml = new ModelContainer();
             Advertisment adv = ml.Advertisments.Where(t => t.ID == AdvID).FirstOrDefault();
-            if (adv.StarCount == -1) 
+            if (adv.StarCount == -1)
             {
                 adv.IsRead = true;
                 adv.IsConfirmed = true;
@@ -163,15 +164,34 @@ namespace ADVIEWER.BAL
             ModelContainer ml = new ModelContainer();
             return ml.Users.Where(a => a.ID == UserID).FirstOrDefault().Advertisments.Where(t => t.IsConfirmed).ToArray();
         }
+        public static Group[] GetSubGroups()
+        {
+            ModelContainer ml = new ModelContainer();
+            return ml.Groups.Where(t => t.ID != null).ToArray();
+        }
+        public static Group[] GetParentGroups()
+        {
+            ModelContainer ml = new ModelContainer();
+            return ml.Groups.Where(t=>t.ParentID==null).ToArray();
+        }
+        public static void AddNewGroup(string groupName, int? parentId) 
+        {
+            Group g = new Group();
+            g.GroupName = groupName;
+            g.ParentID = parentId;
+            ModelContainer ml = new ModelContainer();
+            ml.Groups.AddObject(g);
+            ml.SaveChanges();
+        }
 
     }
-    public class ShowAdvertisment 
+    public class ShowAdvertisment
     {
         public string Description,
             FullName,
             Title,
             Pic;
-        public int ID,UserId;
+        public int ID, UserId;
         public DateTime RegistrationDate;
 
         public ShowAdvertisment(int ID,
@@ -180,7 +200,7 @@ namespace ADVIEWER.BAL
             string FullName,
             string Pic,
             DateTime RegistrationDate,
-            int UserId) 
+            int UserId)
         {
             this.ID = ID;
             this.FullName = FullName;
@@ -191,9 +211,9 @@ namespace ADVIEWER.BAL
             this.UserId = UserId;
         }
     }
-    public class L_User : User 
+    public class L_User : User
     {
-        
+
     }
     public class L_Advertisment : Advertisment
     { }
