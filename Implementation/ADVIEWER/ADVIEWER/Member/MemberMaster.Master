@@ -85,6 +85,39 @@
 			</div><!-- /row -->
 		</div>
 
+         <div class="row ltrClass">
+			<div class="span12 ltrClass">
+				<div class="navbar ltrClassr" style="padding:0px;margin:0px;z-index:1">
+					<div class="navbar-inner ltrClass" style="background-color:#636363; border-radius: 0px 0px 4px 4px">
+						<div class="container ltrClass" >
+						 <a data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar ltrClass">منوی فرعی</a>
+							<div class="nav-collapse collapse ltrClass" >
+								<ul class="nav ltrClass" style="float:right;text-align:right">
+
+                    <asp:Repeater ID="GroupsRepeater" runat="server" OnItemDataBound="getSubGroupsFunc">
+                        <ItemTemplate>
+                             
+                              <li class="dropdown ltrClass" style="width:200px">
+										<a class="dropdown-toggle ltrClass" data-toggle="dropdown" href="#" style="font-size:13pt;"><b class="caret"></b><%# Eval("GroupName") %><i style="padding-left:6px;" id="ICON<%# Eval("id") %>"></i> </a>
+										<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel" style="right:0px">
+                                       
+                                      <asp:Literal ID="GetSubGroups" Text='<%# Eval("id") %>' runat="server"></asp:Literal>
+                                  </ul>  
+                                  
+									</li>
+                             
+                        </ItemTemplate>
+                    </asp:Repeater>
+                            
+									
+								</ul> <!-- /.nav -->
+							</div> <!-- /.nav-collapse -->
+						</div><!-- /container -->
+					</div><!-- /navbar-inner -->
+				</div><!-- /navbar -->
+			</div><!-- /row -->
+		</div>
+       
     </div>
     <!-- end of header -->
    

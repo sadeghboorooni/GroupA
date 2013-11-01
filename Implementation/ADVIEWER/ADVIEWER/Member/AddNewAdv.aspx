@@ -69,6 +69,14 @@
                 <asp:DropDownList ID="AdvKindDrop" CssClass="MyCss" Width="180px" onchange="fill_capital(this.selectedIndex);"
                     runat="server">
                     <asp:ListItem Value="-1">آگهی عادی</asp:ListItem>
+                    <asp:ListItem Value="0">ویژه بی ستاره</asp:ListItem>
+                    <asp:ListItem Value="1">ویژه یک ستاره</asp:ListItem>
+                    <asp:ListItem Value="2">ویژه دو ستاره</asp:ListItem>
+                    <asp:ListItem Value="3">ویژه سه ستاره</asp:ListItem>
+                    <asp:ListItem Value="4">ویژه چهار ستاره</asp:ListItem>
+                    <asp:ListItem Value="5">ویژه پنج ستاره</asp:ListItem>
+                    <asp:ListItem Value="6">ویژه شش ستاره</asp:ListItem>
+                    <asp:ListItem Value="7">ویژه هفت ستاره</asp:ListItem>
                     
                 </asp:DropDownList>
                 &nbsp;&nbsp; به مدت &nbsp;&nbsp;

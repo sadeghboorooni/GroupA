@@ -27,6 +27,28 @@ namespace ADVIEWER.member
                     ManagerPanel.Visible = true;
                 }
             }
+            LoadGropus();
+        }
+
+        protected void LoadGropus()
+        {
+            GroupsRepeater.DataSource = MemberFunctions.GetParentGroups();
+            GroupsRepeater.DataBind();
+        }
+
+        protected void getSubGroupsFunc(object sender, RepeaterItemEventArgs e)
+        {
+
+            Literal ltrsub = e.Item.FindControl("GetSubGroups") as Literal;
+            int id = int.Parse(ltrsub.Text);
+            ltrsub.Text = "";
+            Group[] SubGroups = MemberFunctions.GetSubGroups();
+            foreach (Group sub in SubGroups)
+            {
+                ltrsub.Text += string.Format(" <li><a  style=\"font-size:11pt\" href='../Group-{0}.aspx?{1} '>{2}</a></li>", sub.ID, sub.GroupName, sub.GroupName);
+
+            }
+
         }
 
         protected void ExitFunction(object sender, EventArgs e)
