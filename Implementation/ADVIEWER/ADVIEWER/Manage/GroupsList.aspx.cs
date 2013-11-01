@@ -45,7 +45,13 @@ namespace ADVIEWER.Manage
                 parentsDropDownList.Items.Add(new ListItem(g.GroupName, g.ID.ToString()));
             } 
         }
-
+        protected void groupsGridView_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "delete") 
+            {
+                int id = Convert.ToInt32(e.CommandArgument.ToString());
+            }
+        }
         protected void groupsGridView_RowDataBound(object sender, GridViewRowEventArgs e)
         {
 
@@ -66,6 +72,8 @@ namespace ADVIEWER.Manage
             int? newParentId = null;
             if (parentsDropDownList.SelectedValue != "null") newParentId = int.Parse(parentsDropDownList.SelectedValue);
             MemberFunctions.AddNewGroup(newTitle, newParentId);
+
+            Response.Redirect(Request.Url.ToString());
         }
     }
 }

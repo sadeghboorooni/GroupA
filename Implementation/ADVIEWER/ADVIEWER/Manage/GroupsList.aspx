@@ -59,13 +59,14 @@
             </div>
             <div style="float: left; width: 490px">
              <asp:GridView CssClass="grid" ID="groupsGridView" runat="server" AutoGenerateColumns="False" 
-                DataKeyNames="ID" EnableModelValidation="True" 
+                DataKeyNames="ID" EnableModelValidation="True" OnRowCommand="groupsGridView_RowCommand" 
                 Width="100%" AllowPaging="True" GridLines="None" PageSize="40" 
                  EnableTheming="False" EnableViewState="False"  OnPageIndexChanging="groupsGridView_PageIndexChanging"
                 ShowFooter="True" onrowdatabound="groupsGridView_RowDataBound" >
                 <AlternatingRowStyle CssClass="alt" />
                 <Columns>
-                    <asp:TemplateField FooterText="#" HeaderText="#" InsertVisible="False" 
+
+                    <%--<asp:TemplateField FooterText="#" HeaderText="#" InsertVisible="False" 
                         SortExpression="ID">
                         <ItemTemplate>
                             <asp:CheckBox ID="chkBxSelect" runat="server" Text='<%# Container.DataItemIndex+1 %>'/>
@@ -81,14 +82,14 @@
                         <FooterStyle HorizontalAlign="Center" />
                         <HeaderStyle HorizontalAlign="Center" />
                         <ItemStyle Font-Names="byekan" HorizontalAlign="Center" Width="30px" />
-                    </asp:TemplateField>
+                    </asp:TemplateField>--%>
                     <asp:TemplateField FooterText="عنوان" HeaderText="عنوان" 
                         SortExpression="title">
                         <HeaderTemplate>
                           عنوان
                         </HeaderTemplate>
                         <ItemTemplate>
-                            <a style="font-size:12px;" href='<%# Eval("id","editgroup.aspx?id={0}") %>' title='<%# Eval("Text") %>'><%# Eval("Title") %></a>
+                            <a style="font-size:12px;" href='<%# Eval("id","editgroup.aspx?id={0}") %>' title='<%# Eval("GroupName") %>'><%# Eval("childGroup.GroupName") == null ? Eval("GroupName") : Eval("childGroup.GroupName") + "->" + Eval("GroupName")%></a>
                         </ItemTemplate> 
                         <HeaderStyle HorizontalAlign="Right" />
                         <ItemStyle Width="250px" />
@@ -106,9 +107,10 @@
                     </asp:TemplateField>
                       <asp:TemplateField FooterText="تنظیمات" HeaderText="تنظیمات">
                         <ItemTemplate>
-                            <center>
-                            <a href='<%# Eval("ID","deleteproductgroup.aspx?id={0}") %>' title="حذف گروه" class="tooltip"><i class="icon-eraser"></i></a>
-                            </center>
+                            
+                            <asp:LinkButton ID="deleteLinkButton" CommandArgument='<%# Eval("ID") %>' CommandName="delete" runat="server"><i class="icon-eraser"></i>حذف</asp:LinkButton>
+                            
+                            
                         </ItemTemplate>
                         <FooterStyle HorizontalAlign="Center" />
                         <HeaderStyle HorizontalAlign="Center" />
@@ -122,9 +124,7 @@
                 هیچ رکوردی وجود ندارد.
                 </EmptyDataTemplate>
             </asp:GridView>
-            <left>
-            <asp:LinkButton ID="LinkButton1" runat="server" ><i class="icon-eraser"></i> حذف انتخاب شده ها</asp:LinkButton>
-            </left>
+            
             </div>
             <div class="clr">
             </div>

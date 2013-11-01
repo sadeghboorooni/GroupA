@@ -149,7 +149,7 @@ namespace ADVIEWER.BAL
             }
         }
 
-        public static Advertisment GetAdvertismentInformation(int id)
+        public static Advertisment GetAdvertismentData(int id)
         {
             ModelContainer ml = new ModelContainer();
             return ml.Advertisments.Where(t => t.ID == id).FirstOrDefault();
@@ -184,6 +184,21 @@ namespace ADVIEWER.BAL
             ml.SaveChanges();
         }
 
+
+        internal static Group GetGroupData(int groupId)
+        {
+            ModelContainer ml = new ModelContainer();
+            return ml.Groups.Where(t => t.ID == groupId).First();
+        }
+
+        internal static void UpdateGroupData(int Id, string groupName, int? parentId)
+        {
+            ModelContainer ml = new ModelContainer();
+            Group g = ml.Groups.Where(t => t.ID == Id).First();
+            g.GroupName = groupName;
+            g.ParentID = parentId;
+            ml.SaveChanges();
+        }
     }
     public class ShowAdvertisment
     {

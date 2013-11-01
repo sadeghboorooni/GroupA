@@ -10,7 +10,7 @@
 namespace ADVIEWER.Manage {
     
     
-    public partial class GroupsList {
+    public partial class EditGroup {
         
         /// <summary>
         /// titleTextBox control.
@@ -31,13 +31,13 @@ namespace ADVIEWER.Manage {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
         
         /// <summary>
-        /// descriptionTextBox control.
+        /// DescriptonTextBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox descriptionTextBox;
+        protected global::System.Web.UI.WebControls.TextBox DescriptonTextBox;
         
         /// <summary>
         /// parentsDropDownList control.
@@ -49,15 +49,6 @@ namespace ADVIEWER.Manage {
         protected global::System.Web.UI.WebControls.DropDownList parentsDropDownList;
         
         /// <summary>
-        /// FileUpload1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload FileUpload1;
-        
-        /// <summary>
         /// submitButton control.
         /// </summary>
         /// <remarks>
@@ -65,14 +56,5 @@ namespace ADVIEWER.Manage {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button submitButton;
-        
-        /// <summary>
-        /// groupsGridView control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView groupsGridView;
     }
 }
