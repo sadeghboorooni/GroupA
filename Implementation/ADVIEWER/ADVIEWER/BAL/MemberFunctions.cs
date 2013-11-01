@@ -148,7 +148,27 @@ namespace ADVIEWER.BAL
                 ml.SaveChanges();
             }
         }
+        public static void AddNewTicket(string text, string title, int userId)
+        {
+            ModelContainer ml = new ModelContainer();
+            Ticket t = new Ticket();
+            t.Priority = "";
+            t.Text = text;
+            t.Title = title;
+            t.User = ml.Users.Where(u => u.ID == userId).First();
+            t.IsRead = false;
+            t.LastUpdate = DateTime.Now;
+            t.RegDate = DateTime.Now;
 
+            ml.Tickets1.AddObject(t);
+            ml.SaveChanges();
+
+        }
+        public static Ticket GetTicketData(int id)
+        {
+            ModelContainer ml = new ModelContainer();
+            return ml.Tickets1.Where(t => t.ID == id).FirstOrDefault();
+        }
         public static Advertisment GetAdvertismentData(int id)
         {
             ModelContainer ml = new ModelContainer();
@@ -172,9 +192,9 @@ namespace ADVIEWER.BAL
         public static Group[] GetParentGroups()
         {
             ModelContainer ml = new ModelContainer();
-            return ml.Groups.Where(t=>t.ParentID==null).ToArray();
+            return ml.Groups.Where(t => t.ParentID == null).ToArray();
         }
-        public static void AddNewGroup(string groupName, int? parentId) 
+        public static void AddNewGroup(string groupName, int? parentId)
         {
             Group g = new Group();
             g.GroupName = groupName;
