@@ -8,17 +8,18 @@
 //------------------------------------------------------------------------------
 
 using System;
+using System.ComponentModel;
+using System.Data.EntityClient;
 using System.Data.Objects;
 using System.Data.Objects.DataClasses;
-using System.Data.EntityClient;
-using System.ComponentModel;
-using System.Xml.Serialization;
+using System.Linq;
 using System.Runtime.Serialization;
+using System.Xml.Serialization;
 
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
 
-[assembly: EdmRelationshipAttribute("Model1", "GroupGroup", "Group", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ADVIEWER.DAL.Group), "Group1", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DAL.Group))]
+[assembly: EdmRelationshipAttribute("Model1", "GroupGroup", "Group", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(ADVIEWER.DAL.Group), "childGroup", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DAL.Group), true)]
 [assembly: EdmRelationshipAttribute("Model1", "StateCity", "State", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ADVIEWER.DAL.State), "City", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DAL.City))]
 [assembly: EdmRelationshipAttribute("Model1", "UserTicket", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ADVIEWER.DAL.User), "Ticket", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DAL.Ticket))]
 [assembly: EdmRelationshipAttribute("Model1", "UserGroup", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DAL.User), "Group", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DAL.Group))]
@@ -252,6 +253,7 @@ namespace ADVIEWER.DAL
         private ObjectSet<KeyWord> _KeyWords;
 
         #endregion
+
         #region AddTo Methods
     
         /// <summary>
@@ -343,11 +345,11 @@ namespace ADVIEWER.DAL
         }
 
         #endregion
+
     }
-    
 
     #endregion
-    
+
     #region Entities
     
     /// <summary>
@@ -372,6 +374,7 @@ namespace ADVIEWER.DAL
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -642,6 +645,7 @@ namespace ADVIEWER.DAL
         partial void OnreplyChanged();
 
         #endregion
+
     
     }
     
@@ -691,6 +695,7 @@ namespace ADVIEWER.DAL
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -1393,6 +1398,7 @@ namespace ADVIEWER.DAL
         partial void OnUserIdChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -1457,6 +1463,7 @@ namespace ADVIEWER.DAL
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -1485,6 +1492,7 @@ namespace ADVIEWER.DAL
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -1563,6 +1571,7 @@ namespace ADVIEWER.DAL
         partial void OnStateIDChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -1605,6 +1614,7 @@ namespace ADVIEWER.DAL
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -1629,6 +1639,7 @@ namespace ADVIEWER.DAL
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -1875,6 +1886,7 @@ namespace ADVIEWER.DAL
         partial void OnUserIDChanged();
 
         #endregion
+
     
     }
     
@@ -1902,6 +1914,7 @@ namespace ADVIEWER.DAL
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -2004,6 +2017,7 @@ namespace ADVIEWER.DAL
         partial void OnParentIDChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -2013,18 +2027,18 @@ namespace ADVIEWER.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Model1", "GroupGroup", "Group1")]
+        [EdmRelationshipNavigationPropertyAttribute("Model1", "GroupGroup", "childGroup")]
         public EntityCollection<Group> parentGroup
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Group>("Model1.GroupGroup", "Group1");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Group>("Model1.GroupGroup", "childGroup");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Group>("Model1.GroupGroup", "Group1", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Group>("Model1.GroupGroup", "childGroup", value);
                 }
             }
         }
@@ -2090,6 +2104,7 @@ namespace ADVIEWER.DAL
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -2116,6 +2131,7 @@ namespace ADVIEWER.DAL
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -2170,6 +2186,7 @@ namespace ADVIEWER.DAL
         partial void OnTextChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -2196,6 +2213,7 @@ namespace ADVIEWER.DAL
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -2220,6 +2238,7 @@ namespace ADVIEWER.DAL
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -2490,6 +2509,7 @@ namespace ADVIEWER.DAL
         partial void OnDateChanged();
 
         #endregion
+
     
     }
     
@@ -2515,6 +2535,7 @@ namespace ADVIEWER.DAL
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -2857,6 +2878,7 @@ namespace ADVIEWER.DAL
         partial void OnBankChanged();
 
         #endregion
+
     
     }
     
@@ -2884,6 +2906,7 @@ namespace ADVIEWER.DAL
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -2938,6 +2961,7 @@ namespace ADVIEWER.DAL
         partial void OnStateNameChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -2964,6 +2988,7 @@ namespace ADVIEWER.DAL
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -2990,6 +3015,7 @@ namespace ADVIEWER.DAL
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -3192,78 +3218,6 @@ namespace ADVIEWER.DAL
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Boolean> IsManageRead
-        {
-            get
-            {
-                return _IsManageRead;
-            }
-            set
-            {
-                OnIsManageReadChanging(value);
-                ReportPropertyChanging("IsManageRead");
-                _IsManageRead = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("IsManageRead");
-                OnIsManageReadChanged();
-            }
-        }
-        private Nullable<global::System.Boolean> _IsManageRead;
-        partial void OnIsManageReadChanging(Nullable<global::System.Boolean> value);
-        partial void OnIsManageReadChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String Part
-        {
-            get
-            {
-                return _Part;
-            }
-            set
-            {
-                OnPartChanging(value);
-                ReportPropertyChanging("Part");
-                _Part = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("Part");
-                OnPartChanged();
-            }
-        }
-        private global::System.String _Part;
-        partial void OnPartChanging(global::System.String value);
-        partial void OnPartChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Boolean> IsDeleted
-        {
-            get
-            {
-                return _IsDeleted;
-            }
-            set
-            {
-                OnIsDeletedChanging(value);
-                ReportPropertyChanging("IsDeleted");
-                _IsDeleted = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("IsDeleted");
-                OnIsDeletedChanged();
-            }
-        }
-        private Nullable<global::System.Boolean> _IsDeleted;
-        partial void OnIsDeletedChanging(Nullable<global::System.Boolean> value);
-        partial void OnIsDeletedChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
         public Nullable<global::System.DateTime> LastUpdate
         {
             get
@@ -3284,6 +3238,7 @@ namespace ADVIEWER.DAL
         partial void OnLastUpdateChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -3326,6 +3281,7 @@ namespace ADVIEWER.DAL
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -3360,6 +3316,7 @@ namespace ADVIEWER.DAL
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -3774,6 +3731,7 @@ namespace ADVIEWER.DAL
         partial void OnMailChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -3844,8 +3802,10 @@ namespace ADVIEWER.DAL
         }
 
         #endregion
+
     }
 
     #endregion
+
     
 }

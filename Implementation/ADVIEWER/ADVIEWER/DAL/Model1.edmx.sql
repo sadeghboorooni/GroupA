@@ -2,13 +2,13 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 10/20/2013 23:32:25
--- Generated from EDMX file: C:\Users\M-R\Desktop\SE2\GroupA\Implementation\ADVIEWER\ADVIEWER\DataModel\Model1.edmx
+-- Date Created: 11/01/2013 10:49:11
+-- Generated from EDMX file: C:\Users\Ali\Documents\GitHub\GroupA\Implementation\ADVIEWER\ADVIEWER\DAL\Model1.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
 GO
-USE [ADVIEWERdb];
+USE [ADVIEWER];
 GO
 IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
 GO
@@ -156,9 +156,6 @@ CREATE TABLE [dbo].[Tickets1] (
     [Status] smallint  NULL,
     [Priority] nvarchar(10)  NULL,
     [IsRead] bit  NULL,
-    [IsManageRead] bit  NULL,
-    [Part] nvarchar(50)  NULL,
-    [IsDeleted] bit  NULL,
     [LastUpdate] datetime  NULL,
     [User_ID] int  NOT NULL
 );
@@ -195,8 +192,7 @@ CREATE TABLE [dbo].[Groups] (
     [ID] int IDENTITY(1,1) NOT NULL,
     [Pic] nvarchar(100)  NULL,
     [GroupName] nvarchar(max)  NOT NULL,
-    [ParentID] int  NULL,
-    [childGroup_ID] int  NOT NULL
+    [ParentID] int  NULL
 );
 GO
 
@@ -363,10 +359,10 @@ GO
 -- Creating all FOREIGN KEY constraints
 -- --------------------------------------------------
 
--- Creating foreign key on [childGroup_ID] in table 'Groups'
+-- Creating foreign key on [ParentID] in table 'Groups'
 ALTER TABLE [dbo].[Groups]
 ADD CONSTRAINT [FK_GroupGroup]
-    FOREIGN KEY ([childGroup_ID])
+    FOREIGN KEY ([ParentID])
     REFERENCES [dbo].[Groups]
         ([ID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
@@ -374,7 +370,7 @@ ADD CONSTRAINT [FK_GroupGroup]
 -- Creating non-clustered index for FOREIGN KEY 'FK_GroupGroup'
 CREATE INDEX [IX_FK_GroupGroup]
 ON [dbo].[Groups]
-    ([childGroup_ID]);
+    ([ParentID]);
 GO
 
 -- Creating foreign key on [State_ID] in table 'Cities'
