@@ -91,7 +91,7 @@
                 <div class="info-column">
              
                 <div class="advContainer" style="height:220px;text-align:center">
-                   <a href='<%# Eval("ID", "adv.aspx?id={0}") %>'
+                   <a href='<%# Eval("ID", "advcontent.aspx?id={0}") %>'
                         title='<%# Eval("Title")%>'>
 <%--                        <img style="height: auto;display: inline-block; max-width: 100%;" src='<%# Eval("Pic","/HPicturer.ashx?w=280&h=200&path={0}") %>' alt='<%# Eval("Title")%>' class="img-rounded" />--%>
 <img src='<%# Eval("Pic","/HPicturer.ashx?w=300&h=200&path={0}") %>' class="img-rounded" />

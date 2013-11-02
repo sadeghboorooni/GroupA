@@ -51,13 +51,17 @@
       <End Role="User" EntitySet="Users" />
       <End Role="Advertisment" EntitySet="Advertisments" />
     </AssociationSet>
+    <AssociationSet Name="AdvertismentGroup" Association="Model1.Store.AdvertismentGroup">
+      <End Role="Advertisment" EntitySet="Advertisments" />
+      <End Role="Group" EntitySet="Groups" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Advertisments">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="GroupID" Type="int" Nullable="true" />
+    <Property Name="GroupID" Type="int" Nullable="false" />
     <Property Name="SateID" Type="int" Nullable="true" />
     <Property Name="StarCount" Type="int" Nullable="false" />
     <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="100" />
@@ -285,6 +289,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="AdvertismentGroup">
+    <End Role="Advertisment" Type="Model1.Store.Advertisments" Multiplicity="*" />
+    <End Role="Group" Type="Model1.Store.Groups" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Group">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Advertisment">
+        <PropertyRef Name="GroupID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_UserGroup_User">
     <End Role="User" Type="Model1.Store.Users" Multiplicity="1" />
     <End Role="UserGroup" Type="Model1.Store.UserGroup" Multiplicity="*" />
@@ -373,13 +389,17 @@
             <End Role="User" EntitySet="Users" />
             <End Role="Advertisment" EntitySet="Advertisments" />
           </AssociationSet>
+          <AssociationSet Name="AdvertismentGroup" Association="Model1.AdvertismentGroup">
+            <End Role="Advertisment" EntitySet="Advertisments" />
+            <End Role="Group" EntitySet="Groups" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Advertisment">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Int32" Name="GroupID" Nullable="true" />
+          <Property Type="Int32" Name="GroupID" Nullable="false" />
           <Property Type="Int32" Name="SateID" Nullable="true" />
           <Property Type="Int32" Name="StarCount" Nullable="false" />
           <Property Type="String" Name="Title" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
@@ -409,6 +429,7 @@
           <Property Type="Int32" Name="UserId" Nullable="false" />
           <NavigationProperty Name="KeyWords" Relationship="Model1.AdvertismentKeyWord" FromRole="Advertisment" ToRole="KeyWord" />
           <NavigationProperty Name="User" Relationship="Model1.UserAdvertisment" FromRole="Advertisment" ToRole="User" />
+          <NavigationProperty Name="Group" Relationship="Model1.AdvertismentGroup" FromRole="Advertisment" ToRole="Group" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -488,6 +509,7 @@
           <NavigationProperty Name="parentGroup" Relationship="Model1.GroupGroup" FromRole="Group" ToRole="childGroup" />
           <NavigationProperty Name="childGroup" Relationship="Model1.GroupGroup" FromRole="childGroup" ToRole="Group" />
           <NavigationProperty Name="Users" Relationship="Model1.UserGroup" FromRole="Group" ToRole="User" />
+          <NavigationProperty Name="Advertisments" Relationship="Model1.AdvertismentGroup" FromRole="Group" ToRole="Advertisment" />
         </EntityType>
         <EntityType Name="City">
           <Key>
@@ -590,6 +612,18 @@
             </Principal>
             <Dependent Role="Advertisment">
               <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AdvertismentGroup">
+          <End Type="Model1.Advertisment" Role="Advertisment" Multiplicity="*" />
+          <End Type="Model1.Group" Role="Group" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Advertisment">
+              <PropertyRef Name="GroupID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -833,17 +867,17 @@
         <EntityTypeShape EntityType="Model1.Ticket" Width="1.5" PointX="2.625" PointY="12" Height="2.9417936197916656" />
         <EntityTypeShape EntityType="Model1.State" Width="1.5" PointX="9.625" PointY="4.25" Height="1.5956835937500031" />
         <EntityTypeShape EntityType="Model1.Payment" Width="1.5" PointX="10.25" PointY="5.875" Height="3.7109993489583335" />
-        <EntityTypeShape EntityType="Model1.Group" Width="1.5" PointX="3" PointY="9" Height="2.3648893229166674" />
+        <EntityTypeShape EntityType="Model1.Group" Width="1.5" PointX="3" PointY="9.25" Height="2.5571907552083317" />
         <EntityTypeShape EntityType="Model1.City" Width="1.5" PointX="11.875" PointY="4.125" Height="1.7879850260416674" />
         <EntityTypeShape EntityType="Model1.ContactMessage" Width="1.5" PointX="10.25" PointY="9" Height="2.9417936197916674" />
         <EntityTypeShape EntityType="Model1.AdvertisementMessage" Width="1.5" PointX="11.75" PointY="9" Height="3.1340950520833317" />
         <EntityTypeShape EntityType="Model1.Mail_User" Width="1.5" PointX="11.75" PointY="5.875" Height="3.1340950520833317" />
         <EntityTypeShape EntityType="Model1.KeyWord" Width="1.5" PointX="5.5" PointY="3.25" Height="1.5956835937499996" IsExpanded="true" />
         <AssociationConnector Association="Model1.GroupGroup" >
-          <ConnectorPoint PointX="3.5319230769230767" PointY="11.364889322916667" />
-          <ConnectorPoint PointX="3.5319230769230767" PointY="11.614889322916667" />
-          <ConnectorPoint PointX="3.9784615384615383" PointY="11.614889322916667" />
-          <ConnectorPoint PointX="3.9784615384615383" PointY="11.364889322916667" />
+          <ConnectorPoint PointX="3.5319230769230767" PointY="11.807190755208332" />
+          <ConnectorPoint PointX="3.5319230769230767" PointY="12.057190755208332" />
+          <ConnectorPoint PointX="3.9784615384615383" PointY="12.057190755208332" />
+          <ConnectorPoint PointX="3.9784615384615383" PointY="11.807190755208332" />
         </AssociationConnector>
         <AssociationConnector Association="Model1.StateCity" >
           <ConnectorPoint PointX="11.125" PointY="5.0478417968750016" />
@@ -855,9 +889,9 @@
           <ConnectorPoint PointX="2.625" PointY="13.470896809895834" />
         </AssociationConnector>
         <AssociationConnector Association="Model1.UserGroup" >
-          <ConnectorPoint PointX="2.2812525" PointY="6.1148079427083326" />
-          <ConnectorPoint PointX="2.2812525" PointY="10.182444661458334" />
-          <ConnectorPoint PointX="3" PointY="10.182444661458334" />
+          <ConnectorPoint PointX="2.179689375" PointY="6.1148079427083326" />
+          <ConnectorPoint PointX="2.179689375" PointY="10.528595377604166" />
+          <ConnectorPoint PointX="3" PointY="10.528595377604166" />
         </AssociationConnector>
         <AssociationConnector Association="Model1.AdvertismentKeyWord" >
           <ConnectorPoint PointX="4.5" PointY="4.047841796875" />
@@ -866,6 +900,10 @@
         <AssociationConnector Association="Model1.UserAdvertisment" >
           <ConnectorPoint PointX="2.625" PointY="3.9324039713541663" />
           <ConnectorPoint PointX="3" PointY="3.9324039713541663" />
+        </AssociationConnector>
+        <AssociationConnector Association="Model1.AdvertismentGroup">
+          <ConnectorPoint PointX="3.75" PointY="8.9224251302083335" />
+          <ConnectorPoint PointX="3.75" PointY="9.25" />
         </AssociationConnector>
       </Diagram>
     </edmx:Diagrams>

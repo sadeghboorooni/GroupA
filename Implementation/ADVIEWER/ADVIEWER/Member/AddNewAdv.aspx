@@ -69,14 +69,8 @@
                 <asp:DropDownList ID="AdvKindDrop" CssClass="MyCss" Width="180px" onchange="fill_capital(this.selectedIndex);"
                     runat="server">
                     <asp:ListItem Value="-1">آگهی عادی</asp:ListItem>
-                    <asp:ListItem Value="0">ویژه بی ستاره</asp:ListItem>
                     <asp:ListItem Value="1">ویژه یک ستاره</asp:ListItem>
                     <asp:ListItem Value="2">ویژه دو ستاره</asp:ListItem>
-                    <asp:ListItem Value="3">ویژه سه ستاره</asp:ListItem>
-                    <asp:ListItem Value="4">ویژه چهار ستاره</asp:ListItem>
-                    <asp:ListItem Value="5">ویژه پنج ستاره</asp:ListItem>
-                    <asp:ListItem Value="6">ویژه شش ستاره</asp:ListItem>
-                    <asp:ListItem Value="7">ویژه هفت ستاره</asp:ListItem>
                     
                 </asp:DropDownList>
                 &nbsp;&nbsp; به مدت &nbsp;&nbsp;
@@ -86,13 +80,6 @@
                     <asp:ListItem Value="3">سه ماه</asp:ListItem>
                 </asp:DropDownList>
              
-               <p class="helper">
-                    راهنما: با توجه به نیاز خود و شرح تعرفه ها نوع آگهی و مدت آن را انتخاب کنید.
-                    <br />
-                    برای دیدن تعرفه ها <a target="_blank" href="/tariff.aspx">کلیک کنید</a>.
-                    <br />
-                    برای مشاهده مزایای درج آگهی ویژه <a target="_blank" href="/page-why.aspx">کلیک کنید</a>.
-                </p>
                 <span class="title" style="padding-left:5px"><span class="ess">×</span>دسته بندی</span>
                 <asp:DropDownList ID="groupsDropDownList" Width="430px" runat="server">
                 </asp:DropDownList>
@@ -101,19 +88,6 @@
                     صحیح و دقیق بخش مربوط به آگهی، تاثیر بسزایی در میزان مشاهده آگهی شما دارد
                 </p>
                
-                <div class="spacer">
-                </div>
-                <label class="title" for="ctl00_content_txtOnvan">
-                    <span class="ess">×</span>عنوان آگهی</label>
-                <asp:TextBox ID="TextBox1" runat="server" MaxLength="70" Width="410"></asp:TextBox>
-                <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator5" ValidationGroup="required"
-                    ControlToValidate="AdvTitleTxt" runat="server" ErrorMessage="<b>×</b>" Display="Dynamic"
-                    ToolTip="فیلد الزامی"></asp:RequiredFieldValidator>
-                <p class="helper">
-                    راهنما: عنوان آگهی خود را به گونه ای واضح و جمله معنی دار بنویسید. کلمات کلیدی(اصلی)
-                    را در عنوان به کار ببرید. از تکرار بی مورد کلمات کلیدی پرهیز کنید. بهترین تعداد
-                    حروف، حداکثر 60 کاراکتر است.<br />
-                </p>
                 <div class="spacer">
                 </div>
                 <label class="title" for="ctl00_content_txtOnvan">

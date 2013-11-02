@@ -2,13 +2,13 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 11/01/2013 10:49:11
+-- Date Created: 11/03/2013 02:33:55
 -- Generated from EDMX file: C:\Users\Ali\Documents\GitHub\GroupA\Implementation\ADVIEWER\ADVIEWER\DAL\Model1.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
 GO
-USE [ADVIEWER];
+USE [ADVIEWERdb];
 GO
 IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
 GO
@@ -93,7 +93,7 @@ GO
 -- Creating table 'Advertisments'
 CREATE TABLE [dbo].[Advertisments] (
     [ID] int IDENTITY(1,1) NOT NULL,
-    [GroupID] int  NULL,
+    [GroupID] int  NOT NULL,
     [SateID] int  NULL,
     [StarCount] int  NOT NULL,
     [Title] nvarchar(100)  NOT NULL,
@@ -459,6 +459,20 @@ ADD CONSTRAINT [FK_UserAdvertisment]
 CREATE INDEX [IX_FK_UserAdvertisment]
 ON [dbo].[Advertisments]
     ([UserId]);
+GO
+
+-- Creating foreign key on [GroupID] in table 'Advertisments'
+ALTER TABLE [dbo].[Advertisments]
+ADD CONSTRAINT [FK_AdvertismentGroup]
+    FOREIGN KEY ([GroupID])
+    REFERENCES [dbo].[Groups]
+        ([ID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_AdvertismentGroup'
+CREATE INDEX [IX_FK_AdvertismentGroup]
+ON [dbo].[Advertisments]
+    ([GroupID]);
 GO
 
 -- --------------------------------------------------

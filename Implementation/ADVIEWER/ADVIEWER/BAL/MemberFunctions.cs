@@ -194,6 +194,11 @@ namespace ADVIEWER.BAL
             ModelContainer ml = new ModelContainer();
             return ml.Groups.Where(t => t.ParentID == null).ToArray();
         }
+        public static Group[] GetSubGroupsByID(int ID)
+        {
+            ModelContainer ml = new ModelContainer();
+            return ml.Groups.Where(t => t.ParentID == ID).ToArray();
+        }
         public static void AddNewGroup(string groupName, int? parentId)
         {
             Group g = new Group();
@@ -218,6 +223,11 @@ namespace ADVIEWER.BAL
             g.GroupName = groupName;
             g.ParentID = parentId;
             ml.SaveChanges();
+        }
+        public static Advertisment[] GetAdvByGroupID(int ID)
+        {
+            ModelContainer ml = new ModelContainer();
+            return ml.Advertisments.Where(t => t.GroupID == ID && t.IsConfirmed == true).ToArray();
         }
     }
     public class ShowAdvertisment

@@ -25,6 +25,7 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("Model1", "UserGroup", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DAL.User), "Group", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DAL.Group))]
 [assembly: EdmRelationshipAttribute("Model1", "AdvertismentKeyWord", "Advertisment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DAL.Advertisment), "KeyWord", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DAL.KeyWord))]
 [assembly: EdmRelationshipAttribute("Model1", "UserAdvertisment", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ADVIEWER.DAL.User), "Advertisment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DAL.Advertisment), true)]
+[assembly: EdmRelationshipAttribute("Model1", "AdvertismentGroup", "Advertisment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DAL.Advertisment), "Group", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ADVIEWER.DAL.Group), true)]
 
 #endregion
 
@@ -663,6 +664,7 @@ namespace ADVIEWER.DAL
         /// Create a new Advertisment object.
         /// </summary>
         /// <param name="id">Initial value of the ID property.</param>
+        /// <param name="groupID">Initial value of the GroupID property.</param>
         /// <param name="starCount">Initial value of the StarCount property.</param>
         /// <param name="title">Initial value of the Title property.</param>
         /// <param name="description">Initial value of the Description property.</param>
@@ -675,10 +677,11 @@ namespace ADVIEWER.DAL
         /// <param name="tellTime">Initial value of the TellTime property.</param>
         /// <param name="advDuration">Initial value of the AdvDuration property.</param>
         /// <param name="userId">Initial value of the UserId property.</param>
-        public static Advertisment CreateAdvertisment(global::System.Int32 id, global::System.Int32 starCount, global::System.String title, global::System.String description, global::System.String fullName, global::System.String email, global::System.DateTime expirationDate, global::System.DateTime registrationDate, global::System.DateTime lastRenewal, global::System.Int32 reviewCount, global::System.String tellTime, global::System.Int32 advDuration, global::System.Int32 userId)
+        public static Advertisment CreateAdvertisment(global::System.Int32 id, global::System.Int32 groupID, global::System.Int32 starCount, global::System.String title, global::System.String description, global::System.String fullName, global::System.String email, global::System.DateTime expirationDate, global::System.DateTime registrationDate, global::System.DateTime lastRenewal, global::System.Int32 reviewCount, global::System.String tellTime, global::System.Int32 advDuration, global::System.Int32 userId)
         {
             Advertisment advertisment = new Advertisment();
             advertisment.ID = id;
+            advertisment.GroupID = groupID;
             advertisment.StarCount = starCount;
             advertisment.Title = title;
             advertisment.Description = description;
@@ -728,9 +731,9 @@ namespace ADVIEWER.DAL
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int32> GroupID
+        public global::System.Int32 GroupID
         {
             get
             {
@@ -745,8 +748,8 @@ namespace ADVIEWER.DAL
                 OnGroupIDChanged();
             }
         }
-        private Nullable<global::System.Int32> _GroupID;
-        partial void OnGroupIDChanging(Nullable<global::System.Int32> value);
+        private global::System.Int32 _GroupID;
+        partial void OnGroupIDChanging(global::System.Int32 value);
         partial void OnGroupIDChanged();
     
         /// <summary>
@@ -1461,6 +1464,44 @@ namespace ADVIEWER.DAL
                 }
             }
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("Model1", "AdvertismentGroup", "Group")]
+        public Group Group
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Group>("Model1.AdvertismentGroup", "Group").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Group>("Model1.AdvertismentGroup", "Group").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Group> GroupReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Group>("Model1.AdvertismentGroup", "Group");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Group>("Model1.AdvertismentGroup", "Group", value);
+                }
+            }
+        }
 
         #endregion
 
@@ -2099,6 +2140,28 @@ namespace ADVIEWER.DAL
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<User>("Model1.UserGroup", "User", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("Model1", "AdvertismentGroup", "Advertisment")]
+        public EntityCollection<Advertisment> Advertisments
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Advertisment>("Model1.AdvertismentGroup", "Advertisment");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Advertisment>("Model1.AdvertismentGroup", "Advertisment", value);
                 }
             }
         }
