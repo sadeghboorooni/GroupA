@@ -227,7 +227,23 @@ namespace ADVIEWER.BAL
         public static Advertisment[] GetAdvByGroupID(int ID)
         {
             ModelContainer ml = new ModelContainer();
-            return ml.Advertisments.Where(t => t.GroupID == ID && t.IsConfirmed == true).ToArray();
+            if (ml.Groups.Where(t => t.ID == ID).First().ParentID != null)
+                return ml.Advertisments.Where(t => t.GroupID == ID && t.IsConfirmed == true).ToArray();
+            else
+            {
+                Group[] AllSubGroups = ml.Groups.Where(t => t.ParentID == ID).ToArray();
+                List<Advertisment> AllSubGroupAdvs = new List<Advertisment>();
+                List<Advertisment> ReturnAllGroupAdvs = new List<Advertisment>();
+                foreach(Group SubGroup in AllSubGroups){
+                    AllSubGroupAdvs = ml.Advertisments.Where(t => t.GroupID == SubGroup.ID && t.IsConfirmed == true).ToList();
+                    foreach (Advertisment ReturnAdv in AllSubGroupAdvs)
+                    {
+                        ReturnAllGroupAdvs.Add(ReturnAdv);
+                    }
+                    AllSubGroupAdvs.Clear();
+                }
+                return ReturnAllGroupAdvs.ToArray();
+            }
         }
     }
     public class ShowAdvertisment

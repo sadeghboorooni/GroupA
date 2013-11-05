@@ -33,17 +33,14 @@
                                    
                 </div>
      </div>
-     <div class="ten columns maincontent" style="width:720px">
+     <div class="ten columns maincontent" style="width:950px;float:right">
                 <asp:Repeater ID="Repeater1" runat="server" OnItemDataBound="Repeater1_ItemDataBound">
 
                     <ItemTemplate>
                            
-                           
-
-
                   <%# DateTime.Parse(Eval("ExpirationDate").ToString()) > DateTime.Now && Eval("starcount").ToString() != "-1" ?
 
-                                        "<div class='span3 hero-unit featuredAdv' style='width:28%;background-color:#FFFCBB;'><div style=\"position:absolute;top:0;left:0;z-index:10000\"><img src=\"images/vijesmall.png\" /></div>" : "<div class='span3 hero-unit featuredAdv' style='width:28%;'>"%>
+                                        "<div class='span3 hero-unit featuredAdv' style='width:22%;background-color:#FFFCBB;'><div style=\"position:absolute;top:0;left:0;z-index:10000\"><img src=\"images/vijesmall.png\" /></div>" : "<div class='span3 hero-unit featuredAdv' style='width:22%;'>"%>
                                         
                     <div class="info-column">
                     

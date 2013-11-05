@@ -25,7 +25,6 @@ namespace ADVIEWER
                 {
                     Response.Redirect("404.aspx");
                 }
-
                 Title = Request.QueryString["Title"];
                 GroupAdvRepeater.DataSource = MemberFunctions.GetAdvByGroupID(ID);
                 GroupAdvRepeater.DataBind();

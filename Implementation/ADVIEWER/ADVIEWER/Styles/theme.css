@@ -129,6 +129,7 @@ input.flexible{width:50%}
 @media(max-width:280px){.EmailViewer{font-size:13px}}
 @media(min-width:768px) and (max-width:979px){.footer-form input[type="text"]{width:90%}
 }
+@media(max-width:660px){select{width:95% !important;}}
 @media(max-width:1080px){.main.container.AdvContent{padding-right:0px !important;}}
 @media(max-width:767px){header,header form{text-align:center}
 .social-media{margin:0}

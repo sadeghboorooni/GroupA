@@ -64,6 +64,7 @@
             <p>
                 <i class="icon-user"></i>نام: <a href='<%= string.Format("/profile.aspx?id={0}",curAdv.UserId) %>'>
                     <%= curAdv.User.FullName %>  
+                    </a>
             </p>
           
            
@@ -80,7 +81,7 @@
         <div class="white advcontact" style="height: 290px; overflow-y: auto; overflow-x: hidden">
             <p>
                 <i class="icon-barcode"></i>کد آگهي: 
-                    <%= ID %></p>
+                    <%= curAdv.ID %></p>
             <hr />
             
             <p>

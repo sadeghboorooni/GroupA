@@ -101,7 +101,7 @@
                               <li class="dropdown ltrClass" style="width:200px">
 										<a class="dropdown-toggle ltrClass" data-toggle="dropdown" href="#" style="font-size:13pt;"><b class="caret"></b><%# Eval("GroupName") %><i style="padding-left:6px;" id="ICON<%# Eval("id") %>"></i> </a>
 										<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel" style="right:0px">
-                                       
+                                          <li><a  style="font-size:11pt" href='../ShowGroupAdvs.aspx?ID=<%# Eval("id") %>&Title=<%# Eval("GroupName") %>'>تمام تبلیغات این گروه<i class="icon-arrow-left" style="font-size: 10px;padding-left: 5px;color: rgb(90, 238, 90);"></i></a></li>
                                       <asp:Literal ID="GetSubGroups" Text='<%# Eval("id") %>' runat="server"></asp:Literal>
                                   </ul>  
                                   

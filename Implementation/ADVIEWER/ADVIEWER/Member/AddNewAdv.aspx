@@ -65,7 +65,7 @@
 
         <p>
             پرکردن قسمت هایی که با <span class="ess">×</span> مشخص شده اند الزامی است.</p>
-       <span class="title"><span class="ess">×</span>نوع و مدت آگهی</span>
+       <span class="title"><span class="ess">×</span>نوع آگهی</span>
                 <asp:DropDownList ID="AdvKindDrop" CssClass="MyCss" Width="180px" onchange="fill_capital(this.selectedIndex);"
                     runat="server">
                     <asp:ListItem Value="-1">آگهی عادی</asp:ListItem>
@@ -73,13 +73,13 @@
                     <asp:ListItem Value="2">ویژه دو ستاره</asp:ListItem>
                     
                 </asp:DropDownList>
-                &nbsp;&nbsp; به مدت &nbsp;&nbsp;
+               <span class="title"><span class="ess">×</span>مدت آگهی</span>
                 <asp:DropDownList ID="MonthDrop" CssClass="MyCss" Width="180px" runat="server">
                     <asp:ListItem Value="1">یک ماه</asp:ListItem>
                     <asp:ListItem Value="2">دو ماه</asp:ListItem>
                     <asp:ListItem Value="3">سه ماه</asp:ListItem>
                 </asp:DropDownList>
-             
+                <div class="clear"></div>
                 <span class="title" style="padding-left:5px"><span class="ess">×</span>دسته بندی</span>
                 <asp:DropDownList ID="groupsDropDownList" Width="430px" runat="server">
                 </asp:DropDownList>
