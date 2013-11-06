@@ -1,0 +1,277 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Model1" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+  <EntityContainer Name="ModelContainer" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Advertisments" EntityType="Model1.Advertisment" />
+    <EntitySet Name="Users" EntityType="Model1.User" />
+    <EntitySet Name="Tickets1" EntityType="Model1.Ticket" />
+    <EntitySet Name="States" EntityType="Model1.State" />
+    <EntitySet Name="Payments1" EntityType="Model1.Payment" />
+    <EntitySet Name="Groups" EntityType="Model1.Group" />
+    <EntitySet Name="Cities" EntityType="Model1.City" />
+    <EntitySet Name="ContactMessages" EntityType="Model1.ContactMessage" />
+    <EntitySet Name="AdvertisementMessages" EntityType="Model1.AdvertisementMessage" />
+    <EntitySet Name="Mail_User1" EntityType="Model1.Mail_User" />
+    <EntitySet Name="KeyWords" EntityType="Model1.KeyWord" />
+    <AssociationSet Name="GroupGroup" Association="Model1.GroupGroup">
+      <End Role="Group" EntitySet="Groups" />
+      <End Role="childGroup" EntitySet="Groups" />
+    </AssociationSet>
+    <AssociationSet Name="StateCity" Association="Model1.StateCity">
+      <End Role="State" EntitySet="States" />
+      <End Role="City" EntitySet="Cities" />
+    </AssociationSet>
+    <AssociationSet Name="UserTicket" Association="Model1.UserTicket">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Ticket" EntitySet="Tickets1" />
+    </AssociationSet>
+    <AssociationSet Name="UserGroup" Association="Model1.UserGroup">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Group" EntitySet="Groups" />
+    </AssociationSet>
+    <AssociationSet Name="AdvertismentKeyWord" Association="Model1.AdvertismentKeyWord">
+      <End Role="Advertisment" EntitySet="Advertisments" />
+      <End Role="KeyWord" EntitySet="KeyWords" />
+    </AssociationSet>
+    <AssociationSet Name="UserAdvertisment" Association="Model1.UserAdvertisment">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Advertisment" EntitySet="Advertisments" />
+    </AssociationSet>
+    <AssociationSet Name="AdvertismentGroup" Association="Model1.AdvertismentGroup">
+      <End Role="Advertisment" EntitySet="Advertisments" />
+      <End Role="Group" EntitySet="Groups" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Advertisment">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="GroupID" Nullable="false" />
+    <Property Type="Int32" Name="SateID" Nullable="true" />
+    <Property Type="Int32" Name="StarCount" Nullable="false" />
+    <Property Type="String" Name="Title" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="ShortDescription" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Description" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Pic" MaxLength="200" FixedLength="false" Unicode="true" Nullable="true" />
+    <Property Type="Boolean" Name="IsConfirmed" Nullable="false" DefaultValue="false" />
+    <Property Type="Boolean" Name="IsPaid" Nullable="true" />
+    <Property Type="Boolean" Name="IsRead" Nullable="false" DefaultValue="false" />
+    <Property Type="String" Name="DenyReason" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="true" />
+    <Property Type="String" Name="FullName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Tell" MaxLength="50" FixedLength="false" Unicode="true" Nullable="true" />
+    <Property Type="String" Name="Mobile" MaxLength="50" FixedLength="false" Unicode="true" Nullable="true" />
+    <Property Type="String" Name="Address" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="true" />
+    <Property Type="String" Name="Email" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="YahooID" MaxLength="100" FixedLength="false" Unicode="true" Nullable="true" />
+    <Property Type="String" Name="Price" MaxLength="200" FixedLength="false" Unicode="true" Nullable="true" />
+    <Property Type="DateTime" Name="ExpirationDate" Nullable="false" />
+    <Property Type="DateTime" Name="RegistrationDate" Nullable="false" />
+    <Property Type="DateTime" Name="LastRenewal" Nullable="false" />
+    <Property Type="Int32" Name="ReviewCount" Nullable="false" />
+    <Property Type="String" Name="TellTime" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Type="String" Name="Link" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="true" />
+    <Property Name="PaidID" Nullable="true" Type="Int64" />
+    <Property Type="Int32" Name="CityID" Nullable="true" />
+    <Property Type="Int32" Name="AdvDuration" Nullable="false" />
+    <Property Type="Int32" Name="UserId" Nullable="false" />
+    <NavigationProperty Name="KeyWords" Relationship="Model1.AdvertismentKeyWord" FromRole="Advertisment" ToRole="KeyWord" />
+    <NavigationProperty Name="User" Relationship="Model1.UserAdvertisment" FromRole="Advertisment" ToRole="User" />
+    <NavigationProperty Name="Group" Relationship="Model1.AdvertismentGroup" FromRole="Advertisment" ToRole="Group" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="FullName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="IsManager" DefaultValue="false" Nullable="false" />
+    <Property Type="DateTime" Name="RegisterDate" Nullable="false" />
+    <Property Type="String" Name="Mobile" Nullable="true" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Tell" Nullable="true" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Address" Nullable="true" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Type="DateTime" Name="LastLogin" Nullable="false" />
+    <Property Type="Int32" Name="StateID" Nullable="true" />
+    <Property Type="Int32" Name="CityID" Nullable="true" />
+    <Property Type="String" Name="Fax" Nullable="true" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="YahooID" Nullable="true" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="About" Nullable="true" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="PicAddress" Nullable="true" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="BannedMsg" Nullable="true" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="Guid" Name="UserProviderKey" Nullable="false" />
+    <NavigationProperty Name="Tickets" Relationship="Model1.UserTicket" FromRole="User" ToRole="Ticket" />
+    <NavigationProperty Name="Groups" Relationship="Model1.UserGroup" FromRole="User" ToRole="Group" />
+    <NavigationProperty Name="Advertisments" Relationship="Model1.UserAdvertisment" FromRole="User" ToRole="Advertisment" />
+    <Property Type="String" Name="Mail" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Ticket">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="UserID" Nullable="false" />
+    <Property Type="String" Name="Title" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Text" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="DateTime" Name="RegDate" />
+    <Property Type="Int16" Name="Status" />
+    <Property Type="String" Name="Priority" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="IsRead" />
+    <Property Type="DateTime" Name="LastUpdate" />
+    <NavigationProperty Name="User" Relationship="Model1.UserTicket" FromRole="Ticket" ToRole="User" />
+  </EntityType>
+  <EntityType Name="State">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="StateName" Nullable="false" />
+    <NavigationProperty Name="Cities" Relationship="Model1.StateCity" FromRole="State" ToRole="City" />
+  </EntityType>
+  <EntityType Name="Payment">
+    <Key>
+      <PropertyRef Name="RequestID" />
+    </Key>
+    <Property Type="Int64" Name="RequestID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int64" Name="UserID" />
+    <Property Type="String" Name="AgahiID" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Title" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Type="DateTime" Name="RegisterDate" />
+    <Property Type="Int32" Name="Mablagh" />
+    <Property Type="Boolean" Name="IsRead" />
+    <Property Type="String" Name="SanadNum" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="ResidNum" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="Status" />
+    <Property Type="String" Name="Name" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Tel" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Description" MaxLength="3000" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Bank" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Group">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Pic" Nullable="true" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="GroupName" Nullable="false" />
+    <Property Type="Int32" Name="ParentID" Nullable="true" />
+    <NavigationProperty Name="parentGroup" Relationship="Model1.GroupGroup" FromRole="Group" ToRole="childGroup" />
+    <NavigationProperty Name="childGroup" Relationship="Model1.GroupGroup" FromRole="childGroup" ToRole="Group" />
+    <NavigationProperty Name="Users" Relationship="Model1.UserGroup" FromRole="Group" ToRole="User" />
+    <NavigationProperty Name="Advertisments" Relationship="Model1.AdvertismentGroup" FromRole="Group" ToRole="Advertisment" />
+  </EntityType>
+  <EntityType Name="City">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="CityName" Nullable="false" />
+    <Property Type="Int32" Name="StateID" Nullable="false" />
+    <NavigationProperty Name="State" Relationship="Model1.StateCity" FromRole="City" ToRole="State" />
+  </EntityType>
+  <EntityType Name="ContactMessage">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="FulName" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Email" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Tell" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Title" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Text" MaxLength="2000" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Reply" MaxLength="3000" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="IsRead" />
+    <Property Type="DateTime" Name="RegDate" />
+    <Property Type="Int32" Name="UserID" />
+  </EntityType>
+  <EntityType Name="AdvertisementMessage">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int64" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int64" Name="AgahiID" />
+    <Property Type="Int64" Name="UserID" />
+    <Property Type="String" Name="FullName" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Email" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Text" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="DateTime" Name="Date" />
+    <Property Type="Boolean" Name="IsRead" />
+    <Property Type="String" Name="Tell" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="Inbox" />
+    <Property Type="String" Name="reply" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Mail_User">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int64" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int64" Name="SenderID" />
+    <Property Type="Int64" Name="ReciverID" />
+    <Property Type="Int64" Name="QuotationID" />
+    <Property Type="String" Name="Title" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Text" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="Int64" Name="IsRead" />
+    <Property Type="Boolean" Name="SenderDelete" />
+    <Property Type="Boolean" Name="ReciverDelete" />
+    <Property Type="Boolean" Name="IsAnswerd" />
+    <Property Type="DateTime" Name="Date" />
+  </EntityType>
+  <EntityType Name="KeyWord">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Text" Nullable="false" />
+    <NavigationProperty Name="Advertisment" Relationship="Model1.AdvertismentKeyWord" FromRole="KeyWord" ToRole="Advertisment" />
+  </EntityType>
+  <Association Name="GroupGroup">
+    <End Type="Model1.Group" Role="Group" Multiplicity="0..1" />
+    <End Type="Model1.Group" Role="childGroup" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Group">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="childGroup">
+        <PropertyRef Name="ParentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="StateCity">
+    <End Type="Model1.State" Role="State" Multiplicity="1" />
+    <End Type="Model1.City" Role="City" Multiplicity="*" />
+  </Association>
+  <Association Name="UserTicket">
+    <End Type="Model1.User" Role="User" Multiplicity="1" />
+    <End Type="Model1.Ticket" Role="Ticket" Multiplicity="*" />
+  </Association>
+  <Association Name="UserGroup">
+    <End Type="Model1.User" Role="User" Multiplicity="*" />
+    <End Type="Model1.Group" Role="Group" Multiplicity="*" />
+  </Association>
+  <Association Name="AdvertismentKeyWord">
+    <End Type="Model1.Advertisment" Role="Advertisment" Multiplicity="*" />
+    <End Type="Model1.KeyWord" Role="KeyWord" Multiplicity="*" />
+  </Association>
+  <Association Name="UserAdvertisment">
+    <End Type="Model1.User" Role="User" Multiplicity="1" />
+    <End Type="Model1.Advertisment" Role="Advertisment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Advertisment">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AdvertismentGroup">
+    <End Type="Model1.Advertisment" Role="Advertisment" Multiplicity="*" />
+    <End Type="Model1.Group" Role="Group" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Group">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Advertisment">
+        <PropertyRef Name="GroupID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
