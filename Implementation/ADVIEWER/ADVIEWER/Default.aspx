@@ -82,7 +82,7 @@
 
   <div class "container wrapper">
   <h1>
-  <i class="icon-star"></i> آگهی های جدید </h1>
+  <img style="width:2%;vertical-align:-4px" src="Styles/Images/new.png" alt="" /> آگهی های جدید </h1>
         <div class="row" style="clear: both;overflow:hidden;">
         <asp:Repeater ID="LastAdvsRepeater" runat="server">
             <ItemTemplate>
