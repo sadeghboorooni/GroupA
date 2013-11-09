@@ -65,7 +65,14 @@ namespace ADVIEWER.BAL
             ml.SaveChanges();
         }
 
-        
 
+
+
+        public static bool IsManager()
+        {
+            ModelContainer ml = new ModelContainer();
+            Guid userGuid = (Guid)Membership.GetUser().ProviderUserKey;
+            return ml.Users.Where(t => t.UserProviderKey == userGuid).Select(t => t.IsManager).FirstOrDefault();
+        }
     }
 }
