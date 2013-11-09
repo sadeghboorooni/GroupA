@@ -31,7 +31,7 @@ namespace ADVIEWER
             else { Response.Redirect("404.aspx"); }
 
             curAdv = MemberFunctions.GetAdvertismentData(id);
-            if (curAdv == null || !curAdv.IsConfirmed) { Response.Redirect("404.aspx"); }
+            if ((curAdv == null || !curAdv.IsConfirmed) && !AccountFunctions.IsManager()) { Response.Redirect("404.aspx"); }
             LoadUserAdvertisments();
         
         }

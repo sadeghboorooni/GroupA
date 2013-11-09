@@ -84,7 +84,7 @@ namespace TestProject2
             string Pic = string.Empty; // TODO: Initialize to an appropriate value
             DateTime RegistrationDate = new DateTime(); // TODO: Initialize to an appropriate value
             int UserId = 0; // TODO: Initialize to an appropriate value
-            ShowAdvertisment target = new ShowAdvertisment(ID, Title, Description, FullName, Pic, RegistrationDate, UserId);
+            ShowAdvertisment target = new ShowAdvertisment(ID, Title, Description, FullName, Pic, RegistrationDate,0, UserId);
             Assert.Inconclusive("TODO: Implement code to verify target");
         }
     }

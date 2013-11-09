@@ -120,7 +120,7 @@ namespace ADVIEWER.BAL
             List<ShowAdvertisment> unreadList = new List<ShowAdvertisment>();
             foreach (Advertisment adv in ml.Advertisments.Where(t => t.IsConfirmed == false && t.IsRead == false && t.StarCount == -1))
             {
-                unreadList.Add(new ShowAdvertisment(adv.ID, adv.Title, adv.ShortDescription, adv.FullName, adv.Pic, adv.RegistrationDate, adv.UserId));
+                unreadList.Add(new ShowAdvertisment(adv.ID, adv.Title, adv.ShortDescription, adv.FullName, adv.Pic, adv.RegistrationDate,-1, adv.UserId));
             }
             unreadList = unreadList.OrderByDescending(t => t.RegistrationDate).ToList();
             return PublicFunctions.ToDataTable<ShowAdvertisment>(unreadList);
@@ -129,18 +129,19 @@ namespace ADVIEWER.BAL
         {
             ModelContainer ml = new ModelContainer();
             Advertisment adv = ml.Advertisments.Where(t => t.ID == AdvID).FirstOrDefault();
-            if (adv.StarCount == -1)
+            //if (adv.StarCount == -1)
             {
                 adv.IsRead = true;
                 adv.IsConfirmed = true;
                 ml.SaveChanges();
             }
+
         }
         public static void DenyAdvertisment(int AdvID, string reason)
         {
             ModelContainer ml = new ModelContainer();
             Advertisment adv = ml.Advertisments.Where(t => t.ID == AdvID).FirstOrDefault();
-            if (adv.StarCount == -1)
+            //if (adv.StarCount == -1)
             {
                 adv.IsRead = true;
                 adv.IsConfirmed = false;
@@ -245,6 +246,19 @@ namespace ADVIEWER.BAL
                 return ReturnAllGroupAdvs.ToArray();
             }
         }
+
+        public static object UnconfirmedStaredAdvertismentsDataTable()
+        {
+            ModelContainer ml = new ModelContainer();
+
+            List<ShowAdvertisment> unreadList = new List<ShowAdvertisment>();
+            foreach (Advertisment adv in ml.Advertisments.Where(t => t.IsConfirmed == false && t.IsRead == false && t.StarCount > -1))
+            {
+                unreadList.Add(new ShowAdvertisment(adv.ID, adv.Title, adv.ShortDescription, adv.FullName, adv.Pic, adv.RegistrationDate,adv.StarCount, adv.UserId));
+            }
+            unreadList = unreadList.OrderByDescending(t => t.RegistrationDate).ToList();
+            return PublicFunctions.ToDataTable<ShowAdvertisment>(unreadList);
+        }
     }
     public class ShowAdvertisment
     {
@@ -252,7 +266,7 @@ namespace ADVIEWER.BAL
             FullName,
             Title,
             Pic;
-        public int ID, UserId;
+        public int ID, UserId,starCount;
         public DateTime RegistrationDate;
 
         public ShowAdvertisment(int ID,
@@ -260,7 +274,7 @@ namespace ADVIEWER.BAL
             string Description,
             string FullName,
             string Pic,
-            DateTime RegistrationDate,
+            DateTime RegistrationDate,int starcount,
             int UserId)
         {
             this.ID = ID;
@@ -269,6 +283,7 @@ namespace ADVIEWER.BAL
             this.Pic = Pic;
             this.RegistrationDate = RegistrationDate;
             this.Title = Title;
+            this.starCount = starcount;
             this.UserId = UserId;
         }
     }
