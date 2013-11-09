@@ -170,6 +170,21 @@ namespace ADVIEWER.BAL
             ModelContainer ml = new ModelContainer();
             return ml.Tickets1.Where(t => t.ID == id).FirstOrDefault();
         }
+
+        public static Ticket[] GetListTicketData(int id)
+        {
+            ModelContainer ml = new ModelContainer();
+            return ml.Tickets1.Where(t => t.UserID == id).ToArray();
+        }
+
+        public static void DeleteTicket(int TicketID)
+        {
+            ModelContainer ml = new ModelContainer();
+            Ticket TicketDeleted = ml.Tickets1.Where(t => t.ID == TicketID).First();
+            ml.DeleteObject(TicketDeleted);
+            ml.SaveChanges();
+        }
+
         public static Advertisment GetAdvertismentData(int id)
         {
             ModelContainer ml = new ModelContainer();

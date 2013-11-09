@@ -125,7 +125,6 @@
     <Property Name="Priority" Type="nvarchar" Nullable="true" MaxLength="10" />
     <Property Name="IsRead" Type="bit" Nullable="true" />
     <Property Name="LastUpdate" Type="datetime" Nullable="true" />
-    <Property Name="User_ID" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="States">
     <Key>
@@ -273,7 +272,7 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="Ticket">
-        <PropertyRef Name="User_ID" />
+        <PropertyRef Name="UserID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -594,6 +593,14 @@
         <Association Name="UserTicket">
           <End Type="Model1.User" Role="User" Multiplicity="1" />
           <End Type="Model1.Ticket" Role="Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
         <Association Name="UserGroup">
           <End Type="Model1.User" Role="User" Multiplicity="*" />
@@ -819,14 +826,6 @@
         <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="UserTicket" TypeName="Model1.UserTicket" StoreEntitySet="Tickets1">
-      <EndProperty Name="User">
-        <ScalarProperty Name="ID" ColumnName="User_ID" />
-      </EndProperty>
-      <EndProperty Name="Ticket">
-        <ScalarProperty Name="ID" ColumnName="ID" />
-      </EndProperty>
-    </AssociationSetMapping>
     <AssociationSetMapping Name="UserGroup" TypeName="Model1.UserGroup" StoreEntitySet="UserGroup">
       <EndProperty Name="User">
         <ScalarProperty Name="ID" ColumnName="Users_ID" />
@@ -861,7 +860,7 @@
     </edmx:Options>
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram Name="Model1" ZoomLevel="88" >
+      <Diagram Name="Model1" ZoomLevel="81" >
         <EntityTypeShape EntityType="Model1.Advertisment" Width="1.5" PointX="3" PointY="1.75" Height="6.9801236979166656" IsExpanded="true" />
         <EntityTypeShape EntityType="Model1.User" Width="1.5" PointX="1.125" PointY="1.25" Height="4.8648079427083326" IsExpanded="true" />
         <EntityTypeShape EntityType="Model1.Ticket" Width="1.5" PointX="2.625" PointY="12" Height="2.9417936197916656" />

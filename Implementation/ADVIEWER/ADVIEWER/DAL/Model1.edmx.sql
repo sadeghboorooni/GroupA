@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 11/03/2013 02:33:55
--- Generated from EDMX file: C:\Users\Ali\Documents\GitHub\GroupA\Implementation\ADVIEWER\ADVIEWER\DAL\Model1.edmx
+-- Date Created: 11/09/2013 18:22:52
+-- Generated from EDMX file: C:\Users\arash\Documents\GitHub\GroupA\Implementation\ADVIEWER\ADVIEWER\DAL\Model1.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -40,6 +40,9 @@ IF OBJECT_ID(N'[dbo].[FK_AdvertismentKeyWord_KeyWord]', 'F') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[FK_UserAdvertisment]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Advertisments] DROP CONSTRAINT [FK_UserAdvertisment];
+GO
+IF OBJECT_ID(N'[dbo].[FK_AdvertismentGroup]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Advertisments] DROP CONSTRAINT [FK_AdvertismentGroup];
 GO
 
 -- --------------------------------------------------
@@ -156,8 +159,7 @@ CREATE TABLE [dbo].[Tickets1] (
     [Status] smallint  NULL,
     [Priority] nvarchar(10)  NULL,
     [IsRead] bit  NULL,
-    [LastUpdate] datetime  NULL,
-    [User_ID] int  NOT NULL
+    [LastUpdate] datetime  NULL
 );
 GO
 
@@ -387,10 +389,10 @@ ON [dbo].[Cities]
     ([State_ID]);
 GO
 
--- Creating foreign key on [User_ID] in table 'Tickets1'
+-- Creating foreign key on [UserID] in table 'Tickets1'
 ALTER TABLE [dbo].[Tickets1]
 ADD CONSTRAINT [FK_UserTicket]
-    FOREIGN KEY ([User_ID])
+    FOREIGN KEY ([UserID])
     REFERENCES [dbo].[Users]
         ([ID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
@@ -398,7 +400,7 @@ ADD CONSTRAINT [FK_UserTicket]
 -- Creating non-clustered index for FOREIGN KEY 'FK_UserTicket'
 CREATE INDEX [IX_FK_UserTicket]
 ON [dbo].[Tickets1]
-    ([User_ID]);
+    ([UserID]);
 GO
 
 -- Creating foreign key on [Users_ID] in table 'UserGroup'
