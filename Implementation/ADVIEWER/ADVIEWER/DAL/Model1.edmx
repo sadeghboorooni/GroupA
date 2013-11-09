@@ -21,7 +21,7 @@
     <EntitySet Name="AdvertismentKeyWord" EntityType="Model1.Store.AdvertismentKeyWord" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="GroupGroup" Association="Model1.Store.GroupGroup">
       <End Role="Group" EntitySet="Groups" />
-      <End Role="childGroup" EntitySet="Groups" />
+      <End Role="parentGroup" EntitySet="Groups" />
     </AssociationSet>
     <AssociationSet Name="StateCity" Association="Model1.Store.StateCity">
       <End Role="State" EntitySet="States" />
@@ -121,10 +121,10 @@
     <Property Name="Title" Type="nvarchar" Nullable="true" MaxLength="100" />
     <Property Name="Text" Type="nvarchar(max)" Nullable="true" />
     <Property Name="RegDate" Type="datetime" Nullable="true" />
-    <Property Name="Status" Type="smallint" Nullable="true" />
     <Property Name="Priority" Type="nvarchar" Nullable="true" MaxLength="10" />
     <Property Name="IsRead" Type="bit" Nullable="true" />
     <Property Name="LastUpdate" Type="datetime" Nullable="true" />
+    <Property Name="Answer" Type="nvarchar(max)" Nullable="true" />
   </EntityType>
   <EntityType Name="States">
     <Key>
@@ -242,12 +242,12 @@
   </EntityType>
   <Association Name="GroupGroup">
     <End Role="Group" Type="Model1.Store.Groups" Multiplicity="0..1" />
-    <End Role="childGroup" Type="Model1.Store.Groups" Multiplicity="*" />
+    <End Role="parentGroup" Type="Model1.Store.Groups" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Group">
         <PropertyRef Name="ID" />
       </Principal>
-      <Dependent Role="childGroup">
+      <Dependent Role="parentGroup">
         <PropertyRef Name="ParentID" />
       </Dependent>
     </ReferentialConstraint>
@@ -366,7 +366,7 @@
           <EntitySet Name="KeyWords" EntityType="Model1.KeyWord" />
           <AssociationSet Name="GroupGroup" Association="Model1.GroupGroup">
             <End Role="Group" EntitySet="Groups" />
-            <End Role="childGroup" EntitySet="Groups" />
+            <End Role="parentGroup" EntitySet="Groups" />
           </AssociationSet>
           <AssociationSet Name="StateCity" Association="Model1.StateCity">
             <End Role="State" EntitySet="States" />
@@ -464,11 +464,11 @@
           <Property Type="String" Name="Title" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="Text" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="DateTime" Name="RegDate" />
-          <Property Type="Int16" Name="Status" />
           <Property Type="String" Name="Priority" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Type="Boolean" Name="IsRead" />
           <Property Type="DateTime" Name="LastUpdate" />
           <NavigationProperty Name="User" Relationship="Model1.UserTicket" FromRole="Ticket" ToRole="User" />
+          <Property Type="String" Name="Answer" Nullable="true" />
         </EntityType>
         <EntityType Name="State">
           <Key>
@@ -505,8 +505,8 @@
           <Property Type="String" Name="Pic" Nullable="true" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="GroupName" Nullable="false" />
           <Property Type="Int32" Name="ParentID" Nullable="true" />
-          <NavigationProperty Name="parentGroup" Relationship="Model1.GroupGroup" FromRole="Group" ToRole="childGroup" />
-          <NavigationProperty Name="childGroup" Relationship="Model1.GroupGroup" FromRole="childGroup" ToRole="Group" />
+          <NavigationProperty Name="childGroup" Relationship="Model1.GroupGroup" FromRole="Group" ToRole="parentGroup" />
+          <NavigationProperty Name="parentGroup" Relationship="Model1.GroupGroup" FromRole="parentGroup" ToRole="Group" />
           <NavigationProperty Name="Users" Relationship="Model1.UserGroup" FromRole="Group" ToRole="User" />
           <NavigationProperty Name="Advertisments" Relationship="Model1.AdvertismentGroup" FromRole="Group" ToRole="Advertisment" />
         </EntityType>
@@ -576,12 +576,12 @@
         </EntityType>
         <Association Name="GroupGroup">
           <End Type="Model1.Group" Role="Group" Multiplicity="0..1" />
-          <End Type="Model1.Group" Role="childGroup" Multiplicity="*" />
+          <End Type="Model1.Group" Role="parentGroup" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Group">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="childGroup">
+            <Dependent Role="parentGroup">
               <PropertyRef Name="ParentID" />
             </Dependent>
           </ReferentialConstraint>
@@ -706,10 +706,10 @@
           <ScalarProperty Name="Title" ColumnName="Title" />
           <ScalarProperty Name="Text" ColumnName="Text" />
           <ScalarProperty Name="RegDate" ColumnName="RegDate" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="Priority" ColumnName="Priority" />
           <ScalarProperty Name="IsRead" ColumnName="IsRead" />
           <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+          <ScalarProperty Name="Answer" ColumnName="Answer" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -863,7 +863,7 @@
       <Diagram Name="Model1" ZoomLevel="81" >
         <EntityTypeShape EntityType="Model1.Advertisment" Width="1.5" PointX="3" PointY="1.75" Height="6.9801236979166656" IsExpanded="true" />
         <EntityTypeShape EntityType="Model1.User" Width="1.5" PointX="1.125" PointY="1.25" Height="4.8648079427083326" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model1.Ticket" Width="1.5" PointX="2.625" PointY="12" Height="2.9417936197916656" />
+        <EntityTypeShape EntityType="Model1.Ticket" Width="1.5" PointX="2.75" PointY="12.375" Height="2.9417936197916656" />
         <EntityTypeShape EntityType="Model1.State" Width="1.5" PointX="9.625" PointY="4.25" Height="1.5956835937500031" />
         <EntityTypeShape EntityType="Model1.Payment" Width="1.5" PointX="10.25" PointY="5.875" Height="3.7109993489583335" />
         <EntityTypeShape EntityType="Model1.Group" Width="1.5" PointX="3" PointY="9.25" Height="2.5571907552083317" />
@@ -883,9 +883,9 @@
           <ConnectorPoint PointX="11.875" PointY="5.0478417968750016" />
         </AssociationConnector>
         <AssociationConnector Association="Model1.UserTicket" >
-          <ConnectorPoint PointX="1.67187375" PointY="6.1148079427083326" />
-          <ConnectorPoint PointX="1.67187375" PointY="13.470896809895834" />
-          <ConnectorPoint PointX="2.625" PointY="13.470896809895834" />
+          <ConnectorPoint PointX="1.6210921875" PointY="6.1148079427083326" />
+          <ConnectorPoint PointX="1.6210921875" PointY="13.845896809895834" />
+          <ConnectorPoint PointX="2.75" PointY="13.845896809895834" />
         </AssociationConnector>
         <AssociationConnector Association="Model1.UserGroup" >
           <ConnectorPoint PointX="2.179689375" PointY="6.1148079427083326" />

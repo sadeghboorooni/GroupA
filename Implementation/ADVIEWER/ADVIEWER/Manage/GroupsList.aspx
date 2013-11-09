@@ -89,7 +89,7 @@
                           عنوان
                         </HeaderTemplate>
                         <ItemTemplate>
-                            <a style="font-size:12px;" href='<%# Eval("id","editgroup.aspx?id={0}") %>' title='<%# Eval("GroupName") %>'><%# Eval("childGroup.GroupName") == null ? Eval("GroupName") : Eval("childGroup.GroupName") + "->" + Eval("GroupName")%></a>
+                            <a style="font-size:12px;" href='<%# Eval("id","editgroup.aspx?id={0}") %>' title='<%# Eval("GroupName") %>'><%# Eval("parentGroup.GroupName") == null ? Eval("GroupName") : Eval("parentGroup.GroupName") + "->" + Eval("GroupName")%></a>
                         </ItemTemplate> 
                         <HeaderStyle HorizontalAlign="Right" />
                         <ItemStyle Width="250px" />

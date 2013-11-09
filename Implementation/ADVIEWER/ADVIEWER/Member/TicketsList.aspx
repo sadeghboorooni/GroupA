@@ -29,7 +29,9 @@
                     <asp:TemplateField FooterText="عنوان" SortExpression="FullName" HeaderText="عنوان">
                         <ItemTemplate>
                         <p>
-                        <%# Eval("Title") %> 
+                        <a href='viewTicket.aspx?Id=<%# Eval("id")%>'>
+                        <%# Eval("Title") %>
+                        </a>
                         </p>
                         </ItemTemplate>
                         <HeaderTemplate>
@@ -43,7 +45,9 @@
                     <asp:TemplateField FooterText="متن" SortExpression="FullName" HeaderText="عنوان">
                         <ItemTemplate>
                         <p>
-                        <%# Eval("Text") %> 
+                        <a href='viewTicket.aspx?Id=<%# Eval("id")%>'>
+                        <%# Eval("Text") %>
+                        </a>
                         </p>
                         </ItemTemplate>
                         <HeaderTemplate>
