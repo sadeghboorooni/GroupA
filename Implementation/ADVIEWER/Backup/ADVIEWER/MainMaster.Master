@@ -1,0 +1,181 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="ManageMaster.master.cs" Inherits="ADVIEWER.MainMaster" %>
+
+<!DOCTYPE html >
+
+<html lang="en">
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<head id="Head1" runat="server">
+<!--<![endif]-->
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<meta name="description" content=""/>
+		<meta name="author" content=""/>
+
+        <link href="Styles/member.css" rel="stylesheet" type="text/css" />
+        <link href="Styles/bootstrap.css" rel="stylesheet" type="text/css"/>
+		<link href="Styles/theme.css" rel="stylesheet" type="text/css"/>
+        <link href="Styles/newTheme.css" rel="stylesheet" type="text/css" />
+        <link href="Styles/font-awesome.css" rel="stylesheet" type="text/css" />
+
+        <script src="Scripts/jquery-1.8.2.min.js" type="text/javascript"></script>
+        <script src="Scripts/bootstrap.min.js" type="text/javascript"></script>
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+    
+    <div class="container wrapper">
+        
+        <header>
+
+            <div class="row" style="position:relative">
+          
+            <div class="col-md-3 col-sm-6">
+                
+                <div class="input-append" style="margin-top:0;font-size:30px;">
+				    <a href="Default.aspx"><img src="../Styles/Images/Logo.png" style="max-width:30%;float:right" alt="لوگوی سایت" title="لوگوی سایت" /></a>
+				</div>
+            </div>           
+            <div class="col-md-3 col-sm-6" style="width:100%;position:absolute;bottom:5px;left:0px;text-align:left">
+                    
+					<div style="font-size:17px;" class="createAccountButton">
+                        <asp:LoginView ID="HeadLoginView" runat="server" EnableViewState="false">
+                    <AnonymousTemplate>
+                          <a href="~/Account/Login.aspx" ID="HeadLoginStatus" runat="server">ورود</a> |
+                          <a href="~/Account/Register.aspx" ID = "HeadRegisterStatus" runat="server">عضویت</a>
+                    </AnonymousTemplate>
+                    <LoggedInTemplate>
+                        خوش آمدید <span class="bold"><asp:LoginName ID="HeadLoginName" runat="server" /></span>!&nbsp |
+                        <span><i class="icon-user"></i><a href = "/member/MemberDefault.aspx">حساب کاربری من</a></span>
+                        [ <asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" LogoutText="خروج" LogoutPageUrl="~/Default.aspx"/> ]
+                    </LoggedInTemplate>
+                </asp:LoginView>
+                    </div>	
+                    
+            </div>
+              
+            </div>
+
+           
+		</header>
+        
+      
+        <div class="row ltrClass">
+			<div class="span12 ltrClass">
+					<div class="navbar ltrClass yamm" style="padding:10px 0 0 0;margin:0px" >
+					<div class="navbar-inner ltrClass" style="border-radius: 4px 4px 0px 0px">
+						<div class="container ltrClass" >
+					 <a data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar ltrClass">منوی اصلی</a>
+							<div class="nav-collapse collapse ltrClass">
+								<ul class="nav ltrClass" style="float:right;text-align:right">
+                              
+									<li class=""><a class="" style="font-size:120%" href="/Default.aspx">صفحه اصلی</a></li>
+
+               <li class="ltrClass"> <a class="ltrClass" style="font-size:120%" href="/About.aspx">درباره ما</a></li>
+									
+								</ul> <!-- /.nav -->
+							</div> <!-- /.nav-collapse -->
+						</div><!-- /container -->
+					</div><!-- /navbar-inner -->
+				</div><!-- /navbar -->
+			</div><!-- /row -->
+		</div>
+
+
+         <div class="row ltrClass">
+			<div class="span12 ltrClass">
+				<div class="navbar ltrClassr" style="padding:0px;margin:0px;z-index:1">
+					<div class="navbar-inner ltrClass" style="background-color:#636363; border-radius: 0px 0px 4px 4px">
+						<div class="container ltrClass" >
+						 <a data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar ltrClass">منوی فرعی</a>
+							<div class="nav-collapse collapse ltrClass" >
+								<ul class="nav ltrClass" style="float:right;text-align:right">
+
+                    <asp:Repeater ID="GroupsRepeater" runat="server" OnItemDataBound="getSubGroupsFunc">
+                        <ItemTemplate>
+                             
+                              <li class="dropdown ltrClass" style="width:200px">
+										<a class="dropdown-toggle ltrClass" data-toggle="dropdown" href="#" style="font-size:13pt;"><b class="caret"></b><%# Eval("GroupName") %><i style="padding-left:6px;" id="ICON<%# Eval("id") %>"></i> </a>
+										<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel" style="right:0px">
+                                       <li><a  style="font-size:11pt" href='ShowGroupAdvs.aspx?ID=<%# Eval("id") %>&Title=<%# Eval("GroupName") %>'>تمام تبلیغات این گروه<i class="icon-arrow-left" style="font-size: 10px;padding-left: 5px;color: rgb(90, 238, 90);"></i></a></li>
+                                      <asp:Literal ID="GetSubGroups" Text='<%# Eval("id") %>' runat="server"></asp:Literal>
+                                  </ul>  
+                                  
+									</li>
+                             
+                        </ItemTemplate>
+                    </asp:Repeater>
+                            
+									
+								</ul> <!-- /.nav -->
+							</div> <!-- /.nav-collapse -->
+						</div><!-- /container -->
+					</div><!-- /navbar-inner -->
+				</div><!-- /navbar -->
+			</div><!-- /row -->
+		</div>
+       
+
+    </div>
+    <!-- end of header -->
+
+    <div class="clear">
+    </div> 
+
+    <div class="MainMaster container">
+                <asp:ContentPlaceHolder ID="mainContent" runat="server">
+            </asp:ContentPlaceHolder>
+            </div>
+
+            <div class="main container">
+               <asp:ContentPlaceHolder ID="MoreAdvs" runat="server">
+                </asp:ContentPlaceHolder>
+                </div>
+
+     <footer>
+		<div class="container" style="z-index:999999">
+			<!-- row of widgets -->
+			<div class="row" style="height:auto">
+
+				<div style="padding:0px 3% 0px 3%">
+                	<div class="col-md-31 col-sm-6" style="margin-bottom:20px">
+					<h4><i class="icon-phone"></i>
+                    تماس با ما
+                     </h4>
+					
+						                    می توانید نظرات و پیشنهادات خود را از طریق فرم تماس با ما 
+                    برای ما ارسال کنید.
+                    <br />
+                    تلفن: <span style="letter-spacing: 2px;">99999999-021</span>
+                    <br />
+                    فکس: <span style="letter-spacing: 2px;">88888888-021</span>
+<br />
+                   این سایت دارای مجوز رسمی می باشد.
+                   
+				
+				</div> <!-- /.span3 -->
+			
+				<div class="col-md-31 col-sm-6">
+					<h4><i class="icon-link"></i>
+                    دسترسی سریع</h4>
+					<ul class="links">
+                        <li><a href="About.aspx">درباره ما</a></li> 
+                    </ul>
+				</div><!-- /.span3 -->
+
+
+					</div>
+			</div> <!-- /.row -->
+		</div><!-- /.container -->
+
+		
+	</footer>
+    
+    </form>
+</body>
+</html>
