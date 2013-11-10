@@ -191,6 +191,15 @@ namespace ADVIEWER.BAL
             ml.SaveChanges();
         }
 
+        public static void DeleteAdv(int AdvID)
+        {
+            ModelContainer ml = new ModelContainer();
+            Advertisment AdvForDelete = ml.Advertisments.Where(t => t.ID == AdvID).First();
+            AdvForDelete.KeyWords.Clear();
+            ml.DeleteObject(AdvForDelete);
+            ml.SaveChanges();
+        }
+
         public static Advertisment GetAdvertismentData(int id)
         {
             ModelContainer ml = new ModelContainer();
