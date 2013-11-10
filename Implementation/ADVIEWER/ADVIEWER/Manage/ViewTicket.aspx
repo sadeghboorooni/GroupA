@@ -35,10 +35,9 @@
          
          <div id="txt" runat="server">
          <label class="title">متن پاسخ</label>
-         <asp:TextBox ID="TextBox1" runat="server" TextMode="MultiLine" Width="300" Height="80px"></asp:TextBox> <span style="vertical-align:top">×</span><br />
-         <div style=" padding-right:288px"><asp:Button ID="Button1" runat="server" 
-          Text="ارسال" onclick="Button1_Click" /></div>
-         </div>
+         <asp:TextBox ID="AnswerTextBox" runat="server" TextMode="MultiLine" Width="300" Height="80px"></asp:TextBox> <span style="color:Red">×</span><br />
+         <div style=" padding-right:288px">
+         <asp:Button ID="sendButton" runat="server" Text="ارسال" onclick="sendButton_Click" /></div>
          </div>
          </div>
 

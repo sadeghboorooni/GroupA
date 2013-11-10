@@ -32,6 +32,7 @@ namespace ADVIEWER.Member
             LoadTicketGridView();
         }
 
+
         protected void DeleteSelectedTickets(object sender, EventArgs e)
         {
             CheckBox chkAdd;

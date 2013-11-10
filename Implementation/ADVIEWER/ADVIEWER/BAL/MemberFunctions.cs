@@ -177,6 +177,12 @@ namespace ADVIEWER.BAL
             return ml.Tickets1.Where(t => t.UserID == id).ToArray();
         }
 
+        public static Ticket[] GetListTicketData()
+        {
+            ModelContainer ml = new ModelContainer();
+            return ml.Tickets1.Where(t => t.RegDate == t.LastUpdate).OrderByDescending(t => t.LastUpdate).ToArray();
+        }
+
         public static void DeleteTicket(int TicketID)
         {
             ModelContainer ml = new ModelContainer();
@@ -273,6 +279,15 @@ namespace ADVIEWER.BAL
             }
             unreadList = unreadList.OrderByDescending(t => t.RegistrationDate).ToList();
             return PublicFunctions.ToDataTable<ShowAdvertisment>(unreadList);
+        }
+
+        internal static void SetTicketAnswer(int TicketID, string answer)
+        {
+            ModelContainer ml = new ModelContainer();
+            Ticket t1 = ml.Tickets1.Where(t => t.ID == TicketID).First();
+            t1.Answer = answer;
+            t1.LastUpdate = DateTime.Now;
+            ml.SaveChanges();
         }
     }
     public class ShowAdvertisment

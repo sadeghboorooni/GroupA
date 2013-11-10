@@ -46,7 +46,7 @@
 
 
 .container .ten.columns {
-    width: 668px;
+    width: 65%;
     outline: 0 none;
 }
 .container .column, .container .columns {
@@ -135,8 +135,7 @@
     border-style: solid;
     border-width: 1px 1px 2px;
     color: #383838;
-    padding: 10px 10px;
-    line-height:35px;
+    padding: 5px 10px;
 }
 
 .avatarcon {
@@ -154,22 +153,10 @@
 }
 
 .advcontact p {
-    margin: 0;
+    margin: 5px 0px 5px 0px;
     padding: 0;
     position: relative;
-    line-height:35px;
-    font-size:15px;
 }
-
-
-
-.sidebarhome {
-    background: none repeat scroll 0 0 #EAE9E9;
-    border: 1px solid #E7E4E4;
-    min-height: 200px;
-    width: 260px !important;
-}
-
 
 .widget {
     color: #5B5B5B;
@@ -187,7 +174,6 @@
 .main {
     margin-bottom: 0;
     margin-top: 0;
-    width:970px;
 }
 .container {
     padding-left: 0;
@@ -256,7 +242,7 @@ i
     float: left;
     margin: 0 10px 4px 3px;
     padding: 10px;
-    width: 200px;
+    width: 27%;
 }
 
 
@@ -280,7 +266,6 @@ i
 }
 .advcontact h5, h5.color {
     color: #FFFFFF;
-    font: bold 17px "b yekan","byekan",tahoma;
     text-shadow: 1px 1px 1px #575757;
 }
 .advcontact h5, .advcontact h6, .info > h5 {
@@ -300,7 +285,7 @@ i
     background: none repeat scroll 0 0 #EAE9E9;
     border: 1px solid #E7E4E4;
     min-height: 200px;
-    width: 260px !important;
+    width: 260px;
 }
 
 
@@ -386,12 +371,25 @@ i
     max-width:105px !important;
 }
 
-.helper
+table.gridview{border-collapse:collapse;margin:5px 0 5px 0}table.gridview tr{background:#f8f8f8}table.gridview th,table.gridview td{direction:rtl;border-width:1px;border-right:0;border-left:0;border-style:solid}table.gridview tr.alt{background:#efefef}table.gridview tr td{border:1px solid #e2e2e2}table.gridview tr.alt td{border:1px solid #d5d5d5;border-top-color:#efefef}table.gridview td{border-color:#c1c1c1;padding:5px}table.gridview td a.title{font-size:16px}table.gridview td .inboximg{margin-bottom:-4px}table.gridview tr.footer,table.gridview th{background:#fff;border-color:#e5e5e5;color:#949493;font-size:15px;font-weight:normal;border-width:1px;padding:8px}table.gridview tr.footer td{padding:8px}table.gridview tr.pager{background:#cacaca!important;border:0;padding:0;border:1px solid #d9d9d9}table.gridview tr.empty{background:#fff}table.gridview tr.empty td{padding:15px;text-align:center}table.gridview tr.pager *{background:#fff;padding:0;margin:0;border:0}table.gridview tr.pager td{padding:2px}table.gridview tr.pager td a,table.gridview tr.pager td span{padding:1px 4px;margin:3px;border:1px solid #ddd;border-radius:5px;color:#8a8686}table.gridview tr.pager td a{background:#f2f2f2;border-color:#a49d9d;color:#b05a00}table.gridview .largimg{max-width:20px}p.empty{background:#fff;padding:15px;text-align:center}table.gridview p{margin:0}table.gridview label{display:inline !important;margin-right:10px;vertical-align:-3px}table.gridview td img{padding-left:5px}
+
+.sorting
 {
-    line-height:30px !important;
-    color:rgba(196, 85, 51, 1) !important;
+    float:left;
+    display:inline-table;
 }
-.title
-{
-    font-weight:bold
-}
+    
+    @media(max-width:1000px){
+    .main{width:90% !important}
+    }
+    @media screen and (max-width:320px)
+    {
+        .groups.rounded
+        {
+            width:100% !important;
+        }
+        .white.advcontact
+        {
+            width:100% !important;
+        }
+    }

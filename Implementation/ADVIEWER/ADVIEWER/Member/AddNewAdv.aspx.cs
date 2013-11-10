@@ -42,7 +42,11 @@ namespace ADVIEWER.Member
             foreach (Group g in MemberFunctions.GetSubGroups())
             {
                 ListItem li = new ListItem(g.GroupName, g.ID.ToString());
-                if (g.parentGroup == null) li.Enabled = false;
+                if (g.parentGroup == null)
+                {
+                    li.Attributes.Add( "disabled", "disabled" );
+                    li.Attributes.Add("style", "color: #fff; background: #68b800; margin:4px 0;padding:2px 15px 2px 0");
+                }
                 groupsDropDownList.Items.Add(li);
             }
         }

@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 11/09/2013 18:22:52
--- Generated from EDMX file: C:\Users\arash\Documents\GitHub\GroupA\Implementation\ADVIEWER\ADVIEWER\DAL\Model1.edmx
+-- Date Created: 11/10/2013 00:22:29
+-- Generated from EDMX file: C:\Users\Ali\Documents\GitHub\GroupA\Implementation\ADVIEWER\ADVIEWER\DAL\Model1.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -156,10 +156,10 @@ CREATE TABLE [dbo].[Tickets1] (
     [Title] nvarchar(100)  NULL,
     [Text] nvarchar(max)  NULL,
     [RegDate] datetime  NULL,
-    [Status] smallint  NULL,
     [Priority] nvarchar(10)  NULL,
     [IsRead] bit  NULL,
-    [LastUpdate] datetime  NULL
+    [LastUpdate] datetime  NULL,
+    [Answer] nvarchar(max)  NULL
 );
 GO
 
