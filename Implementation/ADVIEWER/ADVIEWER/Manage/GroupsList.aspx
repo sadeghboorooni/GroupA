@@ -97,7 +97,7 @@
                       <asp:TemplateField FooterText="تنظیمات" HeaderText="تنظیمات">
                         <ItemTemplate>
                             
-                            <asp:LinkButton ID="deleteLinkButton" CommandArgument='<%# Eval("ID") %>' CommandName="delete" runat="server"><i class="icon-eraser"></i>حذف</asp:LinkButton>
+                            <asp:LinkButton ID="deleteLinkButton" CommandArgument='<%# Eval("ID") %>' CommandName="deleteGroup" runat="server"><i class="icon-eraser"></i>حذف</asp:LinkButton>
                             
                             
                         </ItemTemplate>

@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -15,15 +14,6 @@
     <AssemblyName>ADVIEWER</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <UseIISExpress>false</UseIISExpress>
-    <FileUpgradeFlags>
-    </FileUpgradeFlags>
-    <UpgradeBackupLocation>
-    </UpgradeBackupLocation>
-    <OldToolsVersion>4.0</OldToolsVersion>
-    <IISExpressSSLPort />
-    <IISExpressAnonymousAuthentication />
-    <IISExpressWindowsAuthentication />
-    <IISExpressUseClassicPipelineMode />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -87,13 +77,20 @@
     <Content Include="BAL\JsonMaker.aspx" />
     <Content Include="DAL\Model1.edmx.sql" />
     <Content Include="Default.aspx" />
+    <Content Include="graphic\pbar-ani.gif" />
     <Content Include="Manage\Default.aspx" />
+    <Content Include="Manage\EditGroup.aspx" />
+    <Content Include="Manage\GroupsList.aspx" />
     <Content Include="Manage\images\Icons\all.png" />
     <Content Include="Manage\images\Icons\exit.png" />
     <Content Include="Manage\images\Icons\new.png" />
     <Content Include="Manage\images\Icons\pass.png" />
+    <Content Include="Manage\Tickets.aspx" />
     <Content Include="Manage\UnconfirmedAdvs.aspx" />
+    <Content Include="Manage\ViewTicket.aspx" />
     <Content Include="Member\AddNewAdv.aspx" />
+    <Content Include="Member\AddNewTicket.aspx" />
+    <Content Include="Member\AdvsList.aspx" />
     <Content Include="Member\EditProfile.aspx" />
     <Content Include="Member\Images\ChangePassword.png" />
     <Content Include="Member\Images\Email.png" />
@@ -103,10 +100,21 @@
     <Content Include="Member\Images\NewAdv.png" />
     <Content Include="Member\Images\Ticket.png" />
     <Content Include="Member\Images\User-Info.png" />
+    <Content Include="Member\ManageAdvGallery.aspx" />
     <Content Include="Member\MemberDefault.aspx" />
+    <Content Include="Member\scripts\fileupload\application.js" />
+    <Content Include="Member\scripts\fileupload\jquery.fileupload-ui.js" />
+    <Content Include="Member\scripts\fileupload\jquery.fileupload.js" />
+    <Content Include="Member\scripts\fileupload\jquery.iframe-transport.js" />
+    <Content Include="Member\SpecialAdvprivileges.aspx" />
+    <Content Include="Member\styles\fileupload\jquery.fileupload-ui.css" />
+    <Content Include="Member\styles\fileupload\style.css" />
+    <Content Include="Member\TicketsList.aspx" />
+    <Content Include="Member\ViewTicket.aspx" />
     <Content Include="Profile.aspx" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
+    <Content Include="ShowGroupAdvs.aspx" />
     <Content Include="src\jquery.tokeninput.js" />
     <Content Include="Styles\bootstrap.css" />
     <Content Include="Styles\bootstrap.min.js" />
@@ -236,12 +244,33 @@
     <Compile Include="Manage\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Manage\EditGroup.aspx.cs">
+      <DependentUpon>EditGroup.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Manage\EditGroup.aspx.designer.cs">
+      <DependentUpon>EditGroup.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manage\GroupsList.aspx.cs">
+      <DependentUpon>GroupsList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Manage\GroupsList.aspx.designer.cs">
+      <DependentUpon>GroupsList.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Manage\ManageMaster.Master.cs">
       <DependentUpon>ManageMaster.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Manage\ManageMaster.Master.designer.cs">
       <DependentUpon>ManageMaster.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Manage\Tickets.aspx.cs">
+      <DependentUpon>Tickets.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Manage\Tickets.aspx.designer.cs">
+      <DependentUpon>Tickets.aspx</DependentUpon>
     </Compile>
     <Compile Include="Manage\UnconfirmedAdvs.aspx.cs">
       <DependentUpon>UnconfirmedAdvs.aspx</DependentUpon>
@@ -250,6 +279,13 @@
     <Compile Include="Manage\UnconfirmedAdvs.aspx.designer.cs">
       <DependentUpon>UnconfirmedAdvs.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Manage\ViewTicket.aspx.cs">
+      <DependentUpon>ViewTicket.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Manage\ViewTicket.aspx.designer.cs">
+      <DependentUpon>ViewTicket.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Member\AddNewAdv.aspx.cs">
       <DependentUpon>AddNewAdv.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -257,12 +293,37 @@
     <Compile Include="Member\AddNewAdv.aspx.designer.cs">
       <DependentUpon>AddNewAdv.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Member\AddNewTicket.aspx.cs">
+      <DependentUpon>AddNewTicket.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Member\AddNewTicket.aspx.designer.cs">
+      <DependentUpon>AddNewTicket.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\AdvsList.aspx.cs">
+      <DependentUpon>AdvsList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Member\AdvsList.aspx.designer.cs">
+      <DependentUpon>AdvsList.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Member\EditProfile.aspx.cs">
       <DependentUpon>EditProfile.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Member\EditProfile.aspx.designer.cs">
       <DependentUpon>EditProfile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\FilesStatus.ashx.cs" />
+    <Compile Include="Member\FileTransferHandler.ashx.cs">
+      <DependentUpon>FileTransferHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\ManageAdvGallery.aspx.cs">
+      <DependentUpon>ManageAdvGallery.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Member\ManageAdvGallery.aspx.designer.cs">
+      <DependentUpon>ManageAdvGallery.aspx</DependentUpon>
     </Compile>
     <Compile Include="Member\MemberDefault.aspx.cs">
       <DependentUpon>MemberDefault.aspx</DependentUpon>
@@ -278,6 +339,30 @@
     <Compile Include="Member\MemberMaster.Master.designer.cs">
       <DependentUpon>MemberMaster.Master</DependentUpon>
     </Compile>
+    <Compile Include="Member\SpecialAdvprivileges.aspx.cs">
+      <DependentUpon>SpecialAdvprivileges.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Member\SpecialAdvprivileges.aspx.designer.cs">
+      <DependentUpon>SpecialAdvprivileges.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\Thumbnail.ashx.cs">
+      <DependentUpon>Thumbnail.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\TicketsList.aspx.cs">
+      <DependentUpon>TicketsList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Member\TicketsList.aspx.designer.cs">
+      <DependentUpon>TicketsList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\ViewTicket.aspx.cs">
+      <DependentUpon>ViewTicket.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Member\ViewTicket.aspx.designer.cs">
+      <DependentUpon>ViewTicket.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Profile.aspx.cs">
       <DependentUpon>Profile.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -286,6 +371,13 @@
       <DependentUpon>Profile.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ShowGroupAdvs.aspx.cs">
+      <DependentUpon>ShowGroupAdvs.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ShowGroupAdvs.aspx.designer.cs">
+      <DependentUpon>ShowGroupAdvs.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Member\MemberMaster.Master" />
@@ -306,7 +398,9 @@
     <Content Include="MainMaster.Master" />
     <Content Include="Manage\ManageMaster.Master" />
     <Content Include="HPicturer.ashx" />
-    <Content Include="ClassDiagram1.cd" />
+    <Content Include="Member\FileTransferHandler.ashx" />
+    <Content Include="Member\Thumbnail.ashx" />
+    <Content Include="Member\Web.config" />
     <None Include="Styles\fontawesome-webfont.eot" />
     <None Include="Styles\fontawesome-webfont.ttf" />
     <None Include="Styles\fontawesome-webfont.woff" />
@@ -320,13 +414,8 @@
     <Folder Include="UserFiles\profile\main\" />
     <Folder Include="UserFiles\profile\temp\" />
   </ItemGroup>
-  <PropertyGroup>
-    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
-    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
-  </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <ProjectExtensions>
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">

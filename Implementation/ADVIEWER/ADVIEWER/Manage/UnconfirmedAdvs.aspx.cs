@@ -22,7 +22,7 @@ namespace ADVIEWER.Manage
         {
             staredAdvsGridView.DataSource = MemberFunctions.UnconfirmedStaredAdvertismentsDataTable();
             staredAdvsGridView.DataBind();
-            freeAdvsCount = ((DataTable)staredAdvsGridView.DataSource).Rows.Count;
+            staredAdvsCount = ((DataTable)staredAdvsGridView.DataSource).Rows.Count;
         }
 
         private void LoadfreeGridView()

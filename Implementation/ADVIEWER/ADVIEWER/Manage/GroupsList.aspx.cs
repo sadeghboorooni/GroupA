@@ -47,14 +47,17 @@ namespace ADVIEWER.Manage
         }
         protected void groupsGridView_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            if (e.CommandName == "delete") 
+            if (e.CommandName == "deleteGroup") 
             {
                 int id = Convert.ToInt32(e.CommandArgument.ToString());
+                MemberFunctions.DeleteGroup(id);
             }
+
+            LoadGroups();
         }
         protected void groupsGridView_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-
+            
         }
         protected void groupsGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {

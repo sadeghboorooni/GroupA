@@ -244,6 +244,7 @@ namespace ADVIEWER.BAL
         internal static Group GetGroupData(int groupId)
         {
             ModelContainer ml = new ModelContainer();
+            
             return ml.Groups.Where(t => t.ID == groupId).First();
         }
 
@@ -297,6 +298,22 @@ namespace ADVIEWER.BAL
             t1.Answer = answer;
             t1.LastUpdate = DateTime.Now;
             ml.SaveChanges();
+        }
+
+        internal static void DeleteGroup(int id)
+        {
+            ModelContainer ml = new ModelContainer();
+            Group g = ml.Groups.Where(t => t.ID == id).First();
+
+            foreach (Group childGroup in g.childGroup.ToArray()) 
+            {
+                ml.Groups.DeleteObject(childGroup);
+            }
+
+            ml.DeleteObject(g);
+
+            ml.SaveChanges();
+            
         }
     }
     public class ShowAdvertisment

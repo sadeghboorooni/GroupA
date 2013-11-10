@@ -3,7 +3,7 @@
     <title>تیکت های پشتیبانی</title>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="mainContent" runat="server">
-<h2>درخواست‏های شما</h2>
+<h2>تیکت های ارسالی</h2>
          
             <asp:GridView CssClass="gridview" ID="TicketGridView" runat="server" AutoGenerateColumns="False"
                 DataKeyNames="ID" EnableModelValidation="True" Width="100%" OnRowCommand="TicketGridView_RowCommand"
@@ -96,11 +96,10 @@
                 <PagerStyle CssClass="pager" />
                 <EmptyDataRowStyle CssClass="empty" />
                 <EmptyDataTemplate>
-                    <p class="empty">هیچ تیکتی وجود ندارد. <a href="AddNewTicket.aspx">برای ایجاد تیکت کلیک کنید</a>.</p>
+                    <p class="empty">هیچ تیکتی وجود ندارد.</p>
                 </EmptyDataTemplate>
             </asp:GridView>
                  
- <a href="AddNewTicket.aspx" class="btn btn-primary" ><i class="icon-plus"></i> تیکت جدید</a>
        <asp:LinkButton ID="DeleteAllTickets" runat="server" CssClass="btn btn-primary" OnClick="DeleteSelectedTickets" OnClientClick="return confirm('از حذف تیکت های انتخاب شده اطمینان دارید؟');"> <i class="icon-remove" style="color:Red"></i>حذف انتخاب شده ها</asp:LinkButton>&nbsp;&nbsp;&nbsp;
             <div class="clear">
             </div>

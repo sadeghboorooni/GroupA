@@ -22,7 +22,7 @@ namespace ADVIEWER.Manage
                 }
                 catch
                 {
-                    Response.Redirect("advgroups.aspx");
+                    Response.Redirect("~/404.aspx");
                 }
 
                 LoadGroups();

@@ -13,6 +13,15 @@ namespace ADVIEWER.Member {
     public partial class AdvsList {
         
         /// <summary>
+        /// ltrTitle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal ltrTitle;
+        
+        /// <summary>
         /// ltr_error control.
         /// </summary>
         /// <remarks>
