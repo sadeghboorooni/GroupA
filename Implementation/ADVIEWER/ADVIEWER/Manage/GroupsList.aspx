@@ -13,17 +13,6 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="mainContent" runat="server">
 
-    <div class="slider2">
-        <div class="slider2_resize">
-            <a href="default.aspx">مدیریت</a> » مدیریت دسته بندی آگهی ها
-            <p class="time" id="jsClock" style="float: left; color: #fff;">
-            </p>
-        </div>
-        <div class="clr">
-        </div>
-    </div>
-
-
     <div class="fullcontent">
         <h2 class="title blue">
             مدیریت دسته بندی آگهی ها</h2>
@@ -48,14 +37,14 @@
                 <br />
                 <div class="sp"></div>
                 
-                <label class="title" for="ctl00_content_FileUpload1">
+                <%--<label class="title" for="ctl00_content_FileUpload1">
                 آیکون (فقط گروه اصلی)</label>
                 <asp:FileUpload ID="FileUpload1" runat="server"  Width="230"/> 
                 <br />
-                بهترین آیکون 50*50 و png می باشد.
+                بهترین آیکون 50*50 و png می باشد.--%>
                 
-                <left><asp:Button ID="submitButton" runat="server" ValidationGroup="required" 
-                    Text="افزودن" onclick="submitButton_Click" /></left>
+                <div><asp:Button ID="submitButton" runat="server" ValidationGroup="required" 
+                    Text="افزودن" onclick="submitButton_Click" /></div>
             </div>
             <div style="float: left; width: 490px">
              <asp:GridView CssClass="grid" ID="groupsGridView" runat="server" AutoGenerateColumns="False" 
@@ -89,12 +78,12 @@
                           عنوان
                         </HeaderTemplate>
                         <ItemTemplate>
-                            <a style="font-size:12px;" href='<%# Eval("id","editgroup.aspx?id={0}") %>' title='<%# Eval("GroupName") %>'><%# Eval("childGroup.GroupName") == null ? Eval("GroupName") : Eval("childGroup.GroupName") + "->" + Eval("GroupName")%></a>
+                            <a style="font-size:12px;" href='<%# Eval("id","editgroup.aspx?id={0}") %>' title='<%# Eval("GroupName") %>'><%# Eval("parentGroup.GroupName") == null ? Eval("GroupName") : Eval("parentGroup.GroupName") + "->" + Eval("GroupName")%></a>
                         </ItemTemplate> 
                         <HeaderStyle HorizontalAlign="Right" />
                         <ItemStyle Width="250px" />
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="آگهی" FooterText="آگهی">
+                  <%--  <asp:TemplateField HeaderText="آگهی" FooterText="آگهی">
                         <ItemTemplate>
                             <center>
                                 <asp:Literal ID="ltr_count" runat="server"></asp:Literal>
@@ -104,7 +93,7 @@
                         <FooterStyle HorizontalAlign="Center" />
                         <HeaderStyle HorizontalAlign="Center" />
                         <ItemStyle Width="35px" />
-                    </asp:TemplateField>
+                    </asp:TemplateField>--%>
                       <asp:TemplateField FooterText="تنظیمات" HeaderText="تنظیمات">
                         <ItemTemplate>
                             

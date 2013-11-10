@@ -170,6 +170,36 @@ namespace ADVIEWER.BAL
             ModelContainer ml = new ModelContainer();
             return ml.Tickets1.Where(t => t.ID == id).FirstOrDefault();
         }
+
+        public static Ticket[] GetListTicketData(int id)
+        {
+            ModelContainer ml = new ModelContainer();
+            return ml.Tickets1.Where(t => t.UserID == id).ToArray();
+        }
+
+        public static Ticket[] GetListTicketData()
+        {
+            ModelContainer ml = new ModelContainer();
+            return ml.Tickets1.Where(t => t.RegDate == t.LastUpdate).OrderByDescending(t => t.LastUpdate).ToArray();
+        }
+
+        public static void DeleteTicket(int TicketID)
+        {
+            ModelContainer ml = new ModelContainer();
+            Ticket TicketDeleted = ml.Tickets1.Where(t => t.ID == TicketID).First();
+            ml.DeleteObject(TicketDeleted);
+            ml.SaveChanges();
+        }
+
+        public static void DeleteAdv(int AdvID)
+        {
+            ModelContainer ml = new ModelContainer();
+            Advertisment AdvForDelete = ml.Advertisments.Where(t => t.ID == AdvID).First();
+            AdvForDelete.KeyWords.Clear();
+            ml.DeleteObject(AdvForDelete);
+            ml.SaveChanges();
+        }
+
         public static Advertisment GetAdvertismentData(int id)
         {
             ModelContainer ml = new ModelContainer();
@@ -258,6 +288,15 @@ namespace ADVIEWER.BAL
             }
             unreadList = unreadList.OrderByDescending(t => t.RegistrationDate).ToList();
             return PublicFunctions.ToDataTable<ShowAdvertisment>(unreadList);
+        }
+
+        internal static void SetTicketAnswer(int TicketID, string answer)
+        {
+            ModelContainer ml = new ModelContainer();
+            Ticket t1 = ml.Tickets1.Where(t => t.ID == TicketID).First();
+            t1.Answer = answer;
+            t1.LastUpdate = DateTime.Now;
+            ml.SaveChanges();
         }
     }
     public class ShowAdvertisment

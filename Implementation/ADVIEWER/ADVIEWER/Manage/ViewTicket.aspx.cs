@@ -17,11 +17,11 @@ namespace ADVIEWER.Manage
             try
             {
                 int TicketID = int.Parse(Request.QueryString["id"]);
-                DAL.Ticket t= MemberFunctions.GetTicketData(TicketID);
+                Ticket t= MemberFunctions.GetTicketData(TicketID);
                 TicketTitle = t.Title;
                 TicketText = t.Text;
-                ModelContainer ml = new ModelContainer();
-                TicketUser = ml.Users.Where(u => u.ID == TicketID).Select(s=>s.FullName).First();
+                //ModelContainer ml = new ModelContainer();
+                //TicketUser = ml.Users.Where(u => u.ID == TicketID).Select(s=>s.FullName).First();
             }
             catch
             {
@@ -29,9 +29,10 @@ namespace ADVIEWER.Manage
             }
         }
 
-        protected void Button1_Click(object sender, EventArgs e)
+        protected void sendButton_Click(object sender, EventArgs e)
         {
-
+            int TicketID = int.Parse(Request.QueryString["id"]);
+            MemberFunctions.SetTicketAnswer(TicketID, AnswerTextBox.Text.Trim());
         }
 
 

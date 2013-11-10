@@ -8,9 +8,8 @@
     <asp:Literal ID="ltr_error" runat="server"></asp:Literal>
 
     <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" PageSize="20"
-        DataKeyNames="ID" DataSourceID="sds_ad" OnPageIndexChanging="GridView1_PageIndexChanging"
-        AllowPaging="True" GridLines="None" EnableTheming="False" EnableViewState="False"
-        Width="100%" OnRowDataBound="GridView1_RowDataBound" ShowHeader="false" EnableModelValidation="True"
+        DataKeyNames="ID" AllowPaging="True" GridLines="None" EnableTheming="False" EnableViewState="False"
+        Width="100%" ShowHeader="false" EnableModelValidation="True"
         OnRowCommand="GridView1_RowCommand">
         <Columns>
             <asp:TemplateField HeaderText="Title" SortExpression="Title">
@@ -20,29 +19,32 @@
                             <div style="color:Red;float:left">
                                 کد:
                                 <%# Eval("id") %></div>
-                            <%# Eval("starCount").ToString()=="-1" ? "" : string.Format("<div class='starcontainer rstar' title='آگهی ویژه {0} ستاره {1} ماهه'><div class='stars star{0}'></div></div>", Eval("starCount"), Eval("CreditTime"))%>
+                           
                          <%--   <%# Eval("pic").ToString() == "noimage.png" ? "" : string.Format("<a href='ad-{3}.aspx?{2}'><img src='/HPicturer.ashx?img={0}&w=170&h=170&path=~/AdvertisePic/' class='rounded' title='{1}' alt='{2}' /></a>", Eval("pic"), Eval("Title"), Agahi.CommonFunctions.ReplaceSpace(Eval("Title")), Eval("id"))%>--%>
                             <div>
-                            <a style="margin-bottom: 4px;font-size:22px" href='<%# Eval("ID", "../AdvContent.aspx?ID={0}") %>'
-                                title='<%# Eval("Title")%>'>
-                                <%# Eval("Title")%></a></div>
+                            <span style="margin-bottom: 4px;font-size:22px"><%# Eval("Title")%>&nbsp&nbsp</span>
+                             <%# Eval("starCount").ToString() == "-1" ? "" : string.Format("<span style='color:blue'>آگهی ویژه {0} ستاره {1} ماهه</span>", Eval("starCount"), Eval("AdvDuration"))%>
+                             </div>
                             <div style="float:right">
                                 <p>
                                     <i class="icon-exclamation-sign"></i>
-                                    <asp:Literal ID="ltrstat" runat="server" Text="Label"></asp:Literal></p>
-                               <%-- <p>
-                                    <i class="icon-calendar"></i>انقضا:
-                                    <%# Agahi.CommonFunctions.String2date(Eval("ExpirationDate"), 1, "TY") + " - " + Agahi.CommonFunctions.String2date(Eval("ExpirationDate"), 2, "H")%></p>--%>
+                                    <%# Eval("IsConfirmed").ToString() == "True" ? "وضعیت: <span style='color:#2b7da3; '>در حال نمایش</span>" : "وضعیت: <span style='color:Red'; '>در انتظار تایید</span>"%>
+                                    </p>
                             </div>
-                            
+                            <div style="float:left">
+                            <p>
+                                    <i class="icon-calendar"></i>انقضا:
+                                    <span><%# Eval("ExpirationDate") %></span></p>
+                            </div>
+                            <div class="clear"></div>
                             <div class="AdlistIcon">
-                               <%-- <asp:HyperLink ID="HyperLink2" Target="_blank" NavigateUrl='<%# Eval("ID", "/adv-{0}.aspx?")+Agahi.CommonFunctions.ReplaceSpace(Eval("title","{0}")) %>'
-                                    runat="server"><i class="icon-file"></i>مشاهده|</asp:HyperLink>--%>
+                                <asp:HyperLink ID="HyperLink2" Target="_blank" NavigateUrl='<%# Eval("ID", "../AdvContent.aspx?ID={0}") %>'
+                                    runat="server"><i class="icon-file"></i>مشاهده</asp:HyperLink></div>
                                     
                                 <asp:LinkButton ID="LinkButton3" runat="server" CausesValidation="False" OnClientClick="return confirm('از حذف این آگهی اطمینان دارید؟');"
-                                    CommandName="del" CssClass="gridlinksred" ToolTip="حذف آگهی" Text="<i class='icon-remove' style='color:Red'></i>حذف"
+                                    CommandName="del" ToolTip="حذف آگهی" style="float:left;color:Black" Text="<i class='icon-remove' style='color:Red'></i>حذف"
                                     CommandArgument='<%# Eval("id") %>'></asp:LinkButton>
-                            </div>
+                            
 
                     </div>
                 </ItemTemplate>
@@ -58,12 +60,12 @@
         </EmptyDataTemplate>
     </asp:GridView>
 
-    <asp:SqlDataSource ID="sds_ad" runat="server" ConnectionString="<%$ ConnectionStrings:ApplicationServices %>"
+    <%--<asp:SqlDataSource ID="sds_ad" runat="server" ConnectionString="<%$ ConnectionStrings:ApplicationServices %>"
         SelectCommand="useradlist" SelectCommandType="StoredProcedure">
         <SelectParameters>
             <asp:QueryStringParameter DefaultValue="0" Name="typ" QueryStringField="typ" Type="Int32" />
             <asp:Parameter Name="UserID" Type="Int32" />
         </SelectParameters>
-    </asp:SqlDataSource>
+    </asp:SqlDataSource>--%>
 
 </asp:Content>

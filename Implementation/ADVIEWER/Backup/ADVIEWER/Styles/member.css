@@ -1,0 +1,397 @@
+﻿.latestwork {
+    background: none repeat scroll 0 0 #FFFFFF;
+    margin-bottom: 0;
+      font: inherit;
+    vertical-align: baseline;
+    outline: 0 none;
+  
+    margin-left:auto;
+    margin-right:auto;
+}
+
+*::-moz-selection {
+    background: none repeat scroll 0 0 #ADC760;
+    color: #FFFFFF;
+}
+
+.latestwork h4 {
+  
+    color: #ECA516;
+   
+    margin-bottom: 10px;
+    margin-top: -15px;
+    padding: 2px 10px;
+    text-shadow: 0 0 1px #FFFFFF;
+       border: 0 none;
+    vertical-align: baseline;
+   
+    direction: rtl;
+    height:auto;
+}
+.rounded {
+    border-radius: 5px 5px 5px 5px;
+}
+
+
+
+*::-moz-selection {
+    background: none repeat scroll 0 0 #ADC760;
+    color: #FFFFFF;
+}
+
+.sidinside {
+    padding: 10px 8px;
+    direction:rtl;
+}
+
+
+.container .ten.columns {
+    width: 668px;
+    outline: 0 none;
+}
+.container .column, .container .columns {
+    display: inline;
+    float: left;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.groups {
+    float: right;
+    margin-bottom: 5px;
+    margin-left: 4px;
+    min-height: 90px;
+    width: 319px;
+
+    background: none repeat scroll 0 0 #F8F8F8;
+    border: 1px solid #E4E4E4;
+    position: relative;
+}
+
+
+.groups .right {
+    padding: 0;
+    width: 110px;
+
+    background: none repeat scroll 0 0 #FFFFFF;
+    border-left: 1px solid #E4E4E4;
+    border-radius: 0 5px 5px 0;
+    height: 100%;
+    position: absolute;
+    text-align: center;
+}
+
+.groups .right a {
+    display: block;
+    padding: 10px 0;
+}
+
+.groups .right a h6 {
+   padding:0;
+   margin:0;
+   height:auto;
+}
+.right {
+    float: right;
+}
+
+
+.groups p {
+    margin: 0;
+    overflow: hidden;
+    padding: 5px 119px 10px 7px;
+    text-align: justify;
+}
+.main p {
+    color: #383838;
+    line-height: 20px;
+}
+.groups .right a img {
+    max-height: 50px;
+    max-width: 50px;
+}
+
+
+.groups .right a h6 {
+    font-size: 12px;
+}
+.advcontact {
+    color: #383838;
+    font: 13px/28px tahoma;
+    margin-bottom: 10px;
+}
+
+.usermenu {
+   
+}
+ .contenttext, .white {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background: none repeat scroll 0 0 #FFFFFF;
+    border-color: #DADADA #DADADA;
+    border-image: none;
+    border-style: solid;
+    border-width: 1px 1px 2px;
+    color: #383838;
+    padding: 10px 10px;
+    line-height:35px;
+}
+
+.avatarcon {
+    height: 90px;
+    margin-bottom: 5px;
+    width: 90px;
+}
+
+.avatar {
+    box-shadow: 0 0 2px #A5A5A5;
+    float: right;
+    max-height: 68px;
+    max-width: 68px;
+    padding: 3px;
+}
+
+.advcontact p {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    line-height:35px;
+    font-size:15px;
+}
+
+
+
+.sidebarhome {
+    background: none repeat scroll 0 0 #EAE9E9;
+    border: 1px solid #E7E4E4;
+    min-height: 200px;
+    width: 260px !important;
+}
+
+
+.widget {
+    color: #5B5B5B;
+    margin-bottom: 15px;
+}
+
+
+.container:after {
+    clear: both;
+    content: " ";
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+.main {
+    margin-bottom: 0;
+    margin-top: 0;
+    width:970px;
+}
+.container {
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    position: relative;
+  
+}
+
+
+
+
+.adv {
+    position: relative;
+}
+
+.clear,.spacer {
+    clear:both;
+    display:block;
+    overflow:hidden;
+    visibility:hidden;
+    width:0;
+    height:0}
+.spacer {
+    margin-bottom:20px
+    }
+
+.info {
+    float: right;
+    margin: 0 1px;
+    width: 320px;
+}
+
+
+.info > h5 {
+    font: 17px "b yekan","byekan",tahoma;
+    padding: 3px;
+}
+
+
+.advcontact h5, h5.color {
+    background: none repeat scroll 0 0 #F0951E;
+    border-color: #C67305;
+    color: #FFFFFF;
+    text-shadow: 1px 1px 1px #575757;
+}
+.advcontact h5, .advcontact h6, .info > h5 {
+    box-shadow: 1px 1px 1px #DDDDDD;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.advcontact hr {
+   margin:2px;
+}
+
+i
+{
+    padding-left:2px;
+}
+
+
+.contactinfo {
+    border: 1px solid #E5E5E5;
+    box-shadow: 0 0 3px #E8E8E8;
+    float: left;
+    margin: 0 10px 4px 3px;
+    padding: 10px;
+    width: 200px;
+}
+
+
+
+.advcontact {
+    color: #383838;
+    font: 13px/28px tahoma;
+    margin-bottom: 10px;
+}
+
+
+
+
+
+.advcontact h5 {
+    background: none repeat scroll 0 0 #ADC760;
+    border-color: #92B03B;
+    height:25px;
+    padding:0;
+    margin:0;
+}
+.advcontact h5, h5.color {
+    color: #FFFFFF;
+    font: bold 17px "b yekan","byekan",tahoma;
+    text-shadow: 1px 1px 1px #575757;
+}
+.advcontact h5, .advcontact h6, .info > h5 {
+    box-shadow: 1px 1px 1px #DDDDDD;
+    margin-bottom: 5px;
+    padding: 5px 0;
+    text-align: center;
+}
+
+.container .column, .container .columns {
+    display: inline;
+    float: left;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.sidebarhome {
+    background: none repeat scroll 0 0 #EAE9E9;
+    border: 1px solid #E7E4E4;
+    min-height: 200px;
+    width: 260px !important;
+}
+
+
+.widget {
+    color: #5B5B5B;
+    margin-bottom: 15px;
+}
+
+
+.container:after {
+    clear: both;
+    content: " ";
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+
+
+
+
+.advtop {
+    background: none repeat scroll 0 0 #FFFFFF;
+    box-shadow: 1px 1px 2px #B2B2B2;
+    height: 70px;
+    margin: 5px 9px 9px 2px;
+}
+
+
+
+.clear,.spacer {
+    clear:both;
+    display:block;
+    overflow:hidden;
+    visibility:hidden;
+    width:0;
+    height:0}
+.spacer {
+    margin-bottom:20px
+    }
+
+.advtop .ad
+{
+    width:100%;
+    max-height:100%;
+    }
+    
+ .hrContainer hr
+ {
+     margin:12px 0px 12px 0px;
+ }
+ .hrContainer i
+ {
+     padding-left:5px;
+     color:#588c1d;
+ }
+ .hrContainer a
+ {
+     color:#666;
+ }
+
+.ess
+{
+    color:Red;
+    padding-left:3px;
+}
+.contenttext i
+
+{
+    color:#72b626;
+}
+
+.imagelist{width:118px;height:170px;background:#fff;border:1px dashed #dcdcdc;padding:4px;text-align:center;display:inline-block;float:right;margin:2px;position:relative;line-height:1}
+.imagelist div{position:absolute;bottom:0}
+.imagelist div{margin-bottom:10px}
+.imagelist a img{max-width:105px;max-height:110px}
+.imagelist a{padding:0 5px;font-size:14px}
+.imagelist a:first-child{margin:0 auto;display:block;padding:0}
+.imagelist a:last-child{color:#f00}
+.imagelist p{color:#7d7d7d;padding:0;margin:0;line-height:100%;height:26px;overflow:hidden}
+.Summary
+{
+    height:auto !important;
+    max-width:105px !important;
+}
+
+.helper
+{
+    line-height:30px !important;
+    color:rgba(196, 85, 51, 1) !important;
+}
+.title
+{
+    font-weight:bold
+}
