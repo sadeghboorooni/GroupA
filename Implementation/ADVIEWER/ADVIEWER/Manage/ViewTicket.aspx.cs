@@ -20,8 +20,8 @@ namespace ADVIEWER.Manage
                 Ticket t= MemberFunctions.GetTicketData(TicketID);
                 TicketTitle = t.Title;
                 TicketText = t.Text;
-                ModelContainer ml = new ModelContainer();
-                TicketUser = ml.Users.Where(u => u.ID == TicketID).Select(s=>s.FullName).First();
+                //ModelContainer ml = new ModelContainer();
+                //TicketUser = ml.Users.Where(u => u.ID == TicketID).Select(s=>s.FullName).First();
             }
             catch
             {

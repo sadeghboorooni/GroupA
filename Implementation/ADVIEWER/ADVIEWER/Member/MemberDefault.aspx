@@ -18,6 +18,34 @@
         
         <div class="groups rounded">
             <div class="right">
+                <a href='AdvsList.aspx'>
+                    <img src="Images/AdvsList.png" alt="" />
+                    <h6>
+                        لیست آگهی‏ها</h6>
+                </a>
+            </div>
+            <p>
+                برای مشاهده آگهی و تبلیغات خود کلیک کنید.</p>
+            <div class="clear">
+            </div>
+        </div>
+
+         <div class="groups rounded">
+            <div class="right">
+                <a href="TicketsList.aspx">
+                    <img src="Images/Ticket.png" alt="" />
+                    <h6>
+                        لیست تیکت‏ها</h6>
+                </a>
+            </div>
+            <p>
+                سوالات خود را از مدیر سایت بپرسید.</p>
+            <div class="clear">
+            </div>
+        </div>
+
+        <div class="groups rounded">
+            <div class="right">
                 <a href="EditProfile.aspx">
                     <img src="Images/User-Info.png" alt="" />
                     <h6>
@@ -42,20 +70,7 @@
             <div class="clear">
             </div>
         </div>
-        <div class="groups rounded">
-            <div class="right">
-                <a href="TicketsList.aspx">
-                    <img src="Images/Ticket.png" alt="" />
-                    <h6>
-                        لیست تیکت‏ها</h6>
-                </a>
-            </div>
-            <p>
-                سوالات خود را از مدیر سایت بپرسید.</p>
-            <div class="clear">
-            </div>
-        </div>
-      
+             
         <div class="groups rounded">
             <div class="right">
                 <asp:LinkButton runat="server" OnClick = "ExitFuction">

@@ -83,7 +83,7 @@
                         <ItemTemplate>
                                 <asp:LinkButton ID="DeleteButton" runat="server" OnClientClick="return confirm('از حذف تیکت اطمینان دارید؟');"
                                     CommandName="deleteTicket" CommandArgument='<%# Eval("ID") %>' ToolTip="حذف تیکت"
-                                    CssClass="tooltip"><i class="icon-remove"></i></asp:LinkButton>
+                                    CssClass="tooltip"><i class="icon-remove" style="color:Red"></i></asp:LinkButton>
                             </center>   
                         </ItemTemplate>
                         <FooterStyle HorizontalAlign="Center" />

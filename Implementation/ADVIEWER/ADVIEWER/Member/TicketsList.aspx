@@ -29,8 +29,8 @@
                     <asp:TemplateField FooterText="عنوان" SortExpression="FullName" HeaderText="عنوان">
                         <ItemTemplate>
                         <p>
-                        <a href='viewTicket.aspx?Id=<%# Eval("id")%>'>
-                        <%# Eval("Title") %>
+                        <%# Eval("RegDate").ToString() == Eval("LastUpdate").ToString() ? string.Format("<a style='color:Red' href='viewTicket.aspx?ID={0}'>{1}</a>", Eval("ID"), Eval("Title")) : string.Format("<a href='viewTicket.aspx?ID={0}'>{1}</a>", Eval("ID"), Eval("Title")) %>
+                        
                         </a>
                         </p>
                         </ItemTemplate>
@@ -45,8 +45,7 @@
                     <asp:TemplateField FooterText="متن" SortExpression="FullName" HeaderText="عنوان">
                         <ItemTemplate>
                         <p>
-                        <a href='viewTicket.aspx?Id=<%# Eval("id")%>'>
-                        <%# Eval("Text") %>
+                         <%# Eval("RegDate").ToString() == Eval("LastUpdate").ToString() ? string.Format("<a style='color:Red' href='viewTicket.aspx?ID={0}'>{1}</a>", Eval("ID"), Eval("Title")) : string.Format("<a href='viewTicket.aspx?ID={0}'>{1}</a>", Eval("ID"), Eval("Title"))%>
                         </a>
                         </p>
                         </ItemTemplate>
@@ -77,13 +76,11 @@
                         <ItemStyle Width="90" />
                     </asp:TemplateField>
 
-                    
-                    
                     <asp:TemplateField HeaderText="حذف">
                         <ItemTemplate>
                                 <asp:LinkButton ID="DeleteButton" runat="server" OnClientClick="return confirm('از حذف تیکت اطمینان دارید؟');"
                                     CommandName="deleteTicket" CommandArgument='<%# Eval("ID") %>' ToolTip="حذف تیکت"
-                                    CssClass="tooltip"><i class="icon-remove"></i></asp:LinkButton>
+                                    CssClass="tooltip"><i class="icon-remove" style="color:Red"></i></asp:LinkButton>
                             </center>   
                         </ItemTemplate>
                         <FooterStyle HorizontalAlign="Center" />
