@@ -499,7 +499,7 @@ h2
 
 .AdlistIcon, .AdlistIcon i
 {
-    display:inline-block;
+    display:initial;
     padding-left:3px;
     color:#72b626;
 }

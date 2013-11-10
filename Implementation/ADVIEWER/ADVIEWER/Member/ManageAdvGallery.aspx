@@ -2,7 +2,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/themes/base/jquery-ui.css" id="theme" />
 <link rel="stylesheet" href="styles/fileupload/jquery.fileupload-ui.css" />
-<link rel="stylesheet" href="styles/fileupload/style.css" />
+<%--<link rel="stylesheet" href="styles/fileupload/style.css" />--%>
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/jquery-ui.min.js"></script>
 <script src="//ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"></script>
 <script src="scripts/fileupload/jquery.iframe-transport.js"></script>
@@ -12,10 +12,10 @@
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="mainContent" runat="server">
-        <div id="fileupload">
+        <div class="MyCss" id="fileupload">
             <form action="FileTransferHandler.ashx" method="post" enctype="multipart/form-data">
                 <div class="fileupload-buttonbar">
-                    <label class="fileinput-button">
+                    <label class="fileinput-button" style="margin:0px">
                         <span>افزودن عکس</span>
                         <input type="file" name="files[]" multiple="multiple" />
                     </label>

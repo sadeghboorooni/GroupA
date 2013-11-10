@@ -3,7 +3,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="mainContent" runat="server">
 <h2 class="alert hero-unit" style="font-size:25px;margin-bottom:10px;border-color:transparent;padding:8px 10px 8px 14px;border-right:5px solid #b1d700">
-        <asp:Literal ID="ltrTitle" runat="server"></asp:Literal>
+        لیست آگهی‏ها
     </h2>
     <asp:Literal ID="ltr_error" runat="server"></asp:Literal>
 
@@ -38,8 +38,9 @@
                             </div>
                             <div class="clear"></div>
                             <div class="AdlistIcon">
-                                <asp:HyperLink ID="HyperLink2" Target="_blank" NavigateUrl='<%# Eval("ID", "../AdvContent.aspx?ID={0}") %>'
-                                    runat="server"><i class="icon-file"></i>مشاهده</asp:HyperLink></div>
+                            <%# Eval("IsConfirmed").ToString() == "True" ? string.Format("<a Target='_blank' href='../AdvContent.aspx?ID={0}')><i class='icon-file'></i>مشاهده&nbsp&nbsp</a>", Eval("ID")) : "" %>
+                            <%# Eval("StarCount").ToString() != "-1" ? string.Format("<a Target='_blank' href='ManageAdvGallery.aspx?ID={0}')><i class='icon-picture'></i>مدیریت تصاویر</a>", Eval("ID")) : "" %>
+                            </div>
                                     
                                 <asp:LinkButton ID="LinkButton3" runat="server" CausesValidation="False" OnClientClick="return confirm('از حذف این آگهی اطمینان دارید؟');"
                                     CommandName="del" ToolTip="حذف آگهی" style="float:left;color:Black" Text="<i class='icon-remove' style='color:Red'></i>حذف"
@@ -59,13 +60,5 @@
                 </div>
         </EmptyDataTemplate>
     </asp:GridView>
-
-    <%--<asp:SqlDataSource ID="sds_ad" runat="server" ConnectionString="<%$ ConnectionStrings:ApplicationServices %>"
-        SelectCommand="useradlist" SelectCommandType="StoredProcedure">
-        <SelectParameters>
-            <asp:QueryStringParameter DefaultValue="0" Name="typ" QueryStringField="typ" Type="Int32" />
-            <asp:Parameter Name="UserID" Type="Int32" />
-        </SelectParameters>
-    </asp:SqlDataSource>--%>
 
 </asp:Content>

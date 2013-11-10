@@ -3,15 +3,7 @@
     <title>ویرایش گروه آگهی</title>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="mainContent" runat="server">
-    <div class="slider2">
-        <div class="slider2_resize">
-            <a href="default.aspx">مدیریت</a> » <a href="advgroups.aspx">مدیریت گروه آگهی</a> » ویرایش گروه آگهی
-            <p class="time" id="jsClock" style="float: left; color: #fff;">
-            </p>
-        </div>
-        <div class="clr">
-        </div>
-    </div>
+    
 
         <div class="fullcontent">
         <h2 class="title green">
