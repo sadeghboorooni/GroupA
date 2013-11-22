@@ -1,0 +1,61 @@
+﻿
+.rateit {
+    -moz-user-select: none;
+    display: inline-block;
+    position: relative;
+}
+.rateit .rateit-range {
+    background: url("star.gif") repeat scroll 0 0 rgba(0, 0, 0, 0);
+    display: inline-block;
+    height: 16px;
+    outline: medium none;
+    position: relative;
+}
+.rateit .rateit-range * {
+    display: block;
+}
+* html .rateit, * html .rateit .rateit-range {
+    display: inline;
+}
+* + html .rateit, * + html .rateit .rateit-range {
+    display: inline;
+}
+.rateit .rateit-hover, .rateit .rateit-selected {
+    left: 0;
+    position: absolute;
+}
+.rateit .rateit-hover-rtl, .rateit .rateit-selected-rtl {
+    left: auto;
+    right: 0;
+}
+.rateit .rateit-hover {
+    background: url("star.gif") repeat scroll left -32px rgba(0, 0, 0, 0);
+}
+.rateit .rateit-hover-rtl {
+    background-position: right -32px;
+}
+.rateit .rateit-selected {
+    background: url("star.gif") repeat scroll left -16px rgba(0, 0, 0, 0);
+}
+.rateit .rateit-selected-rtl {
+    background-position: right -16px;
+}
+.rateit .rateit-preset {
+    background: url("star.gif") repeat scroll left -48px rgba(0, 0, 0, 0);
+}
+.rateit .rateit-preset-rtl {
+    background: url("star.gif") repeat scroll left -48px rgba(0, 0, 0, 0);
+}
+.rateit button.rateit-reset {
+    background: url("delete.gif") repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border: medium none;
+    display: inline-block;
+    float: left;
+    height: 16px;
+    outline: medium none;
+    padding: 0;
+    width: 16px;
+}
+.rateit button.rateit-reset:hover, .rateit button.rateit-reset:focus {
+    background-position: 0 -16px;
+}

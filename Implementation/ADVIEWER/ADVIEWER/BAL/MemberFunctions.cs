@@ -65,7 +65,26 @@ namespace ADVIEWER.BAL
                 return false;
             }
         }
-
+        public static void SetAdvRate(int AdvId, Single Value) 
+        {
+            int? UserId = null;
+            int CurUserId = AccountFunctions.currentUserId();
+            if (CurUserId != -1) UserId = CurUserId;
+            ModelContainer ml = new ModelContainer();
+            if (ml.Rates.Where(t => t.AdvertismentId == AdvId && t.UserId == UserId).Count() > 0)
+            {
+                Rate r = ml.Rates.Where(t => t.AdvertismentId == AdvId && t.UserId == UserId).First();
+                r.Value = Value;
+            }
+            else 
+            {
+                Rate r = new Rate();
+                r.User = ml.Users.Where(t=>t.ID== UserId).First();
+                r.Advertisment = ml.Advertisments.Where(t => t.ID == AdvId).First();
+                r.Value = Value;
+            }
+            ml.SaveChanges();
+        }
         public static void SaveImage(string tempAdd, string mainAdd, string filename)
         {
 
@@ -315,6 +334,21 @@ namespace ADVIEWER.BAL
             ml.SaveChanges();
             
         }
+
+
+        internal static float GetAdvUserRate(int AdvId)
+        {
+            ModelContainer ml =new ModelContainer();
+            int UserId = AccountFunctions.currentUserId();
+            if (UserId != -1 && ml.Rates.Where(t => t.AdvertismentId == AdvId && t.UserId == UserId).Count() > 0)
+            {
+                return ml.Rates.Where(t => t.AdvertismentId == AdvId && t.UserId == UserId).Select(t => t.Value).First();
+            }
+            else 
+            {
+                return 0;
+            }
+         }
     }
     public class ShowAdvertisment
     {

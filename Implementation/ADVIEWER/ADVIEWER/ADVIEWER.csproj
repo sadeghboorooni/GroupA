@@ -114,6 +114,8 @@
     <Content Include="Profile.aspx" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
+    <Content Include="Scripts\jquery.tokeninput.js" />
+    <Content Include="Scripts\RateIt\RateIt.js" />
     <Content Include="ShowGroupAdvs.aspx" />
     <Content Include="src\jquery.tokeninput.js" />
     <Content Include="Styles\bootstrap.css" />
@@ -126,6 +128,10 @@
     <Content Include="Styles\Manage.css" />
     <Content Include="Styles\member.css" />
     <Content Include="Styles\newTheme.css" />
+    <Content Include="Styles\RateIt\RateIt.css" />
+    <Content Include="Styles\RateIt\star_2.gif" />
+    <Content Include="Styles\RateIt\star_3.gif" />
+    <Content Include="Styles\RateIt\star_4.gif" />
     <Content Include="Styles\Site.css" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
@@ -371,6 +377,9 @@
       <DependentUpon>Profile.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RatingHandler.ashx.cs">
+      <DependentUpon>RatingHandler.ashx</DependentUpon>
+    </Compile>
     <Compile Include="ShowGroupAdvs.aspx.cs">
       <DependentUpon>ShowGroupAdvs.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -401,6 +410,7 @@
     <Content Include="Member\FileTransferHandler.ashx" />
     <Content Include="Member\Thumbnail.ashx" />
     <Content Include="Member\Web.config" />
+    <Content Include="RatingHandler.ashx" />
     <None Include="Styles\fontawesome-webfont.eot" />
     <None Include="Styles\fontawesome-webfont.ttf" />
     <None Include="Styles\fontawesome-webfont.woff" />

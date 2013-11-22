@@ -1,6 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MainMaster.Master" AutoEventWireup="true" CodeBehind="AdvContent.aspx.cs" Inherits="ADVIEWER.AdvContent" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="styles/member.css" rel="stylesheet" type="text/css" />
+    
+    <link href="Styles/RateIt/RateIt.css" rel="stylesheet" type="text/css" />
+    <script src="Scripts/RateIt/RateIt.js" type="text/javascript"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="mainContent" runat="server">
 <div class="latestwork" style="padding:5px;
@@ -10,7 +13,33 @@
     <div class="adv">
         <h2 class="alert hero-unit" style="font-size:25px;margin-bottom:10px;border-color:transparent;padding:8px 10px 8px 14px;border-right:5px solid #b1d700">
             <%= curAdv.Title %>
+
+           
         </h2>
+        <div>
+        <div class="rateit" data-rateit-value="<%=AverageAdvRate %>" data-rateit-ispreset="true" id="RateAdv">
+        </div>
+        نمره دهی شما: <%=UserAdvRate %>
+        </div>
+        <div>
+        <%--<button onclick="alert($('#RateAdv').rateit('value'))" type="button">Get value</button>--%>
+        <%--<button onclick="$('#RateAdv').rateit('value', prompt('Input numerical value'))" type="button">Set value</button>--%>
+        <button onclick="SetRate($('#RateAdv').rateit('value'))" type="button">Set Rate</button>
+        </div>
+        <script>
+            function SetRate(value) {
+                var advId = <%= curAdv.ID %>
+                $.ajax({
+                    url: 'RatingHandler.ashx?advId='+advId+'&val='+value,
+                    dataType: 'json',
+                    context: 'PUT'
+                });
+            
+            }
+        </script>
+
+
+
         <div style="padding-right:10px;padding-bottom:10px">
             <asp:Literal ID="ltrstars" runat="server" Visible="false"></asp:Literal>
            

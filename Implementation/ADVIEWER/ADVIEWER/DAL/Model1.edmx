@@ -17,6 +17,7 @@
     <EntitySet Name="AdvertisementMessages" EntityType="Model1.Store.AdvertisementMessages" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Mail_User1" EntityType="Model1.Store.Mail_User1" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="KeyWords" EntityType="Model1.Store.KeyWords" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Rates" EntityType="Model1.Store.Rates" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="UserGroup" EntityType="Model1.Store.UserGroup" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="AdvertismentKeyWord" EntityType="Model1.Store.AdvertismentKeyWord" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="GroupGroup" Association="Model1.Store.GroupGroup">
@@ -54,6 +55,14 @@
     <AssociationSet Name="AdvertismentGroup" Association="Model1.Store.AdvertismentGroup">
       <End Role="Advertisment" EntitySet="Advertisments" />
       <End Role="Group" EntitySet="Groups" />
+    </AssociationSet>
+    <AssociationSet Name="AdvertismentRating" Association="Model1.Store.AdvertismentRating">
+      <End Role="Advertisment" EntitySet="Advertisments" />
+      <End Role="Rating" EntitySet="Rates" />
+    </AssociationSet>
+    <AssociationSet Name="UserRating" Association="Model1.Store.UserRating">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Rating" EntitySet="Rates" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Advertisments">
@@ -224,6 +233,15 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
+  <EntityType Name="Rates">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AdvertismentId" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="true" />
+    <Property Name="Value" Type="real" Nullable="false" />
+  </EntityType>
   <EntityType Name="UserGroup">
     <Key>
       <PropertyRef Name="Users_ID" />
@@ -297,6 +315,30 @@
       </Principal>
       <Dependent Role="Advertisment">
         <PropertyRef Name="GroupID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AdvertismentRating">
+    <End Role="Advertisment" Type="Model1.Store.Advertisments" Multiplicity="1" />
+    <End Role="Rating" Type="Model1.Store.Rates" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Advertisment">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Rating">
+        <PropertyRef Name="AdvertismentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserRating">
+    <End Role="User" Type="Model1.Store.Users" Multiplicity="0..1" />
+    <End Role="Rating" Type="Model1.Store.Rates" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Rating">
+        <PropertyRef Name="UserId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -392,6 +434,15 @@
             <End Role="Advertisment" EntitySet="Advertisments" />
             <End Role="Group" EntitySet="Groups" />
           </AssociationSet>
+          <EntitySet Name="Rates" EntityType="Model1.Rate" />
+          <AssociationSet Name="AdvertismentRating" Association="Model1.AdvertismentRating">
+            <End Role="Advertisment" EntitySet="Advertisments" />
+            <End Role="Rating" EntitySet="Rates" />
+          </AssociationSet>
+          <AssociationSet Name="UserRating" Association="Model1.UserRating">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Rating" EntitySet="Rates" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Advertisment">
           <Key>
@@ -429,6 +480,7 @@
           <NavigationProperty Name="KeyWords" Relationship="Model1.AdvertismentKeyWord" FromRole="Advertisment" ToRole="KeyWord" />
           <NavigationProperty Name="User" Relationship="Model1.UserAdvertisment" FromRole="Advertisment" ToRole="User" />
           <NavigationProperty Name="Group" Relationship="Model1.AdvertismentGroup" FromRole="Advertisment" ToRole="Group" />
+          <NavigationProperty Name="Ratings" Relationship="Model1.AdvertismentRating" FromRole="Advertisment" ToRole="Rating" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -454,6 +506,7 @@
           <NavigationProperty Name="Groups" Relationship="Model1.UserGroup" FromRole="User" ToRole="Group" />
           <NavigationProperty Name="Advertisments" Relationship="Model1.UserAdvertisment" FromRole="User" ToRole="Advertisment" />
           <Property Type="String" Name="Mail" Nullable="false" />
+          <NavigationProperty Name="Ratings" Relationship="Model1.UserRating" FromRole="User" ToRole="Rating" />
         </EntityType>
         <EntityType Name="Ticket">
           <Key>
@@ -631,6 +684,41 @@
             </Principal>
             <Dependent Role="Advertisment">
               <PropertyRef Name="GroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Rate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="AdvertismentId" Nullable="false" />
+          <Property Type="Int32" Name="UserId" Nullable="true" />
+          <Property Type="Single" Name="Value" Nullable="false" />
+          <NavigationProperty Name="Advertisment" Relationship="Model1.AdvertismentRating" FromRole="Rating" ToRole="Advertisment" />
+          <NavigationProperty Name="User" Relationship="Model1.UserRating" FromRole="Rating" ToRole="User" />
+        </EntityType>
+        <Association Name="AdvertismentRating">
+          <End Type="Model1.Advertisment" Role="Advertisment" Multiplicity="1" />
+          <End Type="Model1.Rate" Role="Rating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Advertisment">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Rating">
+              <PropertyRef Name="AdvertismentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserRating">
+          <End Type="Model1.User" Role="User" Multiplicity="0..1" />
+          <End Type="Model1.Rate" Role="Rating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Rating">
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -818,6 +906,16 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Rates">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Rate)">
+        <MappingFragment StoreEntitySet="Rates">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AdvertismentId" ColumnName="AdvertismentId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <AssociationSetMapping Name="StateCity" TypeName="Model1.StateCity" StoreEntitySet="Cities">
       <EndProperty Name="State">
         <ScalarProperty Name="ID" ColumnName="State_ID" />
@@ -864,10 +962,10 @@
         <EntityTypeShape EntityType="Model1.Advertisment" Width="1.5" PointX="3" PointY="1.75" Height="6.9801236979166656" IsExpanded="true" />
         <EntityTypeShape EntityType="Model1.User" Width="1.5" PointX="1.125" PointY="1.25" Height="4.8648079427083326" IsExpanded="true" />
         <EntityTypeShape EntityType="Model1.Ticket" Width="1.5" PointX="2.75" PointY="12.375" Height="2.9417936197916656" />
-        <EntityTypeShape EntityType="Model1.State" Width="1.5" PointX="9.625" PointY="4.25" Height="1.5956835937500031" />
+        <EntityTypeShape EntityType="Model1.State" Width="1.5" PointX="7.375" PointY="5.375" Height="1.5956835937500031" />
         <EntityTypeShape EntityType="Model1.Payment" Width="1.5" PointX="10.25" PointY="5.875" Height="3.7109993489583335" />
         <EntityTypeShape EntityType="Model1.Group" Width="1.5" PointX="3" PointY="9.25" Height="2.5571907552083317" />
-        <EntityTypeShape EntityType="Model1.City" Width="1.5" PointX="11.875" PointY="4.125" Height="1.7879850260416674" />
+        <EntityTypeShape EntityType="Model1.City" Width="1.5" PointX="7.375" PointY="7.375" Height="1.7879850260416674" />
         <EntityTypeShape EntityType="Model1.ContactMessage" Width="1.5" PointX="10.25" PointY="9" Height="2.9417936197916674" />
         <EntityTypeShape EntityType="Model1.AdvertisementMessage" Width="1.5" PointX="11.75" PointY="9" Height="3.1340950520833317" />
         <EntityTypeShape EntityType="Model1.Mail_User" Width="1.5" PointX="11.75" PointY="5.875" Height="3.1340950520833317" />
@@ -879,8 +977,8 @@
           <ConnectorPoint PointX="3.9784615384615383" PointY="11.807190755208332" />
         </AssociationConnector>
         <AssociationConnector Association="Model1.StateCity" >
-          <ConnectorPoint PointX="11.125" PointY="5.0478417968750016" />
-          <ConnectorPoint PointX="11.875" PointY="5.0478417968750016" />
+          <ConnectorPoint PointX="8.125" PointY="6.9706835937500031" />
+          <ConnectorPoint PointX="8.125" PointY="7.375" />
         </AssociationConnector>
         <AssociationConnector Association="Model1.UserTicket" >
           <ConnectorPoint PointX="1.6210921875" PointY="6.1148079427083326" />
@@ -903,6 +1001,15 @@
         <AssociationConnector Association="Model1.AdvertismentGroup">
           <ConnectorPoint PointX="3.75" PointY="8.9224251302083335" />
           <ConnectorPoint PointX="3.75" PointY="9.25" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="Model1.Rate" Width="1.5" PointX="6" PointY="0.75" Height="2.172587890625" />
+        <AssociationConnector Association="Model1.AdvertismentRating">
+          <ConnectorPoint PointX="4.5" PointY="2.3362939453125" />
+          <ConnectorPoint PointX="6" PointY="2.3362939453125" />
+        </AssociationConnector>
+        <AssociationConnector Association="Model1.UserRating">
+          <ConnectorPoint PointX="2.625" PointY="1.4687499999999998" />
+          <ConnectorPoint PointX="6" PointY="1.4687499999999998" />
         </AssociationConnector>
       </Diagram>
     </edmx:Diagrams>

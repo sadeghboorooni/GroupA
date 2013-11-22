@@ -26,6 +26,8 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("Model1", "AdvertismentKeyWord", "Advertisment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DAL.Advertisment), "KeyWord", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DAL.KeyWord))]
 [assembly: EdmRelationshipAttribute("Model1", "UserAdvertisment", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ADVIEWER.DAL.User), "Advertisment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DAL.Advertisment), true)]
 [assembly: EdmRelationshipAttribute("Model1", "AdvertismentGroup", "Advertisment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DAL.Advertisment), "Group", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ADVIEWER.DAL.Group), true)]
+[assembly: EdmRelationshipAttribute("Model1", "AdvertismentRating", "Advertisment", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ADVIEWER.DAL.Advertisment), "Rating", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DAL.Rate), true)]
+[assembly: EdmRelationshipAttribute("Model1", "UserRating", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(ADVIEWER.DAL.User), "Rating", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DAL.Rate), true)]
 
 #endregion
 
@@ -252,6 +254,22 @@ namespace ADVIEWER.DAL
             }
         }
         private ObjectSet<KeyWord> _KeyWords;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Rate> Rates
+        {
+            get
+            {
+                if ((_Rates == null))
+                {
+                    _Rates = base.CreateObjectSet<Rate>("Rates");
+                }
+                return _Rates;
+            }
+        }
+        private ObjectSet<Rate> _Rates;
 
         #endregion
 
@@ -343,6 +361,14 @@ namespace ADVIEWER.DAL
         public void AddToKeyWords(KeyWord keyWord)
         {
             base.AddObject("KeyWords", keyWord);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Rates EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToRates(Rate rate)
+        {
+            base.AddObject("Rates", rate);
         }
 
         #endregion
@@ -1499,6 +1525,28 @@ namespace ADVIEWER.DAL
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Group>("Model1.AdvertismentGroup", "Group", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("Model1", "AdvertismentRating", "Rating")]
+        public EntityCollection<Rate> Ratings
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Rate>("Model1.AdvertismentRating", "Rating");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Rate>("Model1.AdvertismentRating", "Rating", value);
                 }
             }
         }
@@ -2948,6 +2996,219 @@ namespace ADVIEWER.DAL
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="Model1", Name="Rate")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Rate : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Rate object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="advertismentId">Initial value of the AdvertismentId property.</param>
+        /// <param name="value">Initial value of the Value property.</param>
+        public static Rate CreateRate(global::System.Int32 id, global::System.Int32 advertismentId, global::System.Single value)
+        {
+            Rate rate = new Rate();
+            rate.Id = id;
+            rate.AdvertismentId = advertismentId;
+            rate.Value = value;
+            return rate;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _Id;
+        partial void OnIdChanging(global::System.Int32 value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 AdvertismentId
+        {
+            get
+            {
+                return _AdvertismentId;
+            }
+            set
+            {
+                OnAdvertismentIdChanging(value);
+                ReportPropertyChanging("AdvertismentId");
+                _AdvertismentId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("AdvertismentId");
+                OnAdvertismentIdChanged();
+            }
+        }
+        private global::System.Int32 _AdvertismentId;
+        partial void OnAdvertismentIdChanging(global::System.Int32 value);
+        partial void OnAdvertismentIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> UserId
+        {
+            get
+            {
+                return _UserId;
+            }
+            set
+            {
+                OnUserIdChanging(value);
+                ReportPropertyChanging("UserId");
+                _UserId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("UserId");
+                OnUserIdChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _UserId;
+        partial void OnUserIdChanging(Nullable<global::System.Int32> value);
+        partial void OnUserIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Single Value
+        {
+            get
+            {
+                return _Value;
+            }
+            set
+            {
+                OnValueChanging(value);
+                ReportPropertyChanging("Value");
+                _Value = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Value");
+                OnValueChanged();
+            }
+        }
+        private global::System.Single _Value;
+        partial void OnValueChanging(global::System.Single value);
+        partial void OnValueChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("Model1", "AdvertismentRating", "Advertisment")]
+        public Advertisment Advertisment
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Advertisment>("Model1.AdvertismentRating", "Advertisment").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Advertisment>("Model1.AdvertismentRating", "Advertisment").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Advertisment> AdvertismentReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Advertisment>("Model1.AdvertismentRating", "Advertisment");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Advertisment>("Model1.AdvertismentRating", "Advertisment", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("Model1", "UserRating", "User")]
+        public User User
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("Model1.UserRating", "User").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("Model1.UserRating", "User").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<User> UserReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("Model1.UserRating", "User");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("Model1.UserRating", "User", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
     [EdmEntityTypeAttribute(NamespaceName="Model1", Name="State")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
@@ -3860,6 +4121,28 @@ namespace ADVIEWER.DAL
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Advertisment>("Model1.UserAdvertisment", "Advertisment", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("Model1", "UserRating", "Rating")]
+        public EntityCollection<Rate> Ratings
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Rate>("Model1.UserRating", "Rating");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Rate>("Model1.UserRating", "Rating", value);
                 }
             }
         }

@@ -41,6 +41,7 @@ namespace ADVIEWER.BAL
         public static int currentUserId() 
         {
             ModelContainer ml = new ModelContainer();
+            if (Membership.GetUser() == null) return -1;
             Guid userGuid = (Guid)Membership.GetUser().ProviderUserKey;
             return ml.Users.Where(t => t.UserProviderKey == userGuid).Select(t => t.ID).FirstOrDefault();
         }

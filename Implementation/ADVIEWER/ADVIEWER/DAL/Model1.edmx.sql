@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 11/10/2013 00:22:29
+-- Date Created: 11/22/2013 14:35:29
 -- Generated from EDMX file: C:\Users\Ali\Documents\GitHub\GroupA\Implementation\ADVIEWER\ADVIEWER\DAL\Model1.edmx
 -- --------------------------------------------------
 
@@ -44,6 +44,12 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_AdvertismentGroup]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Advertisments] DROP CONSTRAINT [FK_AdvertismentGroup];
 GO
+IF OBJECT_ID(N'[dbo].[FK_AdvertismentRating]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Rates] DROP CONSTRAINT [FK_AdvertismentRating];
+GO
+IF OBJECT_ID(N'[dbo].[FK_UserRating]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Rates] DROP CONSTRAINT [FK_UserRating];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -81,6 +87,9 @@ IF OBJECT_ID(N'[dbo].[Mail_User1]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[KeyWords]', 'U') IS NOT NULL
     DROP TABLE [dbo].[KeyWords];
+GO
+IF OBJECT_ID(N'[dbo].[Rates]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Rates];
 GO
 IF OBJECT_ID(N'[dbo].[UserGroup]', 'U') IS NOT NULL
     DROP TABLE [dbo].[UserGroup];
@@ -261,6 +270,15 @@ CREATE TABLE [dbo].[KeyWords] (
 );
 GO
 
+-- Creating table 'Rates'
+CREATE TABLE [dbo].[Rates] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [AdvertismentId] int  NOT NULL,
+    [UserId] int  NULL,
+    [Value] real  NOT NULL
+);
+GO
+
 -- Creating table 'UserGroup'
 CREATE TABLE [dbo].[UserGroup] (
     [Users_ID] int  NOT NULL,
@@ -342,6 +360,12 @@ GO
 -- Creating primary key on [Id] in table 'KeyWords'
 ALTER TABLE [dbo].[KeyWords]
 ADD CONSTRAINT [PK_KeyWords]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'Rates'
+ALTER TABLE [dbo].[Rates]
+ADD CONSTRAINT [PK_Rates]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -475,6 +499,34 @@ ADD CONSTRAINT [FK_AdvertismentGroup]
 CREATE INDEX [IX_FK_AdvertismentGroup]
 ON [dbo].[Advertisments]
     ([GroupID]);
+GO
+
+-- Creating foreign key on [AdvertismentId] in table 'Rates'
+ALTER TABLE [dbo].[Rates]
+ADD CONSTRAINT [FK_AdvertismentRating]
+    FOREIGN KEY ([AdvertismentId])
+    REFERENCES [dbo].[Advertisments]
+        ([ID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_AdvertismentRating'
+CREATE INDEX [IX_FK_AdvertismentRating]
+ON [dbo].[Rates]
+    ([AdvertismentId]);
+GO
+
+-- Creating foreign key on [UserId] in table 'Rates'
+ALTER TABLE [dbo].[Rates]
+ADD CONSTRAINT [FK_UserRating]
+    FOREIGN KEY ([UserId])
+    REFERENCES [dbo].[Users]
+        ([ID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_UserRating'
+CREATE INDEX [IX_FK_UserRating]
+ON [dbo].[Rates]
+    ([UserId]);
 GO
 
 -- --------------------------------------------------
