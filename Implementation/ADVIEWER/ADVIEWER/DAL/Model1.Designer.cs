@@ -20,7 +20,6 @@ using System.Xml.Serialization;
 #region EDM Relationship Metadata
 
 [assembly: EdmRelationshipAttribute("Model1", "GroupGroup", "Group", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(ADVIEWER.DAL.Group), "parentGroup", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DAL.Group), true)]
-[assembly: EdmRelationshipAttribute("Model1", "StateCity", "State", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ADVIEWER.DAL.State), "City", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DAL.City))]
 [assembly: EdmRelationshipAttribute("Model1", "UserTicket", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ADVIEWER.DAL.User), "Ticket", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DAL.Ticket), true)]
 [assembly: EdmRelationshipAttribute("Model1", "UserGroup", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DAL.User), "Group", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DAL.Group))]
 [assembly: EdmRelationshipAttribute("Model1", "AdvertismentKeyWord", "Advertisment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DAL.Advertisment), "KeyWord", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DAL.KeyWord))]
@@ -28,6 +27,8 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("Model1", "AdvertismentGroup", "Advertisment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DAL.Advertisment), "Group", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ADVIEWER.DAL.Group), true)]
 [assembly: EdmRelationshipAttribute("Model1", "AdvertismentRating", "Advertisment", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ADVIEWER.DAL.Advertisment), "Rating", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DAL.Rate), true)]
 [assembly: EdmRelationshipAttribute("Model1", "UserRating", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(ADVIEWER.DAL.User), "Rating", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DAL.Rate), true)]
+[assembly: EdmRelationshipAttribute("Model1", "StateCityAdvertisment", "StateCity", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(ADVIEWER.DAL.StateCity), "Advertisment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DAL.Advertisment), true)]
+[assembly: EdmRelationshipAttribute("Model1", "StateCityStateCity", "StateCity", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(ADVIEWER.DAL.StateCity), "State", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DAL.StateCity), true)]
 
 #endregion
 
@@ -130,22 +131,6 @@ namespace ADVIEWER.DAL
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<State> States
-        {
-            get
-            {
-                if ((_States == null))
-                {
-                    _States = base.CreateObjectSet<State>("States");
-                }
-                return _States;
-            }
-        }
-        private ObjectSet<State> _States;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<Payment> Payments1
         {
             get
@@ -174,22 +159,6 @@ namespace ADVIEWER.DAL
             }
         }
         private ObjectSet<Group> _Groups;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<City> Cities
-        {
-            get
-            {
-                if ((_Cities == null))
-                {
-                    _Cities = base.CreateObjectSet<City>("Cities");
-                }
-                return _Cities;
-            }
-        }
-        private ObjectSet<City> _Cities;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -270,6 +239,22 @@ namespace ADVIEWER.DAL
             }
         }
         private ObjectSet<Rate> _Rates;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<StateCity> StateCities
+        {
+            get
+            {
+                if ((_StateCities == null))
+                {
+                    _StateCities = base.CreateObjectSet<StateCity>("StateCities");
+                }
+                return _StateCities;
+            }
+        }
+        private ObjectSet<StateCity> _StateCities;
 
         #endregion
 
@@ -300,14 +285,6 @@ namespace ADVIEWER.DAL
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the States EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToStates(State state)
-        {
-            base.AddObject("States", state);
-        }
-    
-        /// <summary>
         /// Deprecated Method for adding a new object to the Payments1 EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToPayments1(Payment payment)
@@ -321,14 +298,6 @@ namespace ADVIEWER.DAL
         public void AddToGroups(Group group)
         {
             base.AddObject("Groups", group);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the Cities EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToCities(City city)
-        {
-            base.AddObject("Cities", city);
         }
     
         /// <summary>
@@ -369,6 +338,14 @@ namespace ADVIEWER.DAL
         public void AddToRates(Rate rate)
         {
             base.AddObject("Rates", rate);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the StateCities EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToStateCities(StateCity stateCity)
+        {
+            base.AddObject("StateCities", stateCity);
         }
 
         #endregion
@@ -783,24 +760,24 @@ namespace ADVIEWER.DAL
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int32> SateID
+        public Nullable<global::System.Int32> StateCityID
         {
             get
             {
-                return _SateID;
+                return _StateCityID;
             }
             set
             {
-                OnSateIDChanging(value);
-                ReportPropertyChanging("SateID");
-                _SateID = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("SateID");
-                OnSateIDChanged();
+                OnStateCityIDChanging(value);
+                ReportPropertyChanging("StateCityID");
+                _StateCityID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("StateCityID");
+                OnStateCityIDChanged();
             }
         }
-        private Nullable<global::System.Int32> _SateID;
-        partial void OnSateIDChanging(Nullable<global::System.Int32> value);
-        partial void OnSateIDChanged();
+        private Nullable<global::System.Int32> _StateCityID;
+        partial void OnStateCityIDChanging(Nullable<global::System.Int32> value);
+        partial void OnStateCityIDChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -1357,30 +1334,6 @@ namespace ADVIEWER.DAL
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Int32> CityID
-        {
-            get
-            {
-                return _CityID;
-            }
-            set
-            {
-                OnCityIDChanging(value);
-                ReportPropertyChanging("CityID");
-                _CityID = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("CityID");
-                OnCityIDChanged();
-            }
-        }
-        private Nullable<global::System.Int32> _CityID;
-        partial void OnCityIDChanging(Nullable<global::System.Int32> value);
-        partial void OnCityIDChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.Int32 AdvDuration
@@ -1550,119 +1503,6 @@ namespace ADVIEWER.DAL
                 }
             }
         }
-
-        #endregion
-
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="Model1", Name="City")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class City : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new City object.
-        /// </summary>
-        /// <param name="id">Initial value of the ID property.</param>
-        /// <param name="cityName">Initial value of the CityName property.</param>
-        /// <param name="stateID">Initial value of the StateID property.</param>
-        public static City CreateCity(global::System.Int32 id, global::System.String cityName, global::System.Int32 stateID)
-        {
-            City city = new City();
-            city.ID = id;
-            city.CityName = cityName;
-            city.StateID = stateID;
-            return city;
-        }
-
-        #endregion
-
-        #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 ID
-        {
-            get
-            {
-                return _ID;
-            }
-            set
-            {
-                if (_ID != value)
-                {
-                    OnIDChanging(value);
-                    ReportPropertyChanging("ID");
-                    _ID = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("ID");
-                    OnIDChanged();
-                }
-            }
-        }
-        private global::System.Int32 _ID;
-        partial void OnIDChanging(global::System.Int32 value);
-        partial void OnIDChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String CityName
-        {
-            get
-            {
-                return _CityName;
-            }
-            set
-            {
-                OnCityNameChanging(value);
-                ReportPropertyChanging("CityName");
-                _CityName = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("CityName");
-                OnCityNameChanged();
-            }
-        }
-        private global::System.String _CityName;
-        partial void OnCityNameChanging(global::System.String value);
-        partial void OnCityNameChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 StateID
-        {
-            get
-            {
-                return _StateID;
-            }
-            set
-            {
-                OnStateIDChanging(value);
-                ReportPropertyChanging("StateID");
-                _StateID = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("StateID");
-                OnStateIDChanged();
-            }
-        }
-        private global::System.Int32 _StateID;
-        partial void OnStateIDChanging(global::System.Int32 value);
-        partial void OnStateIDChanged();
-
-        #endregion
-
-    
-        #region Navigation Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -1670,16 +1510,16 @@ namespace ADVIEWER.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Model1", "StateCity", "State")]
-        public State State
+        [EdmRelationshipNavigationPropertyAttribute("Model1", "StateCityAdvertisment", "StateCity")]
+        public StateCity StateCity
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<State>("Model1.StateCity", "State").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<StateCity>("Model1.StateCityAdvertisment", "StateCity").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<State>("Model1.StateCity", "State").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<StateCity>("Model1.StateCityAdvertisment", "StateCity").Value = value;
             }
         }
         /// <summary>
@@ -1687,17 +1527,17 @@ namespace ADVIEWER.DAL
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<State> StateReference
+        public EntityReference<StateCity> StateCityReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<State>("Model1.StateCity", "State");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<StateCity>("Model1.StateCityAdvertisment", "StateCity");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<State>("Model1.StateCity", "State", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<StateCity>("Model1.StateCityAdvertisment", "StateCity", value);
                 }
             }
         }
@@ -3209,24 +3049,24 @@ namespace ADVIEWER.DAL
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="Model1", Name="State")]
+    [EdmEntityTypeAttribute(NamespaceName="Model1", Name="StateCity")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class State : EntityObject
+    public partial class StateCity : EntityObject
     {
         #region Factory Method
     
         /// <summary>
-        /// Create a new State object.
+        /// Create a new StateCity object.
         /// </summary>
-        /// <param name="id">Initial value of the ID property.</param>
-        /// <param name="stateName">Initial value of the StateName property.</param>
-        public static State CreateState(global::System.Int32 id, global::System.String stateName)
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="name">Initial value of the Name property.</param>
+        public static StateCity CreateStateCity(global::System.Int32 id, global::System.String name)
         {
-            State state = new State();
-            state.ID = id;
-            state.StateName = stateName;
-            return state;
+            StateCity stateCity = new StateCity();
+            stateCity.Id = id;
+            stateCity.Name = name;
+            return stateCity;
         }
 
         #endregion
@@ -3238,51 +3078,75 @@ namespace ADVIEWER.DAL
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int32 ID
+        public global::System.Int32 Id
         {
             get
             {
-                return _ID;
+                return _Id;
             }
             set
             {
-                if (_ID != value)
+                if (_Id != value)
                 {
-                    OnIDChanging(value);
-                    ReportPropertyChanging("ID");
-                    _ID = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("ID");
-                    OnIDChanged();
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
                 }
             }
         }
-        private global::System.Int32 _ID;
-        partial void OnIDChanging(global::System.Int32 value);
-        partial void OnIDChanged();
+        private global::System.Int32 _Id;
+        partial void OnIdChanging(global::System.Int32 value);
+        partial void OnIdChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String StateName
+        public global::System.String Name
         {
             get
             {
-                return _StateName;
+                return _Name;
             }
             set
             {
-                OnStateNameChanging(value);
-                ReportPropertyChanging("StateName");
-                _StateName = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("StateName");
-                OnStateNameChanged();
+                OnNameChanging(value);
+                ReportPropertyChanging("Name");
+                _Name = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Name");
+                OnNameChanged();
             }
         }
-        private global::System.String _StateName;
-        partial void OnStateNameChanging(global::System.String value);
-        partial void OnStateNameChanged();
+        private global::System.String _Name;
+        partial void OnNameChanging(global::System.String value);
+        partial void OnNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> StateId
+        {
+            get
+            {
+                return _StateId;
+            }
+            set
+            {
+                OnStateIdChanging(value);
+                ReportPropertyChanging("StateId");
+                _StateId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("StateId");
+                OnStateIdChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _StateId;
+        partial void OnStateIdChanging(Nullable<global::System.Int32> value);
+        partial void OnStateIdChanged();
 
         #endregion
 
@@ -3295,18 +3159,78 @@ namespace ADVIEWER.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Model1", "StateCity", "City")]
-        public EntityCollection<City> Cities
+        [EdmRelationshipNavigationPropertyAttribute("Model1", "StateCityAdvertisment", "Advertisment")]
+        public EntityCollection<Advertisment> Advertisments
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<City>("Model1.StateCity", "City");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Advertisment>("Model1.StateCityAdvertisment", "Advertisment");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<City>("Model1.StateCity", "City", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Advertisment>("Model1.StateCityAdvertisment", "Advertisment", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("Model1", "StateCityStateCity", "State")]
+        public EntityCollection<StateCity> Cities
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<StateCity>("Model1.StateCityStateCity", "State");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<StateCity>("Model1.StateCityStateCity", "State", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("Model1", "StateCityStateCity", "StateCity")]
+        public StateCity State
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<StateCity>("Model1.StateCityStateCity", "StateCity").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<StateCity>("Model1.StateCityStateCity", "StateCity").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<StateCity> StateReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<StateCity>("Model1.StateCityStateCity", "StateCity");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<StateCity>("Model1.StateCityStateCity", "StateCity", value);
                 }
             }
         }

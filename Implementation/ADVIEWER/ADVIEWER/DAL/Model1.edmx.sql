@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 11/22/2013 14:35:29
--- Generated from EDMX file: C:\Users\Ali\Documents\GitHub\GroupA\Implementation\ADVIEWER\ADVIEWER\DAL\Model1.edmx
+-- Date Created: 11/23/2013 02:33:18
+-- Generated from EDMX file: C:\Users\M-R\Desktop\SE22\GroupA\Implementation\ADVIEWER\ADVIEWER\DAL\Model1.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -19,9 +19,6 @@ GO
 
 IF OBJECT_ID(N'[dbo].[FK_GroupGroup]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Groups] DROP CONSTRAINT [FK_GroupGroup];
-GO
-IF OBJECT_ID(N'[dbo].[FK_StateCity]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Cities] DROP CONSTRAINT [FK_StateCity];
 GO
 IF OBJECT_ID(N'[dbo].[FK_UserTicket]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Tickets1] DROP CONSTRAINT [FK_UserTicket];
@@ -50,6 +47,12 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_UserRating]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Rates] DROP CONSTRAINT [FK_UserRating];
 GO
+IF OBJECT_ID(N'[dbo].[FK_StateCityAdvertisment]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Advertisments] DROP CONSTRAINT [FK_StateCityAdvertisment];
+GO
+IF OBJECT_ID(N'[dbo].[FK_StateCityStateCity]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[StateCities] DROP CONSTRAINT [FK_StateCityStateCity];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -64,17 +67,11 @@ GO
 IF OBJECT_ID(N'[dbo].[Tickets1]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Tickets1];
 GO
-IF OBJECT_ID(N'[dbo].[States]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[States];
-GO
 IF OBJECT_ID(N'[dbo].[Payments1]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Payments1];
 GO
 IF OBJECT_ID(N'[dbo].[Groups]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Groups];
-GO
-IF OBJECT_ID(N'[dbo].[Cities]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Cities];
 GO
 IF OBJECT_ID(N'[dbo].[ContactMessages]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ContactMessages];
@@ -91,6 +88,9 @@ GO
 IF OBJECT_ID(N'[dbo].[Rates]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Rates];
 GO
+IF OBJECT_ID(N'[dbo].[StateCities]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[StateCities];
+GO
 IF OBJECT_ID(N'[dbo].[UserGroup]', 'U') IS NOT NULL
     DROP TABLE [dbo].[UserGroup];
 GO
@@ -106,7 +106,7 @@ GO
 CREATE TABLE [dbo].[Advertisments] (
     [ID] int IDENTITY(1,1) NOT NULL,
     [GroupID] int  NOT NULL,
-    [SateID] int  NULL,
+    [StateCityID] int  NULL,
     [StarCount] int  NOT NULL,
     [Title] nvarchar(100)  NOT NULL,
     [ShortDescription] nvarchar(300)  NULL,
@@ -130,7 +130,6 @@ CREATE TABLE [dbo].[Advertisments] (
     [TellTime] nvarchar(100)  NOT NULL,
     [Link] nvarchar(1000)  NULL,
     [PaidID] bigint  NULL,
-    [CityID] int  NULL,
     [AdvDuration] int  NOT NULL,
     [UserId] int  NOT NULL
 );
@@ -172,13 +171,6 @@ CREATE TABLE [dbo].[Tickets1] (
 );
 GO
 
--- Creating table 'States'
-CREATE TABLE [dbo].[States] (
-    [ID] int  NOT NULL,
-    [StateName] nvarchar(max)  NOT NULL
-);
-GO
-
 -- Creating table 'Payments1'
 CREATE TABLE [dbo].[Payments1] (
     [RequestID] bigint IDENTITY(1,1) NOT NULL,
@@ -204,15 +196,6 @@ CREATE TABLE [dbo].[Groups] (
     [Pic] nvarchar(100)  NULL,
     [GroupName] nvarchar(max)  NOT NULL,
     [ParentID] int  NULL
-);
-GO
-
--- Creating table 'Cities'
-CREATE TABLE [dbo].[Cities] (
-    [ID] int IDENTITY(1,1) NOT NULL,
-    [CityName] nvarchar(max)  NOT NULL,
-    [StateID] int  NOT NULL,
-    [State_ID] int  NOT NULL
 );
 GO
 
@@ -279,6 +262,14 @@ CREATE TABLE [dbo].[Rates] (
 );
 GO
 
+-- Creating table 'StateCities'
+CREATE TABLE [dbo].[StateCities] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [Name] nvarchar(max)  NOT NULL,
+    [StateId] int  NULL
+);
+GO
+
 -- Creating table 'UserGroup'
 CREATE TABLE [dbo].[UserGroup] (
     [Users_ID] int  NOT NULL,
@@ -315,12 +306,6 @@ ADD CONSTRAINT [PK_Tickets1]
     PRIMARY KEY CLUSTERED ([ID] ASC);
 GO
 
--- Creating primary key on [ID] in table 'States'
-ALTER TABLE [dbo].[States]
-ADD CONSTRAINT [PK_States]
-    PRIMARY KEY CLUSTERED ([ID] ASC);
-GO
-
 -- Creating primary key on [RequestID] in table 'Payments1'
 ALTER TABLE [dbo].[Payments1]
 ADD CONSTRAINT [PK_Payments1]
@@ -330,12 +315,6 @@ GO
 -- Creating primary key on [ID] in table 'Groups'
 ALTER TABLE [dbo].[Groups]
 ADD CONSTRAINT [PK_Groups]
-    PRIMARY KEY CLUSTERED ([ID] ASC);
-GO
-
--- Creating primary key on [ID] in table 'Cities'
-ALTER TABLE [dbo].[Cities]
-ADD CONSTRAINT [PK_Cities]
     PRIMARY KEY CLUSTERED ([ID] ASC);
 GO
 
@@ -369,6 +348,12 @@ ADD CONSTRAINT [PK_Rates]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
+-- Creating primary key on [Id] in table 'StateCities'
+ALTER TABLE [dbo].[StateCities]
+ADD CONSTRAINT [PK_StateCities]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
 -- Creating primary key on [Users_ID], [Groups_ID] in table 'UserGroup'
 ALTER TABLE [dbo].[UserGroup]
 ADD CONSTRAINT [PK_UserGroup]
@@ -397,20 +382,6 @@ ADD CONSTRAINT [FK_GroupGroup]
 CREATE INDEX [IX_FK_GroupGroup]
 ON [dbo].[Groups]
     ([ParentID]);
-GO
-
--- Creating foreign key on [State_ID] in table 'Cities'
-ALTER TABLE [dbo].[Cities]
-ADD CONSTRAINT [FK_StateCity]
-    FOREIGN KEY ([State_ID])
-    REFERENCES [dbo].[States]
-        ([ID])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-
--- Creating non-clustered index for FOREIGN KEY 'FK_StateCity'
-CREATE INDEX [IX_FK_StateCity]
-ON [dbo].[Cities]
-    ([State_ID]);
 GO
 
 -- Creating foreign key on [UserID] in table 'Tickets1'
@@ -527,6 +498,34 @@ ADD CONSTRAINT [FK_UserRating]
 CREATE INDEX [IX_FK_UserRating]
 ON [dbo].[Rates]
     ([UserId]);
+GO
+
+-- Creating foreign key on [StateCityID] in table 'Advertisments'
+ALTER TABLE [dbo].[Advertisments]
+ADD CONSTRAINT [FK_StateCityAdvertisment]
+    FOREIGN KEY ([StateCityID])
+    REFERENCES [dbo].[StateCities]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_StateCityAdvertisment'
+CREATE INDEX [IX_FK_StateCityAdvertisment]
+ON [dbo].[Advertisments]
+    ([StateCityID]);
+GO
+
+-- Creating foreign key on [StateId] in table 'StateCities'
+ALTER TABLE [dbo].[StateCities]
+ADD CONSTRAINT [FK_StateCityStateCity]
+    FOREIGN KEY ([StateId])
+    REFERENCES [dbo].[StateCities]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_StateCityStateCity'
+CREATE INDEX [IX_FK_StateCityStateCity]
+ON [dbo].[StateCities]
+    ([StateId]);
 GO
 
 -- --------------------------------------------------

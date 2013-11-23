@@ -80,11 +80,13 @@
     <Content Include="graphic\pbar-ani.gif" />
     <Content Include="Manage\Default.aspx" />
     <Content Include="Manage\EditGroup.aspx" />
+    <Content Include="Manage\EditStateCity.aspx" />
     <Content Include="Manage\GroupsList.aspx" />
     <Content Include="Manage\images\Icons\all.png" />
     <Content Include="Manage\images\Icons\exit.png" />
     <Content Include="Manage\images\Icons\new.png" />
     <Content Include="Manage\images\Icons\pass.png" />
+    <Content Include="Manage\StatesCitiesList.aspx" />
     <Content Include="Manage\Tickets.aspx" />
     <Content Include="Manage\UnconfirmedAdvs.aspx" />
     <Content Include="Manage\ViewTicket.aspx" />
@@ -257,6 +259,13 @@
     <Compile Include="Manage\EditGroup.aspx.designer.cs">
       <DependentUpon>EditGroup.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Manage\EditStateCity.aspx.cs">
+      <DependentUpon>EditStateCity.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Manage\EditStateCity.aspx.designer.cs">
+      <DependentUpon>EditStateCity.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Manage\GroupsList.aspx.cs">
       <DependentUpon>GroupsList.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -270,6 +279,13 @@
     </Compile>
     <Compile Include="Manage\ManageMaster.Master.designer.cs">
       <DependentUpon>ManageMaster.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Manage\StatesCitiesList.aspx.cs">
+      <DependentUpon>StatesCitiesList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Manage\StatesCitiesList.aspx.designer.cs">
+      <DependentUpon>StatesCitiesList.aspx</DependentUpon>
     </Compile>
     <Compile Include="Manage\Tickets.aspx.cs">
       <DependentUpon>Tickets.aspx</DependentUpon>

@@ -349,6 +349,65 @@ namespace ADVIEWER.BAL
                 return 0;
             }
          }
+
+        internal static StateCity[] GetStates()
+        {
+            ModelContainer ml= new ModelContainer();
+            return ml.StateCities.Where(t => t.StateId == null).ToArray();
+        }
+
+        internal static void DeleteStateCity(int id)
+        {
+            ModelContainer ml = new ModelContainer();
+            StateCity s = ml.StateCities.Where(t => t.Id == id).First();
+
+            foreach (StateCity c in s.Cities.ToArray()) 
+            {
+                ml.DeleteObject(c);
+            }
+            ml.DeleteObject(s);
+
+            ml.SaveChanges();
+        }
+
+        internal static object GetStatesCities()
+        {
+            ModelContainer ml = new ModelContainer();
+            return ml.StateCities.ToArray();
+        }
+
+        internal static void AddNewStateCity(string Name, int? StateId)
+        {
+            ModelContainer ml = new ModelContainer();
+            StateCity sc = new StateCity();
+            sc.Name = Name;
+            if (StateId != null) sc.State = ml.StateCities.Where(t => t.Id == StateId).First();
+            ml.StateCities.AddObject(sc);
+            ml.SaveChanges();
+        }
+
+        internal static StateCity GetStateCityData(int StateCityId)
+        {
+            ModelContainer ml = new ModelContainer();
+            return ml.StateCities.Where(t => t.Id == StateCityId).First();
+        }
+
+        internal static void UpdateStateCityData(int StateCityId, string Name, int? StateId)
+        {
+            ModelContainer ml = new ModelContainer();
+            StateCity sc = ml.StateCities.Where(t => t.Id == StateCityId).First();
+            sc.Name = Name;
+            if (StateId != null)
+            {
+                sc.State = ml.StateCities.Where(t => t.Id == StateId).First();
+            }
+            else
+            {
+                sc.State = null;
+                sc.StateId = null;
+            }
+            ml.SaveChanges();
+        }
     }
     public class ShowAdvertisment
     {
