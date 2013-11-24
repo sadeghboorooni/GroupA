@@ -463,7 +463,7 @@ h2
   right: 0;
 }
 .yamm .yamm-content {
-  padding: 20px 30px;
+  padding: 5px 15px 10px 0px;
   *zoom: 1;
 }
 .yamm .yamm-content:before,
@@ -471,6 +471,7 @@ h2
   display: table;
   content: "";
   line-height: 0;
+  height: -15px;
 }
 .yamm .yamm-content:after {
   clear: both;

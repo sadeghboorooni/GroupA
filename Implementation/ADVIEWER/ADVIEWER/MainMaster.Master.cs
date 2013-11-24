@@ -14,6 +14,7 @@ namespace ADVIEWER
         protected void Page_Load(object sender, EventArgs e)
         {
             LoadGropus();
+            makeStatesMenu();
         }
 
         protected void LoadGropus()
@@ -34,6 +35,30 @@ namespace ADVIEWER
                 ltrsub.Text += string.Format(" <li><a  style=\"font-size:11pt\" href='ShowGroupAdvs.aspx?ID={0}&Title={1} '>{2}</a></li>", sub.ID,sub.GroupName, sub.GroupName);
 
             }
+
+        }
+
+        private void makeStatesMenu()
+        {
+
+            List<StateCity> States = PublicFunctions.GetStatesAndCities().ToList();
+            int stateCount = 1;
+
+            string innerHtml = "<ul><li class=\"unstyled\"><div class=\"yamm-content\"><ul  class=\"unstyled\">\n";
+            foreach (StateCity sc in States.OrderBy(t=> t.Name))
+            {
+                innerHtml += "<li style=\"list-style: none;padding-right:7px;margin:0;padding-top:5px;padding-left:7px;\"><a style=\"\" href='ShowStateAdvs.aspx?" + "ID=" + sc.Id.ToString() + "&Title="  + sc.Name + "'";
+                innerHtml += " title='" + "تبلیغات استان "  + sc.Name + "'" + ">";
+                innerHtml += sc.Name;
+                innerHtml += "</a></li>\n";
+                if (stateCount++ % 5 == 0)
+                {
+                    innerHtml += "</ul>\n<ul class=\"unstyled\">\n";
+                }
+            }
+            innerHtml += "</ul></div></li></ul>";
+
+            statesDiv.InnerHtml = innerHtml;
 
         }
 

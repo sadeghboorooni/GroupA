@@ -119,6 +119,7 @@
     <Content Include="Scripts\jquery.tokeninput.js" />
     <Content Include="Scripts\RateIt\RateIt.js" />
     <Content Include="ShowGroupAdvs.aspx" />
+    <Content Include="ShowStateAdvs.aspx" />
     <Content Include="src\jquery.tokeninput.js" />
     <Content Include="Styles\bootstrap.css" />
     <Content Include="Styles\bootstrap.min.js" />
@@ -402,6 +403,13 @@
     </Compile>
     <Compile Include="ShowGroupAdvs.aspx.designer.cs">
       <DependentUpon>ShowGroupAdvs.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ShowStateAdvs.aspx.cs">
+      <DependentUpon>ShowStateAdvs.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ShowStateAdvs.aspx.designer.cs">
+      <DependentUpon>ShowStateAdvs.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

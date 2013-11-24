@@ -48,5 +48,30 @@ namespace ADVIEWER.BAL
             Single result = r == null ? 0 : (Single)r;
             return result;
         }
+
+        public static StateCity[] GetStatesAndCities()
+        {
+            ModelContainer ml = new ModelContainer();
+            return ml.StateCities.Where(t => t.StateId == null).ToArray();
+        }
+
+        public static Advertisment[] GetAdvByStateID(int ID)
+        {
+            ModelContainer ml = new ModelContainer();
+            StateCity[] AllCitiesFromState = ml.StateCities.Where(t => t.StateId == ID || t.Id == ID).ToArray();
+            List<Advertisment> AllCitiesAdvs = new List<Advertisment>();
+            List<Advertisment> ReturnAllCitiesAdvs = new List<Advertisment>();
+            foreach (StateCity Cities in AllCitiesFromState)
+            {
+                AllCitiesAdvs = ml.Advertisments.Where(t => t.StateCityID == Cities.Id && t.IsConfirmed == true).ToList();
+                foreach (Advertisment ReturnAdv in AllCitiesAdvs)
+                {
+                    ReturnAllCitiesAdvs.Add(ReturnAdv);
+                }
+                AllCitiesAdvs.Clear();
+            }
+            return ReturnAllCitiesAdvs.ToArray();
+            
+        }
     }
 }

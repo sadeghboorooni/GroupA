@@ -75,6 +75,12 @@
                               
 									<li class=""><a class="" style="font-size:120%" href="/Default.aspx">صفحه اصلی</a></li>
 
+                                    <li class="dropdown ">
+										<a style="font-size:120%" class="dropdown-toggle " data-toggle="dropdown" href="#"><b class="caret"></b>استان‏ها</a>
+										<div class="dropdown-menu" style="" role="menu" runat="server" id="statesDiv">
+                                        </div>
+									</li>
+
                <li class="ltrClass"> <a class="ltrClass" style="font-size:120%" href="/About.aspx">درباره ما</a></li>
 								
 									
