@@ -43,9 +43,13 @@ namespace ADVIEWER.BAL
         internal static Single GetAdvAverageRate(int AdvId)
         {
             ModelContainer ml = new ModelContainer();
-            var r = ml.Rates.Where(t => t.AdvertismentId == AdvId).Average(t => t.Value);
 
-            Single result = r == null ? 0 : (Single)r;
+            Single result = 0;
+
+            if (ml.Rates.Where(t => t.AdvertismentId == AdvId).Count() > 0)
+            {
+                result = (Single)ml.Rates.Where(t => t.AdvertismentId == AdvId).Average(t => t.Value);
+            }
             return result;
         }
 

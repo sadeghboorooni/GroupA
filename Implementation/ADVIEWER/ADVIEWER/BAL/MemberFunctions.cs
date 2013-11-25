@@ -71,18 +71,53 @@ namespace ADVIEWER.BAL
             int CurUserId = AccountFunctions.currentUserId();
             if (CurUserId != -1) UserId = CurUserId;
             ModelContainer ml = new ModelContainer();
-            if (ml.Rates.Where(t => t.AdvertismentId == AdvId && t.UserId == UserId).Count() > 0)
+            Rate r;
+
+            if (CurUserId != -1)// member user
             {
-                Rate r = ml.Rates.Where(t => t.AdvertismentId == AdvId && t.UserId == UserId).First();
-                r.Value = Value;
+                if (ml.Rates.Where(t => t.AdvertismentId == AdvId && t.UserId == UserId).Count() > 0)//rate this adv in past
+                {
+                    r = ml.Rates.Where(t => t.AdvertismentId == AdvId && t.UserId == UserId).First();
+                    r.Value = Value;
+                }//rate just now
+                else 
+                {
+                    r = new Rate();
+                    r.Advertisment = ml.Advertisments.Where(t => t.ID == AdvId).First();
+                    r.User = ml.Users.Where(t => t.ID == CurUserId).First();
+                    r.Value = Value;
+                    ml.AddToRates(r);
+                }
             }
-            else 
+            else//anonymous user 
             {
-                Rate r = new Rate();
-                r.User = ml.Users.Where(t=>t.ID== UserId).First();
-                r.Advertisment = ml.Advertisments.Where(t => t.ID == AdvId).First();
-                r.Value = Value;
+                List<Rate> sessionRates;
+                if (System.Web.HttpContext.Current.Session["AdvRates"] != null)
+                {
+                    sessionRates = (List<Rate>)System.Web.HttpContext.Current.Session["AdvRates"];
+                    if (sessionRates.Where(t => t.AdvertismentId == AdvId).Count() > 0)//anonymous user rate in past(saved in session)
+                    {
+                        Rate preRate = sessionRates.Where(t => t.AdvertismentId == AdvId).First();
+                        r = ml.Rates.Where(t => t.AdvertismentId == AdvId && t.UserId == null && t.Value == preRate.Value).First();
+                        r.Value = Value;
+                    }//anonymous user rate just now
+                    else 
+                    {
+                        r = new Rate();
+                        r.Value = Value;
+                        r.Advertisment = ml.Advertisments.Where(t => t.ID == AdvId).First();
+                        ml.AddToRates(r);
+                    }
+                }//anonymous user rate just now
+                else 
+                {
+                    r = new Rate();
+                    r.Value = Value;
+                    r.Advertisment = ml.Advertisments.Where(t => t.ID == AdvId).First();
+                    ml.AddToRates(r);
+                }
             }
+                        
             ml.SaveChanges();
         }
         public static void SaveImage(string tempAdd, string mainAdd, string filename)

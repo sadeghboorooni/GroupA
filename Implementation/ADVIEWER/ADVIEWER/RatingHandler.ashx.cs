@@ -47,6 +47,7 @@ namespace ADVIEWER
                         Rate r = new Rate();
                         r.Value = Value;
                         r.AdvertismentId = AdvId;
+                        sessionRates.Add(r);
                     }
                     context.Session.Add("AdvRates", sessionRates);
                 }
