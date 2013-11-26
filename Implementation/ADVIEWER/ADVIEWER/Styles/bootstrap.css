@@ -2996,12 +2996,6 @@ input[type="submit"].btn.btn-mini {
 .navbar .nav .dropdown-toggle .caret {
   margin-top: 8px;
 }
-.navbar .nav > li > a:focus,
-.navbar .nav > li > a:hover {
-  background-color: transparent;
-  color: #333333;
-  text-decoration: none;
-}
 .navbar .nav > .active > a,
 .navbar .nav > .active > a:hover,
 .navbar .nav > .active > a:focus {
@@ -4087,15 +4081,8 @@ a.thumbnail:hover {
   margin: 2px 0 0;
   list-style: none;
   background-color: #ffffff;
-  border: 1px solid rgba(0, 0.2, 0, 0);
-  *border-right-width: 2px;
+  `*border-right-width: 2px;
   *border-bottom-width: 2px;
-  -webkit-border-radius: 6px;
-  -moz-border-radius: 6px;
-  border-radius: 6px;
-  -webkit-box-shadow: 0 5px 10px rgba(0, 0.2, 0, 0);
-  -moz-box-shadow: 0 5px 10px rgba(0, 0.2, 0, 0);
-  box-shadow: 0 5px 10px rgba(0, 0.2, 0, 0);
   -webkit-background-clip: padding-box;
   -moz-background-clip: padding;
   background-clip: padding-box;

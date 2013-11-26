@@ -121,6 +121,7 @@
     <Content Include="ShowGroupAdvs.aspx" />
     <Content Include="ShowStateAdvs.aspx" />
     <Content Include="src\jquery.tokeninput.js" />
+    <Content Include="StateCityList.aspx" />
     <Content Include="Styles\bootstrap.css" />
     <Content Include="Styles\bootstrap.min.js" />
     <Content Include="Styles\font-awesome.css" />
@@ -410,6 +411,13 @@
     </Compile>
     <Compile Include="ShowStateAdvs.aspx.designer.cs">
       <DependentUpon>ShowStateAdvs.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="StateCityList.aspx.cs">
+      <DependentUpon>StateCityList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="StateCityList.aspx.designer.cs">
+      <DependentUpon>StateCityList.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

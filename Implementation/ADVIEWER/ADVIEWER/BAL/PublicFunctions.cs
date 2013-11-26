@@ -62,20 +62,65 @@ namespace ADVIEWER.BAL
         public static Advertisment[] GetAdvByStateID(int ID)
         {
             ModelContainer ml = new ModelContainer();
-            StateCity[] AllCitiesFromState = ml.StateCities.Where(t => t.StateId == ID || t.Id == ID).ToArray();
-            List<Advertisment> AllCitiesAdvs = new List<Advertisment>();
-            List<Advertisment> ReturnAllCitiesAdvs = new List<Advertisment>();
-            foreach (StateCity Cities in AllCitiesFromState)
+            if (ml.StateCities.Where(t => t.Id == ID).First().StateId == null)
             {
-                AllCitiesAdvs = ml.Advertisments.Where(t => t.StateCityID == Cities.Id && t.IsConfirmed == true).ToList();
-                foreach (Advertisment ReturnAdv in AllCitiesAdvs)
-                {
-                    ReturnAllCitiesAdvs.Add(ReturnAdv);
-                }
-                AllCitiesAdvs.Clear();
+                return (from adv in ml.Advertisments
+                        where (adv.StateCityID == ID || adv.StateCityID == (from st in ml.StateCities where st.StateId == ID select st.Id).FirstOrDefault()) && adv.IsConfirmed == true 
+                        select adv).ToArray();
+
             }
-            return ReturnAllCitiesAdvs.ToArray();
-            
+            else
+                return ml.Advertisments.Where(t => t.StateCityID == ID && t.IsConfirmed == true).ToArray();
+        }
+        public static List<StateAndCitiesForReapeater> GetStatesWithCities()
+        {
+            ModelContainer ml = new ModelContainer();
+            List<StateCity> AllState = ml.StateCities.Where(t=> t.StateId == null).ToList();
+            List<StateAndCitiesForReapeater> ReturnListOfClasses = new List<StateAndCitiesForReapeater>();
+            foreach(StateCity AS in AllState){
+                StateAndCitiesForReapeater Temp = new StateAndCitiesForReapeater(AS.Id);
+                ReturnListOfClasses.Add(Temp);
+            }
+            return ReturnListOfClasses;
         }
     }
-}
+
+    public class StateAndCitiesForReapeater
+    {
+        private int Id;
+
+        public int ID
+        {
+            get { return Id; }
+            set { Id = value; }
+        }
+        private string name;
+
+        public string Name
+        {
+            get { return name; }
+            set { name = value; }
+        }
+        private StateCity[] cities;
+
+        public StateCity[] Cities
+        {
+            get { return cities; }
+            set { cities = value; }
+        }
+
+        public StateAndCitiesForReapeater(int ID)
+        {
+            ModelContainer ml = new ModelContainer();
+            this.ID = ID;
+            this.Name = ml.StateCities.Where(t => t.Id == ID).First().Name;
+            SetCities();
+        }
+
+        private void SetCities()
+        {
+            ModelContainer ml = new ModelContainer();
+            Cities = ml.StateCities.Where(t => t.StateId == this.ID).ToArray();
+        }
+    }
+}   

@@ -64,9 +64,11 @@ namespace ADVIEWER.member
         {
 
             List<StateCity> States = PublicFunctions.GetStatesAndCities().ToList();
-            int stateCount = 1;
+            int stateCount = 2;
 
             string innerHtml = "<ul><li class=\"unstyled\"><div class=\"yamm-content\"><ul  class=\"unstyled\">\n";
+            innerHtml += "<li style=\"list-style: none;padding-right:7px;margin:0;padding-top:5px;padding-left:7px;\"><a style=\"\" href='../StateCityList.aspx' title=\"لیست استان ها و شهرها\"" + ">" + "لیست استان ها و شهرها";
+            innerHtml += "<i class=\"icon-arrow-left\" style=\"font-size: 10px;padding-left: 5px;color: rgb(90, 238, 90);\"></i>" + "</a></li>\n";
             foreach (StateCity sc in States.OrderBy(t => t.Name))
             {
                 innerHtml += "<li style=\"list-style: none;padding-right:7px;margin:0;padding-top:5px;padding-left:7px;\"><a style=\"\" href='../ShowStateAdvs.aspx?" + "ID=" + sc.Id.ToString() + "&Title=" + sc.Name + "'";

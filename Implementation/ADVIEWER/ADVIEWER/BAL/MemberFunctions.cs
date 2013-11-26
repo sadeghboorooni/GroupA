@@ -313,23 +313,15 @@ namespace ADVIEWER.BAL
         public static Advertisment[] GetAdvByGroupID(int ID)
         {
             ModelContainer ml = new ModelContainer();
-            if (ml.Groups.Where(t => t.ID == ID).First().ParentID != null)
-                return ml.Advertisments.Where(t => t.GroupID == ID && t.IsConfirmed == true).ToArray();
-            else
+            if (ml.Groups.Where(t => t.ID == ID).First().ParentID == null)
             {
-                Group[] AllSubGroups = ml.Groups.Where(t => t.ParentID == ID).ToArray();
-                List<Advertisment> AllSubGroupAdvs = new List<Advertisment>();
-                List<Advertisment> ReturnAllGroupAdvs = new List<Advertisment>();
-                foreach(Group SubGroup in AllSubGroups){
-                    AllSubGroupAdvs = ml.Advertisments.Where(t => t.GroupID == SubGroup.ID && t.IsConfirmed == true).ToList();
-                    foreach (Advertisment ReturnAdv in AllSubGroupAdvs)
-                    {
-                        ReturnAllGroupAdvs.Add(ReturnAdv);
-                    }
-                    AllSubGroupAdvs.Clear();
-                }
-                return ReturnAllGroupAdvs.ToArray();
+                return (from adv in ml.Advertisments
+                        where (adv.GroupID == ID || adv.GroupID == (from Gr in ml.Groups where Gr.ParentID == ID select Gr.ID).FirstOrDefault()) && adv.IsConfirmed == true
+                        select adv).ToArray();
             }
+            else
+                return ml.Advertisments.Where(t => t.GroupID == ID && t.IsConfirmed == true).ToArray();
+                
         }
 
         public static object UnconfirmedStaredAdvertismentsDataTable()
