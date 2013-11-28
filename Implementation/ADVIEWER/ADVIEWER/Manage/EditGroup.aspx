@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Manage/ManageMaster.Master" AutoEventWireup="true" CodeBehind="EditGroup.aspx.cs" Inherits="ADVIEWER.Manage.EditGroup" %>
+﻿<%@ Page Title="Edit Group" Language="C#" MasterPageFile="~/Manage/ManageMaster.Master" AutoEventWireup="true" CodeBehind="EditGroup.aspx.cs" Inherits="ADVIEWER.Manage.EditGroup" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <title>ویرایش گروه آگهی</title>
 </asp:Content>
