@@ -5,7 +5,6 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using ADVIEWER.BAL;
-using ADVIEWER.DAL;
 
 namespace ADVIEWER.Manage
 {
@@ -17,7 +16,7 @@ namespace ADVIEWER.Manage
             try
             {
                 int TicketID = int.Parse(Request.QueryString["id"]);
-                Ticket t= MemberFunctions.GetTicketData(TicketID);
+                AssignorTicket t = MemberFunctions.GetTicketData(TicketID);
                 TicketTitle = t.Title;
                 TicketText = t.Text;
                 //ModelContainer ml = new ModelContainer();

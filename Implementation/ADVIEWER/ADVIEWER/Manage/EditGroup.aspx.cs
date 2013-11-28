@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using ADVIEWER.DAL;
 using ADVIEWER.BAL;
 
 namespace ADVIEWER.Manage
@@ -36,7 +35,7 @@ namespace ADVIEWER.Manage
 
             parentsDropDownList.Items.Add(new ListItem("اصلی", "null"));
             int? parentId = MemberFunctions.GetGroupData(groupid).ParentID;
-            foreach (Group g in BAL.MemberFunctions.GetParentGroups())
+            foreach (AssignorGroup g in BAL.MemberFunctions.GetParentGroups())
             {
                 ListItem li = new ListItem(g.GroupName, g.ID.ToString());
                 parentsDropDownList.Items.Add(li);

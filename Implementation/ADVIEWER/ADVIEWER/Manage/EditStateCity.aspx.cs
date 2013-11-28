@@ -5,7 +5,6 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using ADVIEWER.BAL;
-using ADVIEWER.DAL;
 
 namespace ADVIEWER.Manage
 {
@@ -36,11 +35,11 @@ namespace ADVIEWER.Manage
 
             statesDropDownList.Items.Add(new ListItem("استان", "null"));
             int? stateId = MemberFunctions.GetStateCityData(SCId).StateId;
-            foreach (StateCity sc in BAL.MemberFunctions.GetStates())
+            foreach (AssignorStateCity sc in BAL.MemberFunctions.GetStates())
             {
-                ListItem li = new ListItem(sc.Name, sc.Id.ToString());
+                ListItem li = new ListItem(sc.Name, sc.ID.ToString());
                 statesDropDownList.Items.Add(li);
-                if (sc.Id == stateId) li.Selected = true;
+                if (sc.ID == stateId) li.Selected = true;
             }
         }
 

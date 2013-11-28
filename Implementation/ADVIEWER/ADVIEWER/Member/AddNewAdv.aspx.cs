@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using ADVIEWER.DAL;
 using ADVIEWER.BAL;
 using System.IO;
 
@@ -18,7 +17,7 @@ namespace ADVIEWER.Member
             {
                 fillGroupsDropDownList();
                 int userId = AccountFunctions.currentUserId();
-                User currusr = AccountFunctions.GetUserInformation(userId);
+                AssignorUser currusr = AccountFunctions.GetUserInformation(userId);
                 Nametxt.Text = currusr.FullName;
                 Mobiletxt.Text = currusr.Mobile;
                 Telltxt.Text = currusr.Tell;
@@ -39,10 +38,10 @@ namespace ADVIEWER.Member
 
         private void fillGroupsDropDownList()
         {
-            foreach (Group g in MemberFunctions.GetSubGroups())
+            foreach (AssignorGroup g in MemberFunctions.GetSubGroups())
             {
                 ListItem li = new ListItem(g.GroupName, g.ID.ToString());
-                if (g.parentGroup == null)
+                if (g.ParentID == null)
                 {
                     li.Attributes.Add( "disabled", "disabled" );
                     li.Attributes.Add("style", "color: #fff; background: #68b800; margin:4px 0;padding:2px 15px 2px 0");

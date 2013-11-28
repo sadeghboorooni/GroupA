@@ -25,29 +25,29 @@ namespace ADVIEWER
 
                 if (AccountFunctions.currentUserId() == -1)//set session for anonymous user
                 {
-                    List<Rate> sessionRates;
+                    List<AssignorRate> sessionRates;
                     if (context.Session["AdvRates"] != null)
                     {
-                        sessionRates = (List<Rate>)context.Session["AdvRates"];
+                        sessionRates = (List<AssignorRate>)context.Session["AdvRates"];
                         context.Session.Remove("AdvRates");
                     }
                     else
                     {
-                        sessionRates = new List<Rate>();
+                        sessionRates = new List<AssignorRate>();
                     }
                     if (sessionRates.Where(t => t.AdvertismentId == AdvId).Count() > 0)
                     {
-                        Rate r = sessionRates.Where(t => t.AdvertismentId == AdvId).First();
+                        AssignorRate r = sessionRates.Where(t => t.AdvertismentId == AdvId).First();
                         sessionRates.Remove(r);
                         r.Value = Value;
-                        sessionRates.Add(r);
+                        sessionRates.Add((r));
                     }
                     else
                     {
                         Rate r = new Rate();
                         r.Value = Value;
                         r.AdvertismentId = AdvId;
-                        sessionRates.Add(r);
+                        sessionRates.Add(PublicFunctions.MakeAssignor<Rate, AssignorRate>(r));
                     }
                     context.Session.Add("AdvRates", sessionRates);
                 }

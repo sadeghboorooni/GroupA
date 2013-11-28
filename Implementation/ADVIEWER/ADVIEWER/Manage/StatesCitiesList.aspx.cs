@@ -5,7 +5,6 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using ADVIEWER.BAL;
-using ADVIEWER.DAL;
 
 namespace ADVIEWER.Manage
 {
@@ -40,9 +39,9 @@ namespace ADVIEWER.Manage
 
             StatesDropDownList.Items.Add(new ListItem("استان", "null"));
 
-            foreach (StateCity s in BAL.MemberFunctions.GetStates())
+            foreach (AssignorStateCity s in BAL.MemberFunctions.GetStates())
             {
-                StatesDropDownList.Items.Add(new ListItem(s.Name, s.Id.ToString()));
+                StatesDropDownList.Items.Add(new ListItem(s.Name, s.ID.ToString()));
             }
         }
         protected void statesCitiesGridView_RowCommand(object sender, GridViewCommandEventArgs e)

@@ -5,7 +5,6 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using ADVIEWER.BAL;
-using ADVIEWER.DAL;
 
 namespace ADVIEWER.Member
 {
@@ -16,7 +15,7 @@ namespace ADVIEWER.Member
             if (!IsPostBack)
             {
                 int UserID = AccountFunctions.currentUserId();
-                User CurUser = AccountFunctions.GetUserInformation(UserID);
+                AssignorUser CurUser = AccountFunctions.GetUserInformation(UserID);
                 txtAddress.Text = CurUser.Address;
                 txtMob.Text = CurUser.Mobile;
                 txtName.Text = CurUser.FullName;

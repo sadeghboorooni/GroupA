@@ -2071,12 +2071,12 @@ namespace ADVIEWER.DAL
         /// <summary>
         /// Create a new KeyWord object.
         /// </summary>
-        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="id">Initial value of the ID property.</param>
         /// <param name="text">Initial value of the Text property.</param>
         public static KeyWord CreateKeyWord(global::System.Int32 id, global::System.String text)
         {
             KeyWord keyWord = new KeyWord();
-            keyWord.Id = id;
+            keyWord.ID = id;
             keyWord.Text = text;
             return keyWord;
         }
@@ -2090,27 +2090,27 @@ namespace ADVIEWER.DAL
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int32 Id
+        public global::System.Int32 ID
         {
             get
             {
-                return _Id;
+                return _ID;
             }
             set
             {
-                if (_Id != value)
+                if (_ID != value)
                 {
-                    OnIdChanging(value);
-                    ReportPropertyChanging("Id");
-                    _Id = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("Id");
-                    OnIdChanged();
+                    OnIDChanging(value);
+                    ReportPropertyChanging("ID");
+                    _ID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ID");
+                    OnIDChanged();
                 }
             }
         }
-        private global::System.Int32 _Id;
-        partial void OnIdChanging(global::System.Int32 value);
-        partial void OnIdChanged();
+        private global::System.Int32 _ID;
+        partial void OnIDChanging(global::System.Int32 value);
+        partial void OnIDChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -2846,13 +2846,13 @@ namespace ADVIEWER.DAL
         /// <summary>
         /// Create a new Rate object.
         /// </summary>
-        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="id">Initial value of the ID property.</param>
         /// <param name="advertismentId">Initial value of the AdvertismentId property.</param>
         /// <param name="value">Initial value of the Value property.</param>
         public static Rate CreateRate(global::System.Int32 id, global::System.Int32 advertismentId, global::System.Single value)
         {
             Rate rate = new Rate();
-            rate.Id = id;
+            rate.ID = id;
             rate.AdvertismentId = advertismentId;
             rate.Value = value;
             return rate;
@@ -2867,27 +2867,27 @@ namespace ADVIEWER.DAL
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int32 Id
+        public global::System.Int32 ID
         {
             get
             {
-                return _Id;
+                return _ID;
             }
             set
             {
-                if (_Id != value)
+                if (_ID != value)
                 {
-                    OnIdChanging(value);
-                    ReportPropertyChanging("Id");
-                    _Id = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("Id");
-                    OnIdChanged();
+                    OnIDChanging(value);
+                    ReportPropertyChanging("ID");
+                    _ID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ID");
+                    OnIDChanged();
                 }
             }
         }
-        private global::System.Int32 _Id;
-        partial void OnIdChanging(global::System.Int32 value);
-        partial void OnIdChanged();
+        private global::System.Int32 _ID;
+        partial void OnIDChanging(global::System.Int32 value);
+        partial void OnIDChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -3059,12 +3059,12 @@ namespace ADVIEWER.DAL
         /// <summary>
         /// Create a new StateCity object.
         /// </summary>
-        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="id">Initial value of the ID property.</param>
         /// <param name="name">Initial value of the Name property.</param>
         public static StateCity CreateStateCity(global::System.Int32 id, global::System.String name)
         {
             StateCity stateCity = new StateCity();
-            stateCity.Id = id;
+            stateCity.ID = id;
             stateCity.Name = name;
             return stateCity;
         }
@@ -3078,27 +3078,27 @@ namespace ADVIEWER.DAL
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int32 Id
+        public global::System.Int32 ID
         {
             get
             {
-                return _Id;
+                return _ID;
             }
             set
             {
-                if (_Id != value)
+                if (_ID != value)
                 {
-                    OnIdChanging(value);
-                    ReportPropertyChanging("Id");
-                    _Id = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("Id");
-                    OnIdChanged();
+                    OnIDChanging(value);
+                    ReportPropertyChanging("ID");
+                    _ID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ID");
+                    OnIDChanged();
                 }
             }
         }
-        private global::System.Int32 _Id;
-        partial void OnIdChanging(global::System.Int32 value);
-        partial void OnIdChanged();
+        private global::System.Int32 _ID;
+        partial void OnIDChanging(global::System.Int32 value);
+        partial void OnIDChanged();
     
         /// <summary>
         /// No Metadata Documentation available.

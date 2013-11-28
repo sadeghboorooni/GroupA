@@ -5,7 +5,6 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
-using ADVIEWER.DAL;
 using ADVIEWER.BAL;
 
 namespace ADVIEWER
@@ -44,7 +43,12 @@ namespace ADVIEWER
         protected void Page_Load(object sender, EventArgs e)
         {
             int ID = int.Parse(Request.QueryString["id"]);
-            User userprofile = AccountFunctions.GetUserInformation(ID);
+            AssignorUser userprofile = AccountFunctions.GetUserInformation(ID);
+
+
+            //L_User test = L_User.setUser<User, L_User>(userprofile);
+            //test = L_User.setUser(userprofile);
+
             about = userprofile.About;
             name = userprofile.FullName;
             tell = userprofile.Tell;

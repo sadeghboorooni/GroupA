@@ -11,10 +11,10 @@ namespace ADVIEWER.member
 {
     public partial class MemberDefault : System.Web.UI.Page
     {
-        public string picAdd;
+        //public string picAdd;
         protected void Page_Load(object sender, EventArgs e)
         {
-            picAdd = AccountFunctions.GetUserInformation(AccountFunctions.currentUserId()).PicAddress;
+            //picAdd = AccountFunctions.GetUserInformation(AccountFunctions.currentUserId()).PicAddress;
         }
 
         protected void ExitFuction(object sender, EventArgs e)

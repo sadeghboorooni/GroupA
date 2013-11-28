@@ -13,7 +13,7 @@ namespace ADVIEWER.manage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!AccountFunctions.GetUserInformation(AccountFunctions.currentUserId()).IsManager) 
+            if (!AccountFunctions.IsManager()) 
             {
                 Response.Redirect("~/");
             }

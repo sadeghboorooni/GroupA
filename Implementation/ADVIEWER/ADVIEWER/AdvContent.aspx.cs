@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using ADVIEWER.DAL;
 using ADVIEWER.BAL;
 using ADVIEWER.Account;
 
@@ -12,7 +11,7 @@ namespace ADVIEWER
 {
     public partial class AdvContent : System.Web.UI.Page
     {
-        public Advertisment curAdv;
+        public AssignorAdvertisment curAdv;
         public Single UserAdvRate = 0, AverageAdvRate = 0;        
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -48,10 +47,10 @@ namespace ADVIEWER
             {
                 if (Session["AdvRates"] != null)
                 {
-                    List<Rate> sessionRates = (List<Rate>)Session["AdvRates"];
+                    List<AssignorRate> sessionRates = (List<AssignorRate>)Session["AdvRates"];
                     if (sessionRates.Where(t => t.AdvertismentId == curAdv.ID).Count() > 0)
                     {
-                        Rate r = sessionRates.Where(t => t.AdvertismentId == curAdv.ID).First();
+                        AssignorRate r = sessionRates.Where(t => t.AdvertismentId == curAdv.ID).First();
                         UserAdvRate = r.Value;
                     }
                 }

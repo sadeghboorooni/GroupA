@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using ADVIEWER.DAL;
 using ADVIEWER.BAL;
 
 namespace ADVIEWER.Member
@@ -15,7 +14,7 @@ namespace ADVIEWER.Member
         protected void Page_Load(object sender, EventArgs e)
         {
             int TicketID = int.Parse(Request.QueryString["id"]);
-            Ticket t = MemberFunctions.GetTicketData(TicketID);
+            AssignorTicket t = MemberFunctions.GetTicketData(TicketID);
             TicketTitle = t.Title;
             TicketText = t.Text;
             if (t.Answer != "" && t.Answer != null)

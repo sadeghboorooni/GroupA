@@ -44,7 +44,7 @@ namespace ADVIEWER.BAL
 
             foreach (int kwId in MemberFunctions.ParseKeyWords(keywordStr))
             {
-                KeyWord tempkw = ml.KeyWords.Where(t => t.Id == kwId).First();
+                KeyWord tempkw = ml.KeyWords.Where(t => t.ID == kwId).First();
                 newAdv.KeyWords.Add(tempkw);
             }
 
@@ -65,7 +65,7 @@ namespace ADVIEWER.BAL
                 return false;
             }
         }
-        public static void SetAdvRate(int AdvId, Single Value) 
+        public static void SetAdvRate(int AdvId, Single Value)
         {
             int? UserId = null;
             int CurUserId = AccountFunctions.currentUserId();
@@ -80,7 +80,7 @@ namespace ADVIEWER.BAL
                     r = ml.Rates.Where(t => t.AdvertismentId == AdvId && t.UserId == UserId).First();
                     r.Value = Value;
                 }//rate just now
-                else 
+                else
                 {
                     r = new Rate();
                     r.Advertisment = ml.Advertisments.Where(t => t.ID == AdvId).First();
@@ -101,7 +101,7 @@ namespace ADVIEWER.BAL
                         r = ml.Rates.Where(t => t.AdvertismentId == AdvId && t.UserId == null && t.Value == preRate.Value).First();
                         r.Value = Value;
                     }//anonymous user rate just now
-                    else 
+                    else
                     {
                         r = new Rate();
                         r.Value = Value;
@@ -109,7 +109,7 @@ namespace ADVIEWER.BAL
                         ml.AddToRates(r);
                     }
                 }//anonymous user rate just now
-                else 
+                else
                 {
                     r = new Rate();
                     r.Value = Value;
@@ -117,7 +117,7 @@ namespace ADVIEWER.BAL
                     ml.AddToRates(r);
                 }
             }
-                        
+
             ml.SaveChanges();
         }
         public static void SaveImage(string tempAdd, string mainAdd, string filename)
@@ -133,7 +133,6 @@ namespace ADVIEWER.BAL
             File.Delete(HttpContext.Current.Server.MapPath(tempAdd + filename));
 
         }
-
         public static int[] ParseKeyWords(string keywordStr)
         {
             List<int> kwList = new List<int>();
@@ -144,9 +143,9 @@ namespace ADVIEWER.BAL
                 try
                 {
                     int id = int.Parse(kwStr);
-                    if (ml.KeyWords.Where(t => t.Id == id).Count() > 0)
+                    if (ml.KeyWords.Where(t => t.ID== id).Count() > 0)
                     {
-                        kwList.Add(ml.KeyWords.Where(t => t.Id == id).Select(t => t.Id).First());
+                        kwList.Add(ml.KeyWords.Where(t => t.ID == id).Select(t => t.ID).First());
                     }
                 }
                 catch
@@ -157,7 +156,7 @@ namespace ADVIEWER.BAL
                         newkw.Text = kwStr;
                         ml.KeyWords.AddObject(newkw);
                         ml.SaveChanges();
-                        kwList.Add(newkw.Id);
+                        kwList.Add(newkw.ID);
                     }
                 }
 
@@ -165,8 +164,6 @@ namespace ADVIEWER.BAL
 
             return kwList.ToArray();
         }
-
-
         public static DataTable UnconfirmedFreeAdvertismentsDataTable()
         {
             ModelContainer ml = new ModelContainer();
@@ -174,7 +171,7 @@ namespace ADVIEWER.BAL
             List<ShowAdvertisment> unreadList = new List<ShowAdvertisment>();
             foreach (Advertisment adv in ml.Advertisments.Where(t => t.IsConfirmed == false && t.IsRead == false && t.StarCount == -1))
             {
-                unreadList.Add(new ShowAdvertisment(adv.ID, adv.Title, adv.ShortDescription, adv.FullName, adv.Pic, adv.RegistrationDate,-1, adv.UserId));
+                unreadList.Add(new ShowAdvertisment(adv.ID, adv.Title, adv.ShortDescription, adv.FullName, adv.Pic, adv.RegistrationDate, -1, adv.UserId));
             }
             unreadList = unreadList.OrderByDescending(t => t.RegistrationDate).ToList();
             return PublicFunctions.ToDataTable<ShowAdvertisment>(unreadList);
@@ -219,22 +216,34 @@ namespace ADVIEWER.BAL
             ml.SaveChanges();
 
         }
-        public static Ticket GetTicketData(int id)
+        public static AssignorTicket GetTicketData(int id)
         {
             ModelContainer ml = new ModelContainer();
-            return ml.Tickets1.Where(t => t.ID == id).FirstOrDefault();
+            return PublicFunctions.MakeAssignor<Ticket, AssignorTicket>(ml.Tickets1.Where(t => t.ID == id).FirstOrDefault());
+        }
+        public static List<AssignorTicket> GetListTicketData(int id)
+        {
+            ModelContainer ml = new ModelContainer();
+            var x = ml.Tickets1.Where(t => t.UserID == id).ToArray();
+            List<AssignorTicket> r = new List<AssignorTicket>();
+            foreach (Ticket tic in x)
+            {
+                r.Add(PublicFunctions.MakeAssignor<Ticket, AssignorTicket>(tic));
+            }
+            return r;
         }
 
-        public static Ticket[] GetListTicketData(int id)
+        public static AssignorTicket[] GetListTicketData()
         {
             ModelContainer ml = new ModelContainer();
-            return ml.Tickets1.Where(t => t.UserID == id).ToArray();
-        }
+            List<AssignorTicket> at = new List<AssignorTicket>();
 
-        public static Ticket[] GetListTicketData()
-        {
-            ModelContainer ml = new ModelContainer();
-            return ml.Tickets1.Where(t => t.RegDate == t.LastUpdate).OrderByDescending(t => t.LastUpdate).ToArray();
+            foreach (Ticket tt in ml.Tickets1.Where(t => t.RegDate == t.LastUpdate).OrderByDescending(t => t.LastUpdate).ToArray())
+            {
+                at.Add(PublicFunctions.MakeAssignor<Ticket, AssignorTicket>(tt));
+            }
+
+            return at.ToArray();
         }
 
         public static void DeleteTicket(int TicketID)
@@ -254,35 +263,70 @@ namespace ADVIEWER.BAL
             ml.SaveChanges();
         }
 
-        public static Advertisment GetAdvertismentData(int id)
+        public static AssignorAdvertisment GetAdvertismentData(int id)
         {
             ModelContainer ml = new ModelContainer();
-            return ml.Advertisments.Where(t => t.ID == id).FirstOrDefault();
+            return PublicFunctions.MakeAssignor<Advertisment, AssignorAdvertisment>(ml.Advertisments.Where(t => t.ID == id).FirstOrDefault());
         }
-        public static Advertisment[] GetUserAdvs(int UserID)
+        public static AssignorAdvertisment[] GetUserAdvs(int UserID)
         {
             ModelContainer ml = new ModelContainer();
-            return ml.Users.Where(a => a.ID == UserID).FirstOrDefault().Advertisments.ToArray();
+            List<AssignorAdvertisment> aAdv = new List<AssignorAdvertisment>();
+            foreach (Advertisment ad in ml.Users.Where(a => a.ID == UserID).FirstOrDefault().Advertisments)
+            {
+                aAdv.Add(PublicFunctions.MakeAssignor<Advertisment, AssignorAdvertisment>(ad));
+            }
+
+            return aAdv.ToArray();
         }
-        public static Advertisment[] GetUserConfirmedAdvs(int UserID)
+        public static AssignorAdvertisment[] GetUserConfirmedAdvs(int UserID)
         {
             ModelContainer ml = new ModelContainer();
-            return ml.Users.Where(a => a.ID == UserID).FirstOrDefault().Advertisments.Where(t => t.IsConfirmed).ToArray();
+
+            List<AssignorAdvertisment> aAdv = new List<AssignorAdvertisment>();
+            foreach (Advertisment ad in ml.Users.Where(a => a.ID == UserID).FirstOrDefault().Advertisments.Where(t => t.IsConfirmed))
+            {
+                aAdv.Add(PublicFunctions.MakeAssignor<Advertisment, AssignorAdvertisment>(ad));
+            }
+
+            return aAdv.ToArray();
         }
-        public static Group[] GetSubGroups()
+        public static AssignorGroup[] GetSubGroups()
         {
             ModelContainer ml = new ModelContainer();
-            return ml.Groups.Where(t => t.ID != null).ToArray();
+
+            List<AssignorGroup> aGroup = new List<AssignorGroup>();
+            foreach (Group gr in ml.Groups.Where(t => t.ID != null))
+            {
+                aGroup.Add(PublicFunctions.MakeAssignor<Group, AssignorGroup>(gr));
+            }
+
+            return aGroup.ToArray();
         }
-        public static Group[] GetParentGroups()
+        public static AssignorGroup[] GetParentGroups()
         {
             ModelContainer ml = new ModelContainer();
-            return ml.Groups.Where(t => t.ParentID == null).ToArray();
+
+            List<AssignorGroup> aGroup = new List<AssignorGroup>();
+            foreach (Group gr in ml.Groups.Where(t => t.ParentID == null))
+            {
+                aGroup.Add(PublicFunctions.MakeAssignor<Group, AssignorGroup>(gr));
+            }
+
+            return aGroup.ToArray();
         }
-        public static Group[] GetSubGroupsByID(int ID)
+        public static AssignorGroup[] GetSubGroupsByID(int ID)
         {
             ModelContainer ml = new ModelContainer();
-            return ml.Groups.Where(t => t.ParentID == ID).ToArray();
+
+
+            List<AssignorGroup> aGroup = new List<AssignorGroup>();
+            foreach (Group gr in ml.Groups.Where(t => t.ParentID == ID))
+            {
+                aGroup.Add(PublicFunctions.MakeAssignor<Group, AssignorGroup>(gr));
+            }
+
+            return aGroup.ToArray();
         }
         public static void AddNewGroup(string groupName, int? parentId)
         {
@@ -295,11 +339,11 @@ namespace ADVIEWER.BAL
         }
 
 
-        internal static Group GetGroupData(int groupId)
+        internal static AssignorGroup GetGroupData(int groupId)
         {
             ModelContainer ml = new ModelContainer();
-            
-            return ml.Groups.Where(t => t.ID == groupId).First();
+
+            return PublicFunctions.MakeAssignor<Group, AssignorGroup>(ml.Groups.Where(t => t.ID == groupId).First());
         }
 
         internal static void UpdateGroupData(int Id, string groupName, int? parentId)
@@ -310,20 +354,31 @@ namespace ADVIEWER.BAL
             g.ParentID = parentId;
             ml.SaveChanges();
         }
-        public static Advertisment[] GetAdvByGroupID(int ID)
+        public static AssignorAdvertisment[] GetAdvByGroupID(int ID)
         {
             ModelContainer ml = new ModelContainer();
+
+            List<AssignorAdvertisment> aAdv = new List<AssignorAdvertisment>();
+
             if (ml.Groups.Where(t => t.ID == ID).First().ParentID == null)
             {
-                return (from adv in ml.Advertisments
-                        where (adv.GroupID == ID || adv.GroupID == (from Gr in ml.Groups where Gr.ParentID == ID select Gr.ID).FirstOrDefault()) && adv.IsConfirmed == true
-                        select adv).ToArray();
+                foreach (Advertisment adv1 in (from adv in ml.Advertisments
+                                               where (adv.GroupID == ID || adv.GroupID == (from Gr in ml.Groups where Gr.ParentID == ID select Gr.ID).FirstOrDefault()) && adv.IsConfirmed == true
+                                               select adv))
+                {
+                    aAdv.Add(PublicFunctions.MakeAssignor<Advertisment, AssignorAdvertisment>(adv1));
+                }
             }
             else
-                return ml.Advertisments.Where(t => t.GroupID == ID && t.IsConfirmed == true).ToArray();
-                
-        }
+                foreach (Advertisment adv1 in ml.Advertisments.Where(t => t.GroupID == ID && t.IsConfirmed == true))
+                {
+                    aAdv.Add(PublicFunctions.MakeAssignor<Advertisment, AssignorAdvertisment>(adv1));
+                }
 
+
+            return aAdv.ToArray();
+
+        }
         public static object UnconfirmedStaredAdvertismentsDataTable()
         {
             ModelContainer ml = new ModelContainer();
@@ -331,7 +386,7 @@ namespace ADVIEWER.BAL
             List<ShowAdvertisment> unreadList = new List<ShowAdvertisment>();
             foreach (Advertisment adv in ml.Advertisments.Where(t => t.IsConfirmed == false && t.IsRead == false && t.StarCount > -1))
             {
-                unreadList.Add(new ShowAdvertisment(adv.ID, adv.Title, adv.ShortDescription, adv.FullName, adv.Pic, adv.RegistrationDate,adv.StarCount, adv.UserId));
+                unreadList.Add(new ShowAdvertisment(adv.ID, adv.Title, adv.ShortDescription, adv.FullName, adv.Pic, adv.RegistrationDate, adv.StarCount, adv.UserId));
             }
             unreadList = unreadList.OrderByDescending(t => t.RegistrationDate).ToList();
             return PublicFunctions.ToDataTable<ShowAdvertisment>(unreadList);
@@ -351,7 +406,7 @@ namespace ADVIEWER.BAL
             ModelContainer ml = new ModelContainer();
             Group g = ml.Groups.Where(t => t.ID == id).First();
 
-            foreach (Group childGroup in g.childGroup.ToArray()) 
+            foreach (Group childGroup in g.childGroup.ToArray())
             {
                 ml.Groups.DeleteObject(childGroup);
             }
@@ -359,36 +414,42 @@ namespace ADVIEWER.BAL
             ml.DeleteObject(g);
 
             ml.SaveChanges();
-            
+
         }
 
 
         internal static float GetAdvUserRate(int AdvId)
         {
-            ModelContainer ml =new ModelContainer();
+            ModelContainer ml = new ModelContainer();
             int UserId = AccountFunctions.currentUserId();
             if (UserId != -1 && ml.Rates.Where(t => t.AdvertismentId == AdvId && t.UserId == UserId).Count() > 0)
             {
                 return ml.Rates.Where(t => t.AdvertismentId == AdvId && t.UserId == UserId).Select(t => t.Value).First();
             }
-            else 
+            else
             {
                 return 0;
             }
-         }
+        }
 
-        internal static StateCity[] GetStates()
+        internal static AssignorStateCity[] GetStates()
         {
-            ModelContainer ml= new ModelContainer();
-            return ml.StateCities.Where(t => t.StateId == null).ToArray();
+            ModelContainer ml = new ModelContainer();
+
+            List<AssignorStateCity> aStateCity = new List<AssignorStateCity>();
+            foreach (StateCity sc in ml.StateCities.Where(t => t.StateId == null))
+            {
+                aStateCity.Add(PublicFunctions.MakeAssignor<StateCity, AssignorStateCity>(sc));
+            }
+            return aStateCity.ToArray();
         }
 
         internal static void DeleteStateCity(int id)
         {
             ModelContainer ml = new ModelContainer();
-            StateCity s = ml.StateCities.Where(t => t.Id == id).First();
+            StateCity s = ml.StateCities.Where(t => t.ID == id).First();
 
-            foreach (StateCity c in s.Cities.ToArray()) 
+            foreach (StateCity c in s.Cities.ToArray())
             {
                 ml.DeleteObject(c);
             }
@@ -397,10 +458,16 @@ namespace ADVIEWER.BAL
             ml.SaveChanges();
         }
 
-        internal static object GetStatesCities()
+        internal static AssignorStateCity[] GetStatesCities()
         {
             ModelContainer ml = new ModelContainer();
-            return ml.StateCities.ToArray();
+
+            List<AssignorStateCity> aStateCity = new List<AssignorStateCity>();
+            foreach (StateCity sc in ml.StateCities)
+            {
+                aStateCity.Add(PublicFunctions.MakeAssignor<StateCity, AssignorStateCity>(sc));
+            }
+            return aStateCity.ToArray();
         }
 
         internal static void AddNewStateCity(string Name, int? StateId)
@@ -408,25 +475,25 @@ namespace ADVIEWER.BAL
             ModelContainer ml = new ModelContainer();
             StateCity sc = new StateCity();
             sc.Name = Name;
-            if (StateId != null) sc.State = ml.StateCities.Where(t => t.Id == StateId).First();
+            if (StateId != null) sc.State = ml.StateCities.Where(t => t.ID == StateId).First();
             ml.StateCities.AddObject(sc);
             ml.SaveChanges();
         }
 
-        internal static StateCity GetStateCityData(int StateCityId)
+        internal static AssignorStateCity GetStateCityData(int StateCityId)
         {
             ModelContainer ml = new ModelContainer();
-            return ml.StateCities.Where(t => t.Id == StateCityId).First();
+            return PublicFunctions.MakeAssignor<StateCity, AssignorStateCity>(ml.StateCities.Where(t => t.ID == StateCityId).First());
         }
 
         internal static void UpdateStateCityData(int StateCityId, string Name, int? StateId)
         {
             ModelContainer ml = new ModelContainer();
-            StateCity sc = ml.StateCities.Where(t => t.Id == StateCityId).First();
+            StateCity sc = ml.StateCities.Where(t => t.ID == StateCityId).First();
             sc.Name = Name;
             if (StateId != null)
             {
-                sc.State = ml.StateCities.Where(t => t.Id == StateId).First();
+                sc.State = ml.StateCities.Where(t => t.ID == StateId).First();
             }
             else
             {
@@ -442,7 +509,7 @@ namespace ADVIEWER.BAL
             FullName,
             Title,
             Pic;
-        public int ID, UserId,starCount;
+        public int ID, UserId, starCount;
         public DateTime RegistrationDate;
 
         public ShowAdvertisment(int ID,
@@ -450,7 +517,7 @@ namespace ADVIEWER.BAL
             string Description,
             string FullName,
             string Pic,
-            DateTime RegistrationDate,int starcount,
+            DateTime RegistrationDate, int starcount,
             int UserId)
         {
             this.ID = ID;
@@ -463,10 +530,4 @@ namespace ADVIEWER.BAL
             this.UserId = UserId;
         }
     }
-    public class L_User : User
-    {
-
-    }
-    public class L_Advertisment : Advertisment
-    { }
 }

@@ -31,7 +31,7 @@ namespace ADVIEWER.BAL
             }
         }
 
-        public static void loginUser(Guid UserId) 
+        public static void SetLastLogin(Guid UserId) 
         {
             ModelContainer ml = new ModelContainer();
             ml.Users.Where(t => t.UserProviderKey == UserId).FirstOrDefault().LastLogin = DateTime.Now;
@@ -46,10 +46,10 @@ namespace ADVIEWER.BAL
             return ml.Users.Where(t => t.UserProviderKey == userGuid).Select(t => t.ID).FirstOrDefault();
         }
 
-        public static User GetUserInformation(int UserID)
+        public static AssignorUser GetUserInformation(int UserID)
         {
             ModelContainer ml = new ModelContainer();
-            return ml.Users.Where(a => a.ID == UserID).FirstOrDefault();
+            return PublicFunctions.MakeAssignor<User,AssignorUser>(ml.Users.Where(a => a.ID == UserID).FirstOrDefault());
         }
 
         public static void UpdateUserInfo(Int32 id, String fullName,String about ,String address,String fax ,String mobile,String tell, String yahooId)

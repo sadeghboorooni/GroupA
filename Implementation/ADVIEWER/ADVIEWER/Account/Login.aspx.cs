@@ -18,7 +18,7 @@ namespace ADVIEWER.Account
         protected void LoginUser_LoggedIn(object sender, EventArgs e) 
         {
             MembershipUser mu = Membership.GetUser(LoginUser.UserName);
-            AccountFunctions.loginUser((Guid)mu.ProviderUserKey);
+            AccountFunctions.SetLastLogin((Guid)mu.ProviderUserKey);
         }
     }
 }
