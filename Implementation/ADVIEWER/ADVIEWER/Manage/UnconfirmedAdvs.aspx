@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="ManageMaster.Master" AutoEventWireup="true" CodeBehind="UnconfirmedAdvs.aspx.cs" Inherits="ADVIEWER.Manage.UnconfirmedAdvs" %>
+﻿<%@ Page Title="آگهی های در حال انتظار" Language="C#" MasterPageFile="ManageMaster.Master" AutoEventWireup="true" CodeBehind="UnconfirmedAdvs.aspx.cs" Inherits="ADVIEWER.Manage.UnconfirmedAdvs" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script>
         function SelectAllCheckboxesFreeAdvsGridView(chk) {

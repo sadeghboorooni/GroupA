@@ -18,7 +18,21 @@ namespace ADVIEWER.Account
         protected void LoginUser_LoggedIn(object sender, EventArgs e) 
         {
             MembershipUser mu = Membership.GetUser(LoginUser.UserName);
+<<<<<<< HEAD
             AccountFunctions.SetLastLogin((Guid)mu.ProviderUserKey);
+=======
+            AccountFunctions.loginUser((Guid)mu.ProviderUserKey);
+
+            if (Request.QueryString["ReturnUrl"] != null)
+            {
+                FormsAuthentication.RedirectFromLoginPage(LoginUser.UserName, LoginUser.RememberMeSet);
+            }
+
+            else
+            {
+                FormsAuthentication.SetAuthCookie(LoginUser.UserName, LoginUser.RememberMeSet);
+            }
+>>>>>>> dc2d4477fa119653f87c4f3f628aace26f7fd333
         }
     }
 }

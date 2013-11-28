@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MainMaster.Master" AutoEventWireup="true" CodeBehind="AdvContent.aspx.cs" Inherits="ADVIEWER.AdvContent" %>
+﻿<%@ Page Title="محتویات آگهی" Language="C#" MasterPageFile="~/MainMaster.Master" AutoEventWireup="true" CodeBehind="AdvContent.aspx.cs" Inherits="ADVIEWER.AdvContent" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="styles/member.css" rel="stylesheet" type="text/css" />
     

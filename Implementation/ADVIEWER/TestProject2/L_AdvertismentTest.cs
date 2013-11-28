@@ -77,7 +77,7 @@ namespace TestProject2
         [UrlToTest("http://localhost:15402/")]
         public void L_AdvertismentConstructorTest()
         {
-            L_Advertisment target = new L_Advertisment();
+            AssignorAdvertisment target = new AssignorAdvertisment();
             Assert.Inconclusive("TODO: Implement code to verify target");
         }
     }

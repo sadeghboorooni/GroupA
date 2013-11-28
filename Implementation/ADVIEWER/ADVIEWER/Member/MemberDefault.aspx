@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/member/MemberMaster.Master" AutoEventWireup="true" CodeBehind="MemberDefault.aspx.cs" Inherits="ADVIEWER.member.MemberDefault" %>
+﻿<%@ Page Title="صفحه کاربری" Language="C#" MasterPageFile="~/member/MemberMaster.Master" AutoEventWireup="true" CodeBehind="MemberDefault.aspx.cs" Inherits="ADVIEWER.member.MemberDefault" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="mainContent" runat="server">

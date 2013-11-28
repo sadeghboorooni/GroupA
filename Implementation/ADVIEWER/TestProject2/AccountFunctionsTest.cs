@@ -158,7 +158,7 @@ namespace TestProject2
         public void loginUserTest()
         {
             Guid UserId = new Guid(); // TODO: Initialize to an appropriate value
-            AccountFunctions.loginUser(UserId);
+            AccountFunctions.SetLastLogin(UserId);
             Assert.Inconclusive("A method that does not return a value cannot be verified.");
         }
 

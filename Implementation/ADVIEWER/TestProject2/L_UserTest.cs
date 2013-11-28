@@ -77,7 +77,7 @@ namespace TestProject2
         [UrlToTest("http://localhost:15402/")]
         public void L_UserConstructorTest()
         {
-            L_User target = new L_User();
+            AssignorUser target = new AssignorUser();
             Assert.Inconclusive("TODO: Implement code to verify target");
         }
     }
