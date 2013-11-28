@@ -1,4 +1,4 @@
-﻿<%@ Page Title="View Ticket" Language="C#" MasterPageFile="~/Manage/ManageMaster.Master" AutoEventWireup="true" CodeBehind="ViewTicket.aspx.cs" Inherits="ADVIEWER.Manage.ViewTicket" %>
+﻿<%@ Page Title="مشاهده تیکت" Language="C#" MasterPageFile="~/Manage/ManageMaster.Master" AutoEventWireup="true" CodeBehind="ViewTicket.aspx.cs" Inherits="ADVIEWER.Manage.ViewTicket" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <title><%= TicketTitle %></title>
 </asp:Content>

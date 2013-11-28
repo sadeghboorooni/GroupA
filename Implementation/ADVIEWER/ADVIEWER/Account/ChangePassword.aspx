@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Change Password" Language="C#" MasterPageFile="~/MainMaster.master" AutoEventWireup="true"
+﻿<%@ Page Title="تغییر رمز عبور" Language="C#" MasterPageFile="~/MainMaster.master" AutoEventWireup="true"
     CodeBehind="ChangePassword.aspx.cs" Inherits="ADVIEWER.Account.ChangePassword" %>
 
     <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">

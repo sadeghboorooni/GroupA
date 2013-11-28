@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Register" Language="C#" MasterPageFile="~/MainMaster.master" AutoEventWireup="true"
+﻿<%@ Page Title="ثبت نام" Language="C#" MasterPageFile="~/MainMaster.master" AutoEventWireup="true"
     CodeBehind="Register.aspx.cs" Inherits="ADVIEWER.Account.Register" %>
 
     <asp:Content ContentPlaceHolderID="head" runat="server">

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Member/MemberMaster.Master" AutoEventWireup="true" CodeBehind="ManageAdvGallery.aspx.cs" Inherits="ADVIEWER.Member.ManageAdvGallery" %>
+﻿<%@ Page Title="مدیریت گالری تبلیغات" Language="C#" MasterPageFile="~/Member/MemberMaster.Master" AutoEventWireup="true" CodeBehind="ManageAdvGallery.aspx.cs" Inherits="ADVIEWER.Member.ManageAdvGallery" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/themes/base/jquery-ui.css" id="theme" />
 <link rel="stylesheet" href="styles/fileupload/jquery.fileupload-ui.css" />
