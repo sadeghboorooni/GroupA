@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Manage/ManageMaster.Master" AutoEventWireup="true" CodeBehind="GroupsList.aspx.cs" Inherits="ADVIEWER.Manage.GroupsList" %>
+﻿<%@ Page Title="Groups List" Language="C#" MasterPageFile="~/Manage/ManageMaster.Master" AutoEventWireup="true" CodeBehind="GroupsList.aspx.cs" Inherits="ADVIEWER.Manage.GroupsList" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 <title>مدیریت دسته بندی آگهی ها</title>
         <script>

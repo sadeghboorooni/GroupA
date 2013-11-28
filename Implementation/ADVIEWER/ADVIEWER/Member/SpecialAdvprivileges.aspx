@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="SpecialAdvprivileges.aspx.cs" Inherits="ADVIEWER.Member.SpecialAdvprivileges" %>
+﻿<%@ Page Title="Special Advertisement Privileges" Language="C#" AutoEventWireup="true" CodeBehind="SpecialAdvprivileges.aspx.cs" Inherits="ADVIEWER.Member.SpecialAdvprivileges" %>
 
 <!DOCTYPE html>
 

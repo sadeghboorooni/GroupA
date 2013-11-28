@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Manage/ManageMaster.Master" AutoEventWireup="true" CodeBehind="EditStateCity.aspx.cs" Inherits="ADVIEWER.Manage.EditStateCity" %>
+﻿<%@ Page Title="Edit City State" Language="C#" MasterPageFile="~/Manage/ManageMaster.Master" AutoEventWireup="true" CodeBehind="EditStateCity.aspx.cs" Inherits="ADVIEWER.Manage.EditStateCity" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <title>ویرایش استان و شهر</title>
 </asp:Content>
