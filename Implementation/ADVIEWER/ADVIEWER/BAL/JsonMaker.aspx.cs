@@ -23,7 +23,7 @@ namespace ADVIEWER.BAL
                     string q = Request.QueryString["q"];
                     foreach (KeyWord kw in ml.KeyWords.Where(t=>t.Text.Contains(q)))
                     {
-                        resp += "{\"name\":\"" + kw.Text + "\",\"id\":\"" + kw.Id + "\"},";
+                        resp += "{\"name\":\"" + kw.Text + "\",\"id\":\"" + kw.ID + "\"},";
                     }
                     if(resp.LastIndexOf(',')!=-1) resp = resp.Remove(resp.LastIndexOf(','));
                     resp += "]";
