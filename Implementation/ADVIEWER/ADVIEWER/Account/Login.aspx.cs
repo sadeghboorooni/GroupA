@@ -19,6 +19,16 @@ namespace ADVIEWER.Account
         {
             MembershipUser mu = Membership.GetUser(LoginUser.UserName);
             AccountFunctions.loginUser((Guid)mu.ProviderUserKey);
+
+            if (Request.QueryString["ReturnUrl"] != null)
+            {
+                FormsAuthentication.RedirectFromLoginPage(LoginUser.UserName, LoginUser.RememberMeSet);
+            }
+
+            else
+            {
+                FormsAuthentication.SetAuthCookie(LoginUser.UserName, LoginUser.RememberMeSet);
+            }
         }
     }
 }
