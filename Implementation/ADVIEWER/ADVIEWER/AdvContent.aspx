@@ -16,15 +16,18 @@
 
            
         </h2>
-        <div>
+        <div style="float:left;text-align:center;margin-left:100px;direction:ltr">
         <div class="rateit" data-rateit-value="<%=AverageAdvRate %>" data-rateit-ispreset="true" id="RateAdv">
         </div>
+        <button class="btn btn-primary" onclick="SetRate($('#RateAdv').rateit('value'))" type="button">ثبت امتیاز شما</button>
+        <div>
         نمره دهی شما: <%=UserAdvRate %>
         </div>
         <div>
         <%--<button onclick="alert($('#RateAdv').rateit('value'))" type="button">Get value</button>--%>
         <%--<button onclick="$('#RateAdv').rateit('value', prompt('Input numerical value'))" type="button">Set value</button>--%>
-        <button onclick="SetRate($('#RateAdv').rateit('value'))" type="button">Set Rate</button>
+        
+        </div>
         </div>
         <script>
             function SetRate(value) {
@@ -39,7 +42,7 @@
         </script>
 
 
-
+        <br /><br /><br />
         <div style="padding-right:10px;padding-bottom:10px">
             <asp:Literal ID="ltrstars" runat="server" Visible="false"></asp:Literal>
            

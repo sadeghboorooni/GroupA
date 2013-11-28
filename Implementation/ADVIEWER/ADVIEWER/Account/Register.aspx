@@ -1,6 +1,11 @@
 ﻿<%@ Page Title="Register" Language="C#" MasterPageFile="~/MainMaster.master" AutoEventWireup="true"
     CodeBehind="Register.aspx.cs" Inherits="ADVIEWER.Account.Register" %>
 
+    <asp:Content ContentPlaceHolderID="head" runat="server">
+        <script src="../Scripts/jquery-1.8.2.min.js" type="text/javascript"></script>
+        <script src="../Scripts/bootstrap.min.js" type="text/javascript"></script>
+    </asp:Content>
+
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
     <asp:CreateUserWizard ID="RegisterUser" runat="server" EnableViewState="false" OnCreatedUser="RegisterUser_CreatedUser">
         <LayoutTemplate>

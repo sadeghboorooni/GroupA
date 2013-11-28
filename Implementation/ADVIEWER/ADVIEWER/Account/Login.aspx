@@ -1,6 +1,11 @@
 ﻿<%@ Page Title="Log In" Language="C#" MasterPageFile="~/MainMaster.master" AutoEventWireup="true"
     CodeBehind="Login.aspx.cs" Inherits="ADVIEWER.Account.Login" %>
 
+    <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+        <script src="../Scripts/jquery-1.8.2.min.js" type="text/javascript"></script>
+        <script src="../Scripts/bootstrap.min.js" type="text/javascript"></script>
+    </asp:Content>
+
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
     <h2>
          ورود با حساب کاربری
