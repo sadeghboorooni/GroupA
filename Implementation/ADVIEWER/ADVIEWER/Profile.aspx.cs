@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
 using ADVIEWER.BAL;
 
-namespace ADVIEWER
+namespace ADVIEWER.Main
 {
 
     public partial class Profile : System.Web.UI.Page
@@ -46,9 +46,6 @@ namespace ADVIEWER
             AssignorUser userprofile = AccountFunctions.GetUserInformation(ID);
 
 
-            //L_User test = L_User.setUser<User, L_User>(userprofile);
-            //test = L_User.setUser(userprofile);
-
             about = userprofile.About;
             name = userprofile.FullName;
             tell = userprofile.Tell;
@@ -56,10 +53,6 @@ namespace ADVIEWER
             addr = userprofile.Address;
             pic = userprofile.PicAddress;
             title = "صفحه اختصاصی" + userprofile.FullName;
-
-            /*Advertisment[] test = { Advertisment.CreateAdvertisment(1, -1, "title", "text", "", true, "fullname", "email", DateTime.Now, DateTime.Now, 2, 1, 2) };
-
-            CollectionPager1.DataSource = test;*/ //test view
 
             CollectionPager1.DataSource = MemberFunctions.GetUserConfirmedAdvs(ID);
             

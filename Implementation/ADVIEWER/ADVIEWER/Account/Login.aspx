@@ -1,4 +1,4 @@
-﻿<%@ Page Title="صفحه ورود" Language="C#" MasterPageFile="~/MainMaster.master" AutoEventWireup="true"
+﻿<%@ Page Title="ورود" Language="C#" MasterPageFile="~/MainMaster.master" AutoEventWireup="true"
     CodeBehind="Login.aspx.cs" Inherits="ADVIEWER.Account.Login" %>
 
     <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">

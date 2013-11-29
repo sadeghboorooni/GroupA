@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="درباره ما" Language="C#" MasterPageFile="~/MainMaster.master" AutoEventWireup="true"
-    CodeBehind="About.aspx.cs" Inherits="ADVIEWER.About" %>
+    CodeBehind="About.aspx.cs" Inherits="ADVIEWER.Main.About" %>
 
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
 

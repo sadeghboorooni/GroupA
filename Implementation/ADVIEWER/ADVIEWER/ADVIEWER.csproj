@@ -41,6 +41,10 @@
       <HintPath>bin\CollectionPager.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Persia, Version=3.0.4052.38236, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Persia.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Core" />
@@ -64,7 +68,6 @@
     <Content Include="404.aspx" />
     <Content Include="About.aspx" />
     <Content Include="Account\ChangePassword.aspx" />
-    <Content Include="Account\ChangePasswordSuccess.aspx" />
     <Content Include="Account\Login.aspx" />
     <Content Include="Account\Register.aspx" />
     <Content Include="AdvContent.aspx" />
@@ -75,6 +78,7 @@
     <Content Include="bin\AjaxControlToolkit.dll" />
     <Content Include="bin\CollectionPager.dll" />
     <Content Include="BAL\JsonMaker.aspx" />
+    <Content Include="bin\Persia.dll" />
     <Content Include="DAL\Model1.edmx.sql" />
     <Content Include="Default.aspx" />
     <Content Include="graphic\pbar-ani.gif" />
@@ -120,22 +124,18 @@
     <Content Include="Scripts\RateIt\RateIt.js" />
     <Content Include="ShowGroupAdvs.aspx" />
     <Content Include="ShowStateAdvs.aspx" />
-    <Content Include="src\jquery.tokeninput.js" />
     <Content Include="StateCityList.aspx" />
     <Content Include="Styles\bootstrap.css" />
-    <Content Include="Styles\bootstrap.min.js" />
     <Content Include="Styles\font-awesome.css" />
     <Content Include="Styles\fontawesome-webfont.svg" />
     <Content Include="Styles\Images\Logo.png" />
+    <Content Include="Styles\Images\new.png" />
     <Content Include="Styles\Images\nopic11.jpg" />
-    <Content Include="Styles\jquery-1.8.2.min.js" />
     <Content Include="Styles\Manage.css" />
     <Content Include="Styles\member.css" />
     <Content Include="Styles\newTheme.css" />
     <Content Include="Styles\RateIt\RateIt.css" />
-    <Content Include="Styles\RateIt\star_2.gif" />
-    <Content Include="Styles\RateIt\star_3.gif" />
-    <Content Include="Styles\RateIt\star_4.gif" />
+    <Content Include="Styles\RateIt\star.gif" />
     <Content Include="Styles\Site.css" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
@@ -194,13 +194,6 @@
     </Compile>
     <Compile Include="Account\ChangePassword.aspx.designer.cs">
       <DependentUpon>ChangePassword.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Account\ChangePasswordSuccess.aspx.cs">
-      <DependentUpon>ChangePasswordSuccess.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Account\ChangePasswordSuccess.aspx.designer.cs">
-      <DependentUpon>ChangePasswordSuccess.aspx</DependentUpon>
     </Compile>
     <Compile Include="Account\Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
@@ -451,8 +444,11 @@
     <None Include="Styles\Fonts\bbc-nassim-regular.otf" />
     <None Include="Styles\Fonts\bbc-nassim-regular.ttf" />
     <None Include="Styles\Fonts\bbc-nassim-regular.woff" />
+    <None Include="vpproject\ADVIEWER.vpp" />
+    <None Include="vpproject\ADVIEWER.vpppath" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Member\advsimages\main\" />
     <Folder Include="UserFiles\profile\main\" />
     <Folder Include="UserFiles\profile\temp\" />
   </ItemGroup>

@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 using System.Web.Security;
 using ADVIEWER.BAL;
 
-namespace ADVIEWER.manage
+namespace ADVIEWER.Manage
 {
     public partial class ManageMaster : System.Web.UI.MasterPage
     {

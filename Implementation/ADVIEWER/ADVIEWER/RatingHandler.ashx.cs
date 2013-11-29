@@ -6,7 +6,7 @@ using ADVIEWER.DAL;
 using ADVIEWER.BAL;
 using System.Web.SessionState;
 
-namespace ADVIEWER
+namespace ADVIEWER.Main
 {
     /// <summary>
     /// Summary description for RatingHandler

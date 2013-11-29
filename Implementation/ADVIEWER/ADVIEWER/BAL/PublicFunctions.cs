@@ -4,7 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Data;
 using System.Reflection;
+using System.Globalization;
 using ADVIEWER.DAL;
+
 
 namespace ADVIEWER.BAL
 {
@@ -127,6 +129,43 @@ namespace ADVIEWER.BAL
                 ReturnListOfClasses.Add(Temp);
             }
             return ReturnListOfClasses;
+        }
+        public static string SolarDateConvertor(object InputDate, int Mode = 2, string type = "")
+        {
+            Persia.SolarDate solarDate;
+            try
+            {
+                solarDate = Persia.Calendar.ConvertToPersian(DateTime.Parse(InputDate.ToString()));
+            }
+            catch
+            {
+                solarDate = Persia.Calendar.ConvertToPersian(DateTime.ParseExact(InputDate.ToString(), "dd/MM/yyyy", new CultureInfo("en-US")));
+            }
+            if (1 == Mode)
+            {
+                /*
+                 D = X  روز پیش
+                 TY = امروز، دیروز، x   روز پیش
+                 p = اکنون، x  دقیقه پیش، x  ساعت پیش
+                 */
+                return solarDate.ToRelativeDateString("TY");
+            }
+            else if (2 == Mode)
+            {
+                /*
+                 D = ۱۳۸۹/۹/۳۰
+                 d = ۸۹/۹/۳۰
+                 W = سه شنبه  ۱۳۸۹/۹/۳۰
+                 M = ۳۰ آذر ۱۳۸۹
+                 H =   ۱۹  : ۵۰
+                 
+                 */
+                if (null == type || "" == type)
+                    return solarDate.ToString("D") + " ساعت " + solarDate.ToString("H");
+                return solarDate.ToString(type);
+            }
+            else
+                return solarDate.ToString("D");
         }
     }
 

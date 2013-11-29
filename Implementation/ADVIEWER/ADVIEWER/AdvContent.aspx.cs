@@ -5,9 +5,8 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using ADVIEWER.BAL;
-using ADVIEWER.Account;
 
-namespace ADVIEWER
+namespace ADVIEWER.Main
 {
     public partial class AdvContent : System.Web.UI.Page
     {

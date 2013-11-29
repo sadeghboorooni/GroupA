@@ -1,10 +1,10 @@
-﻿<%@ Page Title="تبلیغات استان" Language="C#" MasterPageFile="~/MainMaster.Master" AutoEventWireup="true" CodeBehind="ShowStateAdvs.aspx.cs" Inherits="ADVIEWER.ShowStateAdvs" %>
+﻿<%@ Page Title="تبلیغات استان"  Language="C#" MasterPageFile="~/MainMaster.Master" AutoEventWireup="true" CodeBehind="ShowStateAdvs.aspx.cs" Inherits="ADVIEWER.Main.ShowStateAdvs" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="mainContent" runat="server">
 
 <h2 class="alert hero-unit" style="font-size:25px;margin-bottom:10px;border-color:transparent;padding:8px 10px 8px 14px;border-right:5px solid #b1d700">
-            تبلیغات استان&nbsp<% =Title  %>
+            تبلیغات استان&nbsp<% =StateTitle %>
         </h2>
 
         <div class="latestwork" style="clear: both;overflow:hidden;">

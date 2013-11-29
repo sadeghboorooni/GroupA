@@ -1,1 +1,1 @@
-﻿<%@ Application Codebehind="Global.asax.cs" Inherits="ADVIEWER.Global" Language="C#" %>
+﻿<%@ Application Codebehind="Global.asax.cs" Inherits="ADVIEWER.Main.Global" Language="C#" %>

@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="صفحه اصلی" Language="C#" MasterPageFile="~/MainMaster.master" AutoEventWireup="true"
-    CodeBehind="Default.aspx.cs" Inherits="ADVIEWER._Default" %>
+    CodeBehind="Default.aspx.cs" Inherits="ADVIEWER.Main._Default" %>
 
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
 

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="پروفایل" Language="C#" MasterPageFile="~/MainMaster.Master" AutoEventWireup="true" CodeBehind="Profile.aspx.cs" Inherits="ADVIEWER.Profile" %>
+﻿<%@ Page Title="صفحه محصولات کاربر" Language="C#" MasterPageFile="~/MainMaster.Master" AutoEventWireup="true" CodeBehind="Profile.aspx.cs" Inherits="ADVIEWER.Main.Profile" %>
 <%@ Register Assembly="CollectionPager" Namespace="SiteUtils" TagPrefix="cc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -58,7 +58,7 @@
                     </div> 
                     <div class="details">
                     <%# DateTime.Parse(Eval("ExpirationDate").ToString()) > DateTime.Now &&  Eval("StarCount").ToString() != "-1" ? string.Format("<span class='right' title='تعداد ستاره محصول'><i class='icon-star'></i>{0}</span><br />", Eval("StarCount")):""%>
-                         <%# string.Format("<span class='left' title='تاریخ درج محصول'><i class='icon-calendar'></i>{0} </span>", Eval("RegistrationDate")==null?"":((DateTime)Eval("RegistrationDate")).ToShortDateString())%>
+                         <%# string.Format("<span class='left' title='تاریخ درج محصول'><i class='icon-calendar'></i>{0} </span>", Eval("RegistrationDate")==null?"":ADVIEWER.BAL.PublicFunctions.SolarDateConvertor(Eval("RegistrationDate"),3))%>
                     <div style="margin-bottom:10px;float:left;">
                     <a href='<%# Eval("ID", "AdvContent.aspx?id={0}")%>'
                             title='<%# Eval("Title")%>'  class="btn btn-primary">مشاهده جزییات</a>

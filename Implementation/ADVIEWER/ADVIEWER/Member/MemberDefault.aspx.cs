@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 using System.Web.Security;
 using ADVIEWER.BAL;
 
-namespace ADVIEWER.member
+namespace ADVIEWER.Member
 {
     public partial class MemberDefault : System.Web.UI.Page
     {

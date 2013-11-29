@@ -34,7 +34,7 @@
                             <div style="float:left">
                             <p>
                                     <i class="icon-calendar"></i>انقضا:
-                                    <span><%# Eval("ExpirationDate") %></span></p>
+                                    <span><%# ADVIEWER.BAL.PublicFunctions.SolarDateConvertor( Eval("ExpirationDate"),3) %></span></p>
                             </div>
                             <div class="clear"></div>
                             <div class="AdlistIcon">

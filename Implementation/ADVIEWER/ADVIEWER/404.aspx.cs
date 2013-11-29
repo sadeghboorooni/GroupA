@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace ADVIEWER
+namespace ADVIEWER.Main
 {
     public partial class _404 : System.Web.UI.Page
     {

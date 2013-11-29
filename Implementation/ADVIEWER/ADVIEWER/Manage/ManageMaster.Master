@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="ManageMaster.Master.cs" Inherits="ADVIEWER.manage.ManageMaster" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="ManageMaster.Master.cs" Inherits="ADVIEWER.Manage.ManageMaster" %>
 
 <!DOCTYPE html >
 <!DOCTYPE html >

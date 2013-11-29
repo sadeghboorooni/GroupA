@@ -50,7 +50,7 @@
                                     <%# Eval("Title")%></a>
                                 <p>
                                     تاریخ:
-                                    <%# Eval("RegistrationDate")%>
+                                    <%# ADVIEWER.BAL.PublicFunctions.SolarDateConvertor( Eval("RegistrationDate"))%>
                                 </p>
                                 <p>
                                     توسط: <a target="_blank" href='<%# Eval("userid","/profile.aspx?id={0}") %>'>
@@ -131,7 +131,7 @@
                                     <%# Eval("Title")%></a>
                                 <p>
                                     تاریخ:
-                                    <%# Eval("RegistrationDate")%>
+                                    <%# ADVIEWER.BAL.PublicFunctions.SolarDateConvertor( Eval("RegistrationDate"))%>
                                 </p>
                                 <p>
                                     توسط: <a target="_blank" href='<%# Eval("userid","/profile.aspx?id={0}") %>'>

@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ADVIEWER {
+namespace ADVIEWER.Main {
     
     
     public partial class Profile {

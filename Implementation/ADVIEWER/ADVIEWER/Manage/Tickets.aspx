@@ -61,7 +61,7 @@
                     <asp:TemplateField FooterText="بروزرسانی" SortExpression="LastUpdate" HeaderText="بروزرسانی">
                         <ItemTemplate>
                         <p>
-                        <%# Eval("RegDate") %> 
+                        <%# ADVIEWER.BAL.PublicFunctions.SolarDateConvertor( Eval("RegDate"),3) %> 
                         </p>
                         </ItemTemplate>
                         <HeaderTemplate>

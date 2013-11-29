@@ -6,7 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using ADVIEWER.BAL;
 
-namespace ADVIEWER
+namespace ADVIEWER.Main
 {
     public partial class MainMaster : System.Web.UI.MasterPage
     {

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="محتویات آگهی" Language="C#" MasterPageFile="~/MainMaster.Master" AutoEventWireup="true" CodeBehind="AdvContent.aspx.cs" Inherits="ADVIEWER.AdvContent" %>
+﻿<%@ Page Title="محتویات آگهی" Language="C#" MasterPageFile="~/MainMaster.Master" AutoEventWireup="true" CodeBehind="AdvContent.aspx.cs" Inherits="ADVIEWER.Main.AdvContent" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="styles/member.css" rel="stylesheet" type="text/css" />
     
@@ -123,11 +123,11 @@
             <%= curAdv.Price == string.Empty ? "<p><i class='icon-shopping-cart'></i>قيمت: ----</p><hr />" : string.Format("<p><i class='icon-shopping-cart'></i>قيمت: {0}</p><hr />", curAdv.Price)%>
             <p>
                 <i class="icon-calendar"></i>تاريخ درج: 
-                    <%= curAdv.RegistrationDate %></p>
+                    <%= ADVIEWER.BAL.PublicFunctions.SolarDateConvertor( curAdv.RegistrationDate) %></p>
             <hr />
             <p>
                 <i class="icon-ok-sign"></i>تاريخ بروز رساني: 
-                    <%= curAdv.LastRenewal %></p>
+                    <%= ADVIEWER.BAL.PublicFunctions.SolarDateConvertor( curAdv.LastRenewal ) %></p>
         </div>
     </div>
     </div>

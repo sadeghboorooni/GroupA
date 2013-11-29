@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ADVIEWER.manage {
+namespace ADVIEWER.Manage {
     
     
     public partial class ManageMaster {

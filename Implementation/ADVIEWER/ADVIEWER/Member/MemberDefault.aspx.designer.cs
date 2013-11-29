@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ADVIEWER.member {
+namespace ADVIEWER.Member {
     
     
     public partial class MemberDefault {

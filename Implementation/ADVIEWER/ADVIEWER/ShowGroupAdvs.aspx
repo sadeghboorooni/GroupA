@@ -1,11 +1,11 @@
-﻿<%@ Page Title="تبلیغات گروه" Language="C#" MasterPageFile="~/MainMaster.Master" AutoEventWireup="true" CodeBehind="ShowGroupAdvs.aspx.cs" Inherits="ADVIEWER.ShowGroupAdvs" %>
+﻿<%@ Page Title="تبلیغات گروه" Language="C#" MasterPageFile="~/MainMaster.Master" AutoEventWireup="true" CodeBehind="ShowGroupAdvs.aspx.cs" Inherits="ADVIEWER.Main.ShowGroupAdvs" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 <title></title>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="mainContent" runat="server">
 
 <h2 class="alert hero-unit" style="font-size:25px;margin-bottom:10px;border-color:transparent;padding:8px 10px 8px 14px;border-right:5px solid #b1d700">
-            تبلیغات گروه&nbsp<% =Title  %>
+            تبلیغات گروه&nbsp<% =GroupTitle  %>
         </h2>
 
         <div class="latestwork" style="clear: both;overflow:hidden;">
