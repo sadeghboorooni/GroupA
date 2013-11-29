@@ -10,18 +10,15 @@
     <h2>
         تغییر رمز عبور
     </h2>
-    <div ID="ErrorMessage" runat="server" visible="false" class="alert hero-unit">
-        رمز شما با موفقیت تغییر یافت.    
-    </div>
     <p>
         رمز جدید باید دارای حداقل <%= Membership.MinRequiredPasswordLength %> کاراکتر باشد.
     </p>
-    <asp:ChangePassword ID="ChangeUserPassword" runat="server" CancelDestinationPageUrl="../member/MemberDefault.aspx" EnableViewState="false" RenderOuterTable="false" 
-         SuccessPageUrl="ChangePassword.aspx">
+    <asp:ChangePassword ID="ChangeUserPassword" ChangePasswordFailureText="رمز عبور فعلی و یا رمز عبور جدید اشتباه وارد شده است."  ContinueDestinationPageUrl="../Member/MemberDefault.aspx" ContinueButtonStyle-CssClass="btn btn-primary" ContinueButtonText="ادامه" SuccessTitleText="" SuccessText="رمز عبور شما با موفقیت تغییر یافت." SuccessTextStyle-CssClass="alert alert-success" SuccessTextStyle-Font-Size="17px" runat="server" CancelDestinationPageUrl="../member/MemberDefault.aspx" EnableViewState="false" RenderOuterTable="false" >
         <ChangePasswordTemplate>
-            <span class="failureNotification">
+            <div class="failureNotification" style="color: #b94a48;font-size:17px">
                 <asp:Literal ID="FailureText" runat="server"></asp:Literal>
-            </span>
+        
+            </div>
             <asp:ValidationSummary ID="ChangeUserPasswordValidationSummary" runat="server" CssClass="failureNotification" 
                  ValidationGroup="ChangeUserPasswordValidationGroup"/>
             <div class="accountInfo">

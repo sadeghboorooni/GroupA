@@ -15,7 +15,7 @@ namespace ADVIEWER.BAL
     {
         public static bool MakeNewAdvertisment(int starCount, int advDuration, string title, string shortdescription, string description,
             string keywordStr, string price, string link, string fullName, string mobile, string tell, string telltime,
-            string email, string yahooid, string address, int userId, string tempAdd, string mainAdd, string fileName, int groupId)
+            string email, string yahooid, string address, int userId, string tempAdd, string mainAdd, string fileName, int groupId,int StateCityID)
         {
             ModelContainer ml = new ModelContainer();
 
@@ -41,6 +41,7 @@ namespace ADVIEWER.BAL
             newAdv.LastRenewal = DateTime.Now;
             newAdv.GroupID = groupId;
             newAdv.Pic = "";
+            newAdv.StateCityID = StateCityID;
 
             foreach (int kwId in MemberFunctions.ParseKeyWords(keywordStr))
             {
@@ -295,13 +296,37 @@ namespace ADVIEWER.BAL
         {
             ModelContainer ml = new ModelContainer();
 
+            List<Group> ParentGroup = new List<Group>();
+            ParentGroup = ml.Groups.Where(t => t.ParentID == null).OrderBy(t=> t.GroupName).ToList();
             List<AssignorGroup> aGroup = new List<AssignorGroup>();
-            foreach (Group gr in ml.Groups.Where(t => t.ID != null))
+            foreach (Group gr in ParentGroup)
             {
                 aGroup.Add(PublicFunctions.MakeAssignor<Group, AssignorGroup>(gr));
+                foreach (Group subgr in gr.childGroup.OrderBy(t=> t.GroupName))
+                {
+                    aGroup.Add(PublicFunctions.MakeAssignor<Group, AssignorGroup>(subgr));
+                }
             }
 
             return aGroup.ToArray();
+        }
+        public static AssignorStateCity[] GetStateAndCityForDropDown()
+        {
+            ModelContainer ml = new ModelContainer();
+
+            List<StateCity> State = new List<StateCity>();
+            State = ml.StateCities.Where(t => t.StateId == null).OrderBy(t=> t.Name).ToList();
+            List<AssignorStateCity> aState = new List<AssignorStateCity>();
+            foreach (StateCity sc in State)
+            {
+                aState.Add(PublicFunctions.MakeAssignor<StateCity, AssignorStateCity>(sc));
+                foreach (StateCity city in sc.Cities.OrderBy(t=> t.Name))
+                {
+                    aState.Add(PublicFunctions.MakeAssignor<StateCity, AssignorStateCity>(city));
+                }
+            }
+
+            return aState.ToArray();
         }
         public static AssignorGroup[] GetParentGroups()
         {

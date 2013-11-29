@@ -98,7 +98,7 @@ namespace ADVIEWER.BAL
             ModelContainer ml = new ModelContainer();
             List<AssignorAdvertisment> aAdv = new List<AssignorAdvertisment>();
 
-            if (ml.Groups.Where(t => t.ID == ID).First().ParentID == null)
+            if (ml.StateCities.Where(t => t.ID == ID).First().StateId == null)
             {
                 foreach (Advertisment adv1 in (from adv in ml.Advertisments
                                                where (adv.StateCityID == ID || adv.StateCityID == (from st in ml.StateCities where st.StateId == ID select st.ID).FirstOrDefault()) && adv.IsConfirmed == true

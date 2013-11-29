@@ -16,6 +16,7 @@ namespace ADVIEWER.Member
             if (!IsPostBack)
             {
                 fillGroupsDropDownList();
+                fillStateCityDropDownList();
                 int userId = AccountFunctions.currentUserId();
                 AssignorUser currusr = AccountFunctions.GetUserInformation(userId);
                 Nametxt.Text = currusr.FullName;
@@ -36,6 +37,20 @@ namespace ADVIEWER.Member
             }
         }
 
+        private void fillStateCityDropDownList()
+        {
+            foreach (AssignorStateCity sc in MemberFunctions.GetStateAndCityForDropDown())
+            {
+                ListItem li = new ListItem(sc.Name, sc.ID.ToString());
+                if (sc.StateId == null)
+                {
+                    //li.Attributes.Add("disabled", "disabled");
+                    li.Attributes.Add("style", "color: #fff; background: #68b800; margin:4px 0;padding:2px 15px 2px 0");
+                }
+                StateCityDropDownList.Items.Add(li);
+            }
+        }
+
         private void fillGroupsDropDownList()
         {
             foreach (AssignorGroup g in MemberFunctions.GetSubGroups())
@@ -43,7 +58,7 @@ namespace ADVIEWER.Member
                 ListItem li = new ListItem(g.GroupName, g.ID.ToString());
                 if (g.ParentID == null)
                 {
-                    li.Attributes.Add( "disabled", "disabled" );
+                    //li.Attributes.Add( "disabled", "disabled" );
                     li.Attributes.Add("style", "color: #fff; background: #68b800; margin:4px 0;padding:2px 15px 2px 0");
                 }
                 groupsDropDownList.Items.Add(li);
@@ -72,12 +87,13 @@ namespace ADVIEWER.Member
 
             string FullName = Nametxt.Text;
             string Mobile = Mobiletxt.Text;
-            string Tell = TellTimetxt.Text;
+            string Tell = Telltxt.Text;
             string TellTime = TellTimetxt.Text;
             string Email = Emailtxt.Text;
             string YahooID = YahooIDtxt.Text;
             string Address = Addresstxt.Text;
             int groupId = int.Parse(groupsDropDownList.SelectedValue);
+            int statecityid = int.Parse(StateCityDropDownList.SelectedValue);
             if (Link.ToLower().Trim() == "http://") Link = "";
             int userId = AccountFunctions.currentUserId();
             string tempAdd = "", mainAdd = "";
@@ -88,7 +104,7 @@ namespace ADVIEWER.Member
             }
 
             MemberFunctions.MakeNewAdvertisment(StarCount, AdvDuration, Title, ShortDescription, Description, KeyWords, Price, Link, FullName,
-                                            Mobile, Tell, TellTime, Email, YahooID, Address, userId, tempAdd, mainAdd, AsyncFileUpload1.FileName, groupId);
+                                            Mobile, Tell, TellTime, Email, YahooID, Address, userId, tempAdd, mainAdd, AsyncFileUpload1.FileName, groupId,statecityid);
             SuccessMessage.Text = string.Format("<div class='alert alert-success' style='FontSize:17px'> آگهی شما با موفقیت ثبت شد. <br /> آگهی شما در لیست انتظار مدیر قرار گرفت. </div>");
             SuccessMessage.Visible = true;
         }

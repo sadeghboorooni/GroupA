@@ -85,9 +85,15 @@
                 </asp:DropDownList>
                 <p class="helper">
                     راهنما: بخشی که از نظر موضوعی بیشترین انطباق با آگهی شما را دارد انتخاب کنید. انتخاب
-                    صحیح و دقیق بخش مربوط به آگهی، تاثیر بسزایی در میزان مشاهده آگهی شما دارد
+                    صحیح و دقیق بخش مربوط به آگهی، تاثیر بسزایی در میزان مشاهده آگهی شما دارد.
                 </p>
-               
+               <span class="title"><span class="ess">×</span>استان و شهر</span>
+                <asp:DropDownList ID="StateCityDropDownList" CssClass="MyCss" Width="430px" runat="server">
+                </asp:DropDownList>
+                <p class="helper">
+                    راهنما: در صورتی که خدمات شما در استان و شهر خاصی ارائه می شود، استان و شهر را انتخاب
+                    کنید.
+                </p>
                 <div class="spacer">
                 </div>
                 <label class="title" for="ctl00_content_txtOnvan">

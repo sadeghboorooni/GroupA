@@ -393,3 +393,12 @@ table.gridview{border-collapse:collapse;margin:5px 0 5px 0}table.gridview tr{bac
             width:100% !important;
         }
     }
+  
+ .helper
+ {
+     color: rgb(196, 98, 59) !important;
+     }
+ .title
+ {
+     font-size:17px;
+ }
