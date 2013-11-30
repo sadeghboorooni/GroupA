@@ -16,21 +16,21 @@
 
            
         </h2>
-        <div style="float:left;text-align:center;margin-left:100px;direction:ltr">
+        <div style="float:left;text-align:center;margin:10px">
         <div class="rateit" data-rateit-value="<%=AverageAdvRate %>" data-rateit-ispreset="true" id="RateAdv">
         </div>
         <button class="btn btn-primary" onclick="SetRate($('#RateAdv').rateit('value'))" type="button">ثبت امتیاز شما</button>
-        <div>
-        نمره دهی شما: <label id="UserAdvRateLabel" ><%=UserAdvRate %></label>
-        </div>
-        <div>
-        <div>
-        میانگین امتیاز: <label id="AverageAdvRateLabel" ><%=AverageAdvRate %></label> بر اساس <label id="CountOfRatesLabel"><%=CountOfRates %></label> رای.
-        </div>
+        <span>
+        نمره دهی شما: <span id="UserAdvRateLabel" ><%=UserAdvRate %></span>
+        </span>
+        
+        <span>
+        &nbsp میانگین امتیاز: <span id="AverageAdvRateLabel" ><%=AverageAdvRate %></span> بر اساس <span id="CountOfRatesLabel"><%=CountOfRates %></span> رای
+        </span>
         <%--<button onclick="alert($('#RateAdv').rateit('value'))" type="button">Get value</button>--%>
         <%--<button onclick="$('#RateAdv').rateit('value', prompt('Input numerical value'))" type="button">Set value</button>--%>
         
-        </div>
+        
         </div>
         <script type="text/javascript">
             function SetRate(value) {
@@ -68,10 +68,10 @@
              
                 <div class="advContainer">
                   
-                        <%= curAdv.Pic == "noimage.png" ? "<img src='noimage.png' class='advpic' />" : string.Format("<a href='AdvertisePic/{0}' title='{1}' style='line-height:12px;' rel='slide'><img src='/HPicturer.ashx?w=300&h=300&path={0}' class='advpic' alt='{1}' /></a>", curAdv.Pic, curAdv.Title)%>
+                        <%= curAdv.Pic == "noimage.png" ? "<img src='noimage.png' class='advpic' />" : string.Format("<img src='/HPicturer.ashx?w=300&h=300&path={0}' class='advpic' alt='{1}' />", curAdv.Pic, curAdv.Title)%>
                         </div>
 
-                 <h2 class="alert alert-success" style="text-align:center;padding-left:0;padding-right:0;">
+                 <h2 class="alert alert-success" style="text-align:center;padding-left:0;padding-right:0;margin:10px">
                         اطـلـاعـات تـمـاس
                     </h2>
                     <div>
@@ -80,9 +80,9 @@
                             <%= curAdv.FullName.Trim() %>
                     </h3>
                   
-                    <%= curAdv.Mobile == null ? "" : string.Format("<hr/><p><i class='icon-mobile-phone' style='padding-right:2px;padding-left:3px'></i> <b>{0}</b></p> <hr />", curAdv.Mobile)%>
+                    <%= curAdv.Mobile.ToString() == "" ? "" : string.Format("<hr/><p><i class='icon-mobile-phone' style='padding-right:2px;padding-left:3px'></i> <b>{0}</b></p> <hr />", curAdv.Mobile)%>
                      
-                    <%= curAdv.Tell == null ? "" : string.Format("<p><i class='icon-phone'></i> <b>{0}</b></p>", curAdv.Tell)%>
+                    <%= curAdv.Tell.ToString() == "" ? "" : string.Format("<p><i class='icon-phone'></i> <b>{0}</b></p>", curAdv.Tell)%>
                     
                     
                 </div>
@@ -106,7 +106,7 @@
     <div class="main container AdvContent" style="padding-right:25%">
     <div class="info">
         <h3 class="alert alert-success" style="text-align:center;margin:0;">
-            اطلاعات آگهي دهنده</h3>
+            اطلاعات آگهی دهنده</h3>
         <div class="white advcontact" style="height: 290px; overflow-y: auto; overflow-x: hidden">
             <p>
                 <i class="icon-user"></i>نام: <a href='<%= string.Format("/profile.aspx?id={0}",curAdv.UserId) %>'>
@@ -115,19 +115,19 @@
             </p>
           
            
-            <%= curAdv.Mobile == null ? "<hr><p><i class='icon-mobile-phone'></i>موبايل: ----</p>" : string.Format("<hr><p><i class='icon-mobile-phone'></i>موبايل: {0}</p>", curAdv.Mobile)%>
-            <%= curAdv.Tell == null ? "<hr><p><i class='icon-phone'></i>تلفن: ----</p>" : string.Format("<hr><p><i class='icon-phone'></i>تلفن: {0}</p>", curAdv.Tell)%>
-            <%= curAdv.TellTime == null ? "<hr><p><i class='icon-time'></i>زمان تماس: ----</p>" : string.Format("<hr><p><i class='icon-time'></i>زمان تماس: {0}</p>", curAdv.TellTime)%>
-            <%= curAdv.Email == null ? "<hr><p><i class='icon-envelope'></i>ايميل: ----</p>" : string.Format("<hr><p><i class='icon-envelope'></i>ايميل: {0}</p>", curAdv.Email )%>
-            <%= curAdv.User.Address == null ? "<hr><p><i class='icon-flag'></i>آدرس: ----</p>" : string.Format("<hr><p><i class='icon-flag'></i>آدرس: {0}</p>", curAdv.User.Address )%>
+            <%= curAdv.Mobile == "" ? "<hr><p><i class='icon-mobile-phone'></i>موبايل: ----</p>" : string.Format("<hr><p><i class='icon-mobile-phone'></i>موبايل: {0}</p>", curAdv.Mobile)%>
+            <%= curAdv.Tell == "" ? "<hr><p><i class='icon-phone'></i>تلفن: ----</p>" : string.Format("<hr><p><i class='icon-phone'></i>تلفن: {0}</p>", curAdv.Tell)%>
+            <%= curAdv.TellTime == "" ? "<hr><p><i class='icon-time'></i>زمان تماس: ----</p>" : string.Format("<hr><p><i class='icon-time'></i>زمان تماس: {0}</p>", curAdv.TellTime)%>
+            <%= curAdv.Email == "" ? "<hr><p><i class='icon-envelope'></i>ايميل: ----</p>" : string.Format("<hr><p><i class='icon-envelope'></i>ايميل: {0}</p>", curAdv.Email )%>
+            <%= string.IsNullOrEmpty(curAdv.User.Address) ? "<hr><p><i class='icon-flag'></i>آدرس: ----</p>" : string.Format("<hr><p><i class='icon-flag'></i>آدرس: {0}</p>", curAdv.User.Address )%>
         </div>
     </div>
     <div class="info">
         <h3 class="alert alert-success"style="text-align:center;margin:0;">
-            اطلاعات آگهي</h3>
+            اطلاعات آگهی</h3>
         <div class="white advcontact" style="height: 290px; overflow-y: auto; overflow-x: hidden">
             <p>
-                <i class="icon-barcode"></i>کد آگهي: 
+                <i class="icon-barcode"></i>کد آگهی:
                     <%= curAdv.ID %></p>
             <hr />
             
@@ -141,7 +141,7 @@
                     <%= ADVIEWER.BAL.PublicFunctions.SolarDateConvertor( curAdv.RegistrationDate) %></p>
             <hr />
             <p>
-                <i class="icon-ok-sign"></i>تاريخ بروز رساني: 
+                <i class="icon-ok-sign"></i>تاريخ بروز رسانی: 
                     <%= ADVIEWER.BAL.PublicFunctions.SolarDateConvertor( curAdv.LastRenewal ) %></p>
         </div>
     </div>

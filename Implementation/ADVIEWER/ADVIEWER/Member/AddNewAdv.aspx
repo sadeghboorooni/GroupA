@@ -56,7 +56,7 @@
         $get("<%=lblContentTypeDisplay.ClientID%>").innerHTML = args.get_contentType();
         }
 </script>
-    <h2>
+    <h2 class="alert hero-unit memberheader">
         درج آگهی جدید</h2>
     <asp:Literal ID="SuccessMessage" Visible ="false" runat="server" ></asp:Literal>
     <asp:Literal ID="ltr_error" runat="server"></asp:Literal>

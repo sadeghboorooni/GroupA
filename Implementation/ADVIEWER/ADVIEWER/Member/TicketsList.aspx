@@ -3,7 +3,7 @@
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="mainContent" runat="server">
-            <h2>درخواست‏های شما</h2>
+            <h2 class="alert hero-unit memberheader">درخواست‏های شما</h2>
          
             <asp:GridView CssClass="gridview" ID="TicketGridView" runat="server" AutoGenerateColumns="False"
                 DataKeyNames="ID" EnableModelValidation="True" Width="100%" OnRowCommand="TicketGridView_RowCommand"
@@ -80,7 +80,7 @@
                         <ItemTemplate>
                                 <asp:LinkButton ID="DeleteButton" runat="server" OnClientClick="return confirm('از حذف تیکت اطمینان دارید؟');"
                                     CommandName="deleteTicket" CommandArgument='<%# Eval("ID") %>' ToolTip="حذف تیکت"
-                                    CssClass="tooltip"><i class="icon-remove" style="color:Red"></i></asp:LinkButton>
+                                    CssClass="tooltip" style="text-align:center"><i class="icon-remove" style="color:Red"></i></asp:LinkButton>
                             </center>   
                         </ItemTemplate>
                         <FooterStyle HorizontalAlign="Center" />

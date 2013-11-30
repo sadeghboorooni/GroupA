@@ -2,7 +2,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="mainContent" runat="server">
-<h2>ایجاد تیکت جدید</h2>
+<h2 class="alert hero-unit memberheader">ایجاد تیکت جدید</h2>
 
 <div class="contenttext" style="background: #fafafa;">
             <asp:Literal ID="SuccessMessage" Visible ="false" runat="server" ></asp:Literal>

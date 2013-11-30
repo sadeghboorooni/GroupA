@@ -121,7 +121,7 @@ namespace ADVIEWER.BAL
         public static List<StateAndCitiesForReapeater> GetStatesWithCities()
         {
             ModelContainer ml = new ModelContainer();
-            List<StateCity> AllState = ml.StateCities.Where(t => t.StateId == null).ToList();
+            List<StateCity> AllState = ml.StateCities.Where(t => t.StateId == null).OrderBy(t=> t.Name).ToList();
             List<StateAndCitiesForReapeater> ReturnListOfClasses = new List<StateAndCitiesForReapeater>();
             foreach (StateCity AS in AllState)
             {
@@ -210,7 +210,7 @@ namespace ADVIEWER.BAL
         private void SetCities()
         {
             ModelContainer ml = new ModelContainer();
-            Cities = ml.StateCities.Where(t => t.StateId == this.ID).ToArray();
+            Cities = ml.StateCities.Where(t => t.StateId == this.ID).OrderBy(t=> t.Name).ToArray();
         }
     }
 

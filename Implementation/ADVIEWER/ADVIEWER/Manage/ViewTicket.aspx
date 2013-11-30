@@ -3,16 +3,7 @@
     <title><%= TicketTitle %></title>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="mainContent" runat="server">
-    <div class="NavBar2">
-        <div class="NavBar2_resize">
-            <a href="default.aspx">مدیریت</a> » <a href="ViewTicket.aspx">تیکت های دریافتی</a> » <%= TicketTitle %>
-            <p class="time" id="jsClock" style="float: left; color: #fff;">
-            </p>
-        </div>
-        
-        <div class="clr">
-        </div>
-    </div>
+  
      <div class="fullcontent">
         <h2 class="title blue">
             <%= TicketTitle %></h2>     

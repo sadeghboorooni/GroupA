@@ -61,7 +61,7 @@ namespace ADVIEWER.Main
 
         protected void LoadUserAdvertisments()
         {
-            UserAdvsRepeater.DataSource = MemberFunctions.GetUserConfirmedAdvs(curAdv.UserId);
+            UserAdvsRepeater.DataSource = MemberFunctions.GetUserConfirmedAdvs(curAdv.UserId).SkipWhile(t => t.ID == curAdv.ID);
             UserAdvsRepeater.DataBind();
         }
 

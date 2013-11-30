@@ -45,9 +45,7 @@
 .rateit .rateit-preset {
     background: url("star.gif") repeat scroll left -48px rgba(0, 0, 0, 0);
 }
-.rateit .rateit-preset-rtl {
-    background: url("star.gif") repeat scroll left -48px rgba(0, 0, 0, 0);
-}
+
 .rateit button.rateit-reset {
     background: url("delete.gif") repeat scroll 0 0 rgba(0, 0, 0, 0);
     border: medium none;

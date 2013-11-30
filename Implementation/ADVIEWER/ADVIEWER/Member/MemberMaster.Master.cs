@@ -56,7 +56,7 @@ namespace ADVIEWER.Member
             Session.Abandon();
             Request.Cookies.Clear();
             FormsAuthentication.SignOut();
-            Response.Redirect("/Default.aspx", true);
+            Response.Redirect("/", true);
         }
 
         private void makeStatesMenu()

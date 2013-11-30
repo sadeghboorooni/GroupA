@@ -38,7 +38,7 @@
             <div class="col-md-3 col-sm-6">
                 
                 <div class="input-append" style="margin-top:0">
-                 <a href="../Default.aspx"><img src="../Styles/Images/Logo.png" style="max-width:30%;float:right" alt="لوگوی سایت" title="لوگوی سایت" /></a>
+                 <a href="/"><img src="../Styles/Images/Logo.png" style="max-width:30%;float:right" alt="لوگوی سایت" title="لوگوی سایت" /></a>
 				</div>
             </div>           
             <div class="col-md-3 col-sm-6" style="width:100%;position:absolute;bottom:5px;left:0px;text-align:left">
@@ -51,7 +51,7 @@
                     <LoggedInTemplate>
                         خوش آمدید <span class="bold"><asp:LoginName ID="HeadLoginName" runat="server" /></span>&nbsp |
                         <span><i class="icon-user"></i><a href = "/member/MemberDefault.aspx">حساب کاربری من</a></span>
-                        [ <asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" LogoutText="خروج" LogoutPageUrl="~/Default.aspx"/> ]
+                        [ <asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" LogoutText="خروج" LogoutPageUrl="~/"/> ]
                     </LoggedInTemplate>
                 </asp:LoginView>
                     </div>	
@@ -73,7 +73,7 @@
 							<div class="nav-collapse collapse ltrClass">
 								<ul class="nav ltrClass" style="float:right;text-align:right">
                               
-									<li class=""><a class="" style="font-size:120%" href="/Default.aspx">صفحه اصلی</a></li>
+									<li class=""><a class="" style="font-size:120%" href="/">صفحه اصلی</a></li>
 
                                     <li class="dropdown ">
 										<a style="font-size:120%" class="dropdown-toggle " data-toggle="dropdown" href="#"><b class="caret"></b>استان‏ها</a>

@@ -105,7 +105,7 @@ namespace ADVIEWER.Member
 
             MemberFunctions.MakeNewAdvertisment(StarCount, AdvDuration, Title, ShortDescription, Description, KeyWords, Price, Link, FullName,
                                             Mobile, Tell, TellTime, Email, YahooID, Address, userId, tempAdd, mainAdd, AsyncFileUpload1.FileName, groupId,statecityid);
-            SuccessMessage.Text = string.Format("<div class='alert alert-success' style='FontSize:17px'> آگهی شما با موفقیت ثبت شد. <br /> آگهی شما در لیست انتظار مدیر قرار گرفت. </div>");
+            SuccessMessage.Text = string.Format("<div class='alert alert-success' style='font-size:17px'> آگهی شما با موفقیت ثبت شد. <br /> آگهی شما در لیست انتظار مدیر قرار گرفت. </div>");
             SuccessMessage.Visible = true;
         }
 

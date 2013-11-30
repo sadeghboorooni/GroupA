@@ -339,7 +339,7 @@ namespace ADVIEWER.BAL
                 aGroup.Add(PublicFunctions.MakeAssignor<Group, AssignorGroup>(gr));
             }
 
-            return aGroup.ToArray();
+            return aGroup.OrderBy(t=> t.GroupName).ToArray();
         }
         public static AssignorGroup[] GetSubGroupsByID(int ID)
         {
@@ -352,7 +352,7 @@ namespace ADVIEWER.BAL
                 aGroup.Add(PublicFunctions.MakeAssignor<Group, AssignorGroup>(gr));
             }
 
-            return aGroup.ToArray();
+            return aGroup.OrderBy(t => t.GroupName).ToArray();
         }
         public static void AddNewGroup(string groupName, int? parentId)
         {

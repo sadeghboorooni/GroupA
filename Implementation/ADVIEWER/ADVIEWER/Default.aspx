@@ -73,10 +73,10 @@
     <img class="rsImg" src="../Styles/Slider/3.jpg" alt="" />
     
   </div>
-  <div class="rsContent">
+  <%--<div class="rsContent">
     <img class="rsImg" src="../Styles/Slider/4.jpg" alt="" />
     <span class="photosBy rsAbsoluteEl" data-fade-effect="fa;se" data-move-offset="40" data-move-effect="bottom" data-speed="200">Photos by <a href="http://www.flickr.com/photos/gilderic/">Gilderic</a></span>
-  </div>
+  </div>--%>
 </div>
   </div>
 

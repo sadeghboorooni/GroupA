@@ -10,7 +10,7 @@
       
             <%= about%>
             
-            <h2>
+            <h2 class="alert hero-unit memberheader">
             محصولات این کاربر
             </h2> 
 

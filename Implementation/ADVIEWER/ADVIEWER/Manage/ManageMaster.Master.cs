@@ -15,7 +15,7 @@ namespace ADVIEWER.Manage
         {
             if (!AccountFunctions.IsManager()) 
             {
-                Response.Redirect("~/");
+                Response.Redirect("~/4.4.aspx");
             }
         }
 
@@ -24,7 +24,7 @@ namespace ADVIEWER.Manage
             Session.Abandon();
             Request.Cookies.Clear();
             FormsAuthentication.SignOut();
-            Response.Redirect("/Default.aspx", true);
+            Response.Redirect("/", true);
         }
 
 
