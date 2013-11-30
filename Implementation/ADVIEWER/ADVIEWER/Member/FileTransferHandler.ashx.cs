@@ -6,7 +6,7 @@ using System.Web;
 using System.Web.Script.Serialization;
 using System.Web.Security;
 
-namespace jQueryUploadTest {
+namespace ADVIEWER.BAL {
 	public class FileTransferHandler : IHttpHandler {
 		private readonly JavaScriptSerializer js = new JavaScriptSerializer();
 

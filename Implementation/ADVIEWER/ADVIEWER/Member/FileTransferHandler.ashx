@@ -1,1 +1,1 @@
-﻿<%@ WebHandler Language="C#" CodeBehind="FileTransferHandler.ashx.cs" Class="jQueryUploadTest.FileTransferHandler" %>
+﻿<%@ WebHandler Language="C#" CodeBehind="FileTransferHandler.ashx.cs" Class="ADVIEWER.BAL.FileTransferHandler" %>

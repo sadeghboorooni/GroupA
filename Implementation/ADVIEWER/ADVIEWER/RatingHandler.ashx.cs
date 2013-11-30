@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using ADVIEWER.DAL;
 using ADVIEWER.BAL;
 using System.Web.SessionState;
 
@@ -44,10 +43,10 @@ namespace ADVIEWER.Main
                     }
                     else
                     {
-                        Rate r = new Rate();
+                        AssignorRate r = new AssignorRate();
                         r.Value = Value;
                         r.AdvertismentId = AdvId;
-                        sessionRates.Add(PublicFunctions.MakeAssignor<Rate, AssignorRate>(r));
+                        sessionRates.Add(r);
                     }
                     context.Session.Add("AdvRates", sessionRates);
                 }

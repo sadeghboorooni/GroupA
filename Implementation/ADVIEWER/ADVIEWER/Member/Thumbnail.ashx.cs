@@ -1,6 +1,7 @@
 ﻿using System.Web;
 
-namespace jQueryUploadTest {
+namespace ADVIEWER.BAL
+{
 	public class Thumbnail : IHttpHandler {
 
 		public void ProcessRequest (HttpContext context) {
