@@ -11,7 +11,8 @@ namespace ADVIEWER.Main
     public partial class AdvContent : System.Web.UI.Page
     {
         public AssignorAdvertisment curAdv;
-        public Single UserAdvRate = 0, AverageAdvRate = 0;        
+        public Single UserAdvRate = 0, AverageAdvRate = 0;
+        public int CountOfRates;
         protected void Page_Load(object sender, EventArgs e)
         {
             int id = 0;
@@ -38,6 +39,8 @@ namespace ADVIEWER.Main
         private void LoadRates()
         {
             AverageAdvRate = PublicFunctions.GetAdvAverageRate(curAdv.ID);
+            AverageAdvRate = (Single)Math.Round((decimal)AverageAdvRate, 2, MidpointRounding.AwayFromZero);
+            CountOfRates = PublicFunctions.CountOfRates(curAdv.ID);
             if (AccountFunctions.currentUserId() != -1)
             {
                 UserAdvRate = MemberFunctions.GetAdvUserRate(curAdv.ID);

@@ -92,14 +92,15 @@ namespace ADVIEWER.BAL
             }
             else//anonymous user 
             {
-                List<Rate> sessionRates;
+                List<AssignorRate> sessionRates;
                 if (System.Web.HttpContext.Current.Session["AdvRates"] != null)
                 {
-                    sessionRates = (List<Rate>)System.Web.HttpContext.Current.Session["AdvRates"];
+                    sessionRates = (List<AssignorRate>)System.Web.HttpContext.Current.Session["AdvRates"];
                     if (sessionRates.Where(t => t.AdvertismentId == AdvId).Count() > 0)//anonymous user rate in past(saved in session)
                     {
-                        Rate preRate = sessionRates.Where(t => t.AdvertismentId == AdvId).First();
-                        r = ml.Rates.Where(t => t.AdvertismentId == AdvId && t.UserId == null && t.Value == preRate.Value).First();
+                        AssignorRate ar = sessionRates.Where(t => t.AdvertismentId == AdvId).First();
+                        Rate preRate = new Rate();
+                        r = ml.Rates.Where(t => t.AdvertismentId == AdvId && t.UserId == null && t.Value == ar.Value).First();
                         r.Value = Value;
                     }//anonymous user rate just now
                     else

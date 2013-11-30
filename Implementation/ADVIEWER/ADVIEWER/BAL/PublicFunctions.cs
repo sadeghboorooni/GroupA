@@ -167,6 +167,12 @@ namespace ADVIEWER.BAL
             else
                 return solarDate.ToString("D");
         }
+
+        internal static int CountOfRates(int AdvId)
+        {
+            ModelContainer ml = new ModelContainer();
+            return ml.Rates.Where(t => t.AdvertismentId == AdvId).Count();
+        }
     }
 
     public class StateAndCitiesForReapeater
