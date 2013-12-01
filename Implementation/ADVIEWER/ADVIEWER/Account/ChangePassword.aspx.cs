@@ -13,6 +13,10 @@ namespace ADVIEWER.Account
         {
 
         }
-
+        protected void setError(object sender, EventArgs e)
+        {
+            ErrorMessage.Text = string.Format("<div class='alert alert-danger' style='font-size:17px;display:inline-block;padding: 7px 15px 8px 14px;'>رمز عبور فعلی و یا رمز عبور جدید اشتباه وارد شده است.</div>");
+            ErrorMessage.Visible = true;
+        }
     }
 }

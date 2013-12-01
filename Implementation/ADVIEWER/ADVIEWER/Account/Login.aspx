@@ -14,12 +14,10 @@
         لطفا نام کاربری و رمز عبور خود را وارد کنید.
         اگر عضو نیستید<asp:HyperLink ID="RegisterHyperLink" runat="server" EnableViewState="false">عضو شوید</asp:HyperLink>.
     </p>
-    
-    <asp:Login ID="LoginUser" runat="server" EnableViewState="false" OnLoggedIn="LoginUser_LoggedIn" DestinationPageUrl = "~/member/MemberDefault.aspx" RenderOuterTable="false">
+    <asp:Literal ID="ErrorMessage" Visible ="false" runat="server" ></asp:Literal>
+
+    <asp:Login ID="LoginUser" OnLoginError="setError" runat="server" EnableViewState="false" OnLoggedIn="LoginUser_LoggedIn" DestinationPageUrl = "~/member/MemberDefault.aspx" RenderOuterTable="false">
         <LayoutTemplate>
-            <span class="failureNotification">
-                <asp:Literal ID="FailureText" runat="server"></asp:Literal>
-            </span>
             <asp:ValidationSummary ID="LoginUserValidationSummary" runat="server" CssClass="failureNotification" 
                  ValidationGroup="LoginUserValidationGroup"/>
             <div class="accountInfo">

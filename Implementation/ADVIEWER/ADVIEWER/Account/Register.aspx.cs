@@ -37,6 +37,12 @@ namespace ADVIEWER.Account
             }
             Response.Redirect(continueUrl);
         }
-
+        protected void setErrorStyle(object sender, EventArgs e)
+        {
+            Label ErrorMessageLiteral = (Label)RegisterUser.CreateUserStep.ContentTemplateContainer.FindControl("ErrorMessage") as Label;
+            ErrorMessageLiteral.Attributes.Add("class", "alert alert-danger");
+            ErrorMessageLiteral.Attributes.Add("style", "font-size:17px;padding: 7px 15px 8px 14px");
+            ErrorMessageLiteral.Visible = true;
+        }
     }
 }

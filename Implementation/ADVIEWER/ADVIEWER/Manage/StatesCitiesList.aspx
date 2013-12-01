@@ -51,7 +51,7 @@
                 DataKeyNames="ID" EnableModelValidation="True" OnRowCommand="statesCitiesGridView_RowCommand" 
                 Width="100%" AllowPaging="True" GridLines="None" PageSize="40" 
                  EnableTheming="False" EnableViewState="False"  OnPageIndexChanging="statesCitiesGridView_PageIndexChanging"
-                ShowFooter="True" onrowdatabound="statesCitiesGridView_RowDataBound" >
+                ShowFooter="false" onrowdatabound="statesCitiesGridView_RowDataBound" >
                 <AlternatingRowStyle CssClass="alt" />
                 <Columns>
 
@@ -75,10 +75,10 @@
                     <asp:TemplateField FooterText="نام" HeaderText="نام" 
                         SortExpression="Name">
                         <HeaderTemplate>
-                          عنوان
+                          نام شهر
                         </HeaderTemplate>
                         <ItemTemplate>
-                            <a style="font-size:12px;" href='<%# Eval("id","editStateCity.aspx?id={0}") %>' title='<%# Eval("Name") %>'><%# Eval("StateId") == null ? Eval("Name") : Eval("State.Name") + "->" + Eval("Name")%></a>
+                            <a href='<%# Eval("id","editStateCity.aspx?id={0}") %>' title='<%# Eval("Name") %>'><%# Eval("StateId") == null ? Eval("Name") : Eval("State.Name") + "->" + Eval("Name")%></a>
                         </ItemTemplate> 
                         <HeaderStyle HorizontalAlign="Right" />
                         <ItemStyle Width="250px" />

@@ -402,3 +402,21 @@ table.gridview{border-collapse:collapse;margin:5px 0 5px 0}table.gridview tr{bac
  {
      font-size:17px;
  }
+
+.btm-tab-btn {
+width: 80px;
+height: 34px;
+right:0px;
+border-radius: 2px;
+border-width: 1px;
+border-color: #cbcbcb #cbcbcb #fff #cbcbcb;
+border-style: solid;
+background-color: #fff;
+position: relative;
+bottom: -11px;
+box-shadow: 0 1px 2px 0 #CACACA inset;
+text-align:center;
+font-size:17px;
+display:inline-block;
+color:cornflowerblue;
+}

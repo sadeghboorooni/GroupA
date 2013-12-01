@@ -70,7 +70,6 @@ namespace ADVIEWER.Manage
         protected void submitButton_Click(object sender, EventArgs e)
         {
             string newTitle = titleTextBox.Text;
-            string newDescription = descriptionTextBox.Text;
             int? newParentId = null;
             if (parentsDropDownList.SelectedValue != "null") newParentId = int.Parse(parentsDropDownList.SelectedValue);
             MemberFunctions.AddNewGroup(newTitle, newParentId);

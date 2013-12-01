@@ -23,7 +23,9 @@ namespace ADVIEWER.Member
             }
             else
             {
-                ticketAnswer.InnerText = "هنوز پاسخی از سوی مدیر برای این تیکت درج نشده";
+                ticketAnswer.InnerText = "هنوز پاسخی از سوی مدیر برای این تیکت درج نشده است.";
+                ticketAnswer.Attributes.Add("style", "color:red");
+
             }
 
         }

@@ -13,12 +13,10 @@
     <p>
         رمز جدید باید دارای حداقل <%= Membership.MinRequiredPasswordLength %> کاراکتر باشد.
     </p>
-    <asp:ChangePassword ID="ChangeUserPassword" ChangePasswordFailureText="رمز عبور فعلی و یا رمز عبور جدید اشتباه وارد شده است."  ContinueDestinationPageUrl="../Member/MemberDefault.aspx" ContinueButtonStyle-CssClass="btn btn-primary" ContinueButtonText="ادامه" SuccessTitleText="" SuccessText="رمز عبور شما با موفقیت تغییر یافت." SuccessTextStyle-CssClass="alert alert-success" SuccessTextStyle-Font-Size="17px" runat="server" CancelDestinationPageUrl="../member/MemberDefault.aspx" EnableViewState="false" RenderOuterTable="false" >
+    <asp:Literal ID="ErrorMessage" Visible ="false" runat="server" ></asp:Literal>
+
+    <asp:ChangePassword ID="ChangeUserPassword" OnChangePasswordError="setError" ContinueDestinationPageUrl="../Member/MemberDefault.aspx" ContinueButtonStyle-CssClass="btn btn-primary" ContinueButtonText="ادامه" SuccessTitleText="" SuccessText="رمز عبور شما با موفقیت تغییر یافت." SuccessTextStyle-CssClass="alert alert-success" SuccessTextStyle-Font-Size="17px" runat="server" CancelDestinationPageUrl="../member/MemberDefault.aspx" EnableViewState="false" RenderOuterTable="false" >
         <ChangePasswordTemplate>
-            <div class="failureNotification" style="color: #b94a48;font-size:17px">
-                <asp:Literal ID="FailureText" runat="server"></asp:Literal>
-        
-            </div>
             <asp:ValidationSummary ID="ChangeUserPasswordValidationSummary" runat="server" CssClass="failureNotification" 
                  ValidationGroup="ChangeUserPasswordValidationGroup"/>
             <div class="accountInfo">

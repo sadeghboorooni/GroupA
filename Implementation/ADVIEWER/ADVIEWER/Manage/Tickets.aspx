@@ -8,7 +8,7 @@
             <asp:GridView CssClass="gridview" ID="TicketGridView" runat="server" AutoGenerateColumns="False"
                 DataKeyNames="ID" EnableModelValidation="True" Width="100%" OnRowCommand="TicketGridView_RowCommand"
                 AllowPaging="True" GridLines="None" PageSize="20" EnableTheming="False" EnableViewState="False"
-                ShowFooter="True" >
+                ShowFooter="false" >
                 <AlternatingRowStyle CssClass="alt" />
                 <Columns>
                     <asp:TemplateField FooterText="کد" HeaderText="کد" InsertVisible="False" SortExpression="ID">

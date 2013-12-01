@@ -7,15 +7,7 @@
     </asp:Content>
 
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
-    <asp:CreateUserWizard ID="RegisterUser" runat="server" EnableViewState="false" OnCreatedUser="RegisterUser_CreatedUser">
-        <LayoutTemplate>
-            <asp:PlaceHolder ID="wizardStepPlaceholder" runat="server"></asp:PlaceHolder>
-            <asp:PlaceHolder ID="navigationPlaceholder" runat="server"></asp:PlaceHolder>
-        </LayoutTemplate>
-        <WizardSteps>
-            <asp:CreateUserWizardStep ID="RegisterUserWizardStep" runat="server">
-                <ContentTemplate>
-                    <h2>
+<h2>
                         عضویت در سایت
                     </h2>
                     <p>
@@ -24,9 +16,19 @@
                     <p>
                         رمز عبور باید داری حداقل <%= Membership.MinRequiredPasswordLength %> کاراکتر باشد.
                     </p>
-                    <span class="failureNotification">
-                        <asp:Literal ID="ErrorMessage" runat="server"></asp:Literal>
-                    </span>
+                    
+
+    <asp:CreateUserWizard ID="RegisterUser" runat="server" EnableViewState="false"  InvalidPasswordErrorMessage= "رمز عبور وارد شده باید حداقل 6 کاراکتر باشد." UnknownErrorMessage="خطایی رخ داده است. مجددا تلاش فرمایید." DuplicateEmailErrorMessage="ایمیل وارد شده تکراری است." DuplicateUserNameErrorMessage="نام کاربری وارد شده تکراری است." OnCreateUserError="setErrorStyle" OnCreatedUser="RegisterUser_CreatedUser">
+        <LayoutTemplate>
+            <asp:PlaceHolder ID="wizardStepPlaceholder" runat="server"></asp:PlaceHolder>
+            <asp:PlaceHolder ID="navigationPlaceholder" runat="server"></asp:PlaceHolder>
+        </LayoutTemplate>
+        <WizardSteps>
+            <asp:CreateUserWizardStep ID="RegisterUserWizardStep" runat="server">
+                <ContentTemplate>
+                    <div style="margin-top:20px;margin-bottom:15px;">
+                        <asp:Label ID="ErrorMessage" Visible="false" runat="server"></asp:Label>
+                    </div>
                     <asp:ValidationSummary ID="RegisterUserValidationSummary" runat="server" CssClass="failureNotification" 
                          ValidationGroup="RegisterUserValidationGroup"/>
                     <div class="accountInfo">

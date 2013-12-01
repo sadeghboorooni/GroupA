@@ -30,5 +30,10 @@ namespace ADVIEWER.Account
                 FormsAuthentication.SetAuthCookie(LoginUser.UserName, LoginUser.RememberMeSet);
             }
         }
+        protected void setError(object sender, EventArgs e)
+        {
+            ErrorMessage.Text = string.Format("<div class='alert alert-danger' style='font-size:17px;display:inline-block;padding: 7px 15px 8px 14px;'> نام کاربری یا رمز عبور اشتباه است.</div>");
+            ErrorMessage.Visible = true;
+        }
     }
 }

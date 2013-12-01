@@ -27,9 +27,6 @@
                     ControlToValidate="titleTextBox" runat="server" ErrorMessage="×" Display="Dynamic"
                     ToolTip="فیلد الزامی"></asp:RequiredFieldValidator>
                 <br />
-                <label class="title">توضیحات</label>
-                <asp:TextBox ID="descriptionTextBox" TextMode="MultiLine" Height="100" Width="230" MaxLength="2000" runat="server"></asp:TextBox>
-                <br />
                 
                 <label class="title">گروه والد</label>
                 <asp:DropDownList ID="parentsDropDownList" Width="250" runat="server">
@@ -51,7 +48,7 @@
                 DataKeyNames="ID" EnableModelValidation="True" OnRowCommand="groupsGridView_RowCommand" 
                 Width="100%" AllowPaging="True" GridLines="None" PageSize="40" 
                  EnableTheming="False" EnableViewState="False"  OnPageIndexChanging="groupsGridView_PageIndexChanging"
-                ShowFooter="True" onrowdatabound="groupsGridView_RowDataBound" >
+                ShowFooter="false" onrowdatabound="groupsGridView_RowDataBound" >
                 <AlternatingRowStyle CssClass="alt" />
                 <Columns>
 
@@ -78,7 +75,7 @@
                           عنوان
                         </HeaderTemplate>
                         <ItemTemplate>
-                            <a style="font-size:12px;" href='<%# Eval("id","editgroup.aspx?id={0}") %>' title='<%# Eval("GroupName") %>'><%# Eval("parentGroup.GroupName") == null ? Eval("GroupName") : Eval("parentGroup.GroupName") + "->" + Eval("GroupName")%></a>
+                            <a href='<%# Eval("id","editgroup.aspx?id={0}") %>' title='<%# Eval("GroupName") %>'><%# Eval("parentGroup.GroupName") == null ? Eval("GroupName") : Eval("parentGroup.GroupName") + "->" + Eval("GroupName")%></a>
                         </ItemTemplate> 
                         <HeaderStyle HorizontalAlign="Right" />
                         <ItemStyle Width="250px" />

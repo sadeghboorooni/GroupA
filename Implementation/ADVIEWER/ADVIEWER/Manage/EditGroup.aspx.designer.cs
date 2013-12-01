@@ -31,15 +31,6 @@ namespace ADVIEWER.Manage {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
         
         /// <summary>
-        /// DescriptonTextBox control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox DescriptonTextBox;
-        
-        /// <summary>
         /// parentsDropDownList control.
         /// </summary>
         /// <remarks>

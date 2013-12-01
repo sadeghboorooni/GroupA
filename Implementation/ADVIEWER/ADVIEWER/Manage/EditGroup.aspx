@@ -16,8 +16,6 @@
                     ControlToValidate="titleTextBox" runat="server" ErrorMessage="×" Display="Dynamic"
                     ToolTip="فیلد الزامی"></asp:RequiredFieldValidator>
                 <br />
-                <label class="title">توضیحات</label>
-                <asp:TextBox ID="DescriptonTextBox" TextMode="MultiLine" Height="100" Width="340" MaxLength="2000" runat="server"></asp:TextBox><br />
                 <label class="title" for="ctl00_content_DropDownList1">
                     گروه والد</label>
                 <asp:DropDownList ID="parentsDropDownList" Width="360" runat="server">
