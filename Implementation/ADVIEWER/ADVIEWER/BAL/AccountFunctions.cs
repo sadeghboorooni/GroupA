@@ -52,7 +52,7 @@ namespace ADVIEWER.BAL
             return PublicFunctions.MakeAssignor<User,AssignorUser>(ml.Users.Where(a => a.ID == UserID).FirstOrDefault());
         }
 
-        public static void UpdateUserInfo(Int32 id, String fullName,String about ,String address,String fax ,String mobile,String tell, String yahooId)
+        public static void UpdateUserInfo(Int32 id, String fullName,String about ,String address,String fax ,String mobile,String tell, String yahooId,String favgroups)
         {
             ModelContainer ml = new ModelContainer();
             User user = ml.Users.Where(t => t.ID == id).FirstOrDefault();
@@ -63,11 +63,21 @@ namespace ADVIEWER.BAL
             user.Mobile = mobile;
             user.Tell = tell;
             user.YahooID = yahooId;
+            List<string> Groups = favgroups.Split(',').ToList();
+            user.Groups.Clear();
+
+            
+                foreach (string grid in Groups)
+                {
+                    if (grid != "")
+                    {
+                        int GroupId = int.Parse(grid);
+                        Group TempGroup = ml.Groups.Where(t => t.ID == GroupId).FirstOrDefault();
+                        user.Groups.Add(TempGroup);
+                    }
+                }
             ml.SaveChanges();
         }
-
-
-
 
         public static bool IsManager()
         {

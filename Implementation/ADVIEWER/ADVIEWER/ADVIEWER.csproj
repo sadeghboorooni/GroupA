@@ -121,6 +121,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
     <Content Include="Scripts\jquery.tokeninput.js" />
+    <Content Include="Scripts\jquery.tokeninputforfavoritegroup.js" />
     <Content Include="Scripts\RateIt\RateIt.js" />
     <Content Include="ShowGroupAdvs.aspx" />
     <Content Include="ShowStateAdvs.aspx" />

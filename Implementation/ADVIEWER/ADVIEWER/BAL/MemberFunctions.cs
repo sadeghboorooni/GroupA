@@ -36,7 +36,7 @@ namespace ADVIEWER.BAL
             newAdv.Email = email;
             newAdv.YahooID = yahooid;
             newAdv.Address = address;
-            newAdv.ExpirationDate = DateTime.Now;
+            newAdv.ExpirationDate = DateTime.Now.AddMonths(advDuration);
             newAdv.RegistrationDate = DateTime.Now;
             newAdv.LastRenewal = DateTime.Now;
             newAdv.GroupID = groupId;
@@ -65,6 +65,21 @@ namespace ADVIEWER.BAL
             {
                 return false;
             }
+        }
+        public static string GetUserFavoriteGroups(int UserID)
+        {
+            ModelContainer ml = new ModelContainer();
+            List<AssignorGroup> TempGroups = new List<AssignorGroup>();
+            String resp = "[";
+            foreach (Group gr in ml.Users.Where(t => t.ID == UserID).FirstOrDefault().Groups.ToArray())
+            {
+                resp += "{"+"name:"+'"' + gr.GroupName + '"'+","+"id:" + gr.ID + "},";
+                
+            }
+            if (resp.LastIndexOf(',') != -1) resp = resp.Remove(resp.LastIndexOf(','));
+            resp += "]";
+            //resp = resp.Replace(@"\", "");
+            return resp;
         }
         public static void SetAdvRate(int AdvId, Single Value)
         {
@@ -291,7 +306,7 @@ namespace ADVIEWER.BAL
                 aAdv.Add(PublicFunctions.MakeAssignor<Advertisment, AssignorAdvertisment>(ad));
             }
 
-            return aAdv.ToArray();
+            return aAdv.OrderByDescending(t=> t.LastRenewal).ToArray();
         }
         public static AssignorGroup[] GetSubGroups()
         {

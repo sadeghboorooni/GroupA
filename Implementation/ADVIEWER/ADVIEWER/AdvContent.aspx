@@ -20,12 +20,12 @@
         <div class="rateit" data-rateit-value="<%=AverageAdvRate %>" data-rateit-ispreset="true" id="RateAdv">
         </div>
         <button class="btn btn-primary" onclick="SetRate($('#RateAdv').rateit('value'))" type="button">ثبت امتیاز شما</button>
-        <span>
-        نمره دهی شما: <span id="UserAdvRateLabel" ><%=UserAdvRate %></span>
+        <span style="font-size:17px">
+        نمره دهی شما: <span style="color:Red" id="UserAdvRateLabel" ><%=UserAdvRate %></span>
         </span>
         
-        <span>
-        &nbsp میانگین امتیاز: <span id="AverageAdvRateLabel" ><%=AverageAdvRate %></span> بر اساس <span id="CountOfRatesLabel"><%=CountOfRates %></span> رای
+        <span style="font-size:17px">
+        &nbsp میانگین امتیاز: <span style="color:Red" id="AverageAdvRateLabel" ><%=AverageAdvRate %>&nbsp</span> بر اساس <span style="color:Red" id="CountOfRatesLabel"><%=CountOfRates %></span> رای
         </span>
         <%--<button onclick="alert($('#RateAdv').rateit('value'))" type="button">Get value</button>--%>
         <%--<button onclick="$('#RateAdv').rateit('value', prompt('Input numerical value'))" type="button">Set value</button>--%>
@@ -157,7 +157,7 @@
     <div class="clear"></div>
        <div runat="server" id="subgroupadi">
             <hr />
-
+        <h2 style="text-align:center">سایر تبلیغات این کاربر</h2>
         <div class="latestwork" style="clear: both;overflow:hidden">
         <asp:Repeater ID="UserAdvsRepeater" runat="server" OnPreRender="UserAdvsRepeater_PreRender">
             <ItemTemplate>
@@ -181,14 +181,15 @@
                    <p>
                     <%# Eval("Description") %>
                     </p>
-                      <div style="height:25px;overflow:hidden">
+                      
+                          <div class="DetailBtn">
+                      <div style="float:right;overflow:hidden">
                             <span class="right" title="آگهي دهنده"><a href='<%# Eval("UserId","profile.aspx?id={0}") %>'
                                 target="_blank"><i class="icon-user"></i>
                                 <%# Eval("FullName")%></a></span>
                           
                         </div>
-                          <div class="DetailBtn">
-                           
+                             
                             <%#  Eval("Tell") == null || Eval("Tell").ToString() == string.Empty ? "" : string.Format("<span class='left' title='تلفن تماس آگهي دهنده'><i class='icon-cog'></i>{0} </span>", Eval("Tell").ToString().Length <= 15 ? Eval("Tell") : Eval("Tell").ToString().Substring(0, 15) + "...")%>
                     <a href='<%# Eval("ID", "AdvContent.aspx?id={0}") %>'
                             title='<%# Eval("Title")%>'  class="btn btn-primary">مشاهده جزييات</a>
@@ -199,11 +200,6 @@
                    <%--<td style="width:0%">
                    
                    </td>--%>
-                 
-                 
-                  
-                 
-                       
                    
                      </div>
                      <span class="span"></span>

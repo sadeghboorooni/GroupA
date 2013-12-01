@@ -33,14 +33,14 @@
                                    
                 </div>
      </div>
-     <div class="ten columns maincontent" style="width:950px;float:right">
+     <div class="ten columns maincontent" style="float:right;width:70%">
                 <asp:Repeater ID="Repeater1" runat="server" OnItemDataBound="Repeater1_ItemDataBound">
 
                     <ItemTemplate>
                            
-                  <%# DateTime.Parse(Eval("ExpirationDate").ToString()) > DateTime.Now && Eval("starcount").ToString() != "-1" ?
+                  <%# DateTime.Parse(Eval("ExpirationDate").ToString()) > DateTime.Now && Eval("StarCount").ToString() != "-1" ?
 
-                                        "<div class='span3 hero-unit featuredAdv' style='width:22%;background-color:#FFFCBB;'><div style=\"position:absolute;top:0;left:0;z-index:10000\"><img src=\"images/vijesmall.png\" /></div>" : "<div class='span3 hero-unit featuredAdv' style='width:22%;'>"%>
+                                        "<div class='span3 hero-unit featuredAdv' style='width:30%;margin: 1% 2% 1% 1%;background-color:#FFFCBB;'><div style=\"position:absolute;top:0;left:0;z-index:10000\"><img src=\"images/vijesmall.png\" /></div>" : "<div class='span3 hero-unit featuredAdv' style='width:30%;margin: 1% 2% 1% 1%'>"%>
                                         
                     <div class="info-column">
                     
@@ -68,7 +68,7 @@
                 </div>
                     </ItemTemplate>
                     <FooterTemplate>
-                        <asp:Label ID="lblErrorMsg" runat="server" Text="<div class='message Warning'>کاربر هیچ تبلیغی ندارد...</div>"
+                        <asp:Label ID="lblErrorMsg" runat="server" Text="<div class='alert alert-warning' style='display:inline-block;font-size:17px'>کاربر هیچ تبلیغی ندارد...</div>"
                             Visible="false">
                         </asp:Label>
                     </FooterTemplate>

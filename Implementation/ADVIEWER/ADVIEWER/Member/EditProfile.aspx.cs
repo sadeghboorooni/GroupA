@@ -10,11 +10,12 @@ namespace ADVIEWER.Member
 {
     public partial class EditProfile : System.Web.UI.Page
     {
+        public string UserFavoriteGroups;
         protected void Page_Load(object sender, EventArgs e)
         {
+            int UserID = AccountFunctions.currentUserId();
             if (!IsPostBack)
             {
-                int UserID = AccountFunctions.currentUserId();
                 AssignorUser CurUser = AccountFunctions.GetUserInformation(UserID);
                 txtAddress.Text = CurUser.Address;
                 txtMob.Text = CurUser.Mobile;
@@ -26,6 +27,7 @@ namespace ADVIEWER.Member
                 ltrmail.Text = CurUser.Mail;
                 ltrprofile.Text = string.Format("<a href='/profile.aspx?id={0}' target='_blank'>صفحه پروفایل شما</a>", UserID);
             }
+            UserFavoriteGroups = MemberFunctions.GetUserFavoriteGroups(UserID);
         }
 
         
@@ -39,8 +41,11 @@ namespace ADVIEWER.Member
             string Tell = txtTell.Text;
             string Fax = txtfax.Text;
             string YahooID = txtYahoo.Text;
-            AccountFunctions.UpdateUserInfo(UserID, FullName, About, Address, Fax, Mobile, Tell, YahooID);
+            string FavGroups = FavGrouptxt.Text;
+            AccountFunctions.UpdateUserInfo(UserID, FullName, About, Address, Fax, Mobile, Tell, YahooID, FavGroups);
             msg.Visible = true;
+            UserFavoriteGroups = MemberFunctions.GetUserFavoriteGroups(UserID);
+      
         } 
 
     }
