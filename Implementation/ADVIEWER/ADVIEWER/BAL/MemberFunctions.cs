@@ -528,6 +528,35 @@ namespace ADVIEWER.BAL
             }
             ml.SaveChanges();
         }
+
+
+
+        internal static AssignorAdvertisment[] GetLast9AdvsByUserGroups(int UserId)
+        {
+            ModelContainer ml = new ModelContainer();
+            AssignorUser aUser = AccountFunctions.GetUserInformation(UserId);
+            if (aUser.Groups.Count() == 0)
+            {
+                return PublicFunctions.GetLast9Advs();
+            }
+            else 
+            {
+                int[] aid=aUser.Groups.Select(t=>t.ID).ToArray();
+
+                var q = (from adv1 in ml.Advertisments
+                        from grp in aid
+                        where adv1.GroupID == grp
+                        select adv1).ToArray();
+
+                List<AssignorAdvertisment> aAdv = new List<AssignorAdvertisment>();
+                foreach (Advertisment adv2 in q)
+                {
+                    aAdv.Add(PublicFunctions.MakeAssignor<Advertisment, AssignorAdvertisment>(adv2));
+                }
+
+                return aAdv.OrderBy(a => Guid.NewGuid()).Take(9).ToArray();
+            }
+        }
     }
     public class ShowAdvertisment
     {

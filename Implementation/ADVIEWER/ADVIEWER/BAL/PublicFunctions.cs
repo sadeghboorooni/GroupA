@@ -22,7 +22,8 @@ namespace ADVIEWER.BAL
 
             foreach (PropertyInfo Assignor_prop in Assignor_props)
             {
-                if (Assignor_prop.PropertyType.BaseType.Name == "Object" || Assignor_prop.PropertyType.BaseType.Name == "ValueType")
+                if (Assignor_prop.GetSetMethod()!= null && 
+                    (Assignor_prop.PropertyType.BaseType.Name == "Object" || Assignor_prop.PropertyType.BaseType.Name == "ValueType"))
                 {
                     PropertyInfo EntityClass_prop = EntityClass_props.Where(t => t.Name == Assignor_prop.Name).First();
                     var propValue = EntityClass_prop.GetValue(EntityObject, null);
@@ -221,7 +222,10 @@ namespace ADVIEWER.BAL
         public int ID
         {
             get { return Id; }
-            set { Id = value; }
+            set 
+            { 
+                Id = value;
+            }
         }
 
     }
@@ -286,8 +290,34 @@ namespace ADVIEWER.BAL
             set { _value = value; }
         }
     }
-    public class AssignorUser : AssignorParent
+    public class AssignorUser
     {
+        private int _id;
+
+        public int ID
+        {
+            get { return _id; }
+            set { _id = value; _setUserGroups(); }
+        }
+
+        private void _setUserGroups()
+        {
+            List<AssignorGroup>  userG = new List<AssignorGroup>();
+            ModelContainer ml = new ModelContainer();
+            foreach (Group g in ml.Users.Where(t => t.ID == this.ID).First().Groups) 
+            {
+                userG.Add(PublicFunctions.MakeAssignor<Group, AssignorGroup>(g));
+            }
+
+            _userGroups = userG.ToArray();
+        }
+
+        private AssignorGroup[] _userGroups ;
+
+        public AssignorGroup[] Groups
+        {
+            get { return _userGroups; }
+        }
         private string _about;
 
         public string About

@@ -12,8 +12,17 @@ namespace ADVIEWER.Main
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            LastAdvsRepeater.DataSource = PublicFunctions.GetLast9Advs();
+            int UserId = AccountFunctions.currentUserId();
+            if (UserId == -1)
+            {
+                LastAdvsRepeater.DataSource = PublicFunctions.GetLast9Advs();
+            }
+            else
+            {
+                LastAdvsRepeater.DataSource = MemberFunctions.GetLast9AdvsByUserGroups(UserId);
+            }
             LastAdvsRepeater.DataBind();
+
         }
     }
 }
