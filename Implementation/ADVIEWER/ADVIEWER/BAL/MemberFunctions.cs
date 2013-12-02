@@ -186,7 +186,7 @@ namespace ADVIEWER.BAL
             ModelContainer ml = new ModelContainer();
 
             List<ShowAdvertisment> unreadList = new List<ShowAdvertisment>();
-            foreach (Advertisment adv in ml.Advertisments.Where(t => t.IsConfirmed == false && t.IsRead == false && t.StarCount == -1))
+            foreach (Advertisment adv in ml.Advertisments.Where(t => (t.IsConfirmed == false && t.IsRead == false) && t.StarCount == -1))
             {
                 unreadList.Add(new ShowAdvertisment(adv.ID, adv.Title, adv.ShortDescription, adv.FullName, adv.Pic, adv.RegistrationDate, -1, adv.UserId));
             }
@@ -201,6 +201,7 @@ namespace ADVIEWER.BAL
             {
                 adv.IsRead = true;
                 adv.IsConfirmed = true;
+                adv.ExpirationDate = DateTime.Now.AddMonths(adv.AdvDuration);
                 ml.SaveChanges();
             }
 
@@ -420,12 +421,13 @@ namespace ADVIEWER.BAL
             return aAdv.ToArray();
 
         }
+
         public static object UnconfirmedStaredAdvertismentsDataTable()
         {
             ModelContainer ml = new ModelContainer();
 
             List<ShowAdvertisment> unreadList = new List<ShowAdvertisment>();
-            foreach (Advertisment adv in ml.Advertisments.Where(t => t.IsConfirmed == false && t.IsRead == false && t.StarCount > -1))
+            foreach (Advertisment adv in ml.Advertisments.Where(t => (t.IsConfirmed == false && t.IsRead == false) && t.StarCount > -1))
             {
                 unreadList.Add(new ShowAdvertisment(adv.ID, adv.Title, adv.ShortDescription, adv.FullName, adv.Pic, adv.RegistrationDate, adv.StarCount, adv.UserId));
             }
@@ -571,6 +573,38 @@ namespace ADVIEWER.BAL
 
                 return aAdv.OrderBy(a => Guid.NewGuid()).Take(9).ToArray();
             }
+        }
+
+        public static void setUserImage(string tempAdd, string mainAdd, int userId, string fileName)
+        {
+            ModelContainer ml = new ModelContainer();
+            User currentUser = ml.Users.Where(t => t.ID == userId).First();
+            try
+            {
+
+                if (tempAdd != "")
+                {
+                    SaveImage(tempAdd, mainAdd, fileName);
+                    currentUser.PicAddress = mainAdd + fileName;
+                    ml.SaveChanges();
+                }
+
+            }
+            catch
+            {
+
+            }
+
+        }
+
+        public static void RenewAdv(int ID)
+        {
+            ModelContainer ml = new ModelContainer();
+            Advertisment adv1 = ml.Advertisments.Where(t => t.ID == ID).First();
+            adv1.IsConfirmed = false;
+            adv1.IsRead = false;
+            adv1.LastRenewal = DateTime.Now;
+            ml.SaveChanges();
         }
     }
     public class ShowAdvertisment

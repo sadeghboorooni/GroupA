@@ -13,6 +13,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 		<meta name="description" content=""/>
 		<meta name="author" content=""/>
+        <link rel="icon" type="image/x-icon" href="~/styles/images/fav.ico" />
 
         <link href="Styles/member.css" rel="stylesheet" type="text/css" />
         <link href="Styles/bootstrap.css" rel="stylesheet" type="text/css"/>

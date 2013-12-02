@@ -28,6 +28,11 @@ namespace ADVIEWER.Member
                 int ID = int.Parse(e.CommandArgument.ToString());
                 MemberFunctions.DeleteAdv(ID);
             }
+            else if (e.CommandName == "renew")
+            {
+                int ID = int.Parse(e.CommandArgument.ToString());
+                MemberFunctions.RenewAdv(ID);
+            }
             LoadGridViewDataSource();
         }
     }

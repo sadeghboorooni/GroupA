@@ -97,6 +97,7 @@
     <Content Include="Member\AddNewAdv.aspx" />
     <Content Include="Member\AddNewTicket.aspx" />
     <Content Include="Member\AdvsList.aspx" />
+    <Content Include="Member\Avatar.aspx" />
     <Content Include="Member\EditProfile.aspx" />
     <Content Include="Member\Images\ChangePassword.png" />
     <Content Include="Member\Images\Email.png" />
@@ -129,6 +130,7 @@
     <Content Include="Styles\bootstrap.css" />
     <Content Include="Styles\font-awesome.css" />
     <Content Include="Styles\fontawesome-webfont.svg" />
+    <Content Include="Styles\Images\fav.ico" />
     <Content Include="Styles\Images\Logo.png" />
     <Content Include="Styles\Images\new.png" />
     <Content Include="Styles\Images\nopic11.jpg" />
@@ -324,6 +326,13 @@
     </Compile>
     <Compile Include="Member\AdvsList.aspx.designer.cs">
       <DependentUpon>AdvsList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\Avatar.aspx.cs">
+      <DependentUpon>Avatar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Member\Avatar.aspx.designer.cs">
+      <DependentUpon>Avatar.aspx</DependentUpon>
     </Compile>
     <Compile Include="Member\EditProfile.aspx.cs">
       <DependentUpon>EditProfile.aspx</DependentUpon>
