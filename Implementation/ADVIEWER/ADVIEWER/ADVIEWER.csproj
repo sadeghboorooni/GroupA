@@ -130,6 +130,7 @@
     <Content Include="Styles\bootstrap.css" />
     <Content Include="Styles\font-awesome.css" />
     <Content Include="Styles\fontawesome-webfont.svg" />
+    <Content Include="Styles\Images\fav.ico" />
     <Content Include="Styles\Images\Logo.png" />
     <Content Include="Styles\Images\new.png" />
     <Content Include="Styles\Images\nopic11.jpg" />
@@ -328,6 +329,7 @@
     </Compile>
     <Compile Include="Member\Avatar.aspx.cs">
       <DependentUpon>Avatar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Member\Avatar.aspx.designer.cs">
       <DependentUpon>Avatar.aspx</DependentUpon>

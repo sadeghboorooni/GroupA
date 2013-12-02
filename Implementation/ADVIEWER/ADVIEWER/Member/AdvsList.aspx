@@ -28,7 +28,10 @@
                             <div style="float:right">
                                 <p>
                                     <i class="icon-exclamation-sign"></i>
-                                    <%# Eval("IsConfirmed").ToString() == "True" ? "وضعیت: <span style='color:#2b7da3; '>در حال نمایش</span>" : "وضعیت: <span style='color:Red'; '>در انتظار تایید</span>"%>
+
+                                    <%# (bool)Eval("IsConfirmed") ? "وضعیت: <span style='color:#2b7da3; '>در حال نمایش</span>" :
+                                                                            (bool)Eval("IsRead") ? "وضعیت: <span style='color:Red'; '>رد شده</span>" : "وضعیت: <span style='color:#FCA326'; '>در انتظار تایید</span>"%>
+                                    
                                     </p>
                             </div>
                             <div style="float:left">
@@ -41,10 +44,16 @@
                             <%# Eval("IsConfirmed").ToString() == "True" ? string.Format("<a Target='_blank' href='../AdvContent.aspx?ID={0}')><i class='icon-file'></i>مشاهده&nbsp&nbsp</a>", Eval("ID")) : "" %>
                             <%# Eval("StarCount").ToString() != "-1" ? string.Format("<a Target='_blank' href='ManageAdvGallery.aspx?ID={0}')><i class='icon-picture'></i>مدیریت تصاویر</a>", Eval("ID")) : "" %>
                             </div>
-                                    
+                                
+
+
                                 <asp:LinkButton ID="LinkButton3" runat="server" CausesValidation="False" OnClientClick="return confirm('از حذف این آگهی اطمینان دارید؟');"
                                     CommandName="del" ToolTip="حذف آگهی" style="float:left;color:Black" Text="<i class='icon-remove' style='color:Red'></i>حذف"
                                     CommandArgument='<%# Eval("id") %>'></asp:LinkButton>
+                                
+                                <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" CommandName="renew" ToolTip="به روزرسانی آگهی" style="float:left;color:Black;padding-left:5px;" 
+                                Text="<i class='icon-retweet'></i>به روزرسانی" CommandArgument='<%# Eval("id") %>'></asp:LinkButton>
+                                
                             
 
                     </div>

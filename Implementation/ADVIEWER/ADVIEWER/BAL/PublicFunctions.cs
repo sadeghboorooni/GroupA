@@ -403,6 +403,14 @@ namespace ADVIEWER.BAL
             set { _isConfirmed = (bool)value; }
         }
 
+        private bool _isRead;
+
+        public bool IsRead
+        {
+            get { return _isRead; }
+            set { _isRead = value; }
+        }
+
         private int _userId;
 
         public int UserId

@@ -38,15 +38,25 @@
                 var count = parseInt($('#CountOfRatesLabel').text());
                 var average = parseFloat($('#AverageAdvRateLabel').text());
                 var lastRate = parseFloat($('#UserAdvRateLabel').text());
+
+                if(lastRate==0){
                 average = (count * average) + value;
                 average = average/(count+1);
                 average = average.toFixed(2);
                 $('#UserAdvRateLabel').text(value);
                 $('#AverageAdvRateLabel').text(average);
-                if(lastRate==0){
-
                 $('#CountOfRatesLabel').text(count+1);
                 }
+                else
+                {
+                average = (count * average)- lastRate + value;
+                average = average/(count);
+                average = average.toFixed(2);
+                $('#UserAdvRateLabel').text(value);
+                $('#AverageAdvRateLabel').text(average);
+                }
+
+
                 $.ajax({
                     url: 'RatingHandler.ashx?advId='+advId+'&val='+value,
                     dataType: 'json',
