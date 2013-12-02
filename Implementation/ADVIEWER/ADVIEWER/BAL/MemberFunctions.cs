@@ -572,6 +572,28 @@ namespace ADVIEWER.BAL
                 return aAdv.OrderBy(a => Guid.NewGuid()).Take(9).ToArray();
             }
         }
+
+        public static void setUserImage(string tempAdd, string mainAdd, int userId, string fileName)
+        {
+            ModelContainer ml = new ModelContainer();
+            User currentUser = ml.Users.Where(t => t.ID == userId).First();
+            try
+            {
+
+                if (tempAdd != "")
+                {
+                    SaveImage(tempAdd, mainAdd, fileName);
+                    currentUser.PicAddress = mainAdd + fileName;
+                    ml.SaveChanges();
+                }
+
+            }
+            catch
+            {
+
+            }
+
+        }
     }
     public class ShowAdvertisment
     {

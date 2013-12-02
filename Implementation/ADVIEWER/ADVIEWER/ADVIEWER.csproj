@@ -97,6 +97,7 @@
     <Content Include="Member\AddNewAdv.aspx" />
     <Content Include="Member\AddNewTicket.aspx" />
     <Content Include="Member\AdvsList.aspx" />
+    <Content Include="Member\Avatar.aspx" />
     <Content Include="Member\EditProfile.aspx" />
     <Content Include="Member\Images\ChangePassword.png" />
     <Content Include="Member\Images\Email.png" />
@@ -324,6 +325,12 @@
     </Compile>
     <Compile Include="Member\AdvsList.aspx.designer.cs">
       <DependentUpon>AdvsList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\Avatar.aspx.cs">
+      <DependentUpon>Avatar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\Avatar.aspx.designer.cs">
+      <DependentUpon>Avatar.aspx</DependentUpon>
     </Compile>
     <Compile Include="Member\EditProfile.aspx.cs">
       <DependentUpon>EditProfile.aspx</DependentUpon>
