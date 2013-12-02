@@ -42,10 +42,10 @@
                         </FooterTemplate>
                         <HeaderStyle HorizontalAlign="Right" />
                     </asp:TemplateField>
-                    <asp:TemplateField FooterText="متن" SortExpression="FullName" HeaderText="عنوان">
+                    <asp:TemplateField FooterText="متن" SortExpression="FullName" HeaderText="متن">
                         <ItemTemplate>
                         <p>
-                         <%# Eval("RegDate").ToString() == Eval("LastUpdate").ToString() ? string.Format("<a style='color:Red' href='viewTicket.aspx?ID={0}'>{1}</a>", Eval("ID"), Eval("Title")) : string.Format("<a href='viewTicket.aspx?ID={0}'>{1}</a>", Eval("ID"), Eval("Title"))%>
+                         <%# Eval("RegDate").ToString() == Eval("LastUpdate").ToString() ? string.Format("<a style='color:Red' href='viewTicket.aspx?ID={0}'>{1}</a>", Eval("ID"), Eval("Text")) : string.Format("<a href='viewTicket.aspx?ID={0}'>{1}</a>", Eval("ID"), Eval("Text"))%>
                         </a>
                         </p>
                         </ItemTemplate>
@@ -60,7 +60,7 @@
                     <asp:TemplateField FooterText="بروزرسانی" SortExpression="LastUpdate" HeaderText="بروزرسانی">
                         <ItemTemplate>
                         <p>
-                        <%# Eval("RegDate") %> 
+                        <%# ADVIEWER.BAL.PublicFunctions.SolarDateConvertor( Eval("RegDate"),3) %> 
                         </p>
                         </ItemTemplate>
                         <HeaderTemplate>

@@ -10,7 +10,7 @@ namespace ADVIEWER.Manage
 {
     public partial class ViewTicket : System.Web.UI.Page
     {
-        public string TicketTitle, TicketText , TicketUser ;
+        public string TicketTitle, TicketText , TicketUser,TicketDate ;
         protected void Page_Load(object sender, EventArgs e)
         {
             try
@@ -19,6 +19,8 @@ namespace ADVIEWER.Manage
                 AssignorTicket t = MemberFunctions.GetTicketData(TicketID);
                 TicketTitle = t.Title;
                 TicketText = t.Text;
+                TicketUser = t.User.FullName;
+                TicketDate = PublicFunctions.SolarDateConvertor( t.RegDate);
             }
             catch
             {

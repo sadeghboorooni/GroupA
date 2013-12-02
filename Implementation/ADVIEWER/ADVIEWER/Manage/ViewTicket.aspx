@@ -10,7 +10,7 @@
                 <div class="bordered" style='<%# Eval("IsManageReply").ToString().ToLower() == "true" ? "background: #f2f2f2;" : "background: #fbfbfb" %>'>
                 <div class="ticketdetails">
                     <span style="float:right"><i class="icon-user"></i> فرستنده: <%= TicketUser%></span>
-                    <span style="float:left"><i class="icon-calendar"></i> <%#Eval("SendDate") + " ساعت: " + Eval("SendDate") %></span>
+                    <span style="float:left"><i class="icon-calendar"></i> <%=TicketDate%></span>
                 </div>
                 <div class="clear"></div>
                 

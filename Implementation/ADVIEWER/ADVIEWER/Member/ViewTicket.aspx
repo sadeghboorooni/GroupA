@@ -13,7 +13,7 @@
             </div>
             </div>
                 <div class="btm-tab-btn ptr LocoSelect">متن تیکت</div>
-                <div style="float: left;position: relative;top: 20px;"><i class="icon-calendar"></i> <%#Eval("RegDate") + " ساعت: " + Eval("RegDate") %></div>     
+                <div runat="server" style="float: left;position: relative;top: 20px;"><i class="icon-calendar"></i> <% = TicketDate %></div>     
                 <div class="contenttext" style="margin-top:10px;margin-bottom:10px;">
                 <span style="float:right;margin:15px;">
                 
@@ -27,7 +27,7 @@
         <div class="bordered">
          
          <div class="btm-tab-btn ptr LocoSelect">پاسخ مدیر</div>
-         <div style="float: left;position: relative;top: 20px;"><i class="icon-calendar"></i> <%#Eval("RegDate") + " ساعت: " + Eval("RegDate") %></div>     
+         <div runat="server" id="answerdatediv" style="float: left;position: relative;top: 20px;"><i class="icon-calendar"></i> <% = AnswerDate%></div>     
          <div class="contenttext" style="margin-top:10px;margin-bottom:10px;">
                 <div style="margin:15px;">
          <div runat="server" id="ticketAnswer">  

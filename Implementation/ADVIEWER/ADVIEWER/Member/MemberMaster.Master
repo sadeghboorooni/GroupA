@@ -153,9 +153,10 @@
                         </div>
                         </div>
                         <asp:Literal ID="ltr_username2" runat="server"></asp:Literal>
-                        <br>
+                        <br/>
                         <a href="EditProfile.aspx">ویرایش مشخصات</a>
                         <br />
+                        <a href="Avatar.aspx">تغییر تصویر پروفایل</a>
 
                         <div class="hrContainer">
                         <div class="clear">

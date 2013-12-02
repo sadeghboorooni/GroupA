@@ -271,6 +271,27 @@ namespace ADVIEWER.BAL
             get { return _title; }
             set { _title = value; }
         }
+
+        private int _userId;
+
+        public int UserID
+        {
+            get { return _userId; }
+            set { _userId = value; _setUser(); }
+        }
+
+        private AssignorUser _user;
+
+        public AssignorUser User
+        {
+            get { return _user; }
+        }
+
+        private void _setUser()
+        {
+            ModelContainer ml = new ModelContainer();
+            _user = PublicFunctions.MakeAssignor<User, AssignorUser>(ml.Users.Where(t => t.ID == _userId).First());
+        }
     }
     public class AssignorRate : AssignorParent
     {

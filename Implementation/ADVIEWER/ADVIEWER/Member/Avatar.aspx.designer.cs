@@ -10,7 +10,25 @@
 namespace ADVIEWER.Member {
     
     
-    public partial class WebForm1 {
+    public partial class Avatar {
+        
+        /// <summary>
+        /// msg control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl msg;
+        
+        /// <summary>
+        /// ltrprofile control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal ltrprofile;
         
         /// <summary>
         /// ToolkitScriptManager1 control.

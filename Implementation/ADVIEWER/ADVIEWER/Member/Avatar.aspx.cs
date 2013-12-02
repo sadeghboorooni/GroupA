@@ -9,11 +9,12 @@ using System.IO;
 
 namespace ADVIEWER.Member
 {
-    public partial class WebForm1 : System.Web.UI.Page
+    public partial class Avatar : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            int UserID = AccountFunctions.currentUserId();
+            ltrprofile.Text = string.Format("<a href='/profile.aspx?id={0}' target='_blank'>صفحه پروفایل شما</a>", UserID);
         }
 
       
