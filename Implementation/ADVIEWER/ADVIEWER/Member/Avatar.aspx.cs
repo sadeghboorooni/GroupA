@@ -24,6 +24,7 @@ namespace ADVIEWER.Member
             string tempAdd = "";
             string mainAdd="";
             int userId = AccountFunctions.currentUserId();
+            MemberFunctions.deleteImage(userId);
 
             if (AsyncImageUpload.HasFile)
             {
@@ -32,6 +33,7 @@ namespace ADVIEWER.Member
             }
 
             MemberFunctions.setUserImage(tempAdd, mainAdd, userId,AsyncImageUpload.FileName);
+    
 
         }
         protected void AsyncImageUpload_UploadedComplete(object sender, EventArgs e)
@@ -45,6 +47,14 @@ namespace ADVIEWER.Member
             string ext = Path.GetExtension(AsyncImageUpload.FileName).ToLower();
             if (ext == ".png" || ext == ".jpg" || ext == ".jpeg" || ext == ".gif")
                 AsyncImageUpload.SaveAs(MapPath(dirPath + "/" + AsyncImageUpload.FileName));
+
+        }
+
+        protected void deleteImage_Click(object sender, EventArgs e)
+        {
+            int curId = AccountFunctions.currentUserId();
+           MemberFunctions .deleteImage(curId);
+            
         }
     }
 }

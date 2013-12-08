@@ -139,15 +139,19 @@ namespace ADVIEWER.BAL
         }
         public static void SaveImage(string tempAdd, string mainAdd, string filename)
         {
-
+            
             if (!Directory.Exists(HttpContext.Current.Server.MapPath(mainAdd)))
             {
                 Directory.CreateDirectory(HttpContext.Current.Server.MapPath(mainAdd));
             }
-
-            File.Copy(HttpContext.Current.Server.MapPath(tempAdd + filename), HttpContext.Current.Server.MapPath(mainAdd + filename));
-
-            File.Delete(HttpContext.Current.Server.MapPath(tempAdd + filename));
+            try
+            {
+                File.Move(HttpContext.Current.Server.MapPath(tempAdd + filename), HttpContext.Current.Server.MapPath(mainAdd + filename));
+                
+                File.Delete(HttpContext.Current.Server.MapPath(tempAdd + filename));
+            }
+            catch
+            { }
 
         }
         public static int[] ParseKeyWords(string keywordStr)
@@ -605,6 +609,37 @@ namespace ADVIEWER.BAL
             adv1.IsRead = false;
             adv1.LastRenewal = DateTime.Now;
             ml.SaveChanges();
+        }
+
+        public static void deleteImage(int userid)
+        {
+            ModelContainer ml = new ModelContainer();
+            User currentUser = ml.Users.Where(t => t.ID == userid).First();
+            string path = currentUser.PicAddress;
+            try
+            {
+                if (path != null)
+                {
+                   if (System.IO.File.Exists(System.Web.HttpContext.Current.Server.MapPath(path)))
+                    {
+                        try
+                        {
+                            System.IO.File.Delete(System.Web.HttpContext.Current.Server.MapPath(path));
+                        }
+
+                        catch
+                        {
+                        }
+                        currentUser.PicAddress = null;
+                        ml.SaveChanges();
+                    }
+                }
+            }
+            catch
+            {
+            }
+            
+
         }
     }
     public class ShowAdvertisment
