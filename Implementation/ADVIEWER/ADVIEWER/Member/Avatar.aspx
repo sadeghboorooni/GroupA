@@ -94,5 +94,12 @@
     <div class="spacer"></div>
     <center><asp:Button ID="saveImage" runat="server" onclick="SaveImage_Click" class ="btn btn-primary"
         Text="ذخیره" /></center>
+        <hr />
+        <i class="icon-minus-sign"></i>
+        تصویر خود را حذف کنید
+        <center>
+        <asp:Button ID="deleteImage" runat="server" OnClick="deleteImage_Click" class ="btn btn-primary"
+        Text="حذف تصویر" />
+        </center>
         </div>
 </asp:Content>
