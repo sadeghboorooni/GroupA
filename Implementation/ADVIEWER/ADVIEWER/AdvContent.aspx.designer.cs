@@ -13,6 +13,42 @@ namespace ADVIEWER.Main {
     public partial class AdvContent {
         
         /// <summary>
+        /// AddCommentText control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox AddCommentText;
+        
+        /// <summary>
+        /// SubmitComment control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button SubmitComment;
+        
+        /// <summary>
+        /// CommentContent control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl CommentContent;
+        
+        /// <summary>
+        /// AllComments control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl AllComments;
+        
+        /// <summary>
         /// ltrstars control.
         /// </summary>
         /// <remarks>
