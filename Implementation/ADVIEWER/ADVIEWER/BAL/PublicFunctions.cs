@@ -22,7 +22,7 @@ namespace ADVIEWER.BAL
 
             foreach (PropertyInfo Assignor_prop in Assignor_props)
             {
-                if (Assignor_prop.GetSetMethod()!= null && 
+                if (Assignor_prop.GetSetMethod() != null &&
                     (Assignor_prop.PropertyType.BaseType.Name == "Object" || Assignor_prop.PropertyType.BaseType.Name == "ValueType"))
                 {
                     PropertyInfo EntityClass_prop = EntityClass_props.Where(t => t.Name == Assignor_prop.Name).First();
@@ -122,7 +122,7 @@ namespace ADVIEWER.BAL
         public static List<StateAndCitiesForReapeater> GetStatesWithCities()
         {
             ModelContainer ml = new ModelContainer();
-            List<StateCity> AllState = ml.StateCities.Where(t => t.StateId == null).OrderBy(t=> t.Name).ToList();
+            List<StateCity> AllState = ml.StateCities.Where(t => t.StateId == null).OrderBy(t => t.Name).ToList();
             List<StateAndCitiesForReapeater> ReturnListOfClasses = new List<StateAndCitiesForReapeater>();
             foreach (StateCity AS in AllState)
             {
@@ -174,479 +174,558 @@ namespace ADVIEWER.BAL
             ModelContainer ml = new ModelContainer();
             return ml.Rates.Where(t => t.AdvertismentId == AdvId).Count();
         }
-    }
 
-    public class StateAndCitiesForReapeater
-    {
-        private int Id;
-
-        public int ID
-        {
-            get { return Id; }
-            set { Id = value; }
-        }
-        private string name;
-
-        public string Name
-        {
-            get { return name; }
-            set { name = value; }
-        }
-        private StateCity[] cities;
-
-        public StateCity[] Cities
-        {
-            get { return cities; }
-            set { cities = value; }
-        }
-
-        public StateAndCitiesForReapeater(int ID)
+        public static AssignorComment[] GetAdvComments(int AdvID)
         {
             ModelContainer ml = new ModelContainer();
-            this.ID = ID;
-            this.Name = ml.StateCities.Where(t => t.ID == ID).First().Name;
-            SetCities();
-        }
-
-        private void SetCities()
-        {
-            ModelContainer ml = new ModelContainer();
-            Cities = ml.StateCities.Where(t => t.StateId == this.ID).OrderBy(t=> t.Name).ToArray();
-        }
-    }
-
-    public class AssignorParent 
-    {
-        private int Id;
-
-        public int ID
-        {
-            get { return Id; }
-            set 
-            { 
-                Id = value;
-            }
-        }
-
-    }
-
-    public class AssignorTicket : AssignorParent
-    {
-        private string _answer;
-
-        public string Answer
-        {
-            get { return _answer; }
-            set { _answer = value; }
-        }
-
-        private DateTime _lastUpdate;
-
-        public DateTime LastUpdate
-        {
-            get { return _lastUpdate; }
-            set { _lastUpdate = value; }
-        }
-
-        private DateTime _regDate;
-
-        public DateTime RegDate
-        {
-            get { return _regDate; }
-            set { _regDate = value; }
-        }
-
-        private string _text;
-
-        public string Text
-        {
-            get { return _text; }
-            set { _text = value; }
-        }
-
-        private string _title;
-
-        public string Title
-        {
-            get { return _title; }
-            set { _title = value; }
-        }
-
-        private int _userId;
-
-        public int UserID
-        {
-            get { return _userId; }
-            set { _userId = value; _setUser(); }
-        }
-
-        private AssignorUser _user;
-
-        public AssignorUser User
-        {
-            get { return _user; }
-        }
-
-        private void _setUser()
-        {
-            ModelContainer ml = new ModelContainer();
-            _user = PublicFunctions.MakeAssignor<User, AssignorUser>(ml.Users.Where(t => t.ID == _userId).First());
-        }
-    }
-    public class AssignorRate : AssignorParent
-    {
-        private int _advertismentId;
-
-        public int AdvertismentId
-        {
-            get { return _advertismentId; }
-            set { _advertismentId = value; }
-        }
-
-        private Single _value;
-
-        public Single Value
-        {
-            get { return _value; }
-            set { _value = value; }
-        }
-    }
-    public class AssignorUser
-    {
-        private int _id;
-
-        public int ID
-        {
-            get { return _id; }
-            set { _id = value; _setUserGroups(); }
-        }
-
-        private void _setUserGroups()
-        {
-            List<AssignorGroup>  userG = new List<AssignorGroup>();
-            ModelContainer ml = new ModelContainer();
-            foreach (Group g in ml.Users.Where(t => t.ID == this.ID).First().Groups) 
+            List<AssignorComment> TempAssignorComments = new List<AssignorComment>();
+            foreach (Comment Cm in ml.Messages.OfType<Comment>().Where(t => t.AdvID == AdvID).ToArray())
             {
-                userG.Add(PublicFunctions.MakeAssignor<Group, AssignorGroup>(g));
+                TempAssignorComments.Add(PublicFunctions.MakeAssignor<Comment, AssignorComment>(Cm));
             }
-
-            _userGroups = userG.ToArray();
+            return TempAssignorComments.ToArray();
         }
 
-        private AssignorGroup[] _userGroups ;
-
-        public AssignorGroup[] Groups
-        {
-            get { return _userGroups; }
-        }
-        private string _about;
-
-        public string About
-        {
-            get { return _about; }
-            set { _about = value; }
-        }
-
-        private string _address;
-
-        public string Address
-        {
-            get { return _address; }
-            set { _address = value; }
-        }
-
-        private string _fax;
-
-        public string Fax
-        {
-            get { return _fax; }
-            set { _fax = value; }
-        }
-
-        private string _fullName;
-
-        public string FullName
-        {
-            get { return _fullName; }
-            set { _fullName = value; }
-        }
-
-        private string _mail;
-
-        public string Mail
-        {
-            get { return _mail; }
-            set { _mail = value; }
-        }
-
-        private string _mobile;
-
-        public string Mobile
-        {
-            get { return _mobile; }
-            set { _mobile = value; }
-        }
-
-        private string _picAddress;
-
-        public string PicAddress
-        {
-            get { return _picAddress; }
-            set { _picAddress = value; }
-        }
-
-        private string _tell;
-
-        public string Tell
-        {
-            get { return _tell; }
-            set { _tell = value; }
-        }
-
-        private string _yahooId;
-
-        public string YahooID
-        {
-            get { return _yahooId; }
-            set { _yahooId = value; }
-        }
-
-
-    }
-    public class AssignorAdvertisment : AssignorParent
-    {
-
-        private Boolean _isConfirmed;
-
-        public Boolean IsConfirmed
-        {
-            get { return _isConfirmed; }
-            set { _isConfirmed = (bool)value; }
-        }
-
-        private bool _isRead;
-
-        public bool IsRead
-        {
-            get { return _isRead; }
-            set { _isRead = value; }
-        }
-
-        private int _userId;
-
-        public int UserId
-        {
-            get { return _userId; }
-            set { _userId = value; _setUser(); }
-        }
-
-        private AssignorUser _user;
-
-        public AssignorUser User
-        {
-            get { return _user; }
-        }
-
-        private void _setUser()
+        public static void SetComment(int AdvID, string Text, string Email, int UserID)
         {
             ModelContainer ml = new ModelContainer();
-            _user = PublicFunctions.MakeAssignor<User, AssignorUser>(ml.Users.Where(t => t.ID == _userId).First());
-        }
+            Comment TempCm = new Comment();
 
-        private int _groupId;
+            TempCm.AdvID = AdvID;
+            TempCm.RegistrationDate = DateTime.Now;
+            TempCm.Email = Email;
+            TempCm.SenderID = UserID;
+            if (UserID == -1)
+                TempCm.SenderID = null;
+            TempCm.Text = Text;
+            TempCm.IsConfirmed = false;
 
-        public int GroupID
-        {
-            get { return _groupId; }
-            set { _groupId = value; }
-        }
-
-        private string _title;
-
-        public string Title
-        {
-            get { return _title; }
-            set { _title = value; }
-        }
-
-        private string _pic;
-
-        public string Pic
-        {
-            get { return _pic; }
-            set { _pic = value; }
-        }
-
-        private string _fullName;
-
-        public string FullName
-        {
-            get { return _fullName; }
-            set { _fullName = value; }
-        }
-
-        private string _mobile;
-
-        public string Mobile
-        {
-            get { return _mobile; }
-            set { _mobile = value; }
-        }
-
-        private string _tell;
-
-        public string Tell
-        {
-            get { return _tell; }
-            set { _tell = value; }
-        }
-
-        private string _description;
-
-        public string Description
-        {
-            get { return _description; }
-            set { _description = value; }
-        }
-
-        private string _tellTime;
-
-        public string TellTime
-        {
-            get { return _tellTime; }
-            set { _tellTime = value; }
-        }
-
-        private string _email;
-
-        public string Email
-        {
-            get { return _email; }
-            set { _email = value; }
-        }
-
-        private int _reviewCount;
-
-        public int ReviewCount
-        {
-            get { return _reviewCount; }
-            set { _reviewCount = value; }
-        }
-
-        private string _price;
-
-        public string Price
-        {
-            get { return _price; }
-            set { _price = value; }
-        }
-
-        private DateTime _registrationDate;
-
-        public DateTime RegistrationDate
-        {
-            get { return _registrationDate; }
-            set { _registrationDate = value; }
-        }
-
-        private DateTime _lastRenewal;
-
-        public DateTime LastRenewal
-        {
-            get { return _lastRenewal; }
-            set { _lastRenewal = value; }
-        }
-
-        private DateTime _expirationDate;
-
-        public DateTime ExpirationDate
-        {
-            get { return _expirationDate; }
-            set { _expirationDate = value; }
-        }
-
-        private int _advDuration;
-
-        public int AdvDuration
-        {
-            get { return _advDuration; }
-            set { _advDuration = value; }
-        }
-
-        private int _starCount;
-
-        public int StarCount
-        {
-            get { return _starCount; }
-            set { _starCount = value; }
+            ml.AddToMessages(TempCm);
+            ml.SaveChanges();
         }
     }
-    public class AssignorGroup : AssignorParent
-    {
-        private string _groupName;
 
-        public string GroupName
+        public class StateAndCitiesForReapeater
         {
-            get { return _groupName; }
-            set { _groupName = value; }
-        }
+            private int Id;
 
-        private int? parentID;
+            public int ID
+            {
+                get { return Id; }
+                set { Id = value; }
+            }
+            private string name;
 
-        public int? ParentID
-        {
-            get { return parentID; }
-            set { parentID = value; _setParentGroup(); }
-        }
+            public string Name
+            {
+                get { return name; }
+                set { name = value; }
+            }
+            private StateCity[] cities;
 
-        private AssignorGroup _parentGroup;
+            public StateCity[] Cities
+            {
+                get { return cities; }
+                set { cities = value; }
+            }
 
-        public AssignorGroup ParentGroup
-        {
-            get { return _parentGroup; }
-        }
-
-        private void _setParentGroup()
-        {
-            if (parentID != null)
+            public StateAndCitiesForReapeater(int ID)
             {
                 ModelContainer ml = new ModelContainer();
-                _parentGroup = PublicFunctions.MakeAssignor<Group,AssignorGroup>( ml.Groups.Where(t => t.ID == parentID).First());
+                this.ID = ID;
+                this.Name = ml.StateCities.Where(t => t.ID == ID).First().Name;
+                SetCities();
             }
-        }
-    }
-    public class AssignorStateCity : AssignorParent
-    {
-        private string _name;
 
-        public string Name
-        {
-            get { return _name; }
-            set { _name = value; }
-        }
-
-        private int? _stateId;
-
-        public int? StateId
-        {
-            get { return _stateId; }
-            set { _stateId = value; _setState(); }
-        }
-
-        private void _setState()
-        {
-            if (_stateId != null)
+            private void SetCities()
             {
                 ModelContainer ml = new ModelContainer();
-                _state = PublicFunctions.MakeAssignor<StateCity, AssignorStateCity>(ml.StateCities.Where(t => t.ID == _stateId).First());
+                Cities = ml.StateCities.Where(t => t.StateId == this.ID).OrderBy(t => t.Name).ToArray();
             }
         }
 
-        private AssignorStateCity _state;
-
-        public AssignorStateCity State
+        public class AssignorParent
         {
-            get { return _state; }
+            private int Id;
+
+            public int ID
+            {
+                get { return Id; }
+                set
+                {
+                    Id = value;
+                }
+            }
+
         }
-    }
+
+        public class AssignorTicket : AssignorParent
+        {
+            private string _answer;
+
+            public string Answer
+            {
+                get { return _answer; }
+                set { _answer = value; }
+            }
+
+            private DateTime _lastUpdate;
+
+            public DateTime LastUpdate
+            {
+                get { return _lastUpdate; }
+                set { _lastUpdate = value; }
+            }
+
+            private DateTime _regDate;
+
+            public DateTime RegDate
+            {
+                get { return _regDate; }
+                set { _regDate = value; }
+            }
+
+            private string _text;
+
+            public string Text
+            {
+                get { return _text; }
+                set { _text = value; }
+            }
+
+            private string _title;
+
+            public string Title
+            {
+                get { return _title; }
+                set { _title = value; }
+            }
+
+            private int _userId;
+
+            public int UserID
+            {
+                get { return _userId; }
+                set { _userId = value; _setUser(); }
+            }
+
+            private AssignorUser _user;
+
+            public AssignorUser User
+            {
+                get { return _user; }
+            }
+
+            private void _setUser()
+            {
+                ModelContainer ml = new ModelContainer();
+                _user = PublicFunctions.MakeAssignor<User, AssignorUser>(ml.Users.Where(t => t.ID == _userId).First());
+            }
+        }
+        public class AssignorRate : AssignorParent
+        {
+            private int _advertismentId;
+
+            public int AdvertismentId
+            {
+                get { return _advertismentId; }
+                set { _advertismentId = value; }
+            }
+
+            private Single _value;
+
+            public Single Value
+            {
+                get { return _value; }
+                set { _value = value; }
+            }
+        }
+        public class AssignorUser
+        {
+            private int _id;
+
+            public int ID
+            {
+                get { return _id; }
+                set { _id = value; _setUserGroups(); }
+            }
+
+            private void _setUserGroups()
+            {
+                List<AssignorGroup> userG = new List<AssignorGroup>();
+                ModelContainer ml = new ModelContainer();
+                foreach (Group g in ml.Users.Where(t => t.ID == this.ID).First().Groups)
+                {
+                    userG.Add(PublicFunctions.MakeAssignor<Group, AssignorGroup>(g));
+                }
+
+                _userGroups = userG.ToArray();
+            }
+
+            private AssignorGroup[] _userGroups;
+
+            public AssignorGroup[] Groups
+            {
+                get { return _userGroups; }
+            }
+            private string _about;
+
+            public string About
+            {
+                get { return _about; }
+                set { _about = value; }
+            }
+
+            private string _address;
+
+            public string Address
+            {
+                get { return _address; }
+                set { _address = value; }
+            }
+
+            private string _fax;
+
+            public string Fax
+            {
+                get { return _fax; }
+                set { _fax = value; }
+            }
+
+            private string _fullName;
+
+            public string FullName
+            {
+                get { return _fullName; }
+                set { _fullName = value; }
+            }
+
+            private string _mail;
+
+            public string Mail
+            {
+                get { return _mail; }
+                set { _mail = value; }
+            }
+
+            private string _mobile;
+
+            public string Mobile
+            {
+                get { return _mobile; }
+                set { _mobile = value; }
+            }
+
+            private string _picAddress;
+
+            public string PicAddress
+            {
+                get { return _picAddress; }
+                set { _picAddress = value; }
+            }
+
+            private string _tell;
+
+            public string Tell
+            {
+                get { return _tell; }
+                set { _tell = value; }
+            }
+
+            private string _yahooId;
+
+            public string YahooID
+            {
+                get { return _yahooId; }
+                set { _yahooId = value; }
+            }
+
+
+        }
+        public class AssignorAdvertisment : AssignorParent
+        {
+
+            private Boolean _isConfirmed;
+
+            public Boolean IsConfirmed
+            {
+                get { return _isConfirmed; }
+                set { _isConfirmed = (bool)value; }
+            }
+
+            private bool _isRead;
+
+            public bool IsRead
+            {
+                get { return _isRead; }
+                set { _isRead = value; }
+            }
+
+            private int _userId;
+
+            public int UserId
+            {
+                get { return _userId; }
+                set { _userId = value; _setUser(); }
+            }
+
+            private AssignorUser _user;
+
+            public AssignorUser User
+            {
+                get { return _user; }
+            }
+
+            private void _setUser()
+            {
+                ModelContainer ml = new ModelContainer();
+                _user = PublicFunctions.MakeAssignor<User, AssignorUser>(ml.Users.Where(t => t.ID == _userId).First());
+            }
+
+            private int _groupId;
+
+            public int GroupID
+            {
+                get { return _groupId; }
+                set { _groupId = value; }
+            }
+
+            private string _title;
+
+            public string Title
+            {
+                get { return _title; }
+                set { _title = value; }
+            }
+
+            private string _pic;
+
+            public string Pic
+            {
+                get { return _pic; }
+                set { _pic = value; }
+            }
+
+            private string _fullName;
+
+            public string FullName
+            {
+                get { return _fullName; }
+                set { _fullName = value; }
+            }
+
+            private string _mobile;
+
+            public string Mobile
+            {
+                get { return _mobile; }
+                set { _mobile = value; }
+            }
+
+            private string _tell;
+
+            public string Tell
+            {
+                get { return _tell; }
+                set { _tell = value; }
+            }
+
+            private string _description;
+
+            public string Description
+            {
+                get { return _description; }
+                set { _description = value; }
+            }
+
+            private string _tellTime;
+
+            public string TellTime
+            {
+                get { return _tellTime; }
+                set { _tellTime = value; }
+            }
+
+            private string _email;
+
+            public string Email
+            {
+                get { return _email; }
+                set { _email = value; }
+            }
+
+            private int _reviewCount;
+
+            public int ReviewCount
+            {
+                get { return _reviewCount; }
+                set { _reviewCount = value; }
+            }
+
+            private string _price;
+
+            public string Price
+            {
+                get { return _price; }
+                set { _price = value; }
+            }
+
+            private DateTime _registrationDate;
+
+            public DateTime RegistrationDate
+            {
+                get { return _registrationDate; }
+                set { _registrationDate = value; }
+            }
+
+            private DateTime _lastRenewal;
+
+            public DateTime LastRenewal
+            {
+                get { return _lastRenewal; }
+                set { _lastRenewal = value; }
+            }
+
+            private DateTime _expirationDate;
+
+            public DateTime ExpirationDate
+            {
+                get { return _expirationDate; }
+                set { _expirationDate = value; }
+            }
+
+            private int _advDuration;
+
+            public int AdvDuration
+            {
+                get { return _advDuration; }
+                set { _advDuration = value; }
+            }
+
+            private int _starCount;
+
+            public int StarCount
+            {
+                get { return _starCount; }
+                set { _starCount = value; }
+            }
+        }
+        public class AssignorGroup : AssignorParent
+        {
+            private string _groupName;
+
+            public string GroupName
+            {
+                get { return _groupName; }
+                set { _groupName = value; }
+            }
+
+            private int? parentID;
+
+            public int? ParentID
+            {
+                get { return parentID; }
+                set { parentID = value; _setParentGroup(); }
+            }
+
+            private AssignorGroup _parentGroup;
+
+            public AssignorGroup ParentGroup
+            {
+                get { return _parentGroup; }
+            }
+
+            private void _setParentGroup()
+            {
+                if (parentID != null)
+                {
+                    ModelContainer ml = new ModelContainer();
+                    _parentGroup = PublicFunctions.MakeAssignor<Group, AssignorGroup>(ml.Groups.Where(t => t.ID == parentID).First());
+                }
+            }
+        }
+        public class AssignorStateCity : AssignorParent
+        {
+            private string _name;
+
+            public string Name
+            {
+                get { return _name; }
+                set { _name = value; }
+            }
+
+            private int? _stateId;
+
+            public int? StateId
+            {
+                get { return _stateId; }
+                set { _stateId = value; _setState(); }
+            }
+
+            private void _setState()
+            {
+                if (_stateId != null)
+                {
+                    ModelContainer ml = new ModelContainer();
+                    _state = PublicFunctions.MakeAssignor<StateCity, AssignorStateCity>(ml.StateCities.Where(t => t.ID == _stateId).First());
+                }
+            }
+
+            private AssignorStateCity _state;
+
+            public AssignorStateCity State
+            {
+                get { return _state; }
+            }
+        }
+        public class AssignorComment : AssignorParent
+        {
+            private int _advID;
+
+            public int AdvID
+            {
+                get { return _advID; }
+                set { _advID = value; }
+            }
+
+            private bool _isConfirmed;
+
+            public bool IsConfirmed
+            {
+                get { return _isConfirmed; }
+                set { _isConfirmed = value; }
+            }
+
+            private string _text;
+
+            public string Text
+            {
+                get { return _text; }
+                set { _text = value; }
+            }
+
+            private int _senderID;
+
+            public int SenderID
+            {
+                get { return _senderID; }
+                set { _senderID = value; }
+            }
+
+            private DateTime _registrationDate;
+
+            public DateTime RegistrationDate
+            {
+                get { return _registrationDate; }
+                set { _registrationDate = value; }
+            }
+
+            private string _email;
+
+            public string Email
+            {
+                get { return _email; }
+                set { _email = value; }
+            }
+        }
 }

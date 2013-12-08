@@ -5,49 +5,54 @@
     <link href="Styles/RateIt/RateIt.css" rel="stylesheet" type="text/css" />
     <link href="Styles/CommentBox/CommnetStyles.css" rel="stylesheet" type="text/css" />
     <script src="Scripts/RateIt/RateIt.js" type="text/javascript"></script>
-    <script src="Scripts/CommentBox/CommentBoxJs.js" type="text/javascript"></script>
+  <%--  <script src="Scripts/CommentBox/CommentBoxJs.js" type="text/javascript"></script>--%>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="mainContent" runat="server">
 <div class="latestwork" style="padding:5px;
     -webkit-border-radius: 5px;">
 
-    
     <div class="adv">
         <h2 class="alert hero-unit" style="font-size:25px;margin-bottom:10px;border-color:transparent;padding:8px 10px 8px 14px;border-right:5px solid #b1d700">
             <%= curAdv.Title %>
         </h2>
-
+                
+        <!-- Modal -->
         <div style="float:right">
         <a href="#myModal" role="button" class="btn" data-toggle="modal">Launch demo modal</a>
- 
-<!-- Modal -->
-<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+<div id="myModal" class="modal hide fade" style="direction:ltr !important" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="myModalLabel">Modal header</h3>
+    <h3 id="myModalLabel">نظردهی</h3>
   </div>
   <div class="modal-body">
 
     <div id="vc-container">
     <div class="add-comment logged-in focused" data-virtual-good-id="-1">  <div class="add-comment-user">
-    <img id="user-img" src="">
+    <%= CurrentUserID == -1 ? "<img id=\"user-img\" src='Styles/Images/nopic11.jpg' />" : string.Format("<img id=\"user-img\" src='/HPicturer.ashx?w=300&amp;h=300&amp;path={0}'/>", CurUser.PicAddress)%>
+    
     </div>
 
   <div class="add-comment-form">
     <span class="add-comment-content">
       <span class="content-triangle"></span>
-        <asp:TextBox ID="AddCommentText" runat="server" CssClass="add-comment-content-input" ValidationGroup="RequiredText"></asp:TextBox>
+        <asp:TextBox ID="AddCommentText" runat="server" TextMode="MultiLine" CssClass="add-comment-content-input" ValidationGroup="RequiredText"></asp:TextBox>
+        <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator3" ValidationGroup="required"
+                    ControlToValidate="AddCommentText" runat="server" ErrorMessage=".متن نظر خود را وارد نمایید" Display="Dynamic"
+                    ToolTip="فیلد الزامی"></asp:RequiredFieldValidator>
     </span>
 
     <div class="add-comment-anonymous-form">
-      <input type="text" id="post-form-name" class="post-form-name" name="post-form-name" placeholder="Name" value="Ali Dehghani" maxlength="30" disabled="disabled">
-      <input type="text" id="post-form-location" class="post-form-location" name="post-form-location" placeholder="Location" value="Tehran, Iran" maxlength="30" disabled="disabled">
+      <asp:TextBox runat="server" ID="EmailTextBox" placeholder="ایمیل" onfocus="this.placeholder=''" onblur="this.placeholder='ایمیل'" CssClass="post-form-name"></asp:TextBox>
+      <asp:RegularExpressionValidator
+                    style="color:Red" ID="RegularExpressionValidator1" ValidationGroup="required" Display="Dynamic" ValidationExpression="^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$" runat="server" ErrorMessage="ایمیل وارد شده صحیح نیست." ControlToValidate="EmailTextBox"></asp:RegularExpressionValidator>
+      <asp:Button runat="server" ID="SubmitComment" CssClass="btn btn-primary" style="height:33px;margin-left:20px" OnClick="SubmitComment_Click" Text="ثبت نظر" ValidationGroup="required" />
     </div>
 
-    <div class="post-container">
-      <asp:Button runat="server" ID="SubmitComment"  Text="ثبت نظر" ValidationGroup="RequiredText" />
+    <%--<div class="post-container">
+      
 
-    </div>
+    </div>--%>
   </div>
 </div>
 <%--EndOfAddCommentBox--%>
@@ -55,45 +60,6 @@
 
 <div id="CommentContent" runat="server">
 <ul id="AllComments" runat="server" class="comments-ul">
-
-<li><div class="vc-comment " data-comment-id="" data-owner-id="" data-item-id="" data-comment-format="default">
-		<!-- Comment -->
-		<div class="vc-comment-inner shadow   default">
-
-			<div class="vc-comment-body">
-				
-					<div class="vc-comment-user-avatar">
-						<img id="Img1" src="">
-					</div>
-					<div class="vc-comment-user">
-                    
-                        <a class="comment-user-name vc-profile-link" href="">Ali Dehghani</a>
-                    
-						<span class="comment-user-seperator">•</span>
-						<span class="comment-user-city">Tehran, Iran</span>
-					</div>
-				
-
-				<div class="vc-comment-content">
-					<div class="comment-content-text summery-content">
-                      <b> </b>
-                      rggf
-                      
-                    </div>
-				</div>
-
-				<div class="vc-comment-footer">
-					<span class="time-posted">2 minutes ago</span>
-					
-				</div>
-			</div>
-			
-			
-		</div>
-
-	</div>
-</li>
-
 
 </ul>
 </div>
@@ -103,9 +69,19 @@
 
 </div>
 </div>
-
-        
         </div>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('.add-comment-content-input').click(function () {
+                    if ($('.add-comment-content-input').hasClass('active'))
+                        return;
+                    else
+                        $('.add-comment-content-input').addClass('active');
+                });
+
+            });
+        
+        </script>
 
         <div style="float:left;text-align:center;margin:10px">
         <div class="rateit" data-rateit-value="<%=AverageAdvRate %>" data-rateit-ispreset="true" id="RateAdv">
@@ -250,9 +226,6 @@
     <div class="clear">
     </div>
  
-   
- 
-
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="MoreAdvs" runat="server">
     <div class="clear"></div>

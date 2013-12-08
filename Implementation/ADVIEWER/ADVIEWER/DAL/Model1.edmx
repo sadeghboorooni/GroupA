@@ -13,10 +13,12 @@
     <EntitySet Name="Groups" EntityType="Model1.Store.Groups" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="ContactMessages" EntityType="Model1.Store.ContactMessages" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="AdvertisementMessages" EntityType="Model1.Store.AdvertisementMessages" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Mail_User1" EntityType="Model1.Store.Mail_User1" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="KeyWords" EntityType="Model1.Store.KeyWords" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Rates" EntityType="Model1.Store.Rates" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="StateCities" EntityType="Model1.Store.StateCities" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Messages" EntityType="Model1.Store.Messages" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Messages_Comment" EntityType="Model1.Store.Messages_Comment" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Messages_UserMessage" EntityType="Model1.Store.Messages_UserMessage" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="UserGroup" EntityType="Model1.Store.UserGroup" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="AdvertismentKeyWord" EntityType="Model1.Store.AdvertismentKeyWord" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="GroupGroup" Association="Model1.Store.GroupGroup">
@@ -66,6 +68,26 @@
     <AssociationSet Name="StateCityStateCity" Association="Model1.Store.StateCityStateCity">
       <End Role="StateCity" EntitySet="StateCities" />
       <End Role="State" EntitySet="StateCities" />
+    </AssociationSet>
+    <AssociationSet Name="CommentDataUser" Association="Model1.Store.CommentDataUser">
+      <End Role="CommentData" EntitySet="Messages" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="CommentAdvertisment" Association="Model1.Store.CommentAdvertisment">
+      <End Role="Comment" EntitySet="Messages_Comment" />
+      <End Role="Advertisment" EntitySet="Advertisments" />
+    </AssociationSet>
+    <AssociationSet Name="UserMessageUser" Association="Model1.Store.UserMessageUser">
+      <End Role="UserMessage" EntitySet="Messages_UserMessage" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Comment_inherits_Message" Association="Model1.Store.FK_Comment_inherits_Message">
+      <End Role="Message" EntitySet="Messages" />
+      <End Role="Comment" EntitySet="Messages_Comment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserMessage_inherits_Message" Association="Model1.Store.FK_UserMessage_inherits_Message">
+      <End Role="Message" EntitySet="Messages" />
+      <End Role="UserMessage" EntitySet="Messages_UserMessage" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Advertisments">
@@ -196,45 +218,54 @@
     <Property Name="Inbox" Type="bit" Nullable="true" />
     <Property Name="reply" Type="nvarchar(max)" Nullable="true" />
   </EntityType>
-  <EntityType Name="Mail_User1">
+  <EntityType Name="KeyWords">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
-    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="SenderID" Type="bigint" Nullable="true" />
-    <Property Name="ReciverID" Type="bigint" Nullable="true" />
-    <Property Name="QuotationID" Type="bigint" Nullable="true" />
-    <Property Name="Title" Type="nvarchar" Nullable="true" MaxLength="200" />
-    <Property Name="Text" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="IsRead" Type="bigint" Nullable="true" />
-    <Property Name="SenderDelete" Type="bit" Nullable="true" />
-    <Property Name="ReciverDelete" Type="bit" Nullable="true" />
-    <Property Name="IsAnswerd" Type="bit" Nullable="true" />
-    <Property Name="Date" Type="datetime" Nullable="true" />
-  </EntityType>
-  <EntityType Name="KeyWords">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="Rates">
     <Key>
-      <PropertyRef Name="Id" />
+      <PropertyRef Name="ID" />
     </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="AdvertismentId" Type="int" Nullable="false" />
     <Property Name="UserId" Type="int" Nullable="true" />
     <Property Name="Value" Type="real" Nullable="false" />
   </EntityType>
   <EntityType Name="StateCities">
     <Key>
-      <PropertyRef Name="Id" />
+      <PropertyRef Name="ID" />
     </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
     <Property Name="StateId" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Messages">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="RegistrationDate" Type="datetime" Nullable="false" />
+    <Property Name="SenderID" Type="int" Nullable="true" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Messages_Comment">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="AdvID" Type="int" Nullable="false" />
+    <Property Name="IsConfirmed" Type="bit" Nullable="false" DefaultValue="false" />
+    <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Messages_UserMessage">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="RecieverID" Type="int" Nullable="false" />
+    <Property Name="ID" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="UserGroup">
     <Key>
@@ -247,10 +278,10 @@
   <EntityType Name="AdvertismentKeyWord">
     <Key>
       <PropertyRef Name="Advertisment_ID" />
-      <PropertyRef Name="KeyWords_Id" />
+      <PropertyRef Name="KeyWords_ID" />
     </Key>
     <Property Name="Advertisment_ID" Type="int" Nullable="false" />
-    <Property Name="KeyWords_Id" Type="int" Nullable="false" />
+    <Property Name="KeyWords_ID" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="GroupGroup">
     <End Role="Group" Type="Model1.Store.Groups" Multiplicity="0..1" />
@@ -329,7 +360,7 @@
     <End Role="Advertisment" Type="Model1.Store.Advertisments" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="StateCity">
-        <PropertyRef Name="Id" />
+        <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="Advertisment">
         <PropertyRef Name="StateCityID" />
@@ -341,10 +372,46 @@
     <End Role="State" Type="Model1.Store.StateCities" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="StateCity">
-        <PropertyRef Name="Id" />
+        <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="State">
         <PropertyRef Name="StateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CommentDataUser">
+    <End Role="CommentData" Type="Model1.Store.Messages" Multiplicity="*" />
+    <End Role="User" Type="Model1.Store.Users" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CommentData">
+        <PropertyRef Name="SenderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CommentAdvertisment">
+    <End Role="Comment" Type="Model1.Store.Messages_Comment" Multiplicity="*" />
+    <End Role="Advertisment" Type="Model1.Store.Advertisments" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Advertisment">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="AdvID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserMessageUser">
+    <End Role="UserMessage" Type="Model1.Store.Messages_UserMessage" Multiplicity="*" />
+    <End Role="User" Type="Model1.Store.Users" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="UserMessage">
+        <PropertyRef Name="RecieverID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -389,10 +456,34 @@
     <End Role="KeyWord" Type="Model1.Store.KeyWords" Multiplicity="1" />
     <ReferentialConstraint>
       <Principal Role="KeyWord">
-        <PropertyRef Name="Id" />
+        <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="AdvertismentKeyWord">
-        <PropertyRef Name="KeyWords_Id" />
+        <PropertyRef Name="KeyWords_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Comment_inherits_Message">
+    <End Role="Message" Type="Model1.Store.Messages" Multiplicity="1" />
+    <End Role="Comment" Type="Model1.Store.Messages_Comment" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Message">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserMessage_inherits_Message">
+    <End Role="Message" Type="Model1.Store.Messages" Multiplicity="1" />
+    <End Role="UserMessage" Type="Model1.Store.Messages_UserMessage" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Message">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="UserMessage">
+        <PropertyRef Name="ID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -408,7 +499,6 @@
           <EntitySet Name="Groups" EntityType="Model1.Group" />
           <EntitySet Name="ContactMessages" EntityType="Model1.ContactMessage" />
           <EntitySet Name="AdvertisementMessages" EntityType="Model1.AdvertisementMessage" />
-          <EntitySet Name="Mail_User1" EntityType="Model1.Mail_User" />
           <EntitySet Name="KeyWords" EntityType="Model1.KeyWord" />
           <AssociationSet Name="GroupGroup" Association="Model1.GroupGroup">
             <End Role="Group" EntitySet="Groups" />
@@ -452,6 +542,19 @@
             <End Role="StateCity" EntitySet="StateCities" />
             <End Role="State" EntitySet="StateCities" />
           </AssociationSet>
+          <EntitySet Name="Messages" EntityType="Model1.Message" />
+          <AssociationSet Name="CommentDataUser" Association="Model1.CommentDataUser">
+            <End Role="CommentData" EntitySet="Messages" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="CommentAdvertisment" Association="Model1.CommentAdvertisment">
+            <End Role="Comment" EntitySet="Messages" />
+            <End Role="Advertisment" EntitySet="Advertisments" />
+          </AssociationSet>
+          <AssociationSet Name="UserMessageUser" Association="Model1.UserMessageUser">
+            <End Role="UserMessage" EntitySet="Messages" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Advertisment">
           <Key>
@@ -490,6 +593,7 @@
           <NavigationProperty Name="Group" Relationship="Model1.AdvertismentGroup" FromRole="Advertisment" ToRole="Group" />
           <NavigationProperty Name="Ratings" Relationship="Model1.AdvertismentRating" FromRole="Advertisment" ToRole="Rating" />
           <NavigationProperty Name="StateCity" Relationship="Model1.StateCityAdvertisment" FromRole="Advertisment" ToRole="StateCity" />
+          <NavigationProperty Name="Comments" Relationship="Model1.CommentAdvertisment" FromRole="Advertisment" ToRole="Comment" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -516,6 +620,8 @@
           <NavigationProperty Name="Advertisments" Relationship="Model1.UserAdvertisment" FromRole="User" ToRole="Advertisment" />
           <Property Type="String" Name="Mail" Nullable="false" />
           <NavigationProperty Name="Ratings" Relationship="Model1.UserRating" FromRole="User" ToRole="Rating" />
+          <NavigationProperty Name="CommentDatas" Relationship="Model1.CommentDataUser" FromRole="User" ToRole="CommentData" />
+          <NavigationProperty Name="UserMessage" Relationship="Model1.UserMessageUser" FromRole="User" ToRole="UserMessage" />
         </EntityType>
         <EntityType Name="Ticket">
           <Key>
@@ -594,22 +700,6 @@
           <Property Type="String" Name="Tell" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Type="Boolean" Name="Inbox" />
           <Property Type="String" Name="reply" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="Mail_User">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Type="Int64" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Int64" Name="SenderID" />
-          <Property Type="Int64" Name="ReciverID" />
-          <Property Type="Int64" Name="QuotationID" />
-          <Property Type="String" Name="Title" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Text" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="Int64" Name="IsRead" />
-          <Property Type="Boolean" Name="SenderDelete" />
-          <Property Type="Boolean" Name="ReciverDelete" />
-          <Property Type="Boolean" Name="IsAnswerd" />
-          <Property Type="DateTime" Name="Date" />
         </EntityType>
         <EntityType Name="KeyWord">
           <Key>
@@ -742,6 +832,62 @@
             </Principal>
             <Dependent Role="State">
               <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Message">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Text" Nullable="false" />
+          <NavigationProperty Name="Sender" Relationship="Model1.CommentDataUser" FromRole="CommentData" ToRole="User" />
+          <Property Type="DateTime" Name="RegistrationDate" Nullable="false" />
+          <Property Type="Int32" Name="SenderID" Nullable="true" />
+          <Property Type="String" Name="Email" Nullable="true" />
+        </EntityType>
+        <Association Name="CommentDataUser">
+          <End Type="Model1.Message" Role="CommentData" Multiplicity="*" />
+          <End Type="Model1.User" Role="User" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CommentData">
+              <PropertyRef Name="SenderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Comment" BaseType="Model1.Message">
+          <Property Type="Int32" Name="AdvID" Nullable="false" />
+          <Property Type="Boolean" Name="IsConfirmed" Nullable="false" DefaultValue="False" />
+          <NavigationProperty Name="Advertisment" Relationship="Model1.CommentAdvertisment" FromRole="Comment" ToRole="Advertisment" />
+        </EntityType>
+        <EntityType Name="UserMessage" BaseType="Model1.Message">
+          <Property Type="Int32" Name="RecieverID" Nullable="false" />
+          <NavigationProperty Name="Reciever" Relationship="Model1.UserMessageUser" FromRole="UserMessage" ToRole="User" />
+        </EntityType>
+        <Association Name="CommentAdvertisment">
+          <End Type="Model1.Comment" Role="Comment" Multiplicity="*" />
+          <End Type="Model1.Advertisment" Role="Advertisment" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Advertisment">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="AdvID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserMessageUser">
+          <End Type="Model1.UserMessage" Role="UserMessage" Multiplicity="*" />
+          <End Type="Model1.User" Role="User" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserMessage">
+              <PropertyRef Name="RecieverID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -886,27 +1032,10 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Mail_User1">
-      <EntityTypeMapping TypeName="IsTypeOf(Model1.Mail_User)">
-        <MappingFragment StoreEntitySet="Mail_User1">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="SenderID" ColumnName="SenderID" />
-          <ScalarProperty Name="ReciverID" ColumnName="ReciverID" />
-          <ScalarProperty Name="QuotationID" ColumnName="QuotationID" />
-          <ScalarProperty Name="Title" ColumnName="Title" />
-          <ScalarProperty Name="Text" ColumnName="Text" />
-          <ScalarProperty Name="IsRead" ColumnName="IsRead" />
-          <ScalarProperty Name="SenderDelete" ColumnName="SenderDelete" />
-          <ScalarProperty Name="ReciverDelete" ColumnName="ReciverDelete" />
-          <ScalarProperty Name="IsAnswerd" ColumnName="IsAnswerd" />
-          <ScalarProperty Name="Date" ColumnName="Date" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="KeyWords">
       <EntityTypeMapping TypeName="IsTypeOf(Model1.KeyWord)">
         <MappingFragment StoreEntitySet="KeyWords">
-          <ScalarProperty Name="ID" ColumnName="Id" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Text" ColumnName="Text" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -914,7 +1043,7 @@
     <EntitySetMapping Name="Rates">
       <EntityTypeMapping TypeName="IsTypeOf(Model1.Rate)">
         <MappingFragment StoreEntitySet="Rates">
-          <ScalarProperty Name="ID" ColumnName="Id" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="AdvertismentId" ColumnName="AdvertismentId" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
           <ScalarProperty Name="Value" ColumnName="Value" />
@@ -924,9 +1053,33 @@
     <EntitySetMapping Name="StateCities">
       <EntityTypeMapping TypeName="IsTypeOf(Model1.StateCity)">
         <MappingFragment StoreEntitySet="StateCities">
-          <ScalarProperty Name="ID" ColumnName="Id" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="StateId" ColumnName="StateId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Messages">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Message)">
+        <MappingFragment StoreEntitySet="Messages">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Text" ColumnName="Text" />
+          <ScalarProperty Name="RegistrationDate" ColumnName="RegistrationDate" />
+          <ScalarProperty Name="SenderID" ColumnName="SenderID" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Comment)">
+        <MappingFragment StoreEntitySet="Messages_Comment">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="AdvID" ColumnName="AdvID" />
+          <ScalarProperty Name="IsConfirmed" ColumnName="IsConfirmed" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.UserMessage)">
+        <MappingFragment StoreEntitySet="Messages_UserMessage">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="RecieverID" ColumnName="RecieverID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -943,7 +1096,7 @@
         <ScalarProperty Name="ID" ColumnName="Advertisment_ID" />
       </EndProperty>
       <EndProperty Name="KeyWord">
-        <ScalarProperty Name="ID" ColumnName="KeyWords_Id" />
+        <ScalarProperty Name="ID" ColumnName="KeyWords_ID" />
       </EndProperty>
     </AssociationSetMapping>
   </EntityContainerMapping>
@@ -964,63 +1117,90 @@
     </edmx:Options>
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram Name="Model1" ZoomLevel="68" >
-        <EntityTypeShape EntityType="Model1.Advertisment" Width="1.5" PointX="3" PointY="1.625" Height="7.3647265624999978" IsExpanded="true" />
+      <Diagram Name="Model1" ZoomLevel="89" >
+        <EntityTypeShape EntityType="Model1.Advertisment" Width="1.5" PointX="3" PointY="3.375" Height="7.3647265624999978" IsExpanded="true" />
         <EntityTypeShape EntityType="Model1.User" Width="1.5" PointX="1.125" PointY="1.25" Height="4.8648079427083326" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model1.Ticket" Width="1.5" PointX="5.125" PointY="11.125" Height="2.9417936197916656" />
+        <EntityTypeShape EntityType="Model1.Ticket" Width="1.5" PointX="5.125" PointY="12.625" Height="2.9417936197916656" />
         <EntityTypeShape EntityType="Model1.Payment" Width="1.5" PointX="10.25" PointY="5.875" Height="3.7109993489583335" />
-        <EntityTypeShape EntityType="Model1.Group" Width="1.5" PointX="3" PointY="9.875" Height="2.5571907552083317" />
+        <EntityTypeShape EntityType="Model1.Group" Width="1.5" PointX="3" PointY="11.75" Height="2.5571907552083317" />
         <EntityTypeShape EntityType="Model1.ContactMessage" Width="1.5" PointX="10.25" PointY="9" Height="2.9417936197916674" />
-        <EntityTypeShape EntityType="Model1.AdvertisementMessage" Width="1.5" PointX="11.75" PointY="9" Height="3.1340950520833317" />
-        <EntityTypeShape EntityType="Model1.Mail_User" Width="1.5" PointX="11.75" PointY="5.875" Height="3.1340950520833317" />
-        <EntityTypeShape EntityType="Model1.KeyWord" Width="1.5" PointX="5.5" PointY="3.25" Height="1.5956835937499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model1.AdvertisementMessage" Width="1.5" PointX="11.875" PointY="9.125" Height="3.1340950520833317" />
+        <EntityTypeShape EntityType="Model1.KeyWord" Width="1.5" PointX="5.625" PointY="5.625" Height="1.5956835937499996" IsExpanded="true" />
         <AssociationConnector Association="Model1.GroupGroup" >
-          <ConnectorPoint PointX="3.5319230769230767" PointY="12.432190755208332" />
-          <ConnectorPoint PointX="3.5319230769230767" PointY="12.682190755208332" />
-          <ConnectorPoint PointX="3.9784615384615383" PointY="12.682190755208332" />
-          <ConnectorPoint PointX="3.9784615384615383" PointY="12.432190755208332" />
+          <ConnectorPoint PointX="3.5319230769230767" PointY="14.307190755208332" />
+          <ConnectorPoint PointX="3.5319230769230767" PointY="14.557190755208332" />
+          <ConnectorPoint PointX="3.9784615384615383" PointY="14.557190755208332" />
+          <ConnectorPoint PointX="3.9784615384615383" PointY="14.307190755208332" />
         </AssociationConnector>
         <AssociationConnector Association="Model1.UserTicket" >
-          <ConnectorPoint PointX="1.616209921875" PointY="6.307109375" />
-          <ConnectorPoint PointX="1.616209921875" PointY="13.3744921875" />
-          <ConnectorPoint PointX="5.125" PointY="13.3744921875" />
+          <ConnectorPoint PointX="1.875" PointY="6.307109375" />
+          <ConnectorPoint PointX="1.875" PointY="15.0619921875" />
+          <ConnectorPoint PointX="5.125" PointY="15.0619921875" />
         </AssociationConnector>
         <AssociationConnector Association="Model1.UserGroup" >
-          <ConnectorPoint PointX="2.16992484375" PointY="6.307109375" />
-          <ConnectorPoint PointX="2.16992484375" PointY="11.09375" />
-          <ConnectorPoint PointX="3" PointY="11.09375" />
+          <ConnectorPoint PointX="2.2812525" PointY="6.307109375" />
+          <ConnectorPoint PointX="2.2812525" PointY="13.028595377604166" />
+          <ConnectorPoint PointX="3" PointY="13.028595377604166" />
         </AssociationConnector>
         <AssociationConnector Association="Model1.AdvertismentKeyWord" >
-          <ConnectorPoint PointX="4.5" PointY="4.047841796875" />
-          <ConnectorPoint PointX="5.5" PointY="4.047841796875" />
+          <ConnectorPoint PointX="4.5" PointY="6.422841796875" />
+          <ConnectorPoint PointX="5.625" PointY="6.422841796875" />
         </AssociationConnector>
         <AssociationConnector Association="Model1.UserAdvertisment" >
-          <ConnectorPoint PointX="2.625" PointY="3.9660546875" />
-          <ConnectorPoint PointX="3" PointY="3.9660546875" />
+          <ConnectorPoint PointX="2.625" PointY="4.8410546875" />
+          <ConnectorPoint PointX="3" PointY="4.8410546875" />
         </AssociationConnector>
         <AssociationConnector Association="Model1.AdvertismentGroup">
-          <ConnectorPoint PointX="3.75" PointY="8.9897265624999978" />
-          <ConnectorPoint PointX="3.75" PointY="9.875" />
+          <ConnectorPoint PointX="3.75" PointY="10.739726562499998" />
+          <ConnectorPoint PointX="3.75" PointY="11.75" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="Model1.Rate" Width="1.5" PointX="6" PointY="0.75" Height="2.172587890625" />
+        <EntityTypeShape EntityType="Model1.Rate" Width="1.5" PointX="4" PointY="0.5" Height="2.172587890625" />
         <AssociationConnector Association="Model1.AdvertismentRating">
-          <ConnectorPoint PointX="4.5" PointY="2.2737939453125" />
-          <ConnectorPoint PointX="6" PointY="2.2737939453125" />
+          <ConnectorPoint PointX="4.25" PointY="3.375" />
+          <ConnectorPoint PointX="4.25" PointY="2.672587890625" />
         </AssociationConnector>
         <AssociationConnector Association="Model1.UserRating">
-          <ConnectorPoint PointX="2.625" PointY="1.40625" />
-          <ConnectorPoint PointX="6" PointY="1.40625" />
+          <ConnectorPoint PointX="2.625" PointY="1.9612939453124998" />
+          <ConnectorPoint PointX="4" PointY="1.9612939453124998" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="Model1.StateCity" Width="1.5" PointX="6.75" PointY="5.875" Height="1.5956835937499996" />
+        <EntityTypeShape EntityType="Model1.StateCity" Width="1.5" PointX="5.5" PointY="7.75" Height="2.1725878906249996" />
         <AssociationConnector Association="Model1.StateCityAdvertisment">
-          <ConnectorPoint PointX="6.75" PointY="6.7689925130208337" />
-          <ConnectorPoint PointX="4.5" PointY="6.7689925130208337" />
+          <ConnectorPoint PointX="5.5" PointY="8.8362939453125" />
+          <ConnectorPoint PointX="4.5" PointY="8.8362939453125" />
         </AssociationConnector>
         <AssociationConnector Association="Model1.StateCityStateCity">
-          <ConnectorPoint PointX="7.2819230769230776" PointY="8.047587890625" />
-          <ConnectorPoint PointX="7.2819230769230776" PointY="8.297587890625" />
-          <ConnectorPoint PointX="7.7284615384615387" PointY="8.297587890625" />
-          <ConnectorPoint PointX="7.7284615384615387" PointY="8.047587890625" />
+          <ConnectorPoint PointX="6.0319230769230767" PointY="9.922587890625" />
+          <ConnectorPoint PointX="6.0319230769230767" PointY="10.172587890625" />
+          <ConnectorPoint PointX="6.4784615384615378" PointY="10.172587890625" />
+          <ConnectorPoint PointX="6.4784615384615378" PointY="9.922587890625" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="Model1.Message" Width="1.5" PointX="5.75" PointY="2.75" Height="2.1725878906249996" />
+        <AssociationConnector Association="Model1.CommentDataUser">
+          <ConnectorPoint PointX="5.75" PointY="3.03125" />
+          <ConnectorPoint PointX="4.333333333333333" PointY="3.0312499999999996" />
+          <ConnectorPoint PointX="4.166666666666667" PointY="3.03125" />
+          <ConnectorPoint PointX="2.625" PointY="3.03125" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="Model1.Comment" Width="1.5" PointX="7.875" PointY="4.375" Height="1.4033821614583331" />
+        <EntityTypeShape EntityType="Model1.UserMessage" Width="1.5" PointX="8.125" PointY="1.875" Height="1.211080729166667" />
+        <InheritanceConnector EntityType="Model1.Comment">
+          <ConnectorPoint PointX="7.25" PointY="4.6487939453125" />
+          <ConnectorPoint PointX="7.875" PointY="4.6487939453125" />
+        </InheritanceConnector>
+        <InheritanceConnector EntityType="Model1.UserMessage">
+          <ConnectorPoint PointX="7.25" PointY="3.0141910807291667" />
+          <ConnectorPoint PointX="8.125" PointY="3.0141910807291667" />
+        </InheritanceConnector>
+        <AssociationConnector Association="Model1.CommentAdvertisment">
+          <ConnectorPoint PointX="7.875" PointY="5.2737939453125" />
+          <ConnectorPoint PointX="4.5" PointY="5.2737939453125" />
+        </AssociationConnector>
+        <AssociationConnector Association="Model1.UserMessageUser">
+          <ConnectorPoint PointX="8.125" PointY="2.5766910807291667" />
+          <ConnectorPoint PointX="5.75" PointY="2.5766910807291667" />
+          <ConnectorPoint PointX="5.75" PointY="0.25" />
+          <ConnectorPoint PointX="1.875" PointY="0.25" />
+          <ConnectorPoint PointX="1.875" PointY="1.25" />
         </AssociationConnector>
         </Diagram>
     </edmx:Diagrams>

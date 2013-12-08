@@ -5,7 +5,6 @@ max-width: 600px;
 width: 100%;
 height: 100%;
 min-height: 786px;
-font-family: "Arial";
 }
 
 .add-comment {
@@ -75,9 +74,10 @@ left: 0;
 }
 
 .add-comment.focused .add-comment-content-input {
+padding:5px;
 border-bottom-left-radius: 0px;
 border-bottom-right-radius: 0px;
-height: 60px;
+height: 40px;
 }
 
 .add-comment-form .add-comment-content-input {
@@ -92,7 +92,6 @@ padding-left: 10px;
 padding-bottom: 0;
 padding-right: 0;
 box-sizing: border-box;
-font-family: "Arial";
 resize: none;
 vertical-align: top;
 -webkit-transition: height 0.2s ease-in-out;
@@ -109,7 +108,6 @@ position: relative;
 display: none;
 box-sizing: border-box;
 padding-left: 0px;
-padding-right: 145px;
 margin-top: 10px;
 }
 
@@ -119,7 +117,7 @@ margin-right: 4%;
 }
 
 .add-comment-anonymous-form .post-form-name, .add-comment-anonymous-form .post-form-location {
-width: 48%;
+width: 65%;
 box-sizing: border-box;
 height: 34px;
 border: #d0d0d0 1px solid;
@@ -128,7 +126,7 @@ color: #000;
 padding-left: 10px;
 padding-right: 0px;
 float: left;
-font-family: "Arial";
+cursor:auto;
 }
 
 #CommentContent {
@@ -207,7 +205,6 @@ float: left;
 width: 120px;
 font-size: 11px;
 color: #777;
-font-style: italic;
 vertical-align: bottom;
 height: 11px;
 margin-top: 1px;
@@ -276,4 +273,17 @@ color: #999;
 {
     margin-bottom:10px;
     margin-top:10px;
+}
+
+.modal.hide.fade div, .modal.hide.fade input, .modal.hide.fade h3, .modal.hide.fade img, .modal.hide.fade span,
+.modal.hide.fade ul, .modal.hide.fade li
+{
+    direction:ltr !important;
+}
+
+.active
+{
+    transition: height 2s;
+    -webkit-transition: height 2s;
+    height:80px !important;
 }

@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 11/23/2013 02:33:18
--- Generated from EDMX file: C:\Users\M-R\Desktop\SE22\GroupA\Implementation\ADVIEWER\ADVIEWER\DAL\Model1.edmx
+-- Date Created: 12/08/2013 23:38:11
+-- Generated from EDMX file: C:\Users\Ali\Documents\GitHub\GroupA\Implementation\ADVIEWER\ADVIEWER\DAL\Model1.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -78,9 +78,6 @@ IF OBJECT_ID(N'[dbo].[ContactMessages]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[AdvertisementMessages]', 'U') IS NOT NULL
     DROP TABLE [dbo].[AdvertisementMessages];
-GO
-IF OBJECT_ID(N'[dbo].[Mail_User1]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Mail_User1];
 GO
 IF OBJECT_ID(N'[dbo].[KeyWords]', 'U') IS NOT NULL
     DROP TABLE [dbo].[KeyWords];
@@ -230,32 +227,16 @@ CREATE TABLE [dbo].[AdvertisementMessages] (
 );
 GO
 
--- Creating table 'Mail_User1'
-CREATE TABLE [dbo].[Mail_User1] (
-    [ID] bigint IDENTITY(1,1) NOT NULL,
-    [SenderID] bigint  NULL,
-    [ReciverID] bigint  NULL,
-    [QuotationID] bigint  NULL,
-    [Title] nvarchar(200)  NULL,
-    [Text] nvarchar(max)  NULL,
-    [IsRead] bigint  NULL,
-    [SenderDelete] bit  NULL,
-    [ReciverDelete] bit  NULL,
-    [IsAnswerd] bit  NULL,
-    [Date] datetime  NULL
-);
-GO
-
 -- Creating table 'KeyWords'
 CREATE TABLE [dbo].[KeyWords] (
-    [Id] int IDENTITY(1,1) NOT NULL,
+    [ID] int IDENTITY(1,1) NOT NULL,
     [Text] nvarchar(max)  NOT NULL
 );
 GO
 
 -- Creating table 'Rates'
 CREATE TABLE [dbo].[Rates] (
-    [Id] int IDENTITY(1,1) NOT NULL,
+    [ID] int IDENTITY(1,1) NOT NULL,
     [AdvertismentId] int  NOT NULL,
     [UserId] int  NULL,
     [Value] real  NOT NULL
@@ -264,9 +245,34 @@ GO
 
 -- Creating table 'StateCities'
 CREATE TABLE [dbo].[StateCities] (
-    [Id] int IDENTITY(1,1) NOT NULL,
+    [ID] int IDENTITY(1,1) NOT NULL,
     [Name] nvarchar(max)  NOT NULL,
     [StateId] int  NULL
+);
+GO
+
+-- Creating table 'Messages'
+CREATE TABLE [dbo].[Messages] (
+    [ID] int IDENTITY(1,1) NOT NULL,
+    [Text] nvarchar(max)  NOT NULL,
+    [RegistrationDate] datetime  NOT NULL,
+    [SenderID] int  NULL,
+    [Email] nvarchar(max)  NULL
+);
+GO
+
+-- Creating table 'Messages_Comment'
+CREATE TABLE [dbo].[Messages_Comment] (
+    [AdvID] int  NOT NULL,
+    [IsConfirmed] bit  NOT NULL,
+    [ID] int  NOT NULL
+);
+GO
+
+-- Creating table 'Messages_UserMessage'
+CREATE TABLE [dbo].[Messages_UserMessage] (
+    [RecieverID] int  NOT NULL,
+    [ID] int  NOT NULL
 );
 GO
 
@@ -280,7 +286,7 @@ GO
 -- Creating table 'AdvertismentKeyWord'
 CREATE TABLE [dbo].[AdvertismentKeyWord] (
     [Advertisment_ID] int  NOT NULL,
-    [KeyWords_Id] int  NOT NULL
+    [KeyWords_ID] int  NOT NULL
 );
 GO
 
@@ -330,28 +336,40 @@ ADD CONSTRAINT [PK_AdvertisementMessages]
     PRIMARY KEY CLUSTERED ([ID] ASC);
 GO
 
--- Creating primary key on [ID] in table 'Mail_User1'
-ALTER TABLE [dbo].[Mail_User1]
-ADD CONSTRAINT [PK_Mail_User1]
+-- Creating primary key on [ID] in table 'KeyWords'
+ALTER TABLE [dbo].[KeyWords]
+ADD CONSTRAINT [PK_KeyWords]
     PRIMARY KEY CLUSTERED ([ID] ASC);
 GO
 
--- Creating primary key on [Id] in table 'KeyWords'
-ALTER TABLE [dbo].[KeyWords]
-ADD CONSTRAINT [PK_KeyWords]
-    PRIMARY KEY CLUSTERED ([Id] ASC);
-GO
-
--- Creating primary key on [Id] in table 'Rates'
+-- Creating primary key on [ID] in table 'Rates'
 ALTER TABLE [dbo].[Rates]
 ADD CONSTRAINT [PK_Rates]
-    PRIMARY KEY CLUSTERED ([Id] ASC);
+    PRIMARY KEY CLUSTERED ([ID] ASC);
 GO
 
--- Creating primary key on [Id] in table 'StateCities'
+-- Creating primary key on [ID] in table 'StateCities'
 ALTER TABLE [dbo].[StateCities]
 ADD CONSTRAINT [PK_StateCities]
-    PRIMARY KEY CLUSTERED ([Id] ASC);
+    PRIMARY KEY CLUSTERED ([ID] ASC);
+GO
+
+-- Creating primary key on [ID] in table 'Messages'
+ALTER TABLE [dbo].[Messages]
+ADD CONSTRAINT [PK_Messages]
+    PRIMARY KEY CLUSTERED ([ID] ASC);
+GO
+
+-- Creating primary key on [ID] in table 'Messages_Comment'
+ALTER TABLE [dbo].[Messages_Comment]
+ADD CONSTRAINT [PK_Messages_Comment]
+    PRIMARY KEY CLUSTERED ([ID] ASC);
+GO
+
+-- Creating primary key on [ID] in table 'Messages_UserMessage'
+ALTER TABLE [dbo].[Messages_UserMessage]
+ADD CONSTRAINT [PK_Messages_UserMessage]
+    PRIMARY KEY CLUSTERED ([ID] ASC);
 GO
 
 -- Creating primary key on [Users_ID], [Groups_ID] in table 'UserGroup'
@@ -360,10 +378,10 @@ ADD CONSTRAINT [PK_UserGroup]
     PRIMARY KEY NONCLUSTERED ([Users_ID], [Groups_ID] ASC);
 GO
 
--- Creating primary key on [Advertisment_ID], [KeyWords_Id] in table 'AdvertismentKeyWord'
+-- Creating primary key on [Advertisment_ID], [KeyWords_ID] in table 'AdvertismentKeyWord'
 ALTER TABLE [dbo].[AdvertismentKeyWord]
 ADD CONSTRAINT [PK_AdvertismentKeyWord]
-    PRIMARY KEY NONCLUSTERED ([Advertisment_ID], [KeyWords_Id] ASC);
+    PRIMARY KEY NONCLUSTERED ([Advertisment_ID], [KeyWords_ID] ASC);
 GO
 
 -- --------------------------------------------------
@@ -430,18 +448,18 @@ ADD CONSTRAINT [FK_AdvertismentKeyWord_Advertisment]
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating foreign key on [KeyWords_Id] in table 'AdvertismentKeyWord'
+-- Creating foreign key on [KeyWords_ID] in table 'AdvertismentKeyWord'
 ALTER TABLE [dbo].[AdvertismentKeyWord]
 ADD CONSTRAINT [FK_AdvertismentKeyWord_KeyWord]
-    FOREIGN KEY ([KeyWords_Id])
+    FOREIGN KEY ([KeyWords_ID])
     REFERENCES [dbo].[KeyWords]
-        ([Id])
+        ([ID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_AdvertismentKeyWord_KeyWord'
 CREATE INDEX [IX_FK_AdvertismentKeyWord_KeyWord]
 ON [dbo].[AdvertismentKeyWord]
-    ([KeyWords_Id]);
+    ([KeyWords_ID]);
 GO
 
 -- Creating foreign key on [UserId] in table 'Advertisments'
@@ -505,7 +523,7 @@ ALTER TABLE [dbo].[Advertisments]
 ADD CONSTRAINT [FK_StateCityAdvertisment]
     FOREIGN KEY ([StateCityID])
     REFERENCES [dbo].[StateCities]
-        ([Id])
+        ([ID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_StateCityAdvertisment'
@@ -519,13 +537,73 @@ ALTER TABLE [dbo].[StateCities]
 ADD CONSTRAINT [FK_StateCityStateCity]
     FOREIGN KEY ([StateId])
     REFERENCES [dbo].[StateCities]
-        ([Id])
+        ([ID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_StateCityStateCity'
 CREATE INDEX [IX_FK_StateCityStateCity]
 ON [dbo].[StateCities]
     ([StateId]);
+GO
+
+-- Creating foreign key on [SenderID] in table 'Messages'
+ALTER TABLE [dbo].[Messages]
+ADD CONSTRAINT [FK_CommentDataUser]
+    FOREIGN KEY ([SenderID])
+    REFERENCES [dbo].[Users]
+        ([ID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_CommentDataUser'
+CREATE INDEX [IX_FK_CommentDataUser]
+ON [dbo].[Messages]
+    ([SenderID]);
+GO
+
+-- Creating foreign key on [AdvID] in table 'Messages_Comment'
+ALTER TABLE [dbo].[Messages_Comment]
+ADD CONSTRAINT [FK_CommentAdvertisment]
+    FOREIGN KEY ([AdvID])
+    REFERENCES [dbo].[Advertisments]
+        ([ID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_CommentAdvertisment'
+CREATE INDEX [IX_FK_CommentAdvertisment]
+ON [dbo].[Messages_Comment]
+    ([AdvID]);
+GO
+
+-- Creating foreign key on [RecieverID] in table 'Messages_UserMessage'
+ALTER TABLE [dbo].[Messages_UserMessage]
+ADD CONSTRAINT [FK_UserMessageUser]
+    FOREIGN KEY ([RecieverID])
+    REFERENCES [dbo].[Users]
+        ([ID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_UserMessageUser'
+CREATE INDEX [IX_FK_UserMessageUser]
+ON [dbo].[Messages_UserMessage]
+    ([RecieverID]);
+GO
+
+-- Creating foreign key on [ID] in table 'Messages_Comment'
+ALTER TABLE [dbo].[Messages_Comment]
+ADD CONSTRAINT [FK_Comment_inherits_Message]
+    FOREIGN KEY ([ID])
+    REFERENCES [dbo].[Messages]
+        ([ID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [ID] in table 'Messages_UserMessage'
+ALTER TABLE [dbo].[Messages_UserMessage]
+ADD CONSTRAINT [FK_UserMessage_inherits_Message]
+    FOREIGN KEY ([ID])
+    REFERENCES [dbo].[Messages]
+        ([ID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
 -- --------------------------------------------------

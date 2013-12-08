@@ -29,6 +29,9 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("Model1", "UserRating", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(ADVIEWER.DAL.User), "Rating", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DAL.Rate), true)]
 [assembly: EdmRelationshipAttribute("Model1", "StateCityAdvertisment", "StateCity", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(ADVIEWER.DAL.StateCity), "Advertisment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DAL.Advertisment), true)]
 [assembly: EdmRelationshipAttribute("Model1", "StateCityStateCity", "StateCity", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(ADVIEWER.DAL.StateCity), "State", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DAL.StateCity), true)]
+[assembly: EdmRelationshipAttribute("Model1", "CommentDataUser", "CommentData", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DAL.Message), "User", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(ADVIEWER.DAL.User), true)]
+[assembly: EdmRelationshipAttribute("Model1", "CommentAdvertisment", "Comment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DAL.Comment), "Advertisment", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ADVIEWER.DAL.Advertisment), true)]
+[assembly: EdmRelationshipAttribute("Model1", "UserMessageUser", "UserMessage", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ADVIEWER.DAL.UserMessage), "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ADVIEWER.DAL.User), true)]
 
 #endregion
 
@@ -195,22 +198,6 @@ namespace ADVIEWER.DAL
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<Mail_User> Mail_User1
-        {
-            get
-            {
-                if ((_Mail_User1 == null))
-                {
-                    _Mail_User1 = base.CreateObjectSet<Mail_User>("Mail_User1");
-                }
-                return _Mail_User1;
-            }
-        }
-        private ObjectSet<Mail_User> _Mail_User1;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<KeyWord> KeyWords
         {
             get
@@ -255,6 +242,22 @@ namespace ADVIEWER.DAL
             }
         }
         private ObjectSet<StateCity> _StateCities;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Message> Messages
+        {
+            get
+            {
+                if ((_Messages == null))
+                {
+                    _Messages = base.CreateObjectSet<Message>("Messages");
+                }
+                return _Messages;
+            }
+        }
+        private ObjectSet<Message> _Messages;
 
         #endregion
 
@@ -317,14 +320,6 @@ namespace ADVIEWER.DAL
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the Mail_User1 EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToMail_User1(Mail_User mail_User)
-        {
-            base.AddObject("Mail_User1", mail_User);
-        }
-    
-        /// <summary>
         /// Deprecated Method for adding a new object to the KeyWords EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToKeyWords(KeyWord keyWord)
@@ -346,6 +341,14 @@ namespace ADVIEWER.DAL
         public void AddToStateCities(StateCity stateCity)
         {
             base.AddObject("StateCities", stateCity);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Messages EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToMessages(Message message)
+        {
+            base.AddObject("Messages", message);
         }
 
         #endregion
@@ -1541,6 +1544,154 @@ namespace ADVIEWER.DAL
                 }
             }
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("Model1", "CommentAdvertisment", "Comment")]
+        public EntityCollection<Comment> Comments
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Comment>("Model1.CommentAdvertisment", "Comment");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Comment>("Model1.CommentAdvertisment", "Comment", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="Model1", Name="Comment")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Comment : Message
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Comment object.
+        /// </summary>
+        /// <param name="id">Initial value of the ID property.</param>
+        /// <param name="text">Initial value of the Text property.</param>
+        /// <param name="registrationDate">Initial value of the RegistrationDate property.</param>
+        /// <param name="advID">Initial value of the AdvID property.</param>
+        public static Comment CreateComment(global::System.Int32 id, global::System.String text, global::System.DateTime registrationDate, global::System.Int32 advID)
+        {
+            Comment comment = new Comment();
+            comment.ID = id;
+            comment.Text = text;
+            comment.RegistrationDate = registrationDate;
+            comment.AdvID = advID;
+            return comment;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 AdvID
+        {
+            get
+            {
+                return _AdvID;
+            }
+            set
+            {
+                OnAdvIDChanging(value);
+                ReportPropertyChanging("AdvID");
+                _AdvID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("AdvID");
+                OnAdvIDChanged();
+            }
+        }
+        private global::System.Int32 _AdvID;
+        partial void OnAdvIDChanging(global::System.Int32 value);
+        partial void OnAdvIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean IsConfirmed
+        {
+            get
+            {
+                return _IsConfirmed;
+            }
+            set
+            {
+                OnIsConfirmedChanging(value);
+                ReportPropertyChanging("IsConfirmed");
+                _IsConfirmed = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IsConfirmed");
+                OnIsConfirmedChanged();
+            }
+        }
+        private global::System.Boolean _IsConfirmed = false;
+        partial void OnIsConfirmedChanging(global::System.Boolean value);
+        partial void OnIsConfirmedChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("Model1", "CommentAdvertisment", "Advertisment")]
+        public Advertisment Advertisment
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Advertisment>("Model1.CommentAdvertisment", "Advertisment").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Advertisment>("Model1.CommentAdvertisment", "Advertisment").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Advertisment> AdvertismentReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Advertisment>("Model1.CommentAdvertisment", "Advertisment");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Advertisment>("Model1.CommentAdvertisment", "Advertisment", value);
+                }
+            }
+        }
 
         #endregion
 
@@ -2170,22 +2321,28 @@ namespace ADVIEWER.DAL
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="Model1", Name="Mail_User")]
+    [EdmEntityTypeAttribute(NamespaceName="Model1", Name="Message")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class Mail_User : EntityObject
+    [KnownTypeAttribute(typeof(Comment))]
+    [KnownTypeAttribute(typeof(UserMessage))]
+    public partial class Message : EntityObject
     {
         #region Factory Method
     
         /// <summary>
-        /// Create a new Mail_User object.
+        /// Create a new Message object.
         /// </summary>
         /// <param name="id">Initial value of the ID property.</param>
-        public static Mail_User CreateMail_User(global::System.Int64 id)
+        /// <param name="text">Initial value of the Text property.</param>
+        /// <param name="registrationDate">Initial value of the RegistrationDate property.</param>
+        public static Message CreateMessage(global::System.Int32 id, global::System.String text, global::System.DateTime registrationDate)
         {
-            Mail_User mail_User = new Mail_User();
-            mail_User.ID = id;
-            return mail_User;
+            Message message = new Message();
+            message.ID = id;
+            message.Text = text;
+            message.RegistrationDate = registrationDate;
+            return message;
         }
 
         #endregion
@@ -2197,7 +2354,7 @@ namespace ADVIEWER.DAL
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int64 ID
+        public global::System.Int32 ID
         {
             get
             {
@@ -2215,16 +2372,64 @@ namespace ADVIEWER.DAL
                 }
             }
         }
-        private global::System.Int64 _ID;
-        partial void OnIDChanging(global::System.Int64 value);
+        private global::System.Int32 _ID;
+        partial void OnIDChanging(global::System.Int32 value);
         partial void OnIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Text
+        {
+            get
+            {
+                return _Text;
+            }
+            set
+            {
+                OnTextChanging(value);
+                ReportPropertyChanging("Text");
+                _Text = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Text");
+                OnTextChanged();
+            }
+        }
+        private global::System.String _Text;
+        partial void OnTextChanging(global::System.String value);
+        partial void OnTextChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime RegistrationDate
+        {
+            get
+            {
+                return _RegistrationDate;
+            }
+            set
+            {
+                OnRegistrationDateChanging(value);
+                ReportPropertyChanging("RegistrationDate");
+                _RegistrationDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("RegistrationDate");
+                OnRegistrationDateChanged();
+            }
+        }
+        private global::System.DateTime _RegistrationDate;
+        partial void OnRegistrationDateChanging(global::System.DateTime value);
+        partial void OnRegistrationDateChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int64> SenderID
+        public Nullable<global::System.Int32> SenderID
         {
             get
             {
@@ -2239,8 +2444,8 @@ namespace ADVIEWER.DAL
                 OnSenderIDChanged();
             }
         }
-        private Nullable<global::System.Int64> _SenderID;
-        partial void OnSenderIDChanging(Nullable<global::System.Int64> value);
+        private Nullable<global::System.Int32> _SenderID;
+        partial void OnSenderIDChanging(Nullable<global::System.Int32> value);
         partial void OnSenderIDChanged();
     
         /// <summary>
@@ -2248,220 +2453,70 @@ namespace ADVIEWER.DAL
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int64> ReciverID
+        public global::System.String Email
         {
             get
             {
-                return _ReciverID;
+                return _Email;
             }
             set
             {
-                OnReciverIDChanging(value);
-                ReportPropertyChanging("ReciverID");
-                _ReciverID = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("ReciverID");
-                OnReciverIDChanged();
+                OnEmailChanging(value);
+                ReportPropertyChanging("Email");
+                _Email = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Email");
+                OnEmailChanged();
             }
         }
-        private Nullable<global::System.Int64> _ReciverID;
-        partial void OnReciverIDChanging(Nullable<global::System.Int64> value);
-        partial void OnReciverIDChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Int64> QuotationID
-        {
-            get
-            {
-                return _QuotationID;
-            }
-            set
-            {
-                OnQuotationIDChanging(value);
-                ReportPropertyChanging("QuotationID");
-                _QuotationID = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("QuotationID");
-                OnQuotationIDChanged();
-            }
-        }
-        private Nullable<global::System.Int64> _QuotationID;
-        partial void OnQuotationIDChanging(Nullable<global::System.Int64> value);
-        partial void OnQuotationIDChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String Title
-        {
-            get
-            {
-                return _Title;
-            }
-            set
-            {
-                OnTitleChanging(value);
-                ReportPropertyChanging("Title");
-                _Title = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("Title");
-                OnTitleChanged();
-            }
-        }
-        private global::System.String _Title;
-        partial void OnTitleChanging(global::System.String value);
-        partial void OnTitleChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String Text
-        {
-            get
-            {
-                return _Text;
-            }
-            set
-            {
-                OnTextChanging(value);
-                ReportPropertyChanging("Text");
-                _Text = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("Text");
-                OnTextChanged();
-            }
-        }
-        private global::System.String _Text;
-        partial void OnTextChanging(global::System.String value);
-        partial void OnTextChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Int64> IsRead
-        {
-            get
-            {
-                return _IsRead;
-            }
-            set
-            {
-                OnIsReadChanging(value);
-                ReportPropertyChanging("IsRead");
-                _IsRead = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("IsRead");
-                OnIsReadChanged();
-            }
-        }
-        private Nullable<global::System.Int64> _IsRead;
-        partial void OnIsReadChanging(Nullable<global::System.Int64> value);
-        partial void OnIsReadChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Boolean> SenderDelete
-        {
-            get
-            {
-                return _SenderDelete;
-            }
-            set
-            {
-                OnSenderDeleteChanging(value);
-                ReportPropertyChanging("SenderDelete");
-                _SenderDelete = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("SenderDelete");
-                OnSenderDeleteChanged();
-            }
-        }
-        private Nullable<global::System.Boolean> _SenderDelete;
-        partial void OnSenderDeleteChanging(Nullable<global::System.Boolean> value);
-        partial void OnSenderDeleteChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Boolean> ReciverDelete
-        {
-            get
-            {
-                return _ReciverDelete;
-            }
-            set
-            {
-                OnReciverDeleteChanging(value);
-                ReportPropertyChanging("ReciverDelete");
-                _ReciverDelete = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("ReciverDelete");
-                OnReciverDeleteChanged();
-            }
-        }
-        private Nullable<global::System.Boolean> _ReciverDelete;
-        partial void OnReciverDeleteChanging(Nullable<global::System.Boolean> value);
-        partial void OnReciverDeleteChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Boolean> IsAnswerd
-        {
-            get
-            {
-                return _IsAnswerd;
-            }
-            set
-            {
-                OnIsAnswerdChanging(value);
-                ReportPropertyChanging("IsAnswerd");
-                _IsAnswerd = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("IsAnswerd");
-                OnIsAnswerdChanged();
-            }
-        }
-        private Nullable<global::System.Boolean> _IsAnswerd;
-        partial void OnIsAnswerdChanging(Nullable<global::System.Boolean> value);
-        partial void OnIsAnswerdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.DateTime> Date
-        {
-            get
-            {
-                return _Date;
-            }
-            set
-            {
-                OnDateChanging(value);
-                ReportPropertyChanging("Date");
-                _Date = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("Date");
-                OnDateChanged();
-            }
-        }
-        private Nullable<global::System.DateTime> _Date;
-        partial void OnDateChanging(Nullable<global::System.DateTime> value);
-        partial void OnDateChanged();
+        private global::System.String _Email;
+        partial void OnEmailChanging(global::System.String value);
+        partial void OnEmailChanged();
 
         #endregion
 
     
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("Model1", "CommentDataUser", "User")]
+        public User Sender
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("Model1.CommentDataUser", "User").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("Model1.CommentDataUser", "User").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<User> SenderReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("Model1.CommentDataUser", "User");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("Model1.CommentDataUser", "User", value);
+                }
+            }
+        }
+
+        #endregion
+
     }
     
     /// <summary>
@@ -4067,6 +4122,152 @@ namespace ADVIEWER.DAL
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Rate>("Model1.UserRating", "Rating", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("Model1", "CommentDataUser", "CommentData")]
+        public EntityCollection<Message> CommentDatas
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Message>("Model1.CommentDataUser", "CommentData");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Message>("Model1.CommentDataUser", "CommentData", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("Model1", "UserMessageUser", "UserMessage")]
+        public EntityCollection<UserMessage> UserMessage
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<UserMessage>("Model1.UserMessageUser", "UserMessage");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<UserMessage>("Model1.UserMessageUser", "UserMessage", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="Model1", Name="UserMessage")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class UserMessage : Message
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new UserMessage object.
+        /// </summary>
+        /// <param name="id">Initial value of the ID property.</param>
+        /// <param name="text">Initial value of the Text property.</param>
+        /// <param name="registrationDate">Initial value of the RegistrationDate property.</param>
+        /// <param name="recieverID">Initial value of the RecieverID property.</param>
+        public static UserMessage CreateUserMessage(global::System.Int32 id, global::System.String text, global::System.DateTime registrationDate, global::System.Int32 recieverID)
+        {
+            UserMessage userMessage = new UserMessage();
+            userMessage.ID = id;
+            userMessage.Text = text;
+            userMessage.RegistrationDate = registrationDate;
+            userMessage.RecieverID = recieverID;
+            return userMessage;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 RecieverID
+        {
+            get
+            {
+                return _RecieverID;
+            }
+            set
+            {
+                OnRecieverIDChanging(value);
+                ReportPropertyChanging("RecieverID");
+                _RecieverID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("RecieverID");
+                OnRecieverIDChanged();
+            }
+        }
+        private global::System.Int32 _RecieverID;
+        partial void OnRecieverIDChanging(global::System.Int32 value);
+        partial void OnRecieverIDChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("Model1", "UserMessageUser", "User")]
+        public User Reciever
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("Model1.UserMessageUser", "User").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("Model1.UserMessageUser", "User").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<User> RecieverReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("Model1.UserMessageUser", "User");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("Model1.UserMessageUser", "User", value);
                 }
             }
         }
