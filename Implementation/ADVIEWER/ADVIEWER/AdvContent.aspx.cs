@@ -51,7 +51,7 @@ namespace ADVIEWER.Main
                 else
                 {
                     TempUser.ID = -1;
-                    TempUser.PicAddress = "Styles/Images/nopic11.jpg";
+                    TempUser.PicAddress = "Styles/CommentBox/Images/user.png";
                     TempUser.FullName = "ناشناس";
                     TempUser.Address = "نا معلوم";
                 }
@@ -123,8 +123,8 @@ namespace ADVIEWER.Main
         protected void SubmitComment_Click(object sender, EventArgs e)
         {
 
-            int CurUserID = AccountFunctions.currentUserId();
-            PublicFunctions.SetComment(curAdv.ID, AddCommentText.Text, EmailTextBox.Text, CurUserID);
+            PublicFunctions.SetComment(curAdv.ID, AddCommentText.Text, EmailTextBox.Text, CurrentUserID);
+            Response.Redirect(Request.RawUrl);
             
         }
     }

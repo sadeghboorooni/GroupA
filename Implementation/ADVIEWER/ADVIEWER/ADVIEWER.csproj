@@ -128,6 +128,9 @@
     <Content Include="ShowStateAdvs.aspx" />
     <Content Include="StateCityList.aspx" />
     <Content Include="Styles\bootstrap.css" />
+    <Content Include="Styles\CommentBox\CommnetStyles.css" />
+    <Content Include="Styles\CommentBox\Images\post_triangle_ltr.png" />
+    <Content Include="Styles\CommentBox\Images\user.png" />
     <Content Include="Styles\font-awesome.css" />
     <Content Include="Styles\fontawesome-webfont.svg" />
     <Content Include="Styles\Images\fav.ico" />

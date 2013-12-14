@@ -29,7 +29,7 @@
 
     <div id="vc-container">
     <div class="add-comment logged-in focused" data-virtual-good-id="-1">  <div class="add-comment-user">
-    <%= CurrentUserID == -1 ? "<img id=\"user-img\" src='Styles/Images/nopic11.jpg' />" : string.Format("<img id=\"user-img\" src='/HPicturer.ashx?w=300&amp;h=300&amp;path={0}'/>", CurUser.PicAddress)%>
+    <%= CurrentUserID == -1 ? "<img id=\"user-img\" src='Styles/CommentBox/Images/user.png' />" : string.Format("<img id=\"user-img\" src='/HPicturer.ashx?w=300&amp;h=300&amp;path={0}'/>", CurUser.PicAddress)%>
     
     </div>
 
