@@ -116,6 +116,7 @@
     <Content Include="Member\SpecialAdvprivileges.aspx" />
     <Content Include="Member\styles\fileupload\jquery.fileupload-ui.css" />
     <Content Include="Member\styles\fileupload\style.css" />
+    <Content Include="Member\TestMail.aspx" />
     <Content Include="Member\TicketsList.aspx" />
     <Content Include="Member\ViewTicket.aspx" />
     <Content Include="Profile.aspx" />
@@ -375,6 +376,13 @@
     </Compile>
     <Compile Include="Member\SpecialAdvprivileges.aspx.designer.cs">
       <DependentUpon>SpecialAdvprivileges.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\TestMail.aspx.cs">
+      <DependentUpon>TestMail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Member\TestMail.aspx.designer.cs">
+      <DependentUpon>TestMail.aspx</DependentUpon>
     </Compile>
     <Compile Include="Member\Thumbnail.ashx.cs">
       <DependentUpon>Thumbnail.ashx</DependentUpon>
