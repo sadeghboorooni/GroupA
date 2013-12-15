@@ -80,6 +80,7 @@ namespace ADVIEWER.Manage
                 if (chkAdd.Checked == true)
                 {
                     MemberFunctions.ConfirmAdvertisment(ID);
+                    
                 }
             }
 

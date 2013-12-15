@@ -6,6 +6,8 @@ using ADVIEWER.DAL;
 using System.Reflection;
 using System.Data;
 using System.IO;
+using System.Net.Mail;
+using System.Net;
 
 
 namespace ADVIEWER.BAL
@@ -207,8 +209,73 @@ namespace ADVIEWER.BAL
                 adv.IsConfirmed = true;
                 adv.ExpirationDate = DateTime.Now.AddMonths(adv.AdvDuration);
                 ml.SaveChanges();
+
+                if (adv.StarCount == 2)
+                {
+                    SendMail(adv);
+                }
             }
 
+        }
+
+        private static void SendMail(Advertisment adv)
+        {   
+            ModelContainer ml = new ModelContainer();
+            var fromAddress = new MailAddress("adviewer.ir@gmail.com", "hamid");
+            foreach (User u in ml.Users)
+            {
+                var toAddress = new MailAddress(u.Mail, u.FullName);
+
+                const string fromPassword = "hamid123";
+                string subject = adv.Title;
+                string src = "http://www.adviewer.ir" + adv.Pic.Replace("~", "");
+                string body = "<h1></h1><br><table style = \" direction:rtl;\">" +
+                "<tr> <td colspan =\"2\">" +
+                "<a href =\"http://www.adviewer.ir\">" +
+                "<img src=\"http://www.adviewer.ir/Styles/Images/Logo.png \" style = \"max-width:24%; float:right\" />" +
+                "</a>" +
+                "</td> </tr>" +
+                "<tr> <td>" +
+                adv.Description +
+                 "</td> </tr>" +
+                 "<tr><td colspan = \"2\">" +
+                 "<a href = \"http://www.adviwer.ir/advcontent.aspx?id=" + adv.ID + "\">" +
+                " <img src = \"" + src + "\" style = \"max-width:200px; float:right\"/>" +
+                "</a>" +
+                 "</td> </tr>";
+                if (adv.StateCity != null)
+                    if (adv.StateCity.StateId != null)
+                    {
+                        body += "<tr><td>" +
+                            adv.StateCity.State.Name + "شهر:" + adv.StateCity.Name +
+                           "</tr></td>"
+                            ;
+                    }
+                    else
+                    {
+                        body += "<tr><td>" +
+                        "همه ی شهرستان های استان" + " " + adv.StateCity.Name +
+                           "</tr></td>";
+                    }
+                var smtp = new SmtpClient
+                {
+                    Host = "smtp.gmail.com",
+                    Port = 587,
+                    EnableSsl = true,
+                    DeliveryMethod = SmtpDeliveryMethod.Network,
+                    UseDefaultCredentials = false,
+                    Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
+                };
+                using (var message = new MailMessage(fromAddress, toAddress)
+                {
+                    Subject = subject,
+                    Body = body,
+                    IsBodyHtml = true
+                })
+                {
+                    smtp.Send(message);
+                }
+            }
         }
         public static void DenyAdvertisment(int AdvID, string reason)
         {
