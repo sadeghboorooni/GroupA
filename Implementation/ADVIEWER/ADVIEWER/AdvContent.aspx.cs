@@ -46,38 +46,46 @@ namespace ADVIEWER.Main
             foreach (AssignorComment Asc in PublicFunctions.GetAdvComments(curAdv.ID))
             {
                 AssignorUser TempUser = new AssignorUser();
-                if (Asc.SenderID != -1)
-                    TempUser = AccountFunctions.GetUserInformation(Asc.SenderID);
+                if (Asc.SenderID != null)
+                    TempUser = AccountFunctions.GetUserInformation((int)Asc.SenderID);
                 else
                 {
-                    TempUser.ID = -1;
                     TempUser.PicAddress = "Styles/CommentBox/Images/user.png";
                     TempUser.FullName = "ناشناس";
-                    TempUser.Address = "نا معلوم";
                 }
 
                 AllComments.InnerHtml += "<li><div class=\"vc-comment \" data-comment-id=\"\" data-owner-id=\"\" data-item-id=\"\" data-comment-format=\"default\">" +
             "<div class=\"vc-comment-inner shadow   default\">" +
                 "<div class=\"vc-comment-body\"><div class=\"vc-comment-user-avatar\"><img src='/HPicturer.ashx?w=300&amp;h=300&amp;path=" + TempUser.PicAddress + "'/></div>" +
                         "<div class=\"vc-comment-user\"><a class=\"comment-user-name vc-profile-link\"";
-                
-                if (TempUser.ID == -1)
-                    AllComments.InnerHtml += "";
+
+                if (Asc.SenderID == null)
+                    AllComments.InnerHtml += ">";
                 else
                     AllComments.InnerHtml += "href='/profile.aspx?ID=" + TempUser.ID + "'>";
 
                 AllComments.InnerHtml += TempUser.FullName + "</a>" +
-                            "<span class=\"comment-user-seperator\">•</span>" +
-                            "<span class=\"comment-user-city\">" + TempUser.Address + "</span></div>" +
-                    "<div class=\"vc-comment-content\"><div class=\"comment-content-text summery-content\">" +
+                       "</div>" +
+                    "<div class=\"vc-comment-content\"><div class=\"comment-content-text summery-content\" style=\"direction: rtl !important;\">" +
                           "<b> </b>" + Asc.Text + "</div>" +
                     "</div>" +
-                    "<div class=\"vc-comment-footer\">" +
-                        "<span class=\"time-posted\">" + (DateTime.Now - Asc.RegistrationDate) + "</span>" + "</div>" +
+                    "<div style=\"direction:rtl !important;\"  class=\"vc-comment-footer\">";
+
+                if ((int)(DateTime.Now.Subtract(Asc.RegistrationDate).TotalDays) > 0)
+                    AllComments.InnerHtml += "<span style=\"direction:rtl !important;\" class=\"time-posted\">" + (int)(DateTime.Now.Subtract(Asc.RegistrationDate).TotalDays) + "&nbsp" + "روز پیش" ;
+                else if ((int)(DateTime.Now.Subtract(Asc.RegistrationDate).TotalHours) > 0)
+                    AllComments.InnerHtml += "<span style=\"direction:rtl !important;\" class=\"time-posted\">" + (int)(DateTime.Now.Subtract(Asc.RegistrationDate).TotalHours) + "&nbsp" + "ساعت پیش";
+                else if ((int)(DateTime.Now.Subtract(Asc.RegistrationDate).TotalMinutes) > 0)
+                    AllComments.InnerHtml += "<span style=\"direction:rtl !important;\" class=\"time-posted\">" + (int)(DateTime.Now.Subtract(Asc.RegistrationDate).TotalMinutes) + "&nbsp" + "دقیقه پیش";
+                else
+                    AllComments.InnerHtml += "<span style=\"direction:rtl !important;\" class=\"time-posted\">" + "اکنون";
+
+                AllComments.InnerHtml += "</span>" + "</div>" +
                 "</div></div></div>" + "</li>";
             }
 
-            AddCommentText.Text = "";
+            if(!IsPostBack)
+                AddCommentText.Text = "";
         
         }
 
@@ -123,7 +131,7 @@ namespace ADVIEWER.Main
         protected void SubmitComment_Click(object sender, EventArgs e)
         {
 
-            PublicFunctions.SetComment(curAdv.ID, AddCommentText.Text, EmailTextBox.Text, CurrentUserID);
+            PublicFunctions.SetComment(curAdv.ID, AddCommentText.Text.Replace("\n","<br />"), EmailTextBox.Text, CurrentUserID);
             Response.Redirect(Request.RawUrl);
             
         }

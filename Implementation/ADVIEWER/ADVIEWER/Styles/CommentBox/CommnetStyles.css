@@ -19,8 +19,8 @@ z-index: 21;
 
 .add-comment .add-comment-user {
 background-repeat: repeat-x;
-height: 43px;
-width: 43px;
+height: 50px;
+width: 50px;
 padding: 15px;
 float: left;
 background: none;
@@ -29,9 +29,8 @@ z-index: 2;
 }
 
 .add-comment-user #user-img {
-height: 43px;
-width: 43px;
-border: 1px solid rgba(0,0,0,0.25);
+height: 50px;
+width: 45px;
 float: left;
 }
 
@@ -148,12 +147,12 @@ margin-right: 0px;
 }
 
 .vc-comment-inner .vc-comment-user-avatar {
-height: 35px;
-width: 35px;
+height: 40px;
+width: 40px;
 padding-top: 15px;
 padding-right: 15px;
 padding-bottom: 0;
-padding-left: 15px;
+padding-left: 5px;
 float: left;
 position: relative;
 }
@@ -176,8 +175,7 @@ line-height: 14px;
 
 .vc-comment-user .comment-user-name {
 float: left;
-font-size: 12px;
-font-weight: bold;
+font-size: 14px;
 color: #19659A;
 text-decoration: none;
 height: 14px;
@@ -220,8 +218,9 @@ margin-right: 0px;
 word-wrap: break-word;
 }
 
-.vc-comment-inner .summery-content, .vc-comment-inner.opened .full-content {
+.vc-comment-content .comment-content-text.summery-content {
 display: block;
+text-align: right;
 }
 
 .vc-comment-inner .vc-comment-content {
@@ -254,7 +253,8 @@ color: #999;
 }
 
 .vc-comment-footer .time-posted {
-color: #999;
+    color: #999;
+    text-align:right;
 }
 
 
@@ -290,3 +290,20 @@ color: #999;
 .vc-comment-inner:hover {
 border-color: #CCC;
 }
+
+#myModalLabel
+{
+    font-size:17px;
+}
+
+.comments-ul
+{
+    margin-left: 11px;
+    width: 96%;
+}
+
+.vc-comment-user-avatar img
+{
+    border-radius: 3px;
+}
+    
