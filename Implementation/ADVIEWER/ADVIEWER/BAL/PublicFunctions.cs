@@ -183,7 +183,7 @@ namespace ADVIEWER.BAL
             {
                 TempAssignorComments.Add(PublicFunctions.MakeAssignor<Comment, AssignorComment>(Cm));
             }
-            return TempAssignorComments.ToArray();
+            return TempAssignorComments.OrderByDescending(t=> t.RegistrationDate).ToArray();
         }
 
         public static void SetComment(int AdvID, string Text, string Email, int UserID)
@@ -678,14 +678,76 @@ namespace ADVIEWER.BAL
                 get { return _state; }
             }
         }
-        public class AssignorComment : AssignorParent
+
+        public class AssignorMessage : AssignorParent
         {
+            string _text;
+
+            public string Text
+            {
+                get { return _text; }
+                set { _text = value; }
+            }
+
+            DateTime _registrationDate;
+
+            public DateTime RegistrationDate
+            {
+                get { return _registrationDate; }
+                set { _registrationDate = value; }
+            }
+
+            AssignorUser _user;
+
+            public AssignorUser User
+            {
+                get { return _user; }
+            }
+
+            int? _senderID;
+
+            public int? SenderID
+            {
+                get { return _senderID; }
+                set
+                {
+                    _senderID = value;
+                    if (_senderID != null)
+                    {
+                        ModelContainer ml = new ModelContainer();
+                        _user = PublicFunctions.MakeAssignor<User, AssignorUser>(ml.Users.Where(t => t.ID == _senderID).First());
+                    }
+                }
+            }
+
+            string _email;
+
+            public string Email
+            {
+                get { return _email; }
+                set { _email = value; }
+            }
+        }
+       
+        public class AssignorComment : AssignorMessage
+        {
+
+            private AssignorAdvertisment _adv;
+
+            public AssignorAdvertisment Adv
+            {
+                get { return _adv; }
+            }
+            
             private int _advID;
 
             public int AdvID
             {
                 get { return _advID; }
-                set { _advID = value; }
+                set { _advID = value;
+                ModelContainer ml = new ModelContainer();
+                _adv = PublicFunctions.MakeAssignor<Advertisment, AssignorAdvertisment>(ml.Advertisments.Where(t => t.ID == _advID).First());
+                }
             }
 
             private bool _isConfirmed;
@@ -696,36 +758,29 @@ namespace ADVIEWER.BAL
                 set { _isConfirmed = value; }
             }
 
-            private string _text;
+        }
 
-            public string Text
+        public class AssignorUserMessage {
+
+            private AssignorUser _user;
+
+            public AssignorUser User
             {
-                get { return _text; }
-                set { _text = value; }
+                get { return _user; }
             }
+            
+            private int _recieverID;
 
-            private int _senderID;
-
-            public int SenderID
+            public int RecieverID
             {
-                get { return _senderID; }
-                set { _senderID = value; }
-            }
-
-            private DateTime _registrationDate;
-
-            public DateTime RegistrationDate
-            {
-                get { return _registrationDate; }
-                set { _registrationDate = value; }
-            }
-
-            private string _email;
-
-            public string Email
-            {
-                get { return _email; }
-                set { _email = value; }
+                get { return _recieverID; }
+                set { _recieverID = value;
+                ModelContainer ml = new ModelContainer();
+                _user = PublicFunctions.MakeAssignor<User, AssignorUser>(ml.Users.Where(t => t.ID == _recieverID).First());
+                }
             }
         }
-}
+
+        
+}       
+

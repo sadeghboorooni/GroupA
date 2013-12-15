@@ -18,7 +18,7 @@
                 
         <!-- Modal -->
         <div style="float:right">
-        <a href="#myModal" role="button" class="btn" data-toggle="modal">Launch demo modal</a>
+        
 
 <div id="myModal" class="modal hide fade" style="direction:ltr !important" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-header">
@@ -36,7 +36,7 @@
   <div class="add-comment-form">
     <span class="add-comment-content">
       <span class="content-triangle"></span>
-        <asp:TextBox ID="AddCommentText" runat="server" TextMode="MultiLine" CssClass="add-comment-content-input" ValidationGroup="RequiredText"></asp:TextBox>
+        <asp:TextBox ID="AddCommentText" runat="server" onblur="javascript:minimizeTextBox();" TextMode="MultiLine" CssClass="add-comment-content-input"></asp:TextBox>
         <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator3" ValidationGroup="required"
                     ControlToValidate="AddCommentText" runat="server" ErrorMessage=".متن نظر خود را وارد نمایید" Display="Dynamic"
                     ToolTip="فیلد الزامی"></asp:RequiredFieldValidator>
@@ -44,9 +44,14 @@
 
     <div class="add-comment-anonymous-form">
       <asp:TextBox runat="server" ID="EmailTextBox" placeholder="ایمیل" onfocus="this.placeholder=''" onblur="this.placeholder='ایمیل'" CssClass="post-form-name"></asp:TextBox>
+      
+      <asp:Button runat="server" ID="SubmitComment"  CssClass="btn btn-primary" style="height:33px;margin-left:20px" OnClick="SubmitComment_Click" Text="ثبت نظر" ValidationGroup="required" />
+      <div class="clear"></div>
+      <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator2" ValidationGroup="required"
+                    ControlToValidate="EmailTextBox" runat="server" ErrorMessage=".لطفا ایمیل خود را وارد نمایید" Display="Dynamic"
+                    ToolTip="فیلد الزامی"></asp:RequiredFieldValidator>
       <asp:RegularExpressionValidator
-                    style="color:Red" ID="RegularExpressionValidator1" ValidationGroup="required" Display="Dynamic" ValidationExpression="^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$" runat="server" ErrorMessage="ایمیل وارد شده صحیح نیست." ControlToValidate="EmailTextBox"></asp:RegularExpressionValidator>
-      <asp:Button runat="server" ID="SubmitComment" CssClass="btn btn-primary" style="height:33px;margin-left:20px" OnClick="SubmitComment_Click" Text="ثبت نظر" ValidationGroup="required" />
+                    style="color:Red" ID="RegularExpressionValidator1" ValidationGroup="required" Display="Dynamic" ValidationExpression="^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$" runat="server" ErrorMessage=".ایمیل وارد شده صحیح نیست" ControlToValidate="EmailTextBox"></asp:RegularExpressionValidator>
     </div>
 
     <%--<div class="post-container">
@@ -80,6 +85,13 @@
                 });
 
             });
+
+
+            function minimizeTextBox() {
+                if ($('.add-comment-content-input').val() == "")
+                    if ($('.add-comment-content-input').hasClass('active'))
+                        $('.add-comment-content-input').removeClass('active');
+            }
         
         </script>
 
@@ -170,6 +182,9 @@
            
                 </div>
             <div class="clear">
+            </div>
+            <div>
+            <a href="#myModal" role="button" class="btn btn-primary" data-toggle="modal">ثبت و مشاهده نظرات</a>
             </div>
             <div runat="server" id="imglist" class="adslider">
                 <br />
