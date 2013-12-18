@@ -179,7 +179,7 @@ namespace ADVIEWER.BAL
         {
             ModelContainer ml = new ModelContainer();
             List<AssignorComment> TempAssignorComments = new List<AssignorComment>();
-            foreach (Comment Cm in ml.Messages.OfType<Comment>().Where(t => t.AdvID == AdvID).ToArray())
+            foreach (Comment Cm in ml.Messages.OfType<Comment>().Where(t => t.AdvID == AdvID && t.IsConfirmed).ToArray())
             {
                 TempAssignorComments.Add(PublicFunctions.MakeAssignor<Comment, AssignorComment>(Cm));
             }

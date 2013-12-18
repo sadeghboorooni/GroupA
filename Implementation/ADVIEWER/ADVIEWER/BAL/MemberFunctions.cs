@@ -335,6 +335,25 @@ namespace ADVIEWER.BAL
             return at.ToArray();
         }
 
+        public static AssignorComment[] GetListCommentData()
+        {
+            ModelContainer ml = new ModelContainer();
+            List<AssignorComment> at = new List<AssignorComment>();
+
+            foreach (Comment tt in ml.Messages.OfType<Comment>().Where(t => t.IsConfirmed == false).OrderByDescending(t => t.RegistrationDate).ToArray())
+            {
+                at.Add(PublicFunctions.MakeAssignor<Comment, AssignorComment>(tt));
+            }
+
+            return at.ToArray();
+        }
+        public static AssignorComment GetCommentData(int id)
+        {
+            ModelContainer ml = new ModelContainer();
+            return PublicFunctions.MakeAssignor<Comment, AssignorComment>(ml.Messages.OfType<Comment>().Where(t => t.ID == id).FirstOrDefault());
+        }   
+
+
         public static void DeleteTicket(int TicketID)
         {
             ModelContainer ml = new ModelContainer();
@@ -342,6 +361,23 @@ namespace ADVIEWER.BAL
             ml.DeleteObject(TicketDeleted);
             ml.SaveChanges();
         }
+
+        public static void DeleteComment(int CommentID)
+        {
+            ModelContainer ml = new ModelContainer();
+            Comment CommentDeleted = ml.Messages.OfType<Comment>().Where(t => t.ID == CommentID).First(); ml.DeleteObject(CommentDeleted);
+            ml.SaveChanges();
+        }
+
+        public static void ConfirmComment(int id)
+        {
+            ModelContainer ml = new ModelContainer();
+            Comment ConfirmComment = ml.Messages.OfType<Comment>().Where(t => t.ID == id).First();
+            ConfirmComment.IsConfirmed = true;
+            ml.SaveChanges();
+        }
+
+
 
         public static void DeleteAdv(int AdvID)
         {
