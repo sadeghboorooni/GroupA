@@ -171,7 +171,7 @@
 					<h4><i class="icon-link"></i>
                     دسترسی سریع</h4>
 					<ul class="links">
-                        <li><a href="About.aspx">درباره ما</a></li> 
+                        <li><a href="../About.aspx">درباره ما</a></li> 
                     </ul>
 				</div><!-- /.span3 -->
 

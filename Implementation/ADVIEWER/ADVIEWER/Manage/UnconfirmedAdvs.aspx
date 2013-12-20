@@ -85,7 +85,7 @@
                     Text="تایید انتخاب شده ها" onclick="ConfirmStaredAdvsButton_Click" />
 
                 <div style="width: 400px; text-align: left; float: left">
-                    <asp:TextBox ID="denyReasonStaredTextBox" runat="server" placeholder="علت عدم تایید" Style="width: 220px;"></asp:TextBox>
+                    <asp:TextBox ID="denyReasonStaredTextBox" runat="server" placeholder="علت عدم تایید" Style="width: 220px;height:16px"></asp:TextBox>
                     <asp:Button ID="DenyStaredAdvsButton" runat="server" Text="رد انتخاب شده ها" 
                         onclick="DenyStaredAdvsButton_Click" />
                 </div>
@@ -165,7 +165,7 @@
                     Text="تایید انتخاب شده ها" onclick="ConfirmFreeAdvsButton_Click" />
 
                 <div style="width: 400px; text-align: left; float: left">
-                    <asp:TextBox ID="TextBox2" runat="server" placeholder="علت عدم تایید" Style="width: 220px;"></asp:TextBox>
+                    <asp:TextBox ID="TextBox2" runat="server" placeholder="علت عدم تایید" Style="width: 220px;height:16px"></asp:TextBox>
                     <asp:Button ID="DenyFreeAdvsButton" runat="server" Text="رد انتخاب شده ها" 
                         onclick="DenyFreeAdvsButton_Click" />
                 </div>
