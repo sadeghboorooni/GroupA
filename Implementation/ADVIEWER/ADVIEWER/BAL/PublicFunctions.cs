@@ -203,6 +203,60 @@ namespace ADVIEWER.BAL
             ml.AddToMessages(TempCm);
             ml.SaveChanges();
         }
+
+        public struct Wight {public double wr;public AssignorAdvertisment adv;}
+
+        public static AssignorAdvertisment[] SortByRate(AssignorAdvertisment[] AdvList)
+        {
+            ModelContainer ml  = new ModelContainer();
+            int min = 1;
+            double c = 1.7;
+            double rate;
+            int voter;
+            int size = AdvList.Count();
+            Wight[]  SortedList = new Wight[size];
+            SortedList.ToList();
+            Wight wgt = new Wight();
+            int i = 0;
+
+            foreach(AssignorAdvertisment adv in AdvList)
+            {
+               rate =  GetAdvAverageRate(adv.ID);
+               voter = ml.Rates.Where(t => t.AdvertismentId == adv.ID).Count();
+               wgt.wr = (voter / (voter+min))*rate + (min /(voter+min))*c ;
+               wgt.adv = adv;
+               SortedList[i] = wgt;
+               i++;
+            }
+            SortedList.OrderBy(t=> wgt.wr);
+            AssignorAdvertisment[] RetList = new AssignorAdvertisment [size] ;
+            for (int j = 0; j < size; j++)
+            {
+                RetList[i] = SortedList[i].adv;
+            }
+            RetList.ToList();
+
+            List<AssignorAdvertisment> TopList = RetList.Take((int)(size / 4)).ToList();
+            List<AssignorAdvertisment> FirstMiddleList = RetList.Skip((int)(size / 4)).Take((int)(size / 4)).Reverse().ToList();
+            List<AssignorAdvertisment> SecondMiddleList = RetList.Skip(2 * (int)(size / 4)).Take((int)(size / 4)).ToList();
+            List<AssignorAdvertisment> LastList = RetList.Skip(3 * (int)(size / 4)).ToList();
+            
+            List<AssignorAdvertisment> ShowList = new List<AssignorAdvertisment>();
+
+            for(int j=0;j<(int)size/4;j++)
+            {
+                ShowList.Add(FirstMiddleList.Skip(j).First());
+                ShowList.Add(SecondMiddleList.Skip(j).First());
+                ShowList.Add(SecondMiddleList.Skip(++j).First());
+            }
+
+            foreach (AssignorAdvertisment As in RetList.Skip(2 * (int)size / 4))
+            {
+                ShowList.Add(As);
+            }
+
+            return ShowList.ToArray();
+        }
     }
 
         public class StateAndCitiesForReapeater
@@ -779,6 +833,8 @@ namespace ADVIEWER.BAL
                 _user = PublicFunctions.MakeAssignor<User, AssignorUser>(ml.Users.Where(t => t.ID == _recieverID).First());
                 }
             }
+          
+
         }
 
         
