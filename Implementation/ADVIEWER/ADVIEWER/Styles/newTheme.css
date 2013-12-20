@@ -199,10 +199,6 @@ h2
     position: relative;
     top: 0;
  transition: box-shadow 100ms linear 0s, top 100ms linear 0s;
-    /* border: 1px solid rgb(166, 206, 40); */
-    border-bottom: 4px solid #7fcb2a;
-    /* box-shadow: 0 0 3px green; */
-    border-right: 0px solid #7fcb2a;
 }
 
 

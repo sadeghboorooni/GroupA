@@ -222,58 +222,64 @@ namespace ADVIEWER.BAL
         {   
             ModelContainer ml = new ModelContainer();
             var fromAddress = new MailAddress("adviewer.ir@gmail.com", "hamid");
+            Group TempSubGroup = ml.Groups.Where(t=> t.ID == adv.GroupID).First();
+            Group TempParentGroup = TempSubGroup.parentGroup;
+
             foreach (User u in ml.Users)
             {
-                var toAddress = new MailAddress(u.Mail, u.FullName);
+                if (u.Groups.Contains(TempSubGroup) || u.Groups.Contains(TempParentGroup))
+                {
+                    var toAddress = new MailAddress(u.Mail, u.FullName);
 
-                const string fromPassword = "hamid123";
-                string subject = adv.Title;
-                string src = "http://www.adviewer.ir" + adv.Pic.Replace("~", "");
-                string body = "<h1></h1><br><table style = \" direction:rtl;\">" +
-                "<tr> <td colspan =\"2\">" +
-                "<a href =\"http://www.adviewer.ir\">" +
-                "<img src=\"http://www.adviewer.ir/Styles/Images/Logo.png \" style = \"max-width:24%; float:right\" />" +
-                "</a>" +
-                "</td> </tr>" +
-                "<tr> <td>" +
-                adv.Description +
-                 "</td> </tr>" +
-                 "<tr><td colspan = \"2\">" +
-                 "<a href = \"http://www.adviwer.ir/advcontent.aspx?id=" + adv.ID + "\">" +
-                " <img src = \"" + src + "\" style = \"max-width:200px; float:right\"/>" +
-                "</a>" +
-                 "</td> </tr>";
-                if (adv.StateCity != null)
-                    if (adv.StateCity.StateId != null)
+                    const string fromPassword = "hamid123";
+                    string subject = adv.Title;
+                    string src = "http://www.adviewer.ir" + adv.Pic.Replace("~", "");
+                    string body = "<h1></h1><br><table style = \" direction:rtl;\">" +
+                    "<tr> <td colspan =\"2\">" +
+                    "<a href =\"http://www.adviewer.ir\">" +
+                    "<img src=\"http://www.adviewer.ir/Styles/Images/Logo.png \" style = \"max-width:24%; float:right\" />" +
+                    "</a>" +
+                    "</td> </tr>" +
+                    "<tr> <td>" +
+                    adv.Description +
+                     "</td> </tr>" +
+                     "<tr><td colspan = \"2\">" +
+                     "<a href = \"http://www.adviwer.ir/advcontent.aspx?id=" + adv.ID + "\">" +
+                    " <img src = \"" + src + "\" style = \"max-width:200px; float:right\"/>" +
+                    "</a>" +
+                     "</td> </tr>";
+                    if (adv.StateCity != null)
+                        if (adv.StateCity.StateId != null)
+                        {
+                            body += "<tr><td>" +
+                                adv.StateCity.State.Name + "شهر:" + adv.StateCity.Name +
+                               "</tr></td>"
+                                ;
+                        }
+                        else
+                        {
+                            body += "<tr><td>" +
+                            "همه ی شهرستان های استان" + " " + adv.StateCity.Name +
+                               "</tr></td>";
+                        }
+                    var smtp = new SmtpClient
                     {
-                        body += "<tr><td>" +
-                            adv.StateCity.State.Name + "شهر:" + adv.StateCity.Name +
-                           "</tr></td>"
-                            ;
-                    }
-                    else
+                        Host = "smtp.gmail.com",
+                        Port = 587,
+                        EnableSsl = true,
+                        DeliveryMethod = SmtpDeliveryMethod.Network,
+                        UseDefaultCredentials = false,
+                        Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
+                    };
+                    using (var message = new MailMessage(fromAddress, toAddress)
                     {
-                        body += "<tr><td>" +
-                        "همه ی شهرستان های استان" + " " + adv.StateCity.Name +
-                           "</tr></td>";
+                        Subject = subject,
+                        Body = body,
+                        IsBodyHtml = true
+                    })
+                    {
+                        smtp.Send(message);
                     }
-                var smtp = new SmtpClient
-                {
-                    Host = "smtp.gmail.com",
-                    Port = 587,
-                    EnableSsl = true,
-                    DeliveryMethod = SmtpDeliveryMethod.Network,
-                    UseDefaultCredentials = false,
-                    Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
-                };
-                using (var message = new MailMessage(fromAddress, toAddress)
-                {
-                    Subject = subject,
-                    Body = body,
-                    IsBodyHtml = true
-                })
-                {
-                    smtp.Send(message);
                 }
             }
         }
