@@ -44,8 +44,8 @@ namespace ADVIEWER.BAL
             {
                 aAdv.Add(PublicFunctions.MakeAssignor<Advertisment, AssignorAdvertisment>(ad));
             }
-
-            return aAdv.ToArray();
+            
+            return PublicFunctions.SortByRate( aAdv.ToArray());
         }
 
         public static DataTable ToDataTable<T>(List<T> items)
@@ -209,18 +209,18 @@ namespace ADVIEWER.BAL
         public static AssignorAdvertisment[] SortByRate(AssignorAdvertisment[] AdvList)
         {
             ModelContainer ml  = new ModelContainer();
-            int min = 1;
+            double min = 1;
             double c = 1.7;
             double rate;
-            int voter;
+            double voter;
             int size = AdvList.Count();
             Wight[]  SortedList = new Wight[size];
-            SortedList.ToList();
-            Wight wgt = new Wight();
+           
             int i = 0;
 
             foreach(AssignorAdvertisment adv in AdvList)
             {
+               Wight wgt = new Wight();
                rate =  GetAdvAverageRate(adv.ID);
                voter = ml.Rates.Where(t => t.AdvertismentId == adv.ID).Count();
                wgt.wr = (voter / (voter+min))*rate + (min /(voter+min))*c ;
@@ -228,34 +228,36 @@ namespace ADVIEWER.BAL
                SortedList[i] = wgt;
                i++;
             }
-            SortedList.OrderBy(t=> wgt.wr);
+            SortedList.OrderBy(t=> t.wr);
             AssignorAdvertisment[] RetList = new AssignorAdvertisment [size] ;
             for (int j = 0; j < size; j++)
             {
-                RetList[i] = SortedList[i].adv;
+                RetList[j] = SortedList[j].adv;
             }
-            RetList.ToList();
-
-            List<AssignorAdvertisment> TopList = RetList.Take((int)(size / 4)).ToList();
-            List<AssignorAdvertisment> FirstMiddleList = RetList.Skip((int)(size / 4)).Take((int)(size / 4)).Reverse().ToList();
-            List<AssignorAdvertisment> SecondMiddleList = RetList.Skip(2 * (int)(size / 4)).Take((int)(size / 4)).ToList();
-            List<AssignorAdvertisment> LastList = RetList.Skip(3 * (int)(size / 4)).ToList();
-            
-            List<AssignorAdvertisment> ShowList = new List<AssignorAdvertisment>();
-
-            for(int j=0;j<(int)size/4;j++)
+            AssignorAdvertisment[] FinalList = new AssignorAdvertisment[size];
+            int idx = 0;
+            int pos = 0;
+            for (int k = size/2 + (int)size/6; k >( size /4); k--)
             {
-                ShowList.Add(FirstMiddleList.Skip(j).First());
-                ShowList.Add(SecondMiddleList.Skip(j).First());
-                ShowList.Add(SecondMiddleList.Skip(++j).First());
+                if (pos >= k)
+                    break;
+                FinalList[idx] = RetList[k];
+                FinalList[idx + 1] = RetList[pos];
+                pos++;
+                idx+=2;
             }
-
-            foreach (AssignorAdvertisment As in RetList.Skip(2 * (int)size / 4))
+       //     for (int k = 0; k <= size / 4; k++)
+        //    {
+        //        FinalList[idx] = RetList[k];
+        //        idx++;
+         //   }
+            for (int k = idx; k < size; k++)
             {
-                ShowList.Add(As);
+                FinalList[idx] = RetList[k];
+                idx++;
             }
 
-            return ShowList.ToArray();
+            return FinalList; 
         }
     }
 
