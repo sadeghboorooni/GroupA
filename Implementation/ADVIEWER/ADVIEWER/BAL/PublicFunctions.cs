@@ -38,9 +38,10 @@ namespace ADVIEWER.BAL
 
         public static AssignorAdvertisment[] GetLast9Advs()
         {
+
             ModelContainer ml = new ModelContainer();
             List<AssignorAdvertisment> aAdv = new List<AssignorAdvertisment>();
-            foreach (Advertisment ad in ml.Advertisments.Where(t => t.IsConfirmed).OrderByDescending(t => t.RegistrationDate).Take(9))
+            foreach (Advertisment ad in ml.Advertisments.Where(t => t.IsConfirmed).OrderByDescending(t => t.RegistrationDate).Take(12))
             {
                 aAdv.Add(PublicFunctions.MakeAssignor<Advertisment, AssignorAdvertisment>(ad));
             }
@@ -208,6 +209,7 @@ namespace ADVIEWER.BAL
 
         public static AssignorAdvertisment[] SortByRate(AssignorAdvertisment[] AdvList)
         {
+            AdvList.OrderBy(T => T.ID);
             ModelContainer ml  = new ModelContainer();
             double min = 1;
             double c = 1.7;
@@ -215,20 +217,21 @@ namespace ADVIEWER.BAL
             double voter;
             int size = AdvList.Count();
             Wight[]  SortedList = new Wight[size];
-           
-            int i = 0;
 
-            foreach(AssignorAdvertisment adv in AdvList)
+
+
+            for (int i = 0; i < size;i++ )
             {
-               Wight wgt = new Wight();
-               rate =  GetAdvAverageRate(adv.ID);
-               voter = ml.Rates.Where(t => t.AdvertismentId == adv.ID).Count();
-               wgt.wr = (voter / (voter+min))*rate + (min /(voter+min))*c ;
-               wgt.adv = adv;
-               SortedList[i] = wgt;
-               i++;
+                AssignorAdvertisment advs = AdvList[i];
+                Wight wgt = new Wight();
+                rate = GetAdvAverageRate(advs.ID);
+                voter = ml.Rates.Where(t => t.AdvertismentId == advs.ID).Count();
+                wgt.wr = (voter / (voter + min)) * rate + (min / (voter + min)) * c;
+                wgt.adv = advs;
+                SortedList[i] = wgt;
+            
             }
-            SortedList.OrderBy(t=> t.wr);
+            Array.Sort(SortedList, (x, y) => y.wr.CompareTo(x.wr));
             AssignorAdvertisment[] RetList = new AssignorAdvertisment [size] ;
             for (int j = 0; j < size; j++)
             {
@@ -237,7 +240,7 @@ namespace ADVIEWER.BAL
             AssignorAdvertisment[] FinalList = new AssignorAdvertisment[size];
             int idx = 0;
             int pos = 0;
-            for (int k = size/2 + (int)size/6; k >( size /4); k--)
+            for (int k = size/2 + (int)size/8; k >( size /4); k--)
             {
                 if (pos >= k)
                     break;
