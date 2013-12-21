@@ -221,7 +221,7 @@ namespace ADVIEWER.BAL
         private static void SendMail(Advertisment adv)
         {   
             ModelContainer ml = new ModelContainer();
-            var fromAddress = new MailAddress("adviewer.ir@gmail.com", "hamid");
+            var fromAddress = new MailAddress("adviewer1@gmail.com", "تبلیغ نما");
             Group TempSubGroup = ml.Groups.Where(t=> t.ID == adv.GroupID).First();
             Group TempParentGroup = TempSubGroup.parentGroup;
 
@@ -233,35 +233,62 @@ namespace ADVIEWER.BAL
 
                     const string fromPassword = "hamid123";
                     string subject = adv.Title;
-                    string src = "http://www.adviewer.ir" + adv.Pic.Replace("~", "");
-                    string body = "<h1></h1><br><table style = \" direction:rtl;\">" +
-                    "<tr> <td colspan =\"2\">" +
-                    "<a href =\"http://www.adviewer.ir\">" +
-                    "<img src=\"http://www.adviewer.ir/Styles/Images/Logo.png \" style = \"max-width:24%; float:right\" />" +
-                    "</a>" +
-                    "</td> </tr>" +
-                    "<tr> <td>" +
-                    adv.Description +
-                     "</td> </tr>" +
-                     "<tr><td colspan = \"2\">" +
-                     "<a href = \"http://www.adviwer.ir/advcontent.aspx?id=" + adv.ID + "\">" +
-                    " <img src = \"" + src + "\" style = \"max-width:200px; float:right\"/>" +
-                    "</a>" +
-                     "</td> </tr>";
+                    string src = "";
+                    if (adv.Pic.ToString() != "")
+                        src = HttpContext.Current.Server.MapPath(adv.Pic).ToString();
+                    string body = "<h1></h1><br><table style = \" direction:rtl;line-height:40px\">" +
+                        "<tr> <td colspan =\"2\">" +
+                        "<a href =\"http://www.adviewer.ir\">" +
+                        "<img src=\"http://www.adviewer.ir/Styles/Images/Logo.png \" style = \"max-width:15%; float:right\" />" +
+                        "</a>" +
+                        "</td> </tr>" +
+                        "<tr> <td>" +
+                        "<span style='font-size=17px;color:blue'>عنوان آگهی: </span>" +
+                        "<a style='color:green' href = \"http://www.adviewer.ir/advcontent.aspx?id=" + adv.ID + "\">" + adv.Description + "</a>" +
+                         "</td> </tr>";
+                    if (src != "")
+                    {
+                        body += "<tr><td colspan = \"2\">" +
+                        "<a href = \"http://www.adviewer.ir/advcontent.aspx?id=" + adv.ID + "\">" +
+                        " <img src = \"" + src + "\" style = \"max-width:200px; float:right\"/>" + "</a>";
+                    }
+
+                    body += "</td> </tr>";
                     if (adv.StateCity != null)
                         if (adv.StateCity.StateId != null)
                         {
                             body += "<tr><td>" +
-                                adv.StateCity.State.Name + "شهر:" + adv.StateCity.Name +
+                                "<span style='font-size=17px;color:blue'>آگهی مربوط به استان:</span> استان " + "<a style='color:green' href = \"http://www.adviewer.ir/ShowStateAdvs.aspx?id=" + adv.StateCity.StateId + "\">" + adv.StateCity.State.Name + "</a>"
+                                + " شهر  " + "<a style='color:green' href = \"http://www.adviewer.ir/ShowStateAdvs.aspx?id=" + adv.StateCityID + "\">" + adv.StateCity.Name + "</a>" +
                                "</tr></td>"
                                 ;
                         }
                         else
                         {
                             body += "<tr><td>" +
-                            "همه ی شهرستان های استان" + " " + adv.StateCity.Name +
+                            "<span style='font-size=17px;color:blue'>آگهی مربوط به استان:</span>  استان " + "<a style='color:green' href = \"http://www.adviewer.ir/ShowStateAdvs.aspx?id=" + adv.StateCityID + "\">" + adv.StateCity.Name + "</a>" +
                                "</tr></td>";
                         }
+
+                    if (adv.Group != null)
+                        if (adv.Group.ParentID != null)
+                        {
+                            body += "<tr><td>" +
+                                "<span style='font-size=17px;color:blue'>آگهی مربوط به گروه:</span> گروه  " + "<a style='color:green' href = \"http://www.adviewer.ir/ShowGroupAdvs.aspx?id=" + adv.Group.ParentID + "\">" + adv.Group.parentGroup.GroupName + "</a>"
+                                + "  زیرگروه  " + "<a style='color:green' href = \"http://www.adviewer.ir/ShowGroupAdvs.aspx?id=" + adv.GroupID + "\">" + adv.Group.GroupName + "</a>" +
+                               "</tr></td>"
+                                ;
+                        }
+                        else
+                        {
+                            body += "<tr><td>" +
+                            "<span style='font-size=17px;color:blue'>آگهی مربوط به گروه :</span> گروه  " + "<a style='color:green' href = \"http://www.adviewer.ir/ShowGroupAdvs.aspx?id=" + adv.GroupID + "\">" + adv.Group.GroupName + "</a>" +
+                               "</tr></td>";
+                        }
+
+
+                    body += "</table>";
+
                     var smtp = new SmtpClient
                     {
                         Host = "smtp.gmail.com",
