@@ -42,8 +42,10 @@
 				</div>
             </div>           
             <div class="col-md-3 col-sm-6" style="width:100%;position:absolute;bottom:5px;left:0px;text-align:left">
-                    
-					<div style="font-size:17px;" class="createAccountButton">
+                    <div>
+                    <a href="../Rss.ashx"><img src="../Styles/Images/Rss.png" title="خوراک RSS" alt="" style="width: 4%;height: auto;margin-left: 17px;"/></a>
+                    </div>
+					<div style="font-size:17px;margin-top:10px" class="createAccountButton">
                         <asp:LoginView ID="HeadLoginView" runat="server" EnableViewState="false">
                     <AnonymousTemplate>
                         [ <a href="~/Account/Login.aspx" ID="HeadLoginStatus" runat="server">ورود</a> ]
