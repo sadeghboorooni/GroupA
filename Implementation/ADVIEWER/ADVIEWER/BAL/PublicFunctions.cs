@@ -546,7 +546,48 @@ namespace ADVIEWER.BAL
             public int GroupID
             {
                 get { return _groupId; }
-                set { _groupId = value; }
+                set { _groupId = value; _setGroup(); }
+            }
+
+            private AssignorGroup _group;
+
+            public AssignorGroup Group
+            {
+                get { return _group; }
+            }
+
+            private void _setGroup()
+            {
+                ModelContainer ml = new ModelContainer();
+                _group = PublicFunctions.MakeAssignor<Group, AssignorGroup>(ml.Groups.Where(t => t.ID == _groupId).First());
+            }
+
+            private int? _stateCityId;
+
+            public int? StateCityID
+            {
+                get { return _stateCityId; }
+                set
+                {
+                    _stateCityId = value;
+                    _setStateCity();
+                }
+            }
+
+            private AssignorStateCity _stateCity;
+
+            public AssignorStateCity StateCity
+            {
+                get { return _stateCity; }
+            }
+
+            private void _setStateCity()
+            {
+                if (_stateCityId != null)
+                {
+                    ModelContainer ml = new ModelContainer();
+                    _stateCity = PublicFunctions.MakeAssignor<StateCity, AssignorStateCity>(ml.StateCities.Where(t => t.ID == _stateCityId).First());
+                }
             }
 
             private string _title;
