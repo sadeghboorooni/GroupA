@@ -45,6 +45,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Persia.dll</HintPath>
     </Reference>
+    <Reference Include="RssToolkit">
+      <HintPath>E:\My Download\Other\aspnetrsstoolkit-99885\v2.0-release\RssToolkit\bin\Debug\RssToolkit.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Core" />
@@ -79,9 +82,11 @@
     <Content Include="bin\CollectionPager.dll" />
     <Content Include="BAL\JsonMaker.aspx" />
     <Content Include="bin\Persia.dll" />
+    <Content Include="bin\RssToolkit.dll" />
     <Content Include="DAL\Model1.edmx.sql" />
     <Content Include="Default.aspx" />
     <Content Include="graphic\pbar-ani.gif" />
+    <Content Include="Manage\CommentsList.aspx" />
     <Content Include="Manage\Default.aspx" />
     <Content Include="Manage\EditGroup.aspx" />
     <Content Include="Manage\EditStateCity.aspx" />
@@ -93,6 +98,7 @@
     <Content Include="Manage\StatesCitiesList.aspx" />
     <Content Include="Manage\Tickets.aspx" />
     <Content Include="Manage\UnconfirmedAdvs.aspx" />
+    <Content Include="Manage\ViewComment.aspx" />
     <Content Include="Manage\ViewTicket.aspx" />
     <Content Include="Member\AddNewAdv.aspx" />
     <Content Include="Member\AddNewTicket.aspx" />
@@ -247,6 +253,13 @@
     <Compile Include="MainMaster.Master.designer.cs">
       <DependentUpon>MainMaster.Master</DependentUpon>
     </Compile>
+    <Compile Include="Manage\CommentsList.aspx.cs">
+      <DependentUpon>CommentsList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Manage\CommentsList.aspx.designer.cs">
+      <DependentUpon>CommentsList.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Manage\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -302,6 +315,13 @@
     </Compile>
     <Compile Include="Manage\UnconfirmedAdvs.aspx.designer.cs">
       <DependentUpon>UnconfirmedAdvs.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manage\ViewComment.aspx.cs">
+      <DependentUpon>ViewComment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Manage\ViewComment.aspx.designer.cs">
+      <DependentUpon>ViewComment.aspx</DependentUpon>
     </Compile>
     <Compile Include="Manage\ViewTicket.aspx.cs">
       <DependentUpon>ViewTicket.aspx</DependentUpon>
@@ -412,6 +432,9 @@
     <Compile Include="RatingHandler.ashx.cs">
       <DependentUpon>RatingHandler.ashx</DependentUpon>
     </Compile>
+    <Compile Include="Rss.ashx.cs">
+      <DependentUpon>Rss.ashx</DependentUpon>
+    </Compile>
     <Compile Include="ShowGroupAdvs.aspx.cs">
       <DependentUpon>ShowGroupAdvs.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -457,6 +480,7 @@
     <Content Include="Member\Thumbnail.ashx" />
     <Content Include="Member\Web.config" />
     <Content Include="RatingHandler.ashx" />
+    <None Include="Rss.ashx" />
     <None Include="Styles\fontawesome-webfont.eot" />
     <None Include="Styles\fontawesome-webfont.ttf" />
     <None Include="Styles\fontawesome-webfont.woff" />

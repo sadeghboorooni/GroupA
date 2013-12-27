@@ -1,0 +1,9 @@
+obj
+userfiles
+advsimages
+adviewer.dll
+adviewer.pdb
+adviewer.suo
+App_Data
+**/vpproject/*.png
+**/vpproject/*.vpp*

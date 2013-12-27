@@ -13,6 +13,14 @@ namespace ADVIEWER.Account
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Membership.GetUser() != null)
+            {
+                if (Request.QueryString["ReturnUrl"] != null)
+                    Response.Redirect(HttpUtility.UrlEncode(Request.QueryString["ReturnUrl"]).Replace("%2f","/"));
+                else
+                    Response.Redirect("/");
+            }
+
             RegisterHyperLink.NavigateUrl = "Register.aspx?ReturnUrl=" + HttpUtility.UrlEncode(Request.QueryString["ReturnUrl"]);
         }
         protected void LoginUser_LoggedIn(object sender, EventArgs e) 
