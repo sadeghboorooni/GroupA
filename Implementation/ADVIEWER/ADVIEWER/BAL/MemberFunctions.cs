@@ -777,7 +777,81 @@ namespace ADVIEWER.BAL
             
 
         }
+
+        public static void AddNewUserMessages(string UsersList, string MessageContent)
+        {
+            ModelContainer ml = new ModelContainer();
+            int CurUserID = AccountFunctions.currentUserId();
+            foreach (string UserIDStr in UsersList.Split(','))
+            {
+                int UserID = int.Parse(UserIDStr);
+                UserMessage Temp = new UserMessage();
+                Temp.RecieverID = UserID;
+                Temp.Text = MessageContent;
+                Temp.SenderID = CurUserID;
+                Temp.RegistrationDate = DateTime.Now;
+                ml.AddToMessages(Temp);
+            }
+
+            try
+            {
+                ml.SaveChanges();
+            }
+            catch { }
+        }
+
+
+        public static AssignorUserMessage[] GetSendMessageInboxDataSource(int UserID)
+        {
+            ModelContainer ml = new ModelContainer();
+            List<AssignorUserMessage> ReturnList = new List<AssignorUserMessage>();
+
+            try
+            {
+                foreach (UserMessage Usr in ml.Messages.OfType<UserMessage>().Where(t => t.SenderID == UserID))
+                {
+                    ReturnList.Add(PublicFunctions.MakeAssignor<UserMessage, AssignorUserMessage>(Usr));
+                }
+                return ReturnList.ToArray();
+            }
+            catch {
+                return null;
+            }
+        }
+
+        public static AssignorUserMessage[] GetRecieveMessageInboxDataSource(int UserID)
+        {
+            ModelContainer ml = new ModelContainer();
+            List<AssignorUserMessage> ReturnList = new List<AssignorUserMessage>();
+
+            try
+            {
+                foreach (UserMessage Usr in ml.Messages.OfType<UserMessage>().Where(t => t.RecieverID == UserID))
+                {
+                    ReturnList.Add(PublicFunctions.MakeAssignor<UserMessage, AssignorUserMessage>(Usr));
+                }
+                return ReturnList.ToArray();
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public static AssignorMessage GetMessageByID(int MessageID)
+        {
+            ModelContainer ml = new ModelContainer();
+            try
+            {
+                return PublicFunctions.MakeAssignor<Message, AssignorMessage>(ml.Messages.OfType<UserMessage>().Where(t => t.ID == MessageID).First());
+            }
+            catch
+            {
+                return null;
+            }
+        }
     }
+    
     public class ShowAdvertisment
     {
         public string Description,

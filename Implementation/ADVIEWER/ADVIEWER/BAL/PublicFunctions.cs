@@ -860,7 +860,7 @@ namespace ADVIEWER.BAL
 
         }
 
-        public class AssignorUserMessage {
+        public class AssignorUserMessage:AssignorMessage {
 
             private AssignorUser _user;
 
@@ -883,6 +883,5 @@ namespace ADVIEWER.BAL
 
         }
 
-        
 }       
 

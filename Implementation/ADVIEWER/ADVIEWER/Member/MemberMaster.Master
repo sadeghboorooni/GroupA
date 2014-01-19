@@ -173,6 +173,11 @@
                         <a href="AddNewTicket.aspx"><i class="icon-file"></i>درج تیکت جدید</a>&nbsp&nbsp-&nbsp&nbsp
                         <a href="TicketsList.aspx">لیست تیکت‏ها</a>
                         <hr />
+                        <a href="SendMessageToUsers.aspx"><i class="icon-envelope"></i>ارسال پیام به کاربران</a>
+                        <hr />
+                        <a href="RecieveMessagesInbox.aspx"><i class="icon-shopping-cart"></i>پیام های دریافتی</a>&nbsp&nbsp-&nbsp&nbsp
+                        <a href="SendMessagesInbox.aspx">پیام های ارسالی</a>
+                        <hr />
                         <a href="../Account/ChangePassword.aspx"><i class="icon-lock"></i>تغییر رمز ورود</a>
                         <hr />
                         <a href="SpecialAdvprivileges.aspx" onclick="return popitup('SpecialAdvprivileges.aspx')"><i class="icon-question-sign"></i>مزایای آگهی ویژه</a>

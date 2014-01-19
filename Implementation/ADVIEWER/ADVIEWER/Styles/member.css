@@ -420,3 +420,17 @@ font-size:17px;
 display:inline-block;
 color:cornflowerblue;
 }
+
+.messagecontent
+{
+    margin-top:10px !important;
+    box-shadow:none !important;
+    -webkit-box-shadow:none !important;
+    -moz-box-shadow:none !important;
+    resize:none !important;
+}
+
+.messagecontent:hover,.messagecontent:focus
+{
+    border:none !important;
+}

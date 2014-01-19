@@ -54,6 +54,18 @@ namespace ADVIEWER.BAL
                     resp += "]";
                     Response.Write(resp);
                 }
+                else if (Request.QueryString["entity"] == "user")
+                {
+                    string resp = "[";
+                    string q = Request.QueryString["q"];
+                    foreach (User us in ml.Users.Where(t=> t.FullName.Contains(q)))
+                    {
+                        resp += "{\"name\":\"" + us.FullName + "\",\"id\":\"" + us.ID + "\"},";
+                    }
+                    if (resp.LastIndexOf(',') != -1) resp = resp.Remove(resp.LastIndexOf(','));
+                    resp += "]";
+                    Response.Write(resp);
+                }
             }
         }
     }
