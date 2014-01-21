@@ -12,6 +12,7 @@ namespace ADVIEWER.Manage
     public partial class UnconfirmedAdvs : System.Web.UI.Page
     {
         public int freeAdvsCount,staredAdvsCount;
+        public int freeAdvsCountPer, staredAdvsCountPer;
         protected void Page_Load(object sender, EventArgs e)
         {
             LoadfreeGridView();
@@ -23,6 +24,10 @@ namespace ADVIEWER.Manage
             staredAdvsGridView.DataSource = MemberFunctions.UnconfirmedStaredAdvertismentsDataTable();
             staredAdvsGridView.DataBind();
             staredAdvsCount = ((DataTable)staredAdvsGridView.DataSource).Rows.Count;
+            staredAdvsCountPer = MemberFunctions.CountAdReportStar();
+            if (staredAdvsCountPer != 0)
+                staredAdvsCountPer = (staredAdvsCount / staredAdvsCountPer) * 100;
+
         }
 
         private void LoadfreeGridView()
@@ -30,6 +35,9 @@ namespace ADVIEWER.Manage
             FreeAdvsGridView.DataSource = MemberFunctions.UnconfirmedFreeAdvertismentsDataTable();
             FreeAdvsGridView.DataBind();
             freeAdvsCount = ((DataTable)FreeAdvsGridView.DataSource).Rows.Count;
+            freeAdvsCountPer = MemberFunctions.CountAdReportNormal();
+            if (freeAdvsCountPer != 0)
+                freeAdvsCountPer = (freeAdvsCount / freeAdvsCountPer) * 100;
         }
         protected void FreeAdvsGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {

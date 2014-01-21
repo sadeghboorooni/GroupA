@@ -86,6 +86,7 @@
     <Content Include="DAL\Model1.edmx.sql" />
     <Content Include="Default.aspx" />
     <Content Include="graphic\pbar-ani.gif" />
+    <Content Include="Manage\AdReport.aspx" />
     <Content Include="Manage\CommentsList.aspx" />
     <Content Include="Manage\Default.aspx" />
     <Content Include="Manage\EditGroup.aspx" />
@@ -95,9 +96,11 @@
     <Content Include="Manage\images\Icons\exit.png" />
     <Content Include="Manage\images\Icons\new.png" />
     <Content Include="Manage\images\Icons\pass.png" />
+    <Content Include="Manage\SearchUser.aspx" />
     <Content Include="Manage\StatesCitiesList.aspx" />
     <Content Include="Manage\Tickets.aspx" />
     <Content Include="Manage\UnconfirmedAdvs.aspx" />
+    <Content Include="Manage\UserReport.aspx" />
     <Content Include="Manage\ViewComment.aspx" />
     <Content Include="Manage\ViewTicket.aspx" />
     <Content Include="Member\AddNewAdv.aspx" />
@@ -115,15 +118,19 @@
     <Content Include="Member\Images\User-Info.png" />
     <Content Include="Member\ManageAdvGallery.aspx" />
     <Content Include="Member\MemberDefault.aspx" />
+    <Content Include="Member\RecieveMessagesInbox.aspx" />
+    <Content Include="Member\SendMessagesInbox.aspx" />
     <Content Include="Member\scripts\fileupload\application.js" />
     <Content Include="Member\scripts\fileupload\jquery.fileupload-ui.js" />
     <Content Include="Member\scripts\fileupload\jquery.fileupload.js" />
     <Content Include="Member\scripts\fileupload\jquery.iframe-transport.js" />
+    <Content Include="Member\SendMessageToUsers.aspx" />
     <Content Include="Member\SpecialAdvprivileges.aspx" />
     <Content Include="Member\styles\fileupload\jquery.fileupload-ui.css" />
     <Content Include="Member\styles\fileupload\style.css" />
     <Content Include="Member\TestMail.aspx" />
     <Content Include="Member\TicketsList.aspx" />
+    <Content Include="Member\ViewMessage.aspx" />
     <Content Include="Member\ViewTicket.aspx" />
     <Content Include="Profile.aspx" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -253,6 +260,13 @@
     <Compile Include="MainMaster.Master.designer.cs">
       <DependentUpon>MainMaster.Master</DependentUpon>
     </Compile>
+    <Compile Include="Manage\AdReport.aspx.cs">
+      <DependentUpon>AdReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Manage\AdReport.aspx.designer.cs">
+      <DependentUpon>AdReport.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Manage\CommentsList.aspx.cs">
       <DependentUpon>CommentsList.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -295,6 +309,13 @@
     <Compile Include="Manage\ManageMaster.Master.designer.cs">
       <DependentUpon>ManageMaster.Master</DependentUpon>
     </Compile>
+    <Compile Include="Manage\SearchUser.aspx.cs">
+      <DependentUpon>SearchUser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Manage\SearchUser.aspx.designer.cs">
+      <DependentUpon>SearchUser.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Manage\StatesCitiesList.aspx.cs">
       <DependentUpon>StatesCitiesList.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -315,6 +336,13 @@
     </Compile>
     <Compile Include="Manage\UnconfirmedAdvs.aspx.designer.cs">
       <DependentUpon>UnconfirmedAdvs.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manage\UserReport.aspx.cs">
+      <DependentUpon>UserReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Manage\UserReport.aspx.designer.cs">
+      <DependentUpon>UserReport.aspx</DependentUpon>
     </Compile>
     <Compile Include="Manage\ViewComment.aspx.cs">
       <DependentUpon>ViewComment.aspx</DependentUpon>
@@ -390,6 +418,27 @@
     <Compile Include="Member\MemberMaster.Master.designer.cs">
       <DependentUpon>MemberMaster.Master</DependentUpon>
     </Compile>
+    <Compile Include="Member\RecieveMessagesInbox.aspx.cs">
+      <DependentUpon>RecieveMessagesInbox.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Member\RecieveMessagesInbox.aspx.designer.cs">
+      <DependentUpon>RecieveMessagesInbox.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\SendMessagesInbox.aspx.cs">
+      <DependentUpon>SendMessagesInbox.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Member\SendMessagesInbox.aspx.designer.cs">
+      <DependentUpon>SendMessagesInbox.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\SendMessageToUsers.aspx.cs">
+      <DependentUpon>SendMessageToUsers.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Member\SendMessageToUsers.aspx.designer.cs">
+      <DependentUpon>SendMessageToUsers.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Member\SpecialAdvprivileges.aspx.cs">
       <DependentUpon>SpecialAdvprivileges.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -413,6 +462,13 @@
     </Compile>
     <Compile Include="Member\TicketsList.aspx.designer.cs">
       <DependentUpon>TicketsList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\ViewMessage.aspx.cs">
+      <DependentUpon>ViewMessage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Member\ViewMessage.aspx.designer.cs">
+      <DependentUpon>ViewMessage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Member\ViewTicket.aspx.cs">
       <DependentUpon>ViewTicket.aspx</DependentUpon>

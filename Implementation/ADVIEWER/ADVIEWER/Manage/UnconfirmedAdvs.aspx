@@ -17,6 +17,8 @@
         <h2 class="title green">
             لیست آگهی های ویژه در انتظار تایید
             (<%= staredAdvsCount%>)
+            <br />
+            <%= staredAdvsCountPer%> درصد از آگهی ها از روز گذشته منتظر نظر شما هستند
             </h2>
         <div class="bordered">
             <asp:GridView ID="staredAdvsGridView" runat="server" AutoGenerateColumns="False" PageSize="15"
@@ -98,6 +100,8 @@
         <h2 class="title green">
             لیست آگهی های عادی در انتظار تایید
             (<%= freeAdvsCount%>)
+            <br />
+            <%= freeAdvsCountPer%> درصد از آگهی ها از روز گذشته منتظر نظر شما هستند
             </h2>
         <div class="bordered">
             <asp:GridView ID="FreeAdvsGridView" runat="server" AutoGenerateColumns="False" PageSize="15"

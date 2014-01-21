@@ -12,12 +12,13 @@ using System.Net;
 
 namespace ADVIEWER.BAL
 {
-
+    /*This Class is For Function of member*/
     public class MemberFunctions
     {
+        /*This returns all the data in the chart is an ad for it in the Keyword Abtza Id find them and if you did not have it on the table it will add it id allottable, and it's videos id the adds the information to advertisers. adding the image to the address given in the address information is saved ads*/
         public static bool MakeNewAdvertisment(int starCount, int advDuration, string title, string shortdescription, string description,
             string keywordStr, string price, string link, string fullName, string mobile, string tell, string telltime,
-            string email, string yahooid, string address, int userId, string tempAdd, string mainAdd, string fileName, int groupId,int StateCityID)
+            string email, string yahooid, string address, int userId, string tempAdd, string mainAdd, string fileName, int groupId, int StateCityID)
         {
             ModelContainer ml = new ModelContainer();
 
@@ -68,6 +69,7 @@ namespace ADVIEWER.BAL
                 return false;
             }
         }
+
         public static string GetUserFavoriteGroups(int UserID)
         {
             ModelContainer ml = new ModelContainer();
@@ -75,8 +77,8 @@ namespace ADVIEWER.BAL
             String resp = "[";
             foreach (Group gr in ml.Users.Where(t => t.ID == UserID).FirstOrDefault().Groups.ToArray())
             {
-                resp += "{"+"name:"+'"' + gr.GroupName + '"'+","+"id:" + gr.ID + "},";
-                
+                resp += "{" + "name:" + '"' + gr.GroupName + '"' + "," + "id:" + gr.ID + "},";
+
             }
             if (resp.LastIndexOf(',') != -1) resp = resp.Remove(resp.LastIndexOf(','));
             resp += "]";
@@ -139,9 +141,11 @@ namespace ADVIEWER.BAL
 
             ml.SaveChanges();
         }
+
+        /*This is the first Czech to address is that if there is no input, it will generate and store the image at that address.*/
         public static void SaveImage(string tempAdd, string mainAdd, string filename)
         {
-            
+
             if (!Directory.Exists(HttpContext.Current.Server.MapPath(mainAdd)))
             {
                 Directory.CreateDirectory(HttpContext.Current.Server.MapPath(mainAdd));
@@ -149,13 +153,15 @@ namespace ADVIEWER.BAL
             try
             {
                 File.Move(HttpContext.Current.Server.MapPath(tempAdd + filename), HttpContext.Current.Server.MapPath(mainAdd + filename));
-                
+
                 File.Delete(HttpContext.Current.Server.MapPath(tempAdd + filename));
             }
             catch
             { }
 
         }
+
+        /*This function takes a string input and then it all on the field "," id separator and returns the entire category in the output. If you are not a member of keyword table, then it adds the keyword, and then returns the new id.*/
         public static int[] ParseKeyWords(string keywordStr)
         {
             List<int> kwList = new List<int>();
@@ -166,7 +172,7 @@ namespace ADVIEWER.BAL
                 try
                 {
                     int id = int.Parse(kwStr);
-                    if (ml.KeyWords.Where(t => t.ID== id).Count() > 0)
+                    if (ml.KeyWords.Where(t => t.ID == id).Count() > 0)
                     {
                         kwList.Add(ml.KeyWords.Where(t => t.ID == id).Select(t => t.ID).First());
                     }
@@ -187,6 +193,8 @@ namespace ADVIEWER.BAL
 
             return kwList.ToArray();
         }
+
+        /*This function returns all the free advertising that have been approved*/
         public static DataTable UnconfirmedFreeAdvertismentsDataTable()
         {
             ModelContainer ml = new ModelContainer();
@@ -199,6 +207,8 @@ namespace ADVIEWER.BAL
             unreadList = unreadList.OrderByDescending(t => t.RegistrationDate).ToList();
             return PublicFunctions.ToDataTable<ShowAdvertisment>(unreadList);
         }
+
+        /*This function reads the characteristics of certified puts an ad equals true.*/
         public static void ConfirmAdvertisment(int AdvID)
         {
             ModelContainer ml = new ModelContainer();
@@ -218,11 +228,12 @@ namespace ADVIEWER.BAL
 
         }
 
+        /*This Function is just for sending a email*/
         private static void SendMail(Advertisment adv)
-        {   
+        {
             ModelContainer ml = new ModelContainer();
             var fromAddress = new MailAddress("adviewer1@gmail.com", "تبلیغ نما");
-            Group TempSubGroup = ml.Groups.Where(t=> t.ID == adv.GroupID).First();
+            Group TempSubGroup = ml.Groups.Where(t => t.ID == adv.GroupID).First();
             Group TempParentGroup = TempSubGroup.parentGroup;
 
             foreach (User u in ml.Users)
@@ -310,6 +321,8 @@ namespace ADVIEWER.BAL
                 }
             }
         }
+
+
         public static void DenyAdvertisment(int AdvID, string reason)
         {
             ModelContainer ml = new ModelContainer();
@@ -322,6 +335,8 @@ namespace ADVIEWER.BAL
                 ml.SaveChanges();
             }
         }
+
+        /*The function of a ticket will receive all the information it can store.*/
         public static void AddNewTicket(string text, string title, int userId)
         {
             ModelContainer ml = new ModelContainer();
@@ -338,11 +353,15 @@ namespace ADVIEWER.BAL
             ml.SaveChanges();
 
         }
+
+        /*This function returns a ticket id of that information.*/
         public static AssignorTicket GetTicketData(int id)
         {
             ModelContainer ml = new ModelContainer();
             return PublicFunctions.MakeAssignor<Ticket, AssignorTicket>(ml.Tickets1.Where(t => t.ID == id).FirstOrDefault());
         }
+
+        /*This function takes a user id found it to be a function of all the ticket that was created by that person returns.*/
         public static List<AssignorTicket> GetListTicketData(int id)
         {
             ModelContainer ml = new ModelContainer();
@@ -355,6 +374,7 @@ namespace ADVIEWER.BAL
             return r;
         }
 
+        /*This function does not enter a value in the input list of ticket that will be the last update they will return back to REG.*/
         public static AssignorTicket[] GetListTicketData()
         {
             ModelContainer ml = new ModelContainer();
@@ -368,6 +388,7 @@ namespace ADVIEWER.BAL
             return at.ToArray();
         }
 
+
         public static AssignorComment[] GetListCommentData()
         {
             ModelContainer ml = new ModelContainer();
@@ -380,13 +401,15 @@ namespace ADVIEWER.BAL
 
             return at.ToArray();
         }
+
+
         public static AssignorComment GetCommentData(int id)
         {
             ModelContainer ml = new ModelContainer();
             return PublicFunctions.MakeAssignor<Comment, AssignorComment>(ml.Messages.OfType<Comment>().Where(t => t.ID == id).FirstOrDefault());
-        }   
+        }
 
-
+        /*This entry id in the function receives a ticket and it will be deleted from the database.*/
         public static void DeleteTicket(int TicketID)
         {
             ModelContainer ml = new ModelContainer();
@@ -394,6 +417,7 @@ namespace ADVIEWER.BAL
             ml.DeleteObject(TicketDeleted);
             ml.SaveChanges();
         }
+
 
         public static void DeleteComment(int CommentID)
         {
@@ -411,7 +435,7 @@ namespace ADVIEWER.BAL
         }
 
 
-
+        /*This function receives an ad in the input id and it will be deleted from the database.*/
         public static void DeleteAdv(int AdvID)
         {
             ModelContainer ml = new ModelContainer();
@@ -421,11 +445,14 @@ namespace ADVIEWER.BAL
             ml.SaveChanges();
         }
 
+        /*This function takes an advertiser id and all the information it returns.*/
         public static AssignorAdvertisment GetAdvertismentData(int id)
         {
             ModelContainer ml = new ModelContainer();
             return PublicFunctions.MakeAssignor<Advertisment, AssignorAdvertisment>(ml.Advertisments.Where(t => t.ID == id).FirstOrDefault());
         }
+
+        /*This function receives the input of personal id and insert advertising that person returns.*/
         public static AssignorAdvertisment[] GetUserAdvs(int UserID)
         {
             ModelContainer ml = new ModelContainer();
@@ -437,6 +464,8 @@ namespace ADVIEWER.BAL
 
             return aAdv.ToArray();
         }
+
+        /*This function receives the input of personal id and advertising inserts and confirmed that a person will return.*/
         public static AssignorAdvertisment[] GetUserConfirmedAdvs(int UserID)
         {
             ModelContainer ml = new ModelContainer();
@@ -447,19 +476,21 @@ namespace ADVIEWER.BAL
                 aAdv.Add(PublicFunctions.MakeAssignor<Advertisment, AssignorAdvertisment>(ad));
             }
 
-            return aAdv.OrderByDescending(t=> t.LastRenewal).ToArray();
+            return aAdv.OrderByDescending(t => t.LastRenewal).ToArray();
         }
+
+        /*This function returns all sub-groups.*/
         public static AssignorGroup[] GetSubGroups()
         {
             ModelContainer ml = new ModelContainer();
 
             List<Group> ParentGroup = new List<Group>();
-            ParentGroup = ml.Groups.Where(t => t.ParentID == null).OrderBy(t=> t.GroupName).ToList();
+            ParentGroup = ml.Groups.Where(t => t.ParentID == null).OrderBy(t => t.GroupName).ToList();
             List<AssignorGroup> aGroup = new List<AssignorGroup>();
             foreach (Group gr in ParentGroup)
             {
                 aGroup.Add(PublicFunctions.MakeAssignor<Group, AssignorGroup>(gr));
-                foreach (Group subgr in gr.childGroup.OrderBy(t=> t.GroupName))
+                foreach (Group subgr in gr.childGroup.OrderBy(t => t.GroupName))
                 {
                     aGroup.Add(PublicFunctions.MakeAssignor<Group, AssignorGroup>(subgr));
                 }
@@ -467,17 +498,19 @@ namespace ADVIEWER.BAL
 
             return aGroup.ToArray();
         }
+
+
         public static AssignorStateCity[] GetStateAndCityForDropDown()
         {
             ModelContainer ml = new ModelContainer();
 
             List<StateCity> State = new List<StateCity>();
-            State = ml.StateCities.Where(t => t.StateId == null).OrderBy(t=> t.Name).ToList();
+            State = ml.StateCities.Where(t => t.StateId == null).OrderBy(t => t.Name).ToList();
             List<AssignorStateCity> aState = new List<AssignorStateCity>();
             foreach (StateCity sc in State)
             {
                 aState.Add(PublicFunctions.MakeAssignor<StateCity, AssignorStateCity>(sc));
-                foreach (StateCity city in sc.Cities.OrderBy(t=> t.Name))
+                foreach (StateCity city in sc.Cities.OrderBy(t => t.Name))
                 {
                     aState.Add(PublicFunctions.MakeAssignor<StateCity, AssignorStateCity>(city));
                 }
@@ -485,6 +518,8 @@ namespace ADVIEWER.BAL
 
             return aState.ToArray();
         }
+
+        /*This function will return all key subgroups such as Saipa car but do not open it.*/
         public static AssignorGroup[] GetParentGroups()
         {
             ModelContainer ml = new ModelContainer();
@@ -495,8 +530,10 @@ namespace ADVIEWER.BAL
                 aGroup.Add(PublicFunctions.MakeAssignor<Group, AssignorGroup>(gr));
             }
 
-            return aGroup.OrderBy(t=> t.GroupName).ToArray();
+            return aGroup.OrderBy(t => t.GroupName).ToArray();
         }
+
+        /*This function get a group id after that return all sub grpup of that*/
         public static AssignorGroup[] GetSubGroupsByID(int ID)
         {
             ModelContainer ml = new ModelContainer();
@@ -510,6 +547,8 @@ namespace ADVIEWER.BAL
 
             return aGroup.OrderBy(t => t.GroupName).ToArray();
         }
+
+        /*This function in a subclass to receive input data and creates a new subgroup.*/
         public static void AddNewGroup(string groupName, int? parentId)
         {
             Group g = new Group();
@@ -520,7 +559,7 @@ namespace ADVIEWER.BAL
             ml.SaveChanges();
         }
 
-
+        /*The function to get the node id of a subset of all the data it returns.*/
         internal static AssignorGroup GetGroupData(int groupId)
         {
             ModelContainer ml = new ModelContainer();
@@ -528,6 +567,7 @@ namespace ADVIEWER.BAL
             return PublicFunctions.MakeAssignor<Group, AssignorGroup>(ml.Groups.Where(t => t.ID == groupId).First());
         }
 
+        /*This function receives an input of new information and to update them.*/
         internal static void UpdateGroupData(int Id, string groupName, int? parentId)
         {
             ModelContainer ml = new ModelContainer();
@@ -536,6 +576,8 @@ namespace ADVIEWER.BAL
             g.ParentID = parentId;
             ml.SaveChanges();
         }
+
+        /*The entries will receive an ID and the ID of those that are advertising their GroupID is being input to output will be Brarbr.*/
         public static AssignorAdvertisment[] GetAdvByGroupID(int ID)
         {
             ModelContainer ml = new ModelContainer();
@@ -562,6 +604,7 @@ namespace ADVIEWER.BAL
 
         }
 
+        /*This function will return all ads starred that have been approved*/
         public static object UnconfirmedStaredAdvertismentsDataTable()
         {
             ModelContainer ml = new ModelContainer();
@@ -575,6 +618,256 @@ namespace ADVIEWER.BAL
             return PublicFunctions.ToDataTable<ShowAdvertisment>(unreadList);
         }
 
+        /*This Function Return list of user That login betwean f and l*/
+        public static object UserDataTable(string f, string l)
+        {
+            ModelContainer ml = new ModelContainer();
+
+            DateTime fdate, ldate;
+
+
+            fdate = DateTime.ParseExact(f, "yyyyMMdd", null);
+
+
+            ldate = DateTime.ParseExact(l, "yyyyMMdd", null);
+
+
+            List<AssignorUser> userList = new List<AssignorUser>();
+            foreach (User us in ml.Users.Where(t => (t.LastLogin >= fdate && t.LastLogin <= ldate)))
+            {
+                userList.Add(PublicFunctions.MakeAssignor<User,AssignorUser>(us));
+            }
+            userList = userList.OrderByDescending(t => t.RegisterDate).ToList();
+            return userList;
+        }
+
+        /*This Function Return list of user That have information name or mail or id*/
+        public static object UserDataTable2(string name, string mail, string id)
+        {
+            ModelContainer ml = new ModelContainer();
+            List<ShowUser> userList = new List<ShowUser>();
+
+            //000
+            if (!string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(mail) && !string.IsNullOrEmpty(id))
+            {
+                int p = Int32.Parse(id);
+                foreach (User us in ml.Users.Where(t => (t.FullName == name && t.ID == p && t.Mail == mail)))
+                {
+                    userList.Add(new ShowUser(us.ID, us.FullName, us.Mail, us.RegisterDate, us.LastLogin));
+                }
+            }
+
+
+            //001
+
+            if (!string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(mail) && string.IsNullOrEmpty(id))
+            {
+
+                foreach (User us in ml.Users.Where(t => (t.FullName == name && t.Mail == mail)))
+                {
+                    userList.Add(new ShowUser(us.ID, us.FullName, us.Mail, us.RegisterDate, us.LastLogin));
+                }
+            }
+
+            //010
+            if (!string.IsNullOrEmpty(name) && string.IsNullOrEmpty(mail) && !string.IsNullOrEmpty(id))
+            {
+                int p = Int32.Parse(id);
+                foreach (User us in ml.Users.Where(t => (t.FullName == name && t.ID == p)))
+                {
+                    userList.Add(new ShowUser(us.ID, us.FullName, us.Mail, us.RegisterDate, us.LastLogin));
+                }
+            }
+
+            //011
+            if (!string.IsNullOrEmpty(name) && string.IsNullOrEmpty(mail) && string.IsNullOrEmpty(id))
+            {
+
+                foreach (User us in ml.Users.Where(t => (t.FullName == name)))
+                {
+                    userList.Add(new ShowUser(us.ID, us.FullName, us.Mail, us.RegisterDate, us.LastLogin));
+                }
+            }
+
+            //100
+            if (string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(mail) && !string.IsNullOrEmpty(id))
+            {
+                int p = Int32.Parse(id);
+                foreach (User us in ml.Users.Where(t => (t.ID == p && t.Mail == mail)))
+                {
+                    userList.Add(new ShowUser(us.ID, us.FullName, us.Mail, us.RegisterDate, us.LastLogin));
+                }
+            }
+
+
+            //101
+            if (string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(mail) && string.IsNullOrEmpty(id))
+            {
+
+                foreach (User us in ml.Users.Where(t => (t.FullName == name && t.Mail == mail)))
+                {
+                    userList.Add(new ShowUser(us.ID, us.FullName, us.Mail, us.RegisterDate, us.LastLogin));
+                }
+            }
+
+            //110
+            if (string.IsNullOrEmpty(name) && string.IsNullOrEmpty(mail) && !string.IsNullOrEmpty(id))
+            {
+                int p = Int32.Parse(id);
+                foreach (User us in ml.Users.Where(t => (t.ID == p)))
+                {
+                    userList.Add(new ShowUser(us.ID, us.FullName, us.Mail, us.RegisterDate, us.LastLogin));
+                }
+            }
+
+
+            //111
+            if (string.IsNullOrEmpty(name) && string.IsNullOrEmpty(mail) && string.IsNullOrEmpty(id))
+            {
+
+                foreach (User us in ml.Users.Where(t => (t.IsManager == false || t.IsManager == true)))
+                {
+                    userList.Add(new ShowUser(us.ID, us.FullName, us.Mail, us.RegisterDate, us.LastLogin));
+                }
+            }
+
+            userList = userList.OrderByDescending(t => t.RegisterDate).ToList();
+            return PublicFunctions.ToDataTable<ShowUser>(userList);
+        }
+
+        /*return count of Ad Report Star*/
+        public static int CountAdReportStar()
+        {
+            ModelContainer ml = new ModelContainer();
+            DateTime a = DateTime.Now;
+
+            int b = Int32.Parse(a.Day.ToString());
+            int c = Int32.Parse(a.Month.ToString());
+            int d = Int32.Parse(a.Year.ToString());
+
+            if (b == 1)
+            {
+                if (c == 1)
+                {
+                    c = 12;
+                    d = d - 1;
+                    b = 29;
+
+                }
+                else
+                {
+                    c = c - 1;
+                    b = 30;
+                }
+            }
+            else
+                b = b - 1;
+            string e = b.ToString();
+            if (e.Length < 2)
+                e = "0" + e;
+            string f = c.ToString();
+            if (f.Length < 2)
+                f = "0" + f;
+            e = d.ToString() + f + e;
+
+            DateTime g = DateTime.ParseExact(e, "yyyyMMdd", null);
+
+
+            List<ShowAdvertisment> unreadList = new List<ShowAdvertisment>();
+            foreach (Advertisment adv in ml.Advertisments.Where(t => (t.RegistrationDate >= a && t.RegistrationDate <= g) && t.StarCount > -1))
+            {
+                unreadList.Add(new ShowAdvertisment(adv.ID, adv.Title, adv.ShortDescription, adv.FullName, adv.Pic, adv.RegistrationDate, adv.StarCount, adv.UserId));
+            }
+            unreadList = unreadList.OrderByDescending(t => t.RegistrationDate).ToList();
+            return PublicFunctions.ToDataTable<ShowAdvertisment>(unreadList).Rows.Count;
+        }
+
+        /*return count of Ad Star betwean f and l*/
+        public static object AdReportStar(string f, string l)
+        {
+            ModelContainer ml = new ModelContainer();
+            DateTime fdate, ldate;
+
+
+            fdate = DateTime.ParseExact(f, "yyyyMMdd", null);
+
+            ldate = DateTime.ParseExact(l, "yyyyMMdd", null);
+            List<ShowAdvertisment> unreadList = new List<ShowAdvertisment>();
+            foreach (Advertisment adv in ml.Advertisments.Where(t => (t.IsConfirmed == true && t.RegistrationDate >= fdate && t.RegistrationDate <= ldate) && t.StarCount > -1))
+            {
+                unreadList.Add(new ShowAdvertisment(adv.ID, adv.Title, adv.ShortDescription, adv.FullName, adv.Pic, adv.RegistrationDate, adv.StarCount, adv.UserId));
+            }
+            unreadList = unreadList.OrderByDescending(t => t.RegistrationDate).ToList();
+            return PublicFunctions.ToDataTable<ShowAdvertisment>(unreadList);
+        }
+
+        /*return count of Ad Report Star*/
+        public static int CountAdReportNormal()
+        {
+            ModelContainer ml = new ModelContainer();
+            DateTime a = DateTime.Now;
+
+            int b = Int32.Parse(a.Day.ToString());
+            int c = Int32.Parse(a.Month.ToString());
+            int d = Int32.Parse(a.Year.ToString());
+
+            if (b == 1)
+            {
+                if (c == 1)
+                {
+                    c = 12;
+                    d = d - 1;
+                    b = 29;
+
+                }
+                else
+                {
+                    c = c - 1;
+                    b = 30;
+                }
+            }
+            else
+                b = b - 1;
+            string e = b.ToString();
+            if (e.Length < 2)
+                e = "0" + e;
+            string f = c.ToString();
+            if (f.Length < 2)
+                f = "0" + f;
+            e = d.ToString() + f + e;
+
+            DateTime g = DateTime.ParseExact(e, "yyyyMMdd", null);
+
+
+            List<ShowAdvertisment> unreadList = new List<ShowAdvertisment>();
+            foreach (Advertisment adv in ml.Advertisments.Where(t => (t.RegistrationDate >= a && t.RegistrationDate <= g) && t.StarCount > -1))
+            {
+                unreadList.Add(new ShowAdvertisment(adv.ID, adv.Title, adv.ShortDescription, adv.FullName, adv.Pic, adv.RegistrationDate, adv.StarCount, adv.UserId));
+            }
+            unreadList = unreadList.OrderByDescending(t => t.RegistrationDate).ToList();
+            return PublicFunctions.ToDataTable<ShowAdvertisment>(unreadList).Rows.Count;
+        }
+
+        /*This Function Return list of ad That Registered betwean f and l*/
+        public static object AdReportNormal(string f, string l)
+        {
+            ModelContainer ml = new ModelContainer();
+            DateTime fdate, ldate;
+
+
+            fdate = DateTime.ParseExact(f, "yyyyMMdd", null);
+
+            ldate = DateTime.ParseExact(l, "yyyyMMdd", null);
+            List<ShowAdvertisment> unreadList = new List<ShowAdvertisment>();
+            foreach (Advertisment adv in ml.Advertisments.Where(t => (t.IsConfirmed == true && t.RegistrationDate >= fdate && t.RegistrationDate <= ldate) && t.StarCount > -1))
+            {
+                unreadList.Add(new ShowAdvertisment(adv.ID, adv.Title, adv.ShortDescription, adv.FullName, adv.Pic, adv.RegistrationDate, adv.StarCount, adv.UserId));
+            }
+            unreadList = unreadList.OrderByDescending(t => t.RegistrationDate).ToList();
+            return PublicFunctions.ToDataTable<ShowAdvertisment>(unreadList);
+        }
+
+        /*This function takes a string input and a Shnayh for Ticket with ID equal to the value of the field will answer it.*/
         internal static void SetTicketAnswer(int TicketID, string answer)
         {
             ModelContainer ml = new ModelContainer();
@@ -584,6 +877,7 @@ namespace ADVIEWER.BAL
             ml.SaveChanges();
         }
 
+        /*This function get id of a group an delete that group and all sub group*/
         internal static void DeleteGroup(int id)
         {
             ModelContainer ml = new ModelContainer();
@@ -600,7 +894,7 @@ namespace ADVIEWER.BAL
 
         }
 
-
+        /*This function get id of a ad and return the rate of that*/
         internal static float GetAdvUserRate(int AdvId)
         {
             ModelContainer ml = new ModelContainer();
@@ -615,6 +909,7 @@ namespace ADVIEWER.BAL
             }
         }
 
+        /*This function returns all provinces.*/
         internal static AssignorStateCity[] GetStates()
         {
             ModelContainer ml = new ModelContainer();
@@ -627,6 +922,7 @@ namespace ADVIEWER.BAL
             return aStateCity.ToArray();
         }
 
+        /*This function takes in input the Astna ID a provincial cities, it is deleted from the system.*/
         internal static void DeleteStateCity(int id)
         {
             ModelContainer ml = new ModelContainer();
@@ -641,6 +937,7 @@ namespace ADVIEWER.BAL
             ml.SaveChanges();
         }
 
+        /*This function returns information StatesCities table.*/
         internal static AssignorStateCity[] GetStatesCities()
         {
             ModelContainer ml = new ModelContainer();
@@ -653,6 +950,7 @@ namespace ADVIEWER.BAL
             return aStateCity.ToArray();
         }
 
+        /*This function takes an input name and ID of a provincial town in the province is created.*/
         internal static void AddNewStateCity(string Name, int? StateId)
         {
             ModelContainer ml = new ModelContainer();
@@ -663,12 +961,14 @@ namespace ADVIEWER.BAL
             ml.SaveChanges();
         }
 
+        /*Statecity ID function on the input and the output it gives statecity*/
         internal static AssignorStateCity GetStateCityData(int StateCityId)
         {
             ModelContainer ml = new ModelContainer();
             return PublicFunctions.MakeAssignor<StateCity, AssignorStateCity>(ml.StateCities.Where(t => t.ID == StateCityId).First());
         }
 
+        /*This function takes the input data and the value of a statecity it is updated.*/
         internal static void UpdateStateCityData(int StateCityId, string Name, int? StateId)
         {
             ModelContainer ml = new ModelContainer();
@@ -696,14 +996,14 @@ namespace ADVIEWER.BAL
             {
                 return PublicFunctions.GetLast9Advs();
             }
-            else 
+            else
             {
-                int[] aid=aUser.Groups.Select(t=>t.ID).ToArray();
+                int[] aid = aUser.Groups.Select(t => t.ID).ToArray();
 
                 var q = (from adv1 in ml.Advertisments
-                        from grp in aid
-                        where adv1.GroupID == grp
-                        select adv1).ToArray();
+                         from grp in aid
+                         where adv1.GroupID == grp
+                         select adv1).ToArray();
 
                 List<AssignorAdvertisment> aAdv = new List<AssignorAdvertisment>();
                 foreach (Advertisment adv2 in q)
@@ -715,6 +1015,7 @@ namespace ADVIEWER.BAL
             }
         }
 
+        /*This Function Set User image !!!*/
         public static void setUserImage(string tempAdd, string mainAdd, int userId, string fileName)
         {
             ModelContainer ml = new ModelContainer();
@@ -737,6 +1038,7 @@ namespace ADVIEWER.BAL
 
         }
 
+        /*This Functiun change atribute of ad that like new ad*/
         public static void RenewAdv(int ID)
         {
             ModelContainer ml = new ModelContainer();
@@ -747,6 +1049,7 @@ namespace ADVIEWER.BAL
             ml.SaveChanges();
         }
 
+        /*This Function Remove image of a user*/
         public static void deleteImage(int userid)
         {
             ModelContainer ml = new ModelContainer();
@@ -756,7 +1059,7 @@ namespace ADVIEWER.BAL
             {
                 if (path != null)
                 {
-                   if (System.IO.File.Exists(System.Web.HttpContext.Current.Server.MapPath(path)))
+                    if (System.IO.File.Exists(System.Web.HttpContext.Current.Server.MapPath(path)))
                     {
                         try
                         {
@@ -774,7 +1077,7 @@ namespace ADVIEWER.BAL
             catch
             {
             }
-            
+
 
         }
 
@@ -814,7 +1117,8 @@ namespace ADVIEWER.BAL
                 }
                 return ReturnList.ToArray();
             }
-            catch {
+            catch
+            {
                 return null;
             }
         }
@@ -851,7 +1155,7 @@ namespace ADVIEWER.BAL
             }
         }
     }
-    
+    /*This class have som atribute of object of advertisment*/
     public class ShowAdvertisment
     {
         public string Description,
@@ -878,5 +1182,24 @@ namespace ADVIEWER.BAL
             this.starCount = starcount;
             this.UserId = UserId;
         }
+    }
+}
+/*This class have som atribute of object of Users*/
+public class ShowUser
+{
+    public string FullName,
+        Mail;
+    public int ID;
+    public DateTime RegisterDate,
+        LastLogin;
+
+    public ShowUser(int ID, string FullName, string Mail, DateTime RegisterDate, DateTime LastLogin)
+    {
+        this.ID = ID;
+        this.FullName = FullName;
+        this.Mail = Mail;
+        this.LastLogin = LastLogin;
+        this.RegisterDate = RegisterDate;
+
     }
 }
