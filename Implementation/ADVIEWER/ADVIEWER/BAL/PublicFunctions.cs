@@ -10,9 +10,14 @@ using ADVIEWER.DAL;
 
 namespace ADVIEWER.BAL
 {
-    /*This Class is For Bublic Function*/
+    //! PublicFunctions
+    /*! This Class is For Bublic Function*/
     public class PublicFunctions
     {
+        //! MakeAssignor
+        /*! 
+         get an object, copy its data in assignor object and return it.
+         */
         public static AssignorClass MakeAssignor<EntityClass, AssignorClass>(EntityClass EntityObject)
         {
 
@@ -37,7 +42,8 @@ namespace ADVIEWER.BAL
             return AssignorObject;
         }
 
-        /*this function return last nine adv for home page*/
+        //! GetLast9Advs
+        /*! this function return last nine adv for home page*/
         public static AssignorAdvertisment[] GetLast9Advs()
         {
 
@@ -51,7 +57,10 @@ namespace ADVIEWER.BAL
             return PublicFunctions.SortByRate(aAdv.ToArray());
         }
 
-
+        //! ToDataTable
+        /*! 
+         return data table of list. data table columns are the properties of List template.
+         */
         public static DataTable ToDataTable<T>(List<T> items)
         {
             DataTable dataTable = new DataTable(typeof(T).Name);
@@ -75,8 +84,8 @@ namespace ADVIEWER.BAL
             return dataTable;
         }
 
-
-        /*this return Adv Average Rate */
+        //! GetAdvAverageRate
+        /*! this return Adv Average Rate */
         internal static Single GetAdvAverageRate(int AdvId)
         {
             ModelContainer ml = new ModelContainer();
@@ -90,7 +99,8 @@ namespace ADVIEWER.BAL
             return result;
         }
 
-        /*This return of state and cities*/
+        //! GetStatesAndCities
+        /*! This return of state and cities*/
         public static AssignorStateCity[] GetStatesAndCities()
         {
             ModelContainer ml = new ModelContainer();
@@ -104,7 +114,8 @@ namespace ADVIEWER.BAL
             return aSta.ToArray();
         }
 
-        /* This get id of state after that return list of ad of that state*/
+        //! GetAdvByStateID
+        /*!  This get id of state after that return list of ad of that state*/
         public static AssignorAdvertisment[] GetAdvByStateID(int ID)
         {
             ModelContainer ml = new ModelContainer();
@@ -129,7 +140,10 @@ namespace ADVIEWER.BAL
             return aAdv.ToArray();
         }
 
-
+        //! GetStatesWithCities
+        /*! 
+         return list of StateAndCitiesForReapeater that contains a state and its cities
+         */
         public static List<StateAndCitiesForReapeater> GetStatesWithCities()
         {
             ModelContainer ml = new ModelContainer();
@@ -143,7 +157,8 @@ namespace ADVIEWER.BAL
             return ReturnListOfClasses;
         }
 
-        /*This function convert date to solar date*/
+        //! SolarDateConvertor
+        /*! This function convert date to solar date*/
         public static string SolarDateConvertor(object InputDate, int Mode = 2, string type = "")
         {
             Persia.SolarDate solarDate;
@@ -157,7 +172,7 @@ namespace ADVIEWER.BAL
             }
             if (1 == Mode)
             {
-                /*
+                /*! 
                  D = X  روز پیش
                  TY = امروز، دیروز، x   روز پیش
                  p = اکنون، x  دقیقه پیش، x  ساعت پیش
@@ -166,7 +181,7 @@ namespace ADVIEWER.BAL
             }
             else if (2 == Mode)
             {
-                /*
+                /*! 
                  D = ۱۳۸۹/۹/۳۰
                  d = ۸۹/۹/۳۰
                  W = سه شنبه  ۱۳۸۹/۹/۳۰
@@ -182,14 +197,16 @@ namespace ADVIEWER.BAL
                 return solarDate.ToString("D");
         }
 
-        /*This function return Count Of Rates*/
+        //! CountOfRates
+        /*! This function return Count Of Rates*/
         internal static int CountOfRates(int AdvId)
         {
             ModelContainer ml = new ModelContainer();
             return ml.Rates.Where(t => t.AdvertismentId == AdvId).Count();
         }
 
-        /*this get id of ad after that return list of comment that has that ad_id and is confirmed*/
+        //! GetAdvComments
+        /*! this get id of ad after that return list of comment that has that ad_id and is confirmed*/
         public static AssignorComment[] GetAdvComments(int AdvID)
         {
             ModelContainer ml = new ModelContainer();
@@ -201,7 +218,8 @@ namespace ADVIEWER.BAL
             return TempAssignorComments.OrderByDescending(t => t.RegistrationDate).ToArray();
         }
 
-        /* this function set a comment in DB in Comment table*/
+        //! SetComment
+        /*!  this function set a comment in DB in Comment table*/
         public static void SetComment(int AdvID, string Text, string Email, int UserID)
         {
             ModelContainer ml = new ModelContainer();
@@ -220,10 +238,12 @@ namespace ADVIEWER.BAL
             ml.SaveChanges();
         }
 
-        /* This struct has just 2 args double wr and AssignorAdvertisment adv that adv is object of AssignorAdvertisment */
+        //! Wight
+        /*!  This struct has just 2 args double wr and AssignorAdvertisment adv that adv is object of AssignorAdvertisment */
         public struct Wight { public double wr; public AssignorAdvertisment adv;}
 
-        /* This return best ads for showing in home oage of website*/
+        //! SortByRate
+        /*!  This return best ads for showing in home oage of website*/
         public static AssignorAdvertisment[] SortByRate(AssignorAdvertisment[] AdvList)
         {
             AdvList.OrderBy(T => T.ID);
@@ -281,6 +301,10 @@ namespace ADVIEWER.BAL
         }
     }
 
+    //! StateAndCitiesForReapeater
+    /*! 
+     represents the set of state and its cities
+     */
     public class StateAndCitiesForReapeater
     {
         private int Id;
@@ -305,6 +329,10 @@ namespace ADVIEWER.BAL
             set { cities = value; }
         }
 
+        //! StateAndCitiesForReapeater
+        /*!
+         get the id of state and set it. call SetCities(). 
+         */
         public StateAndCitiesForReapeater(int ID)
         {
             ModelContainer ml = new ModelContainer();
@@ -313,14 +341,18 @@ namespace ADVIEWER.BAL
             SetCities();
         }
 
+        //! SetCities
+        /*!
+         set the cities of this state
+         */
         private void SetCities()
         {
             ModelContainer ml = new ModelContainer();
             Cities = ml.StateCities.Where(t => t.StateId == this.ID).OrderBy(t => t.Name).ToArray();
         }
     }
-
-    /* This class just make id*/
+    //! This class just make id for assignor classes
+    /*!  This class just make id*/
     public class AssignorParent
     {
         private int Id;
@@ -335,7 +367,9 @@ namespace ADVIEWER.BAL
         }
 
     }
-    /* This class make Ticket*/
+
+    //! AssignorTicket
+    /*!  This class make assignor Ticket. assignor classes are used to transfer data between DAL and UI. */
     public class AssignorTicket : AssignorParent
     {
         private string _answer;
@@ -400,7 +434,8 @@ namespace ADVIEWER.BAL
         }
     }
 
-    /* This class make Assignor Rate*/
+    //! AssignorRate 
+    /*!  This class make Assignor Rate. assignor classes are used to transfer data between DAL and UI. */
     public class AssignorRate : AssignorParent
     {
         private int _advertismentId;
@@ -420,7 +455,8 @@ namespace ADVIEWER.BAL
         }
     }
 
-    /* This class make Assignor User*/
+    //! AssignorUser
+    /*!  This class make Assignor User. assignor classes are used to transfer data between DAL and UI. */
     public class AssignorUser
     {
         private int _id;
@@ -532,7 +568,8 @@ namespace ADVIEWER.BAL
 
     }
 
-    /* This class make Assignor Advertisment*/
+    //! AssignorAdvertisment
+    /*!  This class make Assignor Advertisment. assignor classes are used to transfer data between DAL and UI. */
     public class AssignorAdvertisment : AssignorParent
     {
 
@@ -743,7 +780,8 @@ namespace ADVIEWER.BAL
         }
     }
 
-    /* This class make Assignor Group*/
+    //! AssignorGroup
+    /*!  This class make Assignor Group. assignor classes are used to transfer data between DAL and UI. */
     public class AssignorGroup : AssignorParent
     {
         private string _groupName;
@@ -779,7 +817,8 @@ namespace ADVIEWER.BAL
         }
     }
 
-    /* This class make Assignor State and City*/
+    //! AssignorStateCity
+    /*!  This class make Assignor State and City. assignor classes are used to transfer data between DAL and UI. */
     public class AssignorStateCity : AssignorParent
     {
         private string _name;
@@ -815,7 +854,8 @@ namespace ADVIEWER.BAL
         }
     }
 
-    /* This class make Assignor Message*/
+    //! AssignorMessage
+    /*!  This class make Assignor Message. assignor classes are used to transfer data between DAL and UI. */
     public class AssignorMessage : AssignorParent
     {
         string _text;
@@ -866,7 +906,8 @@ namespace ADVIEWER.BAL
         }
     }
 
-    /* This class make Assignor Comment*/
+    //! AssignorComment
+    /*!  This class make Assignor Comment. assignor classes are used to transfer data between DAL and UI. */
     public class AssignorComment : AssignorMessage
     {
 
@@ -900,7 +941,8 @@ namespace ADVIEWER.BAL
 
     }
 
-    /* This class make Assignor User Message*/
+    //! AssignorUserMessage
+    /*!  This class make Assignor User Message. assignor classes are used to transfer data between DAL and UI. */
     public class AssignorUserMessage : AssignorMessage
     {
 
@@ -926,7 +968,6 @@ namespace ADVIEWER.BAL
 
 
     }
-
 
 }
 

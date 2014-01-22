@@ -7,8 +7,17 @@ using ADVIEWER.DAL;
 
 namespace ADVIEWER.BAL
 {
+    //! AccountFunctions
+    /*!
+     this class represents the functions for work with membership.
+     */
     public class AccountFunctions
     {
+
+        //! newUser
+        /*!
+         make new user in both databases.
+         */
         public static bool newUser(Guid UserId,string UserFullName, string mail) 
         {
             try
@@ -31,6 +40,10 @@ namespace ADVIEWER.BAL
             }
         }
 
+        //! SetLastLogin
+        /*!
+         set last login property of user class when specific user loged in.
+         */
         public static void SetLastLogin(Guid UserId) 
         {
             ModelContainer ml = new ModelContainer();
@@ -38,6 +51,10 @@ namespace ADVIEWER.BAL
             ml.SaveChanges();
         }
 
+        //! currentUserId
+        /*!
+         return the id of logged in user. return -1 if no user logged in.
+         */
         public static int currentUserId() 
         {
             ModelContainer ml = new ModelContainer();
@@ -46,12 +63,20 @@ namespace ADVIEWER.BAL
             return ml.Users.Where(t => t.UserProviderKey == userGuid).Select(t => t.ID).FirstOrDefault();
         }
 
+        //! GetUserInformation
+        /*!
+         return the data of specific user that its id passed to this function.
+         */
         public static AssignorUser GetUserInformation(int UserID)
         {
             ModelContainer ml = new ModelContainer();
             return PublicFunctions.MakeAssignor<User,AssignorUser>(ml.Users.Where(a => a.ID == UserID).FirstOrDefault());
         }
 
+        //! UpdateUserInfo
+        /*!
+         update datas of specific user with fields that passed to it. 
+         */
         public static void UpdateUserInfo(Int32 id, String fullName,String about ,String address,String fax ,String mobile,String tell, String yahooId,String favgroups)
         {
             ModelContainer ml = new ModelContainer();
@@ -79,6 +104,10 @@ namespace ADVIEWER.BAL
             ml.SaveChanges();
         }
 
+        //! IsManager
+        /*!
+         if logged in user is manager return true, otherwise return false.  
+         */
         public static bool IsManager()
         {
             ModelContainer ml = new ModelContainer();
